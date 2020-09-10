@@ -32,7 +32,7 @@
     "symfony/yaml": "*"
   },
   "require-dev": {
-    "doctrine/doctrine-fixtures-bundle": "^3.3",
+    "doctrine/doctrine-fixtures-bundle": "^3.3"
   },
   "config": {
     "preferred-install": {
