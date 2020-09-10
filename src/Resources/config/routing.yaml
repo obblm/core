@@ -1,6 +1,3 @@
-obblm.controllers:
-  resource: ../../Controller/
-  type: annotation
-
-obblm.logout:
-  path: /logout
+obblm.extra:
+  resource: .
+  type: extra
