@@ -1,0 +1,22 @@
+<table class="ui celled selectable center aligned table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th class="left aligned">Name</th>
+            <th class="left aligned">Type</th>
+            <th>{{ 'lrb6.trait.ma.abbr'|trans({}, 'lrb6') }}</th>
+            <th>{{ 'lrb6.trait.st.abbr'|trans({}, 'lrb6') }}</th>
+            <th>{{ 'lrb6.trait.ag.abbr'|trans({}, 'lrb6') }}</th>
+            <th>{{ 'lrb6.trait.av.abbr'|trans({}, 'lrb6') }}</th>
+            <th class="left aligned">{{ 'lrb6.trait.skill.title'|trans({}, 'lrb6') }}</th>
+            <th class="left aligned">{{ 'lrb6.trait.injury.title'|trans({}, 'lrb6') }}</th>
+            <th>{{ 'lrb6.trait.spp.abbr'|trans({}, 'lrb6') }}</th>
+            <th class="right aligned">{{ 'lrb6.trait.value.title'|trans({}, 'lrb6') }}</th>
+        </tr>
+    </thead>
+    {% for player in team.notDeadPlayers %}
+        {% include '@ObblmCore/team/player-line.lrb6.html.twig' with { 'player': player } %}
+    {% else %}
+        <tr colspan="5">No players</tr>
+    {% endfor %}
+</table>

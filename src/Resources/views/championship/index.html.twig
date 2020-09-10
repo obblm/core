@@ -1,0 +1,18 @@
+{% extends '@ObblmCore/base.html.twig'%}
+
+{% block body %}
+    <ul>
+        {% for championship in championships %}
+            <li>
+                <a href="{{ path('championship_detail', {'championship': championship.id}) }}">{{ championship.name }}</a>
+                {% if(is_granted('championship.manage', championship)) %}
+                    - <a href="{{ path('championship_manage_detail', {'championship': championship.id}) }}">Details</a>
+                    - <a href="{{ path('championship_manage_edit', {'championship': championship.id}) }}">Edit</a>
+                    - <a href="{{ path('championship_manage_delete', {'championship': championship.id}) }}">Delete</a>
+                {% endif %}
+            </li>
+        {% else %}
+            <li>Nothing to see here</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

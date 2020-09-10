@@ -1,0 +1,13 @@
+{% extends '@ObblmCore/base.html.twig'%}
+
+{% block body %}
+    <ul>
+        {% for item in users %}
+        <li>
+            {{ item.email }} ({{ item.teams.count }})
+            - <a href="{{ path('admin_users_edit', {user: item.id}) }}">Edit</a>
+            - <a href="#delete-{{ item.id }}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

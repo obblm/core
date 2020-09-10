@@ -1,0 +1,41 @@
+{% extends '@ObblmCore/base.html.twig' %}
+
+{% block body %}
+    <nav class="action">
+    {% if(is_granted('team.edit', team)) %}
+        <a href="{{ path('team_edit', {'team': team.id}) }}">Edit</a> -
+        <a href="{{ path('team_delete', {'team': team.id}) }}">Delete</a>
+    {% endif %}
+    </nav>
+    <section class="row">
+        <header>
+            <h1>{{ team.name }} ({{ team|tr }})</h1>
+            {% if team.championship %}
+            <h2>{{ team.championship.name }}</h2>
+            {% endif %}
+        </header>
+        {% include '@ObblmCore/team/sheet.html.twig' with { 'team': team } %}
+        <footer>
+            <ul>
+                <li>
+                    Rerolls : {{ team.rerolls }} (x{{ team|reroll_cost|price }})
+                </li>
+                <li>
+                    Popularity : {{ team.popularity }}
+                </li>
+                <li>
+                    Assistants : {{ team.assistants }}
+                </li>
+                <li>
+                    Cheerleaders : {{ team.cheerleaders }}
+                </li>
+                <li>
+                    Apothecary : {{ team.apothecary|yesno }}
+                </li>
+                <li>
+                    Total cost : {{ team|calculate_value|price }}
+                </li>
+            </ul>
+        </footer>
+    </section>
+{% endblock %}

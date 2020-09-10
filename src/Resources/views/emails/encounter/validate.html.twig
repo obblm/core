@@ -1,0 +1,11 @@
+{% extends 'emails/email-template.html.twig' %}
+
+{% block header_title 'emails.encounter.validated.title'|trans({'%against%': against.name }) %}
+{% block content %}
+    {% do email.setSubject( 'emails.encounter.validated.title'|trans({'%against%': against.name }) ) %}
+    <div>
+        <p>{{ 'emails.encounter.validated.text'|trans({'%receiver%': (email.toName ?: email.to.0.address), '%against%': against.name, '%validator%': validator.username }) }}</p>
+        <a href="{{ absolute_url(path('championship_team', {'championship': encounter.championship.id, 'team': my_team.id})) }}">{{ 'emails.encounter.validated.link_to_team'|trans }}</a>
+        <a href="{{ absolute_url(path('championship_view_encounter', {'championship': encounter.championship.id, 'encounter': encounter.id})) }}">{{ 'emails.encounter.validated.link_to_detail'|trans }}</a>
+    </div>
+{% endblock %}

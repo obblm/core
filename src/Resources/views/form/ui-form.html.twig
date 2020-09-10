@@ -1,0 +1,18 @@
+{% use 'form_div_layout.html.twig' %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <div class="ui negative message">
+            {%- if not form.parent  -%}
+                <div class="header">
+                    {{ 'forms.submission.error'|trans }}
+                </div>
+            {%- endif -%}
+            <ul class="list">
+                {%- for error in errors -%}
+                    <li>{{ error.message }}</li>
+                {%- endfor -%}
+            </ul>
+        </div>
+    {%- endif -%}
+{%- endblock form_errors -%}

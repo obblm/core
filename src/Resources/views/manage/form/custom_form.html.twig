@@ -1,0 +1,20 @@
+{% use "form_div_layout.html.twig" %}
+
+{% block _manage_championship_form_guests_widget %}
+    <div id="manage_championship_form_guests_widget" class="attach-collection-actions ui labels">
+    {% for choice in form.vars.choices %}
+        {% if choice.value in form.vars.value %}
+        <div class="item ui label">
+            <i class="icon user"></i>
+            {{ choice.label }}
+            <input type="hidden" {{ block('widget_attributes') }} value="{{ choice.value }}">
+            <a href="#" data-item-selector=".item" class="remove-collection-widget pull-right">
+                <i class="icon close"></i>
+            </a>
+        </div>
+        {% endif %}
+    {% else %}
+        <li>No registred coach for the moment!</li>
+    {% endfor %}
+    </div>
+{% endblock %}

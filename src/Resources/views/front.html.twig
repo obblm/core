@@ -1,0 +1,12 @@
+
+{% block body %}
+    <script>
+        window.user = {{ user|raw }};
+    </script>
+
+    <div id="bblm">
+        <bblm-app
+            entrypoint="{{ absolute_url(path('api_entrypoint')) }}"
+        ></bblm-app>
+    </div>
+{% endblock %}

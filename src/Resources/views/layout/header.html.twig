@@ -1,0 +1,17 @@
+<header class="ui fixed inverted main menu">
+    <nav class="ui container">
+        <a class="launch icon item">
+            <i class="content icon"></i>
+        </a>
+        <div class="item">
+            <h1>Blood Bowl league manager</h1>
+        </div>
+        <div class="right menu">
+        {% if(is_granted('ROLE_USER')) %}
+            <a class="icon item" href="{{ path('obblm.logout')}}" title="Logout">
+                <i aria-hidden="true" class="icon log out"></i>
+            </a>
+        {% endif %}
+        </div>
+    </nav>
+</header>

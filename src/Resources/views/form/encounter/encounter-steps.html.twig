@@ -1,0 +1,49 @@
+<div class="ui center">
+    {% set steps = [
+        {
+            'id': 'creating',
+            'icon': 'mdi-pencil',
+            'name': "Creation",
+            'description': "Choose the encounter teams",
+            'is_current': false,
+            'is_done': false
+        },
+        {
+            'id': 'completing',
+            'icon': 'mdi-clipboard-edit',
+            'name': "It's game time!",
+            'description': "Complete the encounter sheet",
+            'is_current': false,
+            'is_done': false
+        },
+        {
+            'id': 'finishing',
+            'icon': 'mdi-currency-usd',
+            'name': "It's end of the game!",
+            'description': "Complete the after game part",
+            'is_current': false,
+            'is_done': false
+        },
+        {
+            'id': 'validating',
+            'icon': 'mdi-format-list-checks',
+            'name': "Validation",
+            'description': "A manager has to validate the encounter",
+            'is_current': false,
+            'is_done': false
+        }
+    ] %}
+    {# 'icon': 'mdi-stamper', #}
+    {% set steps = steps|generate_steps(_context) %}
+    <div class="ui four top attached steps">
+        {% for step in steps %}
+            <div class="step{% if step.is_done %} completed{% elseif step.is_current %} active{% endif %}">
+                <i class="icon mdi {{ step.icon }}"></i>
+                <div class="content">
+                    <div class="title">{{ step.name }}</div>
+                    <div class="description">{{ step.description }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

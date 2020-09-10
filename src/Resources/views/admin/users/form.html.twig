@@ -1,0 +1,13 @@
+{% extends '@ObblmCore/base.html.twig'%}
+
+{% block body %}
+    <div>
+        {% form_theme form with ["form/form-vuetify.html.twig"] %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="submit">
+            <input type="submit" value="Save" />
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

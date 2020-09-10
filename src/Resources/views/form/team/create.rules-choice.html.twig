@@ -1,0 +1,55 @@
+{% extends '@ObblmCore/base.html.twig' %}
+
+{% block body %}
+    {% form_theme form '@ObblmCore/form/ui-form.html.twig' %}
+    {% if form.vars.errors is not empty %}
+        {{ form_errors(form) }}
+    {% endif %}
+    {{ form_start( form, {'attr': {'class': 'ui form', 'id': 'team-rule-choice'}} ) }}
+        <div class="field">
+            {{ form_label(form.rule, 'forms.team.fields.rule.question') }}
+            {{ form_errors(form.rule) }}
+            <div class="inline fields">
+                {% for children in form.rule.children %}
+                    <div class="field">
+                        <div class="ui radio checkbox">
+                            {{ form_widget(children) }}
+                            {{ form_label(children) }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="field">
+            {{ form_label(form.championship, 'forms.team.fields.championship.question') }}
+            <div class="inline fields">
+                {% for children in form.championship.children %}
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        {{ form_widget(children) }}
+                        {{ form_label(children) }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% if not form.championship.vars.valid %}
+            {{ form_errors(form.championship) }}
+            {% endif %}
+        </div>
+        {% if form.children.name is defined %}
+            <div class="field">
+                {{ form_label(form.name, 'forms.team.fields.name') }}
+                {% if not form.name.vars.valid %}
+                    {{ form_errors(form.name) }}
+                {% endif %}
+                {{ form_widget(form.name) }}
+            </div>
+            <div class="field">
+                {{ form_label(form.roster, 'forms.team.fields.roster') }}
+                {{ form_errors(form.roster) }}
+                {{ form_widget(form.roster, {'attr': {'class': 'ui dropdown'}}) }}
+            </div>
+        {% endif %}
+        <input class="ui button green" type="submit" value="Submit" />
+    {{ form_end( form ) }}
+{% endblock %}

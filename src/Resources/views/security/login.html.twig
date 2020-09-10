@@ -1,0 +1,67 @@
+{% extends '@ObblmCore/base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+{% block stylesheets %}
+   {{ parent() }}
+    <style>
+        .column {
+            max-width: 450px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+        <h2 class="ui teal image header">
+            <img src="assets/images/logo.png" class="image">
+            <div class="content">
+                Log-in to your account
+            </div>
+        </h2>
+        <form method="post" class="ui large form">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+            <div class="ui stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control" required autofocus placeholder="Login or E-mail address">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    </div>
+                </div>
+                <button type="submit" class="ui fluid large teal submit button">Login</button>
+            </div>
+            <div class="ui error message"></div>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+            <input type="hidden" name="_target_path" value="{{ path('home') }}"/>
+            {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+            #}
+        </form>
+
+        <div class="ui message">
+            New to us? <a href="#">Sign Up</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

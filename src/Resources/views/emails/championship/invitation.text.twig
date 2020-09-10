@@ -1,0 +1,2 @@
+{{ 'emails.championship_invitation.text'|raw|trans({'%receiver%': email.toName, '%championship%': championship.name }) }}
+{{ absolute_url(path('team_create_championship', {'championship': championship.id})) }}

@@ -1,0 +1,98 @@
+{% extends '@ObblmCore/base.html.twig' %}
+{% macro printPlayerFieldsRow( playerFields ) %}
+    <div class="item">
+        {{ form_errors( playerFields ) }}
+        <div class="inline fields">
+            <div class="field">
+                <a href="#" data-item-selector=".item" class="remove-collection-widget pull-right">
+                    <i class="ui icon close red"></i>
+                </a>
+            </div>
+            <div class="field">
+                {{ form_label( playerFields.number, 'forms.player.fields.number' ) }}
+                {{ form_widget( playerFields.number ) }}
+            </div>
+            <div class="field">
+                {{ form_label( playerFields.type, 'forms.player.fields.type', {'translation_domain': 'messages'} ) }}
+                {{ form_widget( playerFields.type, {'attr': {'class': 'ui dropdown'}} ) }}
+            </div>
+            <div class="field">
+                {{ form_label( playerFields.name, 'forms.player.fields.name' ) }}
+                {{ form_widget( playerFields.name ) }}
+            </div>
+        </div>
+        {{ form_rest( playerFields ) }}
+    </div>
+{% endmacro %}
+{% import _self as formMacros %}
+{% block body %}
+    <h1 class="ui title">Edit {{ team.name }}</h1>
+    <h2>{{ team|roster_name|trans({}, team|rule_key) }} - {{ team.championship ? team.championship.name : team|rule_key }}</h2>
+    {{ form_start( form, {'attr': {'class': 'ui form'}} ) }}
+    {{ form_errors( form ) }}
+    <div class="field">
+        {{ form_label( form.name, 'forms.team.fields.name') }}
+        {{ form_widget( form.name ) }}
+        {{ form_errors( form.name ) }}
+    </div>
+    <div class="two fields">
+        <div class="field">
+            {{ form_label( form.anthem, 'forms.team.fields.anthem') }}
+            {{ form_widget( form.anthem ) }}
+            {{ form_errors( form.anthem ) }}
+        </div>
+        <div class="field">
+            {{ form_label( form.fluff, 'forms.team.fields.fluff') }}
+            {{ form_widget( form.fluff ) }}
+            {{ form_errors( form.fluff ) }}
+        </div>
+    </div>
+    <div class="field attach-collection-actions">
+        <div class="field">
+            <button type="button"
+                    class="add-another-collection-widget ui button primary"
+                    data-list-selector="#players-fields-list">Add another player</button>
+        </div>
+        <div id="players-fields-list"
+            data-prototype="{{ formMacros.printPlayerFieldsRow(form.players.vars.prototype)|e('html_attr') }}"
+            data-widget-counter="{{ form.players|length }}">
+            {% for playerFields in form.players %}
+                {{ formMacros.printPlayerFieldsRow( playerFields ) }}
+            {% else %}
+                {{ form_widget(form.players) }}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="four fields">
+        <div class="field">
+            {{ form_label( form.rerolls, 'forms.team.fields.rerolls') }}
+            {{ form_widget( form.rerolls ) }}
+            {{ form_errors( form.rerolls ) }}
+        </div>
+        <div class="field">
+            {{ form_label( form.popularity, 'forms.team.fields.popularity') }}
+            {{ form_widget( form.popularity ) }}
+            {{ form_errors( form.popularity ) }}
+        </div>
+        <div class="field">
+            {{ form_label( form.cheerleaders, 'forms.team.fields.cheerleaders') }}
+            {{ form_widget( form.cheerleaders ) }}
+            {{ form_errors( form.cheerleaders ) }}
+        </div>
+        <div class="field">
+            {{ form_label( form.assistants, 'forms.team.fields.assistants') }}
+            {{ form_widget( form.assistants ) }}
+            {{ form_errors( form.assistants ) }}
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui checkbox">
+            {{ form_widget( form.apothecary ) }}
+            {{ form_label( form.apothecary, 'forms.team.fields.apothecary') }}
+        </div>
+        {{ form_errors( form.apothecary ) }}
+    </div>
+    {{ form_rest( form ) }}
+    <input class="ui button green" type="submit" value="Submit" />
+    {{ form_end( form ) }}
+{% endblock %}

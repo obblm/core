@@ -1,0 +1,126 @@
+{% extends '@ObblmCore/base.html.twig'%}
+
+{% macro printInvitationRow(invitationFields) %}
+    <div class="item">
+        <a href="#" data-item-selector=".item" class="remove-collection-widget pull-right">
+            <span class="icon close"></span>
+        </a>
+        <div class="field">
+            {{ form_label( invitationFields.email, 'forms.invitation.fields.email' ) }}
+            {{ form_widget( invitationFields.email ) }}
+            {{ form_errors( invitationFields ) }}
+        </div>
+    </div>
+{% endmacro %}
+{% import _self as formMacros %}
+{% block body %}
+    <h1>{{ championship.name }}</h1>
+    {% form_theme form '@ObblmCore/manage/form/custom_form.html.twig' %}
+    {{ form_start( form, {'attr': {'class': 'ui form'}}) }}
+    <div class="field">
+        <label>{{ 'forms.championship.fields.format'|trans }}</label>
+        {{ championship.format|trans }}
+    </div>
+    <h2>{{ 'forms.championship.titles.informations'|trans }}</h2>
+    <div class="field">
+        {{ form_label( form.name, 'forms.championship.fields.name') }}
+        {{ form_widget( form.name ) }}
+        {{ form_errors( form.name ) }}
+    </div>
+    <div class="field">
+        {{ form_label( form.is_private, 'forms.championship.fields.is_private') }}
+        <div class="ui toggle checkbox">
+            {{ form_widget( form.is_private) }}
+            {{ form_label( form.is_private, 'forms.championship.fields.is_private') }}
+        </div>
+        {{ form_errors( form.is_private ) }}
+    </div>
+    <div class="ui grid">
+        <div class="eight wide column">
+            <h2>{{ 'forms.championship.titles.points'|trans }}</h2>
+            <div class="field">
+                {{ form_label( form.points_per_win, 'forms.championship.fields.points_per_win') }}
+                {{ form_widget( form.points_per_win ) }}
+                {{ form_errors( form.points_per_win ) }}
+            </div>
+            <div class="field">
+                {{ form_label( form.points_per_draw, 'forms.championship.fields.points_per_draw') }}
+                {{ form_widget( form.points_per_draw ) }}
+                {{ form_errors( form.points_per_draw ) }}
+            </div>
+            <div class="field">
+                {{ form_label( form.points_per_loss, 'forms.championship.fields.points_per_loss') }}
+                {{ form_widget( form.points_per_loss ) }}
+                {{ form_errors( form.points_per_loss ) }}
+            </div>
+        </div>
+        <div class="eight wide column">
+            <h2>{{ 'forms.championship.titles.tiebreaks'|trans }}</h2>
+            <div class="field">
+                {{ form_label( form.tie_break_1, 'forms.championship.fields.tie_break_1') }}
+                {{ form_widget( form.tie_break_1, {'attr': {'class': 'ui dropdown'}}) }}
+                {{ form_errors( form.tie_break_1 ) }}
+            </div>
+            <div class="field">
+                {{ form_label( form.tie_break_2, 'forms.championship.fields.tie_break_2') }}
+                {{ form_widget( form.tie_break_2, {'attr': {'class': 'ui dropdown'}} ) }}
+                {{ form_errors( form.tie_break_2 ) }}
+            </div>
+            <div class="field">
+                {{ form_label( form.tie_break_3, 'forms.championship.fields.tie_break_3') }}
+                {{ form_widget( form.tie_break_3, {'attr': {'class': 'ui dropdown'}} ) }}
+                {{ form_errors( form.tie_break_3 ) }}
+            </div>
+        </div>
+    </div>
+    <h2>{{ 'forms.championship.fields.invitations'|trans }}</h2>
+    <div class="field attach-collection-actions">
+        <div class="field">
+            <button type="button"
+                    class="add-another-collection-widget ui button primary"
+                    data-list-selector="#invitations-fields-list">
+                <i class="icon user"></i>
+                Invite a coach
+            </button>
+        </div>
+        {{ form_label( form.invitations,  'forms.championship.fields.current_invitations') }}
+        {{ form_errors( form.invitations ) }}
+        <div id="invitations-fields-list"
+            data-prototype="{{ formMacros.printInvitationRow(form.invitations.vars.prototype)|e('html_attr') }}"
+            data-widget-counter="{{ form.invitations|length }}">
+            {% for invitation in form.invitations %}
+                {{ formMacros.printInvitationRow(invitation) }}
+            {% else %}
+                {{ form_widget( form.invitations ) }}
+                {{ 'forms.championship.fields.coachs.no_one'|trans }}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="field">
+        {{ form_label( form.guests,  'forms.championship.fields.coach_w_account') }}
+        {{ form_errors( form.guests ) }}
+        {{ form_widget( form.guests ) }}
+    </div>
+    <div class="field">
+        {{ form_label( form.is_locked, 'forms.championship.fields.is_locked') }}
+        <div class="ui toggle checkbox">
+            {{ form_widget( form.is_locked) }}
+            {{ form_label( form.is_locked, 'forms.championship.fields.is_locked') }}
+        </div>
+        {{ form_errors( form.is_locked ) }}
+    </div>
+    {{ form_rest( form ) }}
+    <div class="ui center aligned grid">
+        <div class="sixteen wide column">
+            <a class="ui button" href="{{ path('championship_manage_detail', {'championship': championship.id})}}">
+                <i class="icon close"></i>
+                Cancel
+            </a>
+            <button type="submit" class="ui button green">
+                <i class="icon save"></i>
+                Submit
+            </button>
+        </div>
+    </div>
+    {{ form_end( form ) }}
+{% endblock %}

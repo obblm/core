@@ -1,0 +1,27 @@
+<nav id="navigation" class="ui vertical inverted sidebar menu left">
+    <div class="item"><b>BBLM</b></div>
+    <a class="item" href="{{ path('home') }}">
+        <i aria-hidden="true" class="icon notranslate mdi mdi-view-dashboard"></i>
+        Dashboard
+    </a>
+    <a class="item" href="{{ path('my_teams') }}">
+        <i aria-hidden="true" class="icon notranslate mdi mdi-football"></i>
+        My teams
+    </a>
+    <a class="item" href="{{ path('my_championships') }}">
+        <i aria-hidden="true" class="icon notranslate mdi mdi-trophy-variant"></i>
+        My Championships
+    </a>
+    {% if(is_granted('ROLE_ADMIN')) %}
+    <div class="item">
+        <i class="options icon"></i>
+        <i aria-hidden="true" class="v-icon notranslate mdi mdi-options"></i>
+        Admin
+        <div class="menu">
+            <a class="item" href="{{ path('admin_leagues') }}">Leagues</a>
+            <a class="item" href="{{ path('admin_rules') }}">Rules</a>
+            <a class="item" href="{{ path('admin_users') }}">Users</a>
+        </div>
+    </div>
+    {% endif %}
+</nav>

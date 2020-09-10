@@ -1,0 +1,10 @@
+{% extends 'emails/email-template.html.twig' %}
+
+{% block header_title 'emails.championship_invitation.title'|trans({'%name%': championship.name }) %}
+{% block content %}
+    {% do email.setSubject( 'emails.championship_invitation.title'|trans({'%name%': championship.name }) ) %}
+    <div>
+        <p>{{ 'emails.championship_invitation.text'|trans({'%receiver%': (email.toName ?: email.to.0.address), '%championship%': championship.name }) }}</p>
+        <a href="{{ absolute_url(path('team_create_championship', {'championship': championship.id})) }}">{{ 'emails.championship_invitation.link_to_join'|trans }}</a>
+    </div>
+{% endblock %}

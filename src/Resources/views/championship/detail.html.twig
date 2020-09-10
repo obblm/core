@@ -1,0 +1,60 @@
+{% extends '@ObblmCore/base.html.twig'%}
+
+{% block body%}
+    <h1>{{ championship.name }}</h1>
+    <div>
+        {% if is_granted('championship.manage', championship) %}
+            <a href="#">Vue current encounters</a>
+            - <a href="#">Vue all encounters</a> -
+        {% endif %}
+        {% if is_granted('championship.add_encounter', championship) %}
+            <a href="{{ path('championship_add_encounter', {'championship': championship.id}) }}">Add new encounter</a>
+        {% endif %}
+    </div>
+    <table class="ui table">
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>Points</th>
+                <th>V/N/D</th>
+                <th>TD+</th>
+                <th>TD-</th>
+                <th>CAS+</th>
+                <th>CAS-</th>
+                <th>TR</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for version in teamVersions %}
+            <tr>
+                <td><a href="{{ path('championship_team', {'championship': championship.id, 'team': version.team.id }) }}">{{ version.team.name }}</a></td>
+                <td>{{ version.points }}</td>
+                <td>
+                    {{ version.gameWin }} /
+                    {{ version.gameDraw }} /
+                    {{ version.gameLoss }}
+                </td>
+                <td>{{ version.tdGive }}</td>
+                <td>{{ version.tdTake }}</td>
+                <td>{{ version.injuryGive }}</td>
+                <td>{{ version.injuryTake }}</td>
+                <td>{{ version.team|tr }}</td>
+                <td>
+                {% set encounter = version.team|opened_encounter %}
+                {% if encounter and is_granted('encounter.view', encounter) %}
+                    <a class="ui button primary" href="{{ path('championship_view_encounter', {'championship': championship.id, 'encounter': encounter.id}) }}">View encounter</a>
+                {% endif %}
+                {% if encounter and is_granted('encounter.edit', encounter) and (app.user == version.team.coach or is_granted('championship.manage', championship)) %}
+                    <a class="ui button orange" href="{{ path('championship_edit_encounter', {'championship': championship.id, 'encounter': encounter.id}) }}">Edit encounter</a>
+                {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">No team registred yet!</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock%}

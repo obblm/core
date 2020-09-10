@@ -1,0 +1,10 @@
+{% extends '@ObblmCore/base.html.twig' %}
+
+{% block body %}
+    <h1>Register</h1>
+    {{ form_start( form ) }}
+    {{ form_row( form ) }}
+    {{ form_rest( form ) }}
+    <input type="submit" value="Submit" />
+    {{ form_end( form ) }}
+{% endblock %}

@@ -1,0 +1,9 @@
+{{ 'emails.coach.activation.welldone'|trans({'%login%': coach.username}) }}
+{{ 'emails.coach.activation.success'|trans }}
+{{ 'emails.coach.activation.resume.title'|trans }}
+- {{ 'emails.coach.activation.resume.email'|trans({'%email%': coach.email}) }}
+- {{ 'emails.coach.activation.resume.login'|trans({'%login%': coach.username}) }}
+- {{ 'emails.coach.activation.resume.password'|trans({'%password%': 'emails.coach.registration.resume.password_joke'|raw|trans}) }}
+{{ 'emails.coach.activation.text'|trans }}
+{{ 'emails.coach.activation.click_link_below'|trans }}
+{{ absolute_url(path('app_login')) }}

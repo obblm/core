@@ -1,0 +1,16 @@
+{% extends 'emails/email-template.html.twig'%}
+{% block header_title 'emails.coach.activation.welldone'|trans({'%login%': coach.username}) %}
+{% block content %}
+    {% do email.setSubject( 'emails.coach.activation.title'|trans({'%login%': coach.username }) ) %}
+    <div>
+        <p>{{ 'emails.coach.activation.success'|trans }}</p>
+        <p>{{ 'emails.coach.activation.resume.title'|trans }}</p>
+        <ul>
+            <li>{{ 'emails.coach.activation.resume.email'|trans({'%email%': coach.email}) }}</li>
+            <li>{{ 'emails.coach.activation.resume.login'|trans({'%login%': coach.username}) }}</li>
+            <li>{{ 'emails.coach.activation.resume.password'|trans({'%password%': 'emails.coach.activation.resume.password_joke'|trans }) }}</li>
+        </ul>
+        <p>{{ 'emails.coach.activation.text'|trans }}</p>
+        <p><a href="{{ absolute_url(path('app_login')) }}">{{ 'emails.coach.activation.link_to_login'|trans }}</a></p>
+    </div>
+{% endblock%}

@@ -1,0 +1,21 @@
+{% extends '@ObblmCore/base.html.twig'%}
+
+{% block body %}
+    <div class="action">
+        <a href="{{ path('team_create')}}" class="ui button primary">Create a team</a>
+    </div>
+    <ul>
+        {% for team in teams %}
+            <li>
+                <a href="{{ path('team_detail', {'team': team.id}) }}">
+                    {{ team.name }} {% if team.championship %}({{ team.championship.name }}){% endif %}</a>
+                {% if(is_granted('team.edit', team)) %}
+                    - <a href="{{ path('team_edit', {'team': team.id}) }}">Edit</a>
+                    - <a href="{{ path('team_delete', {'team': team.id}) }}">Delete</a>
+                {% endif %}
+            </li>
+        {% else %}
+            <li>Nothing to see here</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends '@ObblmCore/base.html.twig'%}
+
+{% block body %}
+    <ul>
+        {% for item in rules %}
+            <li>
+                {{ item.name }} ({{ item.ruleKey }})
+                - <a href="#edit-{{ item.id }}">Edit</a>
+                - <a href="#delete-{{ item.id }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
