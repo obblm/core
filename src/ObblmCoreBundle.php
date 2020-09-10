@@ -2,6 +2,7 @@
 
 namespace Obblm\Core;
 
+use Obblm\Core\DependencyInjection\CompilerPass\RoutesPass;
 use Obblm\Core\DependencyInjection\CompilerPass\RulesPass;
 use Obblm\Core\DependencyInjection\ObblmCoreExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -21,5 +22,6 @@ class ObblmCoreBundle extends Bundle
     public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new RulesPass());
+        $container->addCompilerPass(new RoutesPass());
     }
 }
