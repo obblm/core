@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PlayerRepository::class)
+ * @ORM\Table(name="obblm_team_player")
  */
 class Player
 {
@@ -41,7 +42,7 @@ class Player
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity=PlayerVersion::class, fetch="EAGER", mappedBy="player", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=PlayerVersion::class, fetch="EAGER", mappedBy="player", orphanRemoval=true, cascade={"remove"})
      * @ORM\OrderBy({"id"="DESC"})
      */
     private $versions;
@@ -52,11 +53,6 @@ class Player
     private $dead = false;
 
     /**
-     * @ORM\OneToMany(targetEntity=EncounterAction::class, mappedBy="player", orphanRemoval=true)
-     */
-    private $encounterActions;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $fire = false;
@@ -64,7 +60,6 @@ class Player
     public function __construct()
     {
         $this->versions = new ArrayCollection();
-        $this->encounterActions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,37 +154,6 @@ class Player
     public function setDead(bool $dead): self
     {
         $this->dead = $dead;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|EncounterAction[]
-     */
-    public function getEncounterActions(): Collection
-    {
-        return $this->encounterActions;
-    }
-
-    public function addEncounterAction(EncounterAction $encounterAction): self
-    {
-        if (!$this->encounterActions->contains($encounterAction)) {
-            $this->encounterActions[] = $encounterAction;
-            $encounterAction->setPlayer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEncounterAction(EncounterAction $encounterAction): self
-    {
-        if ($this->encounterActions->contains($encounterAction)) {
-            $this->encounterActions->removeElement($encounterAction);
-            // set the owning side to null (unless already changed)
-            if ($encounterAction->getPlayer() === $this) {
-                $encounterAction->setPlayer(null);
-            }
-        }
 
         return $this;
     }

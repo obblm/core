@@ -15,7 +15,7 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $em)
     {
-        $rule = $em->getRepository(Rule::class)->find(1);
+        $rule = $em->getRepository(Rule::class)->findOneBy(['rule_key' => 'lrb6']);
         $team2 = (new Team())
             ->setName('Team test by rule')
             ->setRoster('dark_elf')
@@ -31,7 +31,6 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
     {
         return array(
             CoachFixtures::class,
-            ChampionshipFixtures::class,
         );
     }
 }

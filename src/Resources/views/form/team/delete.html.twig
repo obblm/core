@@ -1,0 +1,14 @@
+{% extends '@ObblmCore/base.html.twig'%}
+
+{% block body %}
+    <div>
+        <div class="ui message negative">
+            <h1 class="header">{{ 'obblm.forms.team.delete.question'|trans }}</h1>
+            <h2>{{ team.name }} ({{ team|tr }})</h2>
+            <p>
+                <a class="ui button red" href="{{ path('obblm_team_delete', {'team': team.id, 'confirm': 0}) }}">{{ 'obblm.layout.tools.no'|trans }}</a>
+                <a class="ui button green" href="{{ path('obblm_team_delete', {'team': team.id, 'confirm': 1}) }}">{{ 'obblm.layout.tools.yes'|trans }}</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

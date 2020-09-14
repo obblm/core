@@ -22,18 +22,4 @@ class TeamVersionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, TeamVersion::class);
     }
-
-    public function getTeamsByChampionship(Championship $championship) {
-
-        $sub = $this->createQueryBuilder('sversion')
-            ->select('max(sversion)')
-            ->join(Team::class, 'team', Join::WITH, 'sversion.team = team')
-            ->where('team.championship = :championship');
-        $sub->groupBy('sversion.team');
-
-        $qb = $this->createQueryBuilder('version');
-        $qb->where($qb->expr()->in('version', $sub->getDQL()))
-            ->setParameter(':championship', $championship);
-        return new ArrayCollection($qb->getQuery()->getResult());
-    }
 }

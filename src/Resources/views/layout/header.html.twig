@@ -4,11 +4,11 @@
             <i class="content icon"></i>
         </a>
         <div class="item">
-            <h1>Blood Bowl league manager</h1>
+            <h1>{{ 'obblm.layout.header.title'|trans }}</h1>
         </div>
         <div class="right menu">
-        {% if(is_granted('ROLE_USER')) %}
-            <a class="icon item" href="{{ path('obblm.logout')}}" title="Logout">
+        {% if(is_granted('ROLE_OBBLM_COACH')) %}
+            <a class="icon item" href="{{ path('obblm.logout')}}" title="{{ 'obblm.layout.header.logout'|trans }}">
                 <i aria-hidden="true" class="icon log out"></i>
             </a>
         {% endif %}

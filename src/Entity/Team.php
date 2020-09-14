@@ -2,7 +2,6 @@
 
 namespace Obblm\Core\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use Obblm\Core\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,8 +12,8 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=TeamRepository::class)
+ * @ORM\Table(name="obblm_team")
  */
 class Team
 {
@@ -35,21 +34,6 @@ class Team
      * @ORM\JoinColumn(nullable=false)
      */
     private $coach;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Encounter::class, fetch="EXTRA_LAZY", mappedBy="home_team")
-     */
-    private $encounters_as_home;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Encounter::class, fetch="EXTRA_LAZY", mappedBy="visitor_team")
-     */
-    private $encounters_as_visitor;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Championship::class, inversedBy="teams")
-     */
-    private $championship;
 
     /**
      * @ORM\ManyToOne(targetEntity=Rule::class, inversedBy="teams")
@@ -78,29 +62,9 @@ class Team
     private $players;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $rerolls;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $cheerleaders;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $assistants;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $popularity;
-
-    /**
      * @ORM\Column(type="boolean")
      */
-    private $apothecary;
+    private $ready = false;
 
     /**
      * @ORM\Column(type="boolean")
@@ -115,14 +79,7 @@ class Team
 
     public function __construct()
     {
-        $this->encounters_as_home = new ArrayCollection();
-        $this->encounters_as_visitor = new ArrayCollection();
         $this->players = new ArrayCollection();
-        $this->apothecary = false;
-        $this->rerolls = 0;
-        $this->cheerleaders = 0;
-        $this->assistants = 0;
-        $this->popularity = 0;
         $this->versions = new ArrayCollection();
     }
 
@@ -151,95 +108,6 @@ class Team
     public function setCoach(?Coach $coach): self
     {
         $this->coach = $coach;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Encounter[]
-     */
-    public function getEncountersAsHome(): Collection
-    {
-        return $this->encounters_as_home;
-    }
-
-    public function addEncounterAsHome(Encounter $encounter): self
-    {
-        if (!$this->encounters_as_home->contains($encounter)) {
-            $this->encounters_as_home[] = $encounter;
-            $encounter->setHomeTeam($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEncounterAsHome(Encounter $encounter): self
-    {
-        if ($this->encounters_as_home->contains($encounter)) {
-            $this->encounters_as_home->removeElement($encounter);
-            // set the owning side to null (unless already changed)
-            if ($encounter->getHomeTeam() === $this) {
-                $encounter->setHomeTeam(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Encounter[]
-     */
-    public function getEncountersAsVisitor(): Collection
-    {
-        return $this->encounters_as_visitor;
-    }
-
-    public function addEncounterAsVisitor(Encounter $encounter): self
-    {
-        if (!$this->encounters_as_visitor->contains($encounter)) {
-            $this->encounters_as_visitor[] = $encounter;
-            $encounter->setHomeTeam($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEncounterAsVisitor(Encounter $encounter): self
-    {
-        if ($this->encounters_as_visitor->contains($encounter)) {
-            $this->encounters_as_visitor->removeElement($encounter);
-            // set the owning side to null (unless already changed)
-            if ($encounter->getHomeTeam() === $this) {
-                $encounter->setHomeTeam(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection|Encounter[]
-     */
-    public function getEncounters(): ArrayCollection
-    {
-        $encounters = new ArrayCollection();
-        foreach ($this->encounters_as_home as $encounter) {
-            $encounters->offsetSet($encounter->getId(), $encounter);
-        }
-        foreach ($this->encounters_as_visitor as $encounter) {
-            $encounters->offsetSet($encounter->getId(), $encounter);
-        }
-        return $encounters;
-    }
-
-    public function getChampionship(): ?Championship
-    {
-        return $this->championship;
-    }
-
-    public function setChampionship(?Championship $championship): self
-    {
-        $this->championship = $championship;
 
         return $this;
     }
@@ -307,6 +175,7 @@ class Team
     {
         $criteria = Criteria::create()
             ->andWhere(Criteria::expr()->eq('dead', false))
+            ->orderBy(['number' => 'ASC'])
         ;
         return $this->players->matching($criteria);
     }
@@ -334,7 +203,7 @@ class Team
         return $this;
     }
 
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    /*public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addConstraint(new Assert\Callback('validateRule'));
     }
@@ -343,67 +212,24 @@ class Team
     {
         if (!($context->getValue()->getRule() || $context->getValue()->getChampionship()) ||
             $context->getValue()->getRule() && $context->getValue()->getChampionship()) {
-            $context->buildViolation('constraints.team.rule_or_championship.violation')
+            $context->buildViolation('obblm.constraints.team.rule_or_championship.violation')
                 ->addViolation();
         }
+    }*/
+
+    public function getReady(): ?bool
+    {
+        return $this->ready;
     }
 
-    public function getRerolls(): ?int
+    public function isReady(): ?bool
     {
-        return $this->rerolls;
+        return $this->getReady();
     }
 
-    public function setRerolls(int $rerolls): self
+    public function setReady(bool $ready): self
     {
-        $this->rerolls = $rerolls;
-
-        return $this;
-    }
-
-    public function getCheerleaders(): ?int
-    {
-        return $this->cheerleaders;
-    }
-
-    public function setCheerleaders(int $cheerleaders): self
-    {
-        $this->cheerleaders = $cheerleaders;
-
-        return $this;
-    }
-
-    public function getAssistants(): ?int
-    {
-        return $this->assistants;
-    }
-
-    public function setAssistants(int $assistants): self
-    {
-        $this->assistants = $assistants;
-
-        return $this;
-    }
-
-    public function getPopularity(): ?int
-    {
-        return $this->popularity;
-    }
-
-    public function setPopularity(int $popularity): self
-    {
-        $this->popularity = $popularity;
-
-        return $this;
-    }
-
-    public function getApothecary(): ?bool
-    {
-        return $this->apothecary;
-    }
-
-    public function setApothecary(bool $apothecary): self
-    {
-        $this->apothecary = $apothecary;
+        $this->ready = $ready;
 
         return $this;
     }

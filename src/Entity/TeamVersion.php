@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=TeamVersionRepository::class)
+ * @ORM\Table(name="obblm_team_version")
+ * @ORM\HasLifecycleCallbacks()
  */
 class TeamVersion
 {
@@ -21,7 +23,7 @@ class TeamVersion
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Team::class, fetch="EAGER", inversedBy="versions")
+     * @ORM\ManyToOne(targetEntity=Team::class, fetch="EAGER", inversedBy="versions", cascade="persist")
      * @ORM\JoinColumn(nullable=false)
      */
     private $team;
@@ -32,9 +34,29 @@ class TeamVersion
     private $playerVersions;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Encounter::class, inversedBy="teamVersions")
+     * @ORM\Column(type="integer")
      */
-    private $encounter;
+    private $rerolls;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $cheerleaders;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $assistants;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $popularity;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $apothecary;
 
     /**
      * @ORM\Column(type="integer")
@@ -89,6 +111,11 @@ class TeamVersion
     public function __construct()
     {
         $this->playerVersions = new ArrayCollection();
+        $this->apothecary = false;
+        $this->rerolls = 0;
+        $this->cheerleaders = 0;
+        $this->assistants = 0;
+        $this->popularity = 0;
     }
 
     public function getId(): ?int
@@ -149,14 +176,62 @@ class TeamVersion
         return $this;
     }
 
-    public function getEncounter(): ?Encounter
+    public function getRerolls(): ?int
     {
-        return $this->encounter;
+        return $this->rerolls;
     }
 
-    public function setEncounter(?Encounter $encounter): self
+    public function setRerolls(int $rerolls): self
     {
-        $this->encounter = $encounter;
+        $this->rerolls = $rerolls;
+
+        return $this;
+    }
+
+    public function getCheerleaders(): ?int
+    {
+        return $this->cheerleaders;
+    }
+
+    public function setCheerleaders(int $cheerleaders): self
+    {
+        $this->cheerleaders = $cheerleaders;
+
+        return $this;
+    }
+
+    public function getAssistants(): ?int
+    {
+        return $this->assistants;
+    }
+
+    public function setAssistants(int $assistants): self
+    {
+        $this->assistants = $assistants;
+
+        return $this;
+    }
+
+    public function getPopularity(): ?int
+    {
+        return $this->popularity;
+    }
+
+    public function setPopularity(int $popularity): self
+    {
+        $this->popularity = $popularity;
+
+        return $this;
+    }
+
+    public function getApothecary(): ?bool
+    {
+        return $this->apothecary;
+    }
+
+    public function setApothecary(bool $apothecary): self
+    {
+        $this->apothecary = $apothecary;
 
         return $this;
     }

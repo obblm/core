@@ -2,7 +2,7 @@
 
 namespace Obblm\Core\DependencyInjection\CompilerPass;
 
-use Obblm\Core\Service\RouteAutoloader;
+use Obblm\Core\Routing\RouteAutoloader;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -14,7 +14,7 @@ class RoutesPass implements CompilerPassInterface
         $definition = $container->findDefinition(RouteAutoloader::class);
 
         foreach ($container->findTaggedServiceIds('obblm.routes') as $id => $tags) {
-            $definition->addMethodCall('addRoute', [new Reference($id)]);
+            $definition->addMethodCall('addObblmRoute', [new Reference($id)]);
         }
     }
 }

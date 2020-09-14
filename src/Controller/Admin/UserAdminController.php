@@ -21,7 +21,7 @@ class UserAdminController extends AbstractController {
      * @Route("/", name="admin_users")
      */
     public function index(EntityManagerInterface $em) {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $users = $em->getRepository(Coach::class)
                     ->findAll();
@@ -34,7 +34,7 @@ class UserAdminController extends AbstractController {
      * @Route("/add", name="admin_users_add")
      */
     public function add(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em) {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $user = new Coach();
         $form = $this->createForm(AdminUserForm::class, $user);
@@ -54,7 +54,7 @@ class UserAdminController extends AbstractController {
      * @Route("/edit/{user}", name="admin_users_edit")
      */
     public function edit(Coach $user, Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em) {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $form = $this->createForm(AdminUserForm::class, $user);
 

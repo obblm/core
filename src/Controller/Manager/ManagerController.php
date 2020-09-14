@@ -16,7 +16,7 @@ class ManagerController extends AbstractController {
      * @Route("/")
      */
     public function index() {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted('OBBLM_USER');
         return $this->render('@ObblmCore/todo.html.twig', []);
     }
 }

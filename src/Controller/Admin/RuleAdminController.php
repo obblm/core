@@ -18,7 +18,7 @@ class RuleAdminController extends AbstractController {
      * @Route("/", name="admin_rules")
      */
     public function index(EntityManagerInterface $em) {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $rules = $em->getRepository(Rule::class)
             ->findAll();

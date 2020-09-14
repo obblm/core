@@ -1,6 +1,7 @@
 {
   "name": "obblm/core",
   "license": "proprietary",
+  "type": "symfony-bundle",
   "require": {
     "php": "^7.2.5",
     "ext-ctype": "*",
@@ -28,7 +29,6 @@
     "symfony/twig-pack": "*",
     "symfony/validator": "*",
     "symfony/web-link": "*",
-    "symfony/webpack-encore-bundle": "^1.7",
     "symfony/yaml": "*"
   },
   "require-dev": {
@@ -45,7 +45,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Obblm\\Core\\Tests\\": "tests/"
+      "Obblm\\Core\\Tests\\": "src/Tests/"
     }
   },
   "extra": {

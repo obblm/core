@@ -7,7 +7,7 @@ use function get_class;
 
 class EncounterDifferentTeams extends Constraint {
 
-    public $limitMessage = 'constraints.encounter.different_teams.violation';
+    public $limitMessage = 'obblm.constraints.encounter.different_teams.violation';
 
     public function validatedBy()
     {

@@ -2,30 +2,30 @@
 
 namespace Obblm\Core\Controller;
 
-use Obblm\Core\Entity\Championship;
 use Obblm\Core\Entity\Rule;
 use Obblm\Core\Entity\Team;
+use Obblm\Core\Event\TeamVersionEvent;
 use Obblm\Core\Form\Team\EditTeamType;
-use Obblm\Core\Form\Team\TeamRulesSelectorForm;
+use Obblm\Core\Helper\TeamHelper;
+use Obblm\Core\Security\Roles;
 use Obblm\Core\Security\Voter\TeamVoter;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Exception\InvalidParameterException;
 
 /**
  * Class TeamController
  * @package Obblm\Core\Controller
  *
- * @Route("/teams")
+ * @Route("/teams", name="obblm_team")
  */
-class TeamController extends AbstractController {
+class TeamController extends AbstractTeamController {
     /**
-     * @Route("/", name="my_teams")
+     * @Route("/", name="_mine")
      */
     public function index(): Response {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted(Roles::COACH);
 
         $teams = $this->getUser()->getTeams();
 
@@ -34,107 +34,51 @@ class TeamController extends AbstractController {
         ]);
     }
     /**
-     * @Route("/create", name="team_create")
+     * @Route("/create", name="_create")
      */
     public function create(Request $request): Response {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted(Roles::COACH);
 
-        $team = new Team();
-        $form = $this->createForm(TeamRulesSelectorForm::class, $team);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() and $form->isValid()) {
-            if($team->getRule()) {
-                return $this->redirectToRoute('team_create_rule', ['rule' => $team->getRule()->getId()]);
-            }
-            elseif($team->getChampionship()) {
-                return $this->redirectToRoute('team_create_championship', ['championship' => $team->getChampionship()->getId()]);
-            }
-            else {
-                throw new InvalidParameterException("Impossible to create the redirect route.");
-            }
-        }
-
-        return $this->render('@ObblmCore/form/team/create.rules-choice.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('@ObblmCore/form/team/rules-selector.html.twig', [
         ]);
     }
     /**
-     * @Route("/create/from-rule/{rule}", name="team_create_rule")
+     * @Route("/create/from-rule/{rule}", name="_create_rule")
      */
     public function createFromRule(Rule $rule, Request $request): Response {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted(Roles::COACH);
 
         $team = (new Team())
             ->setRule($rule)
             ->setCoach($this->getUser());
-        $form = $this->createForm(TeamRulesSelectorForm::class, $team);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() and $form->isValid()) {
-            $team = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($team);
-            $em->flush();
-            return $this->redirectToRoute('team_detail', ['team' => $team->getId()]);
-        }
-
-        return $this->render('@ObblmCore/form/team/create.rules-choice.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->createAndComputeTeamForm($team, $request);
     }
     /**
-     * @Route("/create/for-championship/{championship}", name="team_create_championship")
-     */
-    public function createForChampionship(Championship $championship, Request $request): Response {
-        $this->denyAccessUnlessGranted('championship.view', $championship);
-
-        $team = (new Team())
-            ->setChampionship($championship)
-            ->setCoach($this->getUser());
-        $form = $this->createForm(TeamRulesSelectorForm::class, $team);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() and $form->isValid()) {
-            $team = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($team);
-            $em->flush();
-            return $this->redirectToRoute('team_detail', ['team' => $team->getId()]);
-        }
-
-        return $this->render('@ObblmCore/form/team/create.rules-choice.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-    /**
-     * @Route("/{team}", name="team_detail")
+     * @Route("/{team}", name="_detail")
      */
     public function detail(Team $team): Response {
         $this->denyAccessUnlessGranted(TeamVoter::VIEW, $team);
         return $this->render('@ObblmCore/team/detail.html.twig', [
-            'team' => $team,
+            'version' => TeamHelper::getLastVersion($team),
         ]);
     }
     /**
-     * @Route("/{team}/edit", name="team_edit")
+     * @Route("/{team}/edit", name="_edit")
      */
-    public function edit(Team $team, Request $request): Response {
+    public function edit(Team $team, Request $request, EventDispatcherInterface $dispatcher): Response {
         $this->denyAccessUnlessGranted(TeamVoter::EDIT, $team);
 
-        $form = $this->createForm(EditTeamType::class, $team);
+        $form = $this->createForm(EditTeamType::class, TeamHelper::getLastVersion($team));
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $team = $form->getData();
+            $version = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($team);
+            $dispatcher->dispatch(new TeamVersionEvent($version), TeamVersionEvent::PRE_SAVE);
+            $em->persist($version);
             $em->flush();
-            return $this->redirectToRoute('team_detail', ['team' => $team->getId()]);
+            return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);
         }
 
         return $this->render('@ObblmCore/form/team/edit.html.twig', [
@@ -143,10 +87,24 @@ class TeamController extends AbstractController {
         ]);
     }
     /**
-     * @Route("/{team}/delete", name="team_delete")
+     * @Route("/{team}/delete", name="_delete")
      */
-    public function delete(Team $team): Response {
+    public function delete(Team $team, Request $request): Response {
         $this->denyAccessUnlessGranted(TeamVoter::EDIT, $team);
-        return $this->render('@ObblmCore/todo.html.twig', []);
+
+        $confirm = $request->get('confirm');
+        if($confirm !== null) {
+            if ($confirm == 1) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($team);
+                $em->flush();
+                return $this->redirectToRoute('obblm_team_mine');
+            }
+            return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);
+        }
+
+        return $this->render('@ObblmCore/form/team/delete.html.twig', [
+            'team' => $team
+        ]);
     }
 }

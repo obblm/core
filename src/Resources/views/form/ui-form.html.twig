@@ -1,11 +1,17 @@
 {% use 'form_div_layout.html.twig' %}
 
+{% block _edit_team_team_ready_widget %}
+    <button class="ui button green" id="{{ id }}" name="{{ full_name }}" type="submit" value="1">
+        {{ 'obblm.forms.team.edit.buttons.submit'|trans }}
+    </button>
+{% endblock %}
+
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         <div class="ui negative message">
             {%- if not form.parent  -%}
                 <div class="header">
-                    {{ 'forms.submission.error'|trans }}
+                    {{ 'obblm.forms.submission.error'|trans }}
                 </div>
             {%- endif -%}
             <ul class="list">
