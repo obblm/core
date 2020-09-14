@@ -1,0 +1,13 @@
+{% extends '@ObblmCore/base.html.twig'%}
+
+{% block body %}
+    <h1>{{ team.name }}</h1>
+
+    <div>
+        <p>Are you sure you want to use delete this team ?</p>
+        <p>
+            <a href="{{ path('obblm_team_delete', {'team': team.id, 'confirm': 1}) }}">Yes</a>
+            <a href="{{ path('obblm_team_delete', {'team': team.id, 'confirm': 0}) }}">No</a>
+        </p>
+    </div>
+{% endblock %}

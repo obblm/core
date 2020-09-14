@@ -3,11 +3,6 @@
 namespace Obblm\Core\Service;
 
 use Obblm\Core\Entity\Rule;
-use Obblm\Core\Form\Encounter\ActionBb2020Type;
-use Obblm\Core\Form\Encounter\ActionType;
-use Obblm\Core\Form\Encounter\InjuryBb2020Type;
-use Obblm\Core\Form\Encounter\InjuryType;
-use Obblm\Core\Service\Rule\RuleInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Exception;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
@@ -49,7 +44,7 @@ class RuleService {
     }
 
     protected static function getCacheKey(Rule $rule) {
-        return join(self::TRANSLATION_GLUE, ['bblm', 'rules', $rule->getRuleKey(), $rule->getId()]);
+        return join(self::TRANSLATION_GLUE, ['obblm', 'rules', $rule->getRuleKey(), $rule->getId()]);
     }
     public function getCacheOrCreate($key, Rule $rule):RuleInterface {
         $item = $this->cache->getItem($key);
@@ -65,19 +60,19 @@ class RuleService {
     }
 
     public static function composeTranslationRosterKey($rule_key, $roster):string {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'rosters', $roster, 'title']);
+        return join(self::TRANSLATION_GLUE, ['obblm', $rule_key, 'rosters', $roster, 'title']);
     }
 
     public static function composeTranslationRosterDescription($rule_key, $roster):string {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'rosters', $roster, 'description']);
+        return join(self::TRANSLATION_GLUE, ['obblm', $rule_key, 'rosters', $roster, 'description']);
     }
 
     public static function composeTranslationInjuryKey($rule_key, $injury_key):string {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'injuries', $injury_key, 'name']);
+        return join(self::TRANSLATION_GLUE, ['obblm', $rule_key, 'injuries', $injury_key, 'name']);
     }
 
     public static function composeTranslationInjuryEffect($rule_key, $injury_key):string {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'injuries', $injury_key, 'effect']);
+        return join(self::TRANSLATION_GLUE, ['obblm', $rule_key, 'injuries', $injury_key, 'effect']);
     }
 
     public static function getAvailableRosters(Rule $object):array {

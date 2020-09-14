@@ -13,7 +13,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class RulesLoaderCommand extends Command {
 
-    protected static $defaultName = 'bblm:rules:load';
+    protected static $defaultName = 'obblm:rules:load';
     protected static $rulesDirectory = 'datas/rules';
 
     private $em;

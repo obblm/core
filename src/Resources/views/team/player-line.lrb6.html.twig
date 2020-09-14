@@ -8,8 +8,8 @@
     <td>{{ player|characteristics('av') }}</td>
     <td class="left aligned">
         {% for skill in player|skills %}
-            {% set skill_name = 'lrb6.skills.' ~ skill ~ '.title' %}
-            {% set skill_text = 'lrb6.skills.' ~ skill ~ '.description' %}
+            {% set skill_name = 'obblm.lrb6.skills.' ~ skill ~ '.title' %}
+            {% set skill_text = 'obblm.lrb6.skills.' ~ skill ~ '.description' %}
             <span title="{{ skill_text|trans({}, 'lrb6') }}">{{ skill_name|trans({}, 'lrb6') }}</span>
         {% else %}
             None

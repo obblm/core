@@ -7,9 +7,11 @@
             <a href="#">Vue current encounters</a>
             - <a href="#">Vue all encounters</a> -
         {% endif %}
+        {# TODO: fix it
         {% if is_granted('championship.add_encounter', championship) %}
-            <a href="{{ path('championship_add_encounter', {'championship': championship.id}) }}">Add new encounter</a>
+            <a href="{{ path('obblm_championship_add_encounter', {'championship': championship.id}) }}">Add new encounter</a>
         {% endif %}
+        #}
     </div>
     <table class="ui table">
         <thead>
@@ -28,7 +30,7 @@
         <tbody>
             {% for version in teamVersions %}
             <tr>
-                <td><a href="{{ path('championship_team', {'championship': championship.id, 'team': version.team.id }) }}">{{ version.team.name }}</a></td>
+                <td><a href="{{ path('obblm_championship_team', {'championship': championship.id, 'team': version.team.id }) }}">{{ version.team.name }}</a></td>
                 <td>{{ version.points }}</td>
                 <td>
                     {{ version.gameWin }} /
@@ -41,6 +43,7 @@
                 <td>{{ version.injuryTake }}</td>
                 <td>{{ version.team|tr }}</td>
                 <td>
+                {# TODO: fix it
                 {% set encounter = version.team|opened_encounter %}
                 {% if encounter and is_granted('encounter.view', encounter) %}
                     <a class="ui button primary" href="{{ path('championship_view_encounter', {'championship': championship.id, 'encounter': encounter.id}) }}">View encounter</a>
@@ -48,6 +51,7 @@
                 {% if encounter and is_granted('encounter.edit', encounter) and (app.user == version.team.coach or is_granted('championship.manage', championship)) %}
                     <a class="ui button orange" href="{{ path('championship_edit_encounter', {'championship': championship.id, 'encounter': encounter.id}) }}">Edit encounter</a>
                 {% endif %}
+                #}
                 </td>
             </tr>
             {% else %}

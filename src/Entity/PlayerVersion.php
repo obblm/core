@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PlayerVersionRepository::class)
+ * @ORM\Table(name="obblm_team_player_version")
  * @ORM\HasLifecycleCallbacks
  */
 class PlayerVersion
@@ -20,7 +21,7 @@ class PlayerVersion
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Player::class, inversedBy="versions")
+     * @ORM\ManyToOne(targetEntity=Player::class, inversedBy="versions", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $player;
@@ -218,6 +219,9 @@ class PlayerVersion
     public function loadDefaultDatas(): void
     {
         if($this->getPlayer()) {
+            if(!$this->getPlayer()->getTeam()) {
+                $this->getPlayer()->setTeam($this->getTeamVersion()->getTeam());
+            }
             if(!$this->getCharacteristics()) {
                 $this->setCharacteristics(PlayerService::getPlayerCharacteristics($this->getPlayer()));
             }

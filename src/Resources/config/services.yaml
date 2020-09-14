@@ -15,8 +15,15 @@ services:
     resource: '../../Controller'
     tags: ['controller.service_arguments']
 
-  Obblm\Core\Routing\ExtraLoader:
-    tags: [routing.loader]
+  Obblm\Core\Routing\RouteAutoloader:
+    autowire: true
+
+  Obblm\Core\Helper\Rule\RuleHelperInterface:
+    alias: Obblm\Core\Helper\Rule\BaseRule
+
+  Obblm\Core\Routing\ObblmExtraLoader:
+    arguments: [ '@Obblm\Core\Routing\RouteAutoloader' ]
+    tags: [ routing.loader ]
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
 

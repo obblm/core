@@ -14,7 +14,7 @@
     </script>
 </head>
 <body class="pushable">
-{% if(is_granted('ROLE_USER')) %}
+{% if(is_granted('ROLE_OBBLM_COACH')) %}
     {% include '@ObblmCore/layout/navbar.html.twig' %}
     {% include '@ObblmCore/layout/header.html.twig' %}
 {% endif %}

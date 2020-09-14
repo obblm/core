@@ -2,7 +2,8 @@
 
 namespace Obblm\Core\Form\Team;
 
-use Obblm\Core\Entity\Team;
+use Obblm\Core\Entity\TeamVersion;
+use Obblm\Core\Form\Player\PlayerTeamType;
 use Obblm\Core\Service\TeamService;
 use Obblm\Core\Validator\Constraints\TeamComposition;
 use Obblm\Core\Validator\Constraints\TeamValue;
@@ -15,15 +16,15 @@ class EditTeamType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')
-            ->add('anthem')
-            ->add('fluff');
-
-        if($team = $builder->getData()) {
-            /** @var Team $team */
-            $locked = !$team->getRule() && ($team->getChampionship() && $team->getChampionship()->isLocked());
-            $rule = $team->getRule() ?? $team->getChampionship()->getRule();
-            if(!$locked) {
+        if($version = $builder->getData()) {
+            /** @var TeamVersion $version */
+            $team = $version->getTeam();
+            $builder->add('name')
+                ->add('anthem')
+                ->add('fluff')
+                ->add('ready');
+            $rule = $team->getRule();
+            if(!$team->isReady() && !$team->isLockedByManagment()) {
                 $builder->add('players', CollectionType::class, [
                     'entry_type' => PlayerTeamType::class,
                     'allow_add' => true,
@@ -39,7 +40,7 @@ class EditTeamType extends AbstractType {
                 ->add('cheerleaders')
                 ->add('assistants')
                 ->add('popularity');
-                if(TeamService::couldHaveApothecary($team)) {
+                if(TeamService::couldHaveApothecary($version)) {
                     $builder->add('apothecary');
                 }
             }
@@ -49,7 +50,7 @@ class EditTeamType extends AbstractType {
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Team::class,
+            'data_class' => TeamVersion::class,
             'constraints' => [
                 new TeamValue(),
                 new TeamComposition(),

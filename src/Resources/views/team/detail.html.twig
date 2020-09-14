@@ -2,38 +2,38 @@
 
 {% block body %}
     <nav class="action">
-    {% if(is_granted('team.edit', team)) %}
-        <a href="{{ path('team_edit', {'team': team.id}) }}">Edit</a> -
-        <a href="{{ path('team_delete', {'team': team.id}) }}">Delete</a>
+    {% if(is_granted('team.edit', version.team)) %}
+        <a href="{{ path('obblm_team_edit', {'team': version.team.id}) }}">Edit</a> -
+        <a href="{{ path('obblm_team_delete', {'team': version.team.id}) }}">Delete</a>
     {% endif %}
     </nav>
     <section class="row">
         <header>
-            <h1>{{ team.name }} ({{ team|tr }})</h1>
-            {% if team.championship %}
+            <h1>{{ version.team.name }} ({{ version.tr }})</h1>
+            {# % if team.championship is defined %}
             <h2>{{ team.championship.name }}</h2>
-            {% endif %}
+            {% endif % #}
         </header>
-        {% include '@ObblmCore/team/sheet.html.twig' with { 'team': team } %}
+        {% include '@ObblmCore/team/sheet.html.twig' with { 'team': version.team } %}
         <footer>
             <ul>
                 <li>
-                    Rerolls : {{ team.rerolls }} (x{{ team|reroll_cost|price }})
+                    Rerolls : {{ version.rerolls }} (x{{ version.team|reroll_cost|price }})
                 </li>
                 <li>
-                    Popularity : {{ team.popularity }}
+                    Popularity : {{ version.popularity }}
                 </li>
                 <li>
-                    Assistants : {{ team.assistants }}
+                    Assistants : {{ version.assistants }}
                 </li>
                 <li>
-                    Cheerleaders : {{ team.cheerleaders }}
+                    Cheerleaders : {{ version.cheerleaders }}
                 </li>
                 <li>
-                    Apothecary : {{ team.apothecary|yesno }}
+                    Apothecary : {{ version.apothecary|yesno }}
                 </li>
                 <li>
-                    Total cost : {{ team|calculate_value|price }}
+                    Total cost : {{ version.team|calculate_value|price }}
                 </li>
             </ul>
         </footer>

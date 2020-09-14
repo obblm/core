@@ -18,10 +18,10 @@
     {% form_theme form '@ObblmCore/manage/form/custom_form.html.twig' %}
     {{ form_start( form, {'attr': {'class': 'ui form'}}) }}
     <div class="field">
-        <label>{{ 'forms.championship.fields.format'|trans }}</label>
+        <label>{{ 'obblm.forms.championship.fields.format'|trans }}</label>
         {{ championship.format|trans }}
     </div>
-    <h2>{{ 'forms.championship.titles.informations'|trans }}</h2>
+    <h2>{{ 'obblm.forms.championship.titles.informations'|trans }}</h2>
     <div class="field">
         {{ form_label( form.name, 'forms.championship.fields.name') }}
         {{ form_widget( form.name ) }}
@@ -37,7 +37,7 @@
     </div>
     <div class="ui grid">
         <div class="eight wide column">
-            <h2>{{ 'forms.championship.titles.points'|trans }}</h2>
+            <h2>{{ 'obblm.forms.championship.titles.points'|trans }}</h2>
             <div class="field">
                 {{ form_label( form.points_per_win, 'forms.championship.fields.points_per_win') }}
                 {{ form_widget( form.points_per_win ) }}
@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="eight wide column">
-            <h2>{{ 'forms.championship.titles.tiebreaks'|trans }}</h2>
+            <h2>{{ 'obblm.forms.championship.titles.tiebreaks'|trans }}</h2>
             <div class="field">
                 {{ form_label( form.tie_break_1, 'forms.championship.fields.tie_break_1') }}
                 {{ form_widget( form.tie_break_1, {'attr': {'class': 'ui dropdown'}}) }}
@@ -73,7 +73,7 @@
             </div>
         </div>
     </div>
-    <h2>{{ 'forms.championship.fields.invitations'|trans }}</h2>
+    <h2>{{ 'obblm.forms.championship.fields.invitations'|trans }}</h2>
     <div class="field attach-collection-actions">
         <div class="field">
             <button type="button"
@@ -92,7 +92,7 @@
                 {{ formMacros.printInvitationRow(invitation) }}
             {% else %}
                 {{ form_widget( form.invitations ) }}
-                {{ 'forms.championship.fields.coachs.no_one'|trans }}
+                {{ 'obblm.forms.championship.fields.coachs.no_one'|trans }}
             {% endfor %}
         </div>
     </div>

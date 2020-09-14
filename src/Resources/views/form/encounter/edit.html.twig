@@ -126,7 +126,7 @@
     <div class="players-actions-collection two fields">
         <div class="home-actions field">
             <div class="attach-collection-actions">
-                {{ 'forms.encounter.fields.team_actions'|trans({'%team_name%': encounter.homeTeam.name}) }}
+                {{ 'obblm.forms.encounter.fields.team_actions'|trans({'%team_name%': encounter.homeTeam.name}) }}
 
                 {{ form_label( form.home_actions ) }}
                 {{ form_errors( form.home_actions ) }}
@@ -147,7 +147,7 @@
 
         <div class="visitor-actions field">
             <div class="attach-collection-actions">
-                {{ 'forms.encounter.fields.team_actions'|trans({'%team_name%': encounter.visitorTeam.name}) }}
+                {{ 'obblm.forms.encounter.fields.team_actions'|trans({'%team_name%': encounter.visitorTeam.name}) }}
                 {{ form_label( form.visitor_actions ) }}
                 {{ form_errors( form.visitor_actions ) }}
                 <button type="button"

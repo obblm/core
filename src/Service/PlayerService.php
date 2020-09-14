@@ -4,10 +4,17 @@ namespace Obblm\Core\Service;
 
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\PlayerVersion;
+use Obblm\Core\Helper\RuleHelper;
 
 class PlayerService {
 
     const TRANSLATION_GLUE = '.';
+
+    private $ruleHelper;
+
+    public function __construct(RuleHelper $ruleHelper) {
+        $this->ruleHelper = $ruleHelper;
+    }
 
     public static function getPlayerTranslationKey(Player $player):string {
         list($rule_key, $roster, $type) = explode(self::TRANSLATION_GLUE, $player->getType());
@@ -19,7 +26,7 @@ class PlayerService {
     }
 
     public static function composeTranslationPlayerKey($rule_key, $roster, $type):string {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'rosters', $roster, 'positions', $type]);
+        return join(self::TRANSLATION_GLUE, ['obblm', $rule_key, 'rosters', $roster, 'positions', $type]);
     }
 
     public static function getPlayerSkills(Player $player):array {
@@ -67,7 +74,8 @@ class PlayerService {
                 'mvp' => 0,
             ])
             ->setSkills(($base['skills'] ?? []))
-            ->setValue($base['cost']);
+            ->setValue($base['cost'])
+            ->setSppLevel('rookie');;
     }
     public static function getBasePlayerVersion(Player $player):array {
         list($rule_key, $roster, $type) = explode('.', $player->getType());

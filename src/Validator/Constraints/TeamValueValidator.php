@@ -3,18 +3,20 @@
 namespace Obblm\Core\Validator\Constraints;
 
 use Obblm\Core\Entity\Team;
-use Obblm\Core\Service\RuleService;
+use Obblm\Core\Entity\TeamVersion;
+use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Service\TeamService;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\VarDumper\VarDumper;
 
 class TeamValueValidator extends ConstraintValidator {
 
-    protected $ruleService;
+    protected $ruleHelper;
 
-    public function __construct(RuleService $ruleService) {
-        $this->ruleService = $ruleService;
+    public function __construct(RuleHelper $ruleHelper) {
+        $this->ruleHelper = $ruleHelper;
     }
 
     public function validate($value, Constraint $constraint)
@@ -22,18 +24,19 @@ class TeamValueValidator extends ConstraintValidator {
         if (!$constraint instanceof TeamValue) {
             throw new UnexpectedTypeException($constraint, TeamValue::class);
         }
-        if (!$value instanceof Team) {
+        if (!$value instanceof Team && !$value instanceof TeamVersion) {
             throw new UnexpectedTypeException($value, Team::class);
         }
+        if($value instanceof Team) {
+            $value = TeamService::getLastVersion($value);
+        }
 
-        $rule = $value->getChampionship() ? $value->getChampionship()->getRule() : $value->getRule();
-        $limit = $rule->getMaxTeamCost() ?? TeamValue::LIMIT;
-        $team_cost = TeamService::calculateTeamValue(TeamService::getLastVersion($value),
-            $this->ruleService->getRule(TeamService::getTeamRule($value)));
+        $helper = $this->ruleHelper->getHelper($value->getTeam()->getRule());
+        $team_cost = TeamService::calculateTeamValue($value, $helper);
 
-        if($team_cost > $limit) {
+        if($team_cost > $helper->getMaxTeamCost()) {
             $this->context->buildViolation($constraint->limitMessage)
-                ->setParameter('{{ limit }}', $limit)
+                ->setParameter('{{ limit }}', $helper->getMaxTeamCost())
                 ->setParameter('{{ current }}', $team_cost)
                 ->addViolation();
         }

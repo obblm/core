@@ -7,9 +7,9 @@ use function get_class;
 
 class ParticipateToChampionship extends Constraint {
 
-    public $limitMessage = 'constraints.team.championship.teams_limit.violation';
-    public $closedMessage = 'constraints.team.championship.closed.violation';
-    public $startedMessage = 'constraints.team.championship.started.violation';
+    public $limitMessage = 'obblm.constraints.team.championship.teams_limit.violation';
+    public $closedMessage = 'obblm.constraints.team.championship.closed.violation';
+    public $startedMessage = 'obblm.constraints.team.championship.started.violation';
 
     public function validatedBy()
     {

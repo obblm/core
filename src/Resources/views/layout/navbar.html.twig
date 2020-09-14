@@ -1,26 +1,57 @@
+{% macro navigationCollectionToHtml(collection) %}
+    {% for item in collection %}
+        {% if item|is_collection %}
+        <div class="item">
+            {% if item.name %}
+                {% if item.icon %}
+                    <i aria-hidden="true" class="icon notranslate {{ item.icon }}"></i>
+                {% endif %}
+                {{ item.name }}
+            {% endif %}
+            <div class="menu">
+                {{ _self.navigationCollectionToHtml(item.collection) }}
+            </div>
+        </div>
+        {% else %}
+        {% set context = item.parameters ?? {} %}
+        <a class="item" href="{{ path(item.route, context) }}">
+            {% if item.icon %}
+            <i aria-hidden="true" class="icon notranslate {{ item.icon }}"></i>
+            {% endif %}
+            {{ item.link }}
+        </a>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+{% import _self as macros %}
 <nav id="navigation" class="ui vertical inverted sidebar menu left">
     <div class="item"><b>BBLM</b></div>
-    <a class="item" href="{{ path('home') }}">
+    <a class="item" href="{{ path('obblm_dashboard') }}">
         <i aria-hidden="true" class="icon notranslate mdi mdi-view-dashboard"></i>
         Dashboard
     </a>
-    <a class="item" href="{{ path('my_teams') }}">
+    <a class="item" href="{{ path('obblm_team_mine') }}">
         <i aria-hidden="true" class="icon notranslate mdi mdi-football"></i>
         My teams
     </a>
-    <a class="item" href="{{ path('my_championships') }}">
+    {{ macros.navigationCollectionToHtml(get_navigation_links()) }}
+    {# <a class="item" href="{{ path('my_championships') }}">
         <i aria-hidden="true" class="icon notranslate mdi mdi-trophy-variant"></i>
         My Championships
-    </a>
-    {% if(is_granted('ROLE_ADMIN')) %}
+    </a> #}
+    {% if(is_granted('ROLE_OBBLM_ADMIN')) %}
     <div class="item">
         <i class="options icon"></i>
         <i aria-hidden="true" class="v-icon notranslate mdi mdi-options"></i>
         Admin
         <div class="menu">
-            <a class="item" href="{{ path('admin_leagues') }}">Leagues</a>
+            {# <a class="item" href="{{ path('admin_leagues') }}">Leagues</a> #}
             <a class="item" href="{{ path('admin_rules') }}">Rules</a>
-            <a class="item" href="{{ path('admin_users') }}">Users</a>
+            <a class="item" href="{{ path('admin_users') }}">
+                <i aria-hidden="true" class="icon notranslate user"></i>
+                Users
+            </a>
+            {{ macros.navigationCollectionToHtml(get_admin_links()) }}
         </div>
     </div>
     {% endif %}

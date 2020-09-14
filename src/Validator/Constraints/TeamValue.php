@@ -9,7 +9,7 @@ class TeamValue extends Constraint {
 
     const LIMIT = 1000000;
 
-    public $limitMessage = 'constraints.team.value.violation';
+    public $limitMessage = 'obblm.constraints.team.value.violation';
 
     public function validatedBy()
     {

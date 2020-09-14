@@ -7,7 +7,7 @@
             <h1>Blood Bowl league manager</h1>
         </div>
         <div class="right menu">
-        {% if(is_granted('ROLE_USER')) %}
+        {% if(is_granted('OBBLM_USER')) %}
             <a class="icon item" href="{{ path('obblm.logout')}}" title="Logout">
                 <i aria-hidden="true" class="icon log out"></i>
             </a>

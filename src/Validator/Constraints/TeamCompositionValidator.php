@@ -3,7 +3,9 @@
 namespace Obblm\Core\Validator\Constraints;
 
 use Obblm\Core\Entity\Team;
+use Obblm\Core\Entity\TeamVersion;
 use Obblm\Core\Service\PlayerService;
+use Obblm\Core\Service\TeamService;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -15,15 +17,20 @@ class TeamCompositionValidator extends ConstraintValidator {
         if (!$constraint instanceof TeamComposition) {
             throw new UnexpectedTypeException($constraint, TeamComposition::class);
         }
-        if (!$value instanceof Team) {
+        if (!$value instanceof TeamVersion && !$value instanceof Team) {
             throw new UnexpectedTypeException($value, Team::class);
         }
+        if($value instanceof Team) {
+            $value = TeamService::getLastVersion($value);
+        }
         $count = [];
-        $max_positions = $this->getMaxPlayersByTypes($value);
 
-        foreach($value->getNotDeadPlayers() as $player) {
-            $limit = $max_positions[$player->getType()];
-            $type = $player->getType();
+        /** @var TeamVersion $value */
+
+        $max_positions = $this->getMaxPlayersByTypes($value->getTeam());
+        foreach($value->getNotDeadPlayerVersions() as $version) {
+            $limit = $max_positions[$version->getPlayer()->getType()];
+            $type = $version->getPlayer()->getType();
             isset($count[$type]) ? $count[$type]++ : $count[$type] = 1;
             if($count[$type] > $limit) {
                 $this->context->buildViolation($constraint->limitMessage)
@@ -35,7 +42,7 @@ class TeamCompositionValidator extends ConstraintValidator {
     }
 
     protected function getMaxPlayersByTypes(Team $team):array {
-        $rule = $team->getChampionship() ? $team->getChampionship()->getRule() : $team->getRule();
+        $rule = $team->getRule();
         $max_positions = [];
 
         if($types = $rule->getTypes($team->getRoster())) {

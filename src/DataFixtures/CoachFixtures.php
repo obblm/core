@@ -5,6 +5,7 @@ namespace Obblm\Core\DataFixtures;
 use Obblm\Core\Entity\Coach;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Obblm\Core\Security\Roles;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CoachFixtures extends Fixture
@@ -27,7 +28,7 @@ class CoachFixtures extends Fixture
         $password = $this->encoder->encodePassword($coach, 'admin');
         $coach->setPassword($password);
         $coach->setRoles([
-            'ROLE_ADMIN'
+            Roles::ADMIN
         ]);
         $em->persist($coach);
         $this->addReference(self::ADMIN_USER_REFERENCE, $coach);
@@ -37,7 +38,7 @@ class CoachFixtures extends Fixture
         $password = $this->encoder->encodePassword($coach, 'manager');
         $coach->setPassword($password);
         $coach->setRoles([
-            'ROLE_MANAGER'
+            Roles::MANAGER
         ]);
         $em->persist($coach);
         $this->addReference(self::MANAGER_USER_REFERENCE, $coach);
@@ -46,6 +47,9 @@ class CoachFixtures extends Fixture
             ->setUsername('coach');
         $password = $this->encoder->encodePassword($coach, 'coach');
         $coach->setPassword($password);
+        $coach->setRoles([
+            Roles::COACH
+        ]);
         $em->persist($coach);
         $this->addReference(self::COACH_USER_REFERENCE, $coach);
 

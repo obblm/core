@@ -4,11 +4,11 @@
     <ul>
         {% for championship in championships %}
             <li>
-                <a href="{{ path('championship_detail', {'championship': championship.id}) }}">{{ championship.name }}</a>
+                <a href="{{ path('obblm_championship_detail', {'championship': championship.id}) }}">{{ championship.name }}</a>
                 {% if(is_granted('championship.manage', championship)) %}
-                    - <a href="{{ path('championship_manage_detail', {'championship': championship.id}) }}">Details</a>
-                    - <a href="{{ path('championship_manage_edit', {'championship': championship.id}) }}">Edit</a>
-                    - <a href="{{ path('championship_manage_delete', {'championship': championship.id}) }}">Delete</a>
+                    - <a href="{{ path('obblm_championship_manage_detail', {'championship': championship.id}) }}">Details</a>
+                    - <a href="{{ path('obblm_championship_manage_edit', {'championship': championship.id}) }}">Edit</a>
+                    - <a href="{{ path('obblm_championship_manage_delete', {'championship': championship.id}) }}">Delete</a>
                 {% endif %}
             </li>
         {% else %}

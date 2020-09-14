@@ -20,7 +20,7 @@ class LeagueAdminController extends AbstractController {
      * @Route("/", name="admin_leagues")
      */
     public function index(EntityManagerInterface $em) {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $leagues = $em->getRepository(League::class)
             ->findAll();
@@ -33,7 +33,7 @@ class LeagueAdminController extends AbstractController {
      * @Route("/add", name="admin_leagues_add")
      */
     public function add(Request $request, EntityManagerInterface $em) {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $league = new League();
         $form = $this->createForm(AdminLeagueForm::class, $league);
@@ -53,7 +53,7 @@ class LeagueAdminController extends AbstractController {
      * @Route("/edit/{league}", name="admin_leagues_edit")
      */
     public function edit(League $league, Request $request, EntityManagerInterface $em) {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $form = $this->createForm(AdminLeagueForm::class, $league);
 
@@ -72,7 +72,7 @@ class LeagueAdminController extends AbstractController {
      * @Route("/delete/{league}", name="admin_leagues_delete")
      */
     public function delete(League $league, Request $request, EntityManagerInterface $em) {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
         return $this->render('@ObblmCore/todo.html.twig', []);
     }
 }

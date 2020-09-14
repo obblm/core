@@ -4,6 +4,7 @@ namespace Obblm\Core\Security\Voter;
 use Obblm\Core\Entity\Coach;
 use Obblm\Core\Entity\Team;
 use LogicException;
+use Obblm\Core\Security\Roles;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -11,8 +12,8 @@ class TeamVoter extends Voter
 {
     // these strings are just invented: you can use anything
     const VIEW = 'team.view';
-    const MANAGE = 'team.manage';
     const EDIT = 'team.edit';
+    const MANAGE = 'team.manage';
 
     protected function supports(string $attribute, $subject)
     {
@@ -45,10 +46,10 @@ class TeamVoter extends Voter
         switch ($attribute) {
             case self::VIEW:
                 return $this->canView($team, $coach);
-            case self::MANAGE:
-                return $this->canManage($team, $coach);
             case self::EDIT:
                 return $this->canEdit($team, $coach);
+            case self::MANAGE:
+                return $this->canManage($team, $coach);
         }
 
         throw new LogicException('This code should not be reached!');
@@ -63,18 +64,17 @@ class TeamVoter extends Voter
         return true;
     }
 
-    private function canManage(Team $team, Coach $coach)
+    private function canEdit(Team $team, Coach $coach)
     {
-        if ($this->canEdit($team, $coach)) {
+        if ($this->canManage($team, $coach)) {
             return true;
         }
         // this assumes that the Team object has a `getOwner()` method
-        return ($coach === $team->getCoach() || in_array($coach, $team->getChampionship()->getManagers()->toArray()));
+        return $coach === $team->getCoach();
     }
 
-    private function canEdit(Team $team, Coach $coach)
+    private function canManage(Team $team, Coach $coach)
     {
-        // this assumes that the Team object has a `getOwner()` method
-        return ($coach === $team->getCoach() && !$team->isLockedByManagment() && !($team->getChampionship() ? $team->getChampionship()->isLocked() : false));
+        return false;
     }
 }

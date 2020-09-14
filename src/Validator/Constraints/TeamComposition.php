@@ -7,7 +7,7 @@ use function get_class;
 
 class TeamComposition extends Constraint {
 
-    public $limitMessage = 'constraints.team.composition.violation';
+    public $limitMessage = 'obblm.constraints.team.composition.violation';
 
     public function validatedBy()
     {

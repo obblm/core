@@ -2,6 +2,7 @@
 
 namespace Obblm\Core\Entity;
 
+use Obblm\Core\Helper\Rule\CanHaveRuleInterface;
 use Obblm\Core\Repository\RuleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=RuleRepository::class)
+ * @ORM\Table(name="obblm_rule")
  */
 class Rule
 {
@@ -54,17 +56,11 @@ class Rule
      */
     private $teams;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Championship::class, mappedBy="rule", orphanRemoval=true)
-     */
-    private $championships;
-
     protected $injury_table = [];
 
     public function __construct() {
         $this->post_bb_2020 = false;
         $this->read_only = false;
-        $this->championships = new ArrayCollection();
         $this->teams = new ArrayCollection();
     }
 
@@ -187,35 +183,8 @@ class Rule
         return $this;
     }
 
-    /**
-     * @return Collection|Championship[]
-     */
-    public function getChampionships(): Collection
-    {
-        return $this->championships;
-    }
-
-    public function addChampionship(Championship $championship): self
-    {
-        if (!$this->championships->contains($championship)) {
-            $this->championships[] = $championship;
-            $championship->setRule($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChampionship(Championship $championship): self
-    {
-        if ($this->championships->contains($championship)) {
-            $this->championships->removeElement($championship);
-            // set the owning side to null (unless already changed)
-            if ($championship->getRule() === $this) {
-                $championship->setRule(null);
-            }
-        }
-
-        return $this;
+    public function __toString(): ?string {
+        return $this->rule_key;
     }
 
     /**

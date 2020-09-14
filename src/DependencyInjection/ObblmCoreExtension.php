@@ -2,7 +2,8 @@
 
 namespace Obblm\Core\DependencyInjection;
 
-use Obblm\Core\Service\Rule\RuleInterface;
+use Obblm\Core\Routing\AutoloadedRouteInterface;
+use Obblm\Core\Helper\Rule\RuleHelperInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -17,12 +18,15 @@ class ObblmCoreExtension extends Extension {
         foreach ($configs as $subConfig) {
             $config = array_merge($config, $subConfig);
         }
-
-        $loader = new YamlFileLoader($container, new FileLocator(dirname(__DIR__).'/Resources/config'));
+        $locator = new FileLocator(dirname(__DIR__).'/Resources/config');
+        $loader = new YamlFileLoader($container, $locator);
         $loader->load('services.yaml');
 
-        $container->registerForAutoconfiguration(RuleInterface::class)
-            ->addTag('obblm.rules')
+        $container->registerForAutoconfiguration(RuleHelperInterface::class)
+            ->addTag('obblm.rule_helpers')
+        ;
+        $container->registerForAutoconfiguration(AutoloadedRouteInterface::class)
+            ->addTag('obblm.routes')
         ;
     }
 }

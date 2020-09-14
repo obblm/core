@@ -16,7 +16,7 @@ class AdminController extends AbstractController {
      * @Route("/", name="admin")
      */
     public function index() {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
         return $this->render('@ObblmCore/admin/index.html.twig', []);
     }
 }
