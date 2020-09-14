@@ -6,15 +6,13 @@ use Obblm\Core\Entity\Rule;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Event\TeamVersionEvent;
 use Obblm\Core\Form\Team\EditTeamType;
-use Obblm\Core\Form\Team\TeamVersionForm;
+use Obblm\Core\Helper\TeamHelper;
 use Obblm\Core\Security\Roles;
 use Obblm\Core\Security\Voter\TeamVoter;
-use Obblm\Core\Service\TeamService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Class TeamController
@@ -61,7 +59,7 @@ class TeamController extends AbstractTeamController {
     public function detail(Team $team): Response {
         $this->denyAccessUnlessGranted(TeamVoter::VIEW, $team);
         return $this->render('@ObblmCore/team/detail.html.twig', [
-            'version' => TeamService::getLastVersion($team),
+            'version' => TeamHelper::getLastVersion($team),
         ]);
     }
     /**
@@ -70,7 +68,7 @@ class TeamController extends AbstractTeamController {
     public function edit(Team $team, Request $request, EventDispatcherInterface $dispatcher): Response {
         $this->denyAccessUnlessGranted(TeamVoter::EDIT, $team);
 
-        $form = $this->createForm(TeamVersionForm::class, TeamService::getLastVersion($team));
+        $form = $this->createForm(EditTeamType::class, TeamHelper::getLastVersion($team));
 
         $form->handleRequest($request);
 

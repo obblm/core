@@ -20,6 +20,8 @@
                 {{ form_widget(form.roster, {'attr': {'class': 'ui dropdown'}}) }}
             </div>
         {% endif %}
-        <input class="ui button green" type="submit" value="Submit" />
+        <button class="ui button green" type="submit">
+            {{ 'obblm.forms.team.create.buttons.submit'|trans }}
+        </button>
     {{ form_end( form ) }}
 {% endblock %}

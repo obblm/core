@@ -42,7 +42,7 @@ class Player
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity=PlayerVersion::class, fetch="EAGER", mappedBy="player", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=PlayerVersion::class, fetch="EAGER", mappedBy="player", orphanRemoval=true, cascade={"remove"})
      * @ORM\OrderBy({"id"="DESC"})
      */
     private $versions;

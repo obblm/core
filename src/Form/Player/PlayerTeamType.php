@@ -3,7 +3,7 @@
 namespace Obblm\Core\Form\Player;
 
 use Obblm\Core\Entity\Player;
-use Obblm\Core\Entity\Rule;
+use Obblm\Core\Helper\Rule\RuleHelperInterface;
 use Obblm\Core\Service\PlayerService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -17,21 +17,22 @@ class PlayerTeamType extends AbstractType {
         $builder->add('name')
             ->add('number');
         if(!$builder->getData()) {
-            $rule = $options['rule'];
+            /** @var RuleHelperInterface $helper */
+            $helper = $options['rule_helper'];
             $roster = $options['roster'];
-            if($rule instanceof Rule && $roster) {
-                $types = $rule->getAvailableTypes($roster);
+            if($helper && $roster) {
+                $types = $helper->getAvailablePlayerKeyTypes($roster);
 
                 $choices = [];
                 foreach($types as $type) {
-                    $translation_key = PlayerService::composeTranslationPlayerKey($rule->getRuleKey(), $roster, $type);
-                    $player_key = PlayerService::composePlayerKey($rule->getRuleKey(), $roster, $type);
+                    $translation_key = PlayerService::composeTranslationPlayerKey($helper->getAttachedRule()->getRuleKey(), $roster, $type);
+                    $player_key = PlayerService::composePlayerKey($helper->getAttachedRule()->getRuleKey(), $roster, $type);
                     $choices[$translation_key] = $player_key;
                 }
             }
             $builder->add('type', ChoiceType::class, [
                 'choices' => $choices ?? [],
-                'translation_domain' => $rule->getRuleKey() ?? false
+                'translation_domain' => $helper->getAttachedRule()->getRuleKey() ?? false
             ]);
         }
     }
@@ -39,11 +40,13 @@ class PlayerTeamType extends AbstractType {
     {
         $resolver->setDefaults(array(
             'data_class' => Player::class,
+            'allow_type_edit' => true,
             'roster' => null,
-            'rule' => null,
+            'rule_helper' => null,
         ));
 
-        $resolver->setAllowedTypes('rule', [Rule::class]);
+        $resolver->setAllowedTypes('rule_helper', [RuleHelperInterface::class]);
         $resolver->setAllowedTypes('roster', ['string']);
+        $resolver->setAllowedTypes('allow_type_edit', ['bool']);
     }
 }

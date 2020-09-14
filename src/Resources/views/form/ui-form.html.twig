@@ -1,8 +1,8 @@
 {% use 'form_div_layout.html.twig' %}
 
-{% block _team_version_form_team_ready_widget %}
+{% block _edit_team_team_ready_widget %}
     <button class="ui button green" id="{{ id }}" name="{{ full_name }}" type="submit" value="1">
-        Save and ready to go
+        {{ 'obblm.forms.team.edit.buttons.submit'|trans }}
     </button>
 {% endblock %}
 

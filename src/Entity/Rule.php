@@ -211,16 +211,6 @@ class Rule
     }
 
     /**
-     * Get Max Team Cost
-     *
-     * @return integer
-     */
-    public function getMaxTeamCost() {
-        $datas = $this->getRule();
-        return ($datas['max_team_cost']) ? $datas['max_team_cost'] : 0;
-    }
-
-    /**
      * Get Experience Level For Experience Value
      *
      * @param integer $experience
@@ -261,21 +251,5 @@ class Rule
     public function getInjuryEffect($key_name) {
         $datas = $this->getRule();
         return ($datas['injuries'][$key_name]) ? $datas['injuries'][$key_name]['effects'] : false;
-    }
-
-    public function getTypes($roster) {
-        $datas = $this->getRule();
-        return ($datas['rosters'][$roster]) ? $datas['rosters'][$roster]['players'] : false;
-    }
-
-    public function getAvailableTypes($roster) {
-        $datas = $this->getRule();
-        return ($datas['rosters'][$roster]) ? array_keys($datas['rosters'][$roster]['players']) : false;
-    }
-
-    public function getPlayerCost($key) {
-        $datas = $this->getRule();
-        list($rule_key, $roster, $type) = explode('.', $key);
-        return ($datas['rosters'][$roster]) ? $datas['rosters'][$roster]['players'][$type]['cost'] : false;
     }
 }

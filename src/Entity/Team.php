@@ -175,6 +175,7 @@ class Team
     {
         $criteria = Criteria::create()
             ->andWhere(Criteria::expr()->eq('dead', false))
+            ->orderBy(['number' => 'ASC'])
         ;
         return $this->players->matching($criteria);
     }

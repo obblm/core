@@ -12,7 +12,7 @@
             {% set skill_text = 'obblm.lrb6.skills.' ~ skill ~ '.description' %}
             <span title="{{ skill_text|trans({}, 'lrb6') }}">{{ skill_name|trans({}, 'lrb6') }}</span>
         {% else %}
-            None
+        {{ 'None'|trans }}
         {% endfor %}
     </td>
     <td class="left aligned"></td>

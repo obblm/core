@@ -4,7 +4,6 @@ namespace Obblm\Core\Form\Team;
 
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Helper\RuleHelper;
-use Obblm\Core\Service\TeamService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,7 +23,7 @@ class TeamRulesSelectorForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if($team = $builder->getData()) {
-            if($rule = TeamService::getTeamRule($team)) {
+            if($rule = $team->getRule()) {
                 $rosters = $this->ruleHelper->getAvailableRosters($rule);
                 $choices = [];
                 foreach($rosters as $roster) {

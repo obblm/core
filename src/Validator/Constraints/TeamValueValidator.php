@@ -4,19 +4,17 @@ namespace Obblm\Core\Validator\Constraints;
 
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
-use Obblm\Core\Helper\RuleHelper;
-use Obblm\Core\Service\TeamService;
+use Obblm\Core\Helper\TeamHelper;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\VarDumper\VarDumper;
 
 class TeamValueValidator extends ConstraintValidator {
 
-    protected $ruleHelper;
+    protected $teamHelper;
 
-    public function __construct(RuleHelper $ruleHelper) {
-        $this->ruleHelper = $ruleHelper;
+    public function __construct(TeamHelper $teamHelper) {
+        $this->teamHelper = $teamHelper;
     }
 
     public function validate($value, Constraint $constraint)
@@ -28,15 +26,15 @@ class TeamValueValidator extends ConstraintValidator {
             throw new UnexpectedTypeException($value, Team::class);
         }
         if($value instanceof Team) {
-            $value = TeamService::getLastVersion($value);
+            $value = TeamHelper::getLastVersion($value);
         }
 
-        $helper = $this->ruleHelper->getHelper($value->getTeam()->getRule());
-        $team_cost = TeamService::calculateTeamValue($value, $helper);
+        $team_cost = $this->teamHelper->calculateTeamValue($value);
+        $limit = $this->teamHelper->getRuleHelper($value->getTeam())->getMaxTeamCost();
 
-        if($team_cost > $helper->getMaxTeamCost()) {
+        if($team_cost > $limit) {
             $this->context->buildViolation($constraint->limitMessage)
-                ->setParameter('{{ limit }}', $helper->getMaxTeamCost())
+                ->setParameter('{{ limit }}', $limit)
                 ->setParameter('{{ current }}', $team_cost)
                 ->addViolation();
         }

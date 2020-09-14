@@ -2,8 +2,8 @@
     <thead>
         <tr>
             <th>#</th>
-            <th class="left aligned">Name</th>
-            <th class="left aligned">Type</th>
+            <th class="left aligned">{{ 'obblm.forms.player.fields.name'|trans }}</th>
+            <th class="left aligned">{{ 'obblm.forms.player.fields.type'|trans }}</th>
             <th>{{ 'obblm.lrb6.trait.ma.abbr'|trans({}, 'lrb6') }}</th>
             <th>{{ 'obblm.lrb6.trait.st.abbr'|trans({}, 'lrb6') }}</th>
             <th>{{ 'obblm.lrb6.trait.ag.abbr'|trans({}, 'lrb6') }}</th>
@@ -17,6 +17,6 @@
     {% for player in team.notDeadPlayers %}
         {% include '@ObblmCore/team/player-line.lrb6.html.twig' with { 'player': player } %}
     {% else %}
-        <tr colspan="5">No players</tr>
+        <tr colspan="5">{{ 'No players'|trans }}</tr>
     {% endfor %}
 </table>

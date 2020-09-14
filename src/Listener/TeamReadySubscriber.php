@@ -4,16 +4,16 @@ namespace Obblm\Core\Listener;
 
 use Obblm\Core\Event\TeamEvent;
 use Obblm\Core\Helper\RuleHelper;
-use Obblm\Core\Service\TeamService;
+use Obblm\Core\Helper\TeamHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class TeamReadySubscriber implements EventSubscriberInterface {
 
-    private $teamService;
+    private $teamHelper;
     private $ruleHelper;
 
-    public function __construct(TeamService $teamService, RuleHelper $ruleHelper) {
-        $this->teamService = $teamService;
+    public function __construct(TeamHelper $teamHelper, RuleHelper $ruleHelper) {
+        $this->teamHelper = $teamHelper;
         $this->ruleHelper = $ruleHelper;
     }
 

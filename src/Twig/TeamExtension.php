@@ -5,11 +5,9 @@ namespace Obblm\Core\Twig;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Helper\RuleHelper;
+use Obblm\Core\Helper\TeamHelper;
 use Obblm\Core\Service\PlayerService;
-use Obblm\Core\Service\RuleService;
-use Obblm\Core\Service\TeamService;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
-use Symfony\Component\VarDumper\VarDumper;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -17,11 +15,11 @@ use Twig\TwigFunction;
 class TeamExtension extends AbstractExtension {
 
     protected $ruleHelper;
-    protected $teamService;
+    protected $teamHelper;
 
-    public function __construct(RuleHelper $ruleHelper, TeamService $teamService) {
+    public function __construct(RuleHelper $ruleHelper, TeamHelper $teamHelper) {
         $this->ruleHelper = $ruleHelper;
-        $this->teamService = $teamService;
+        $this->teamHelper = $teamHelper;
     }
 
     public function getFilters()
@@ -56,25 +54,23 @@ class TeamExtension extends AbstractExtension {
     }
 
     public function getTeamRate(Team $team) {
-        $helper = $this->ruleHelper->getHelper(TeamService::getTeamRule($team));
-        return TeamService::calculateTeamRate(TeamService::getLastVersion($team), $helper);
+        return $this->teamHelper->calculateTeamRate(TeamHelper::getLastVersion($team));
     }
 
     public function getRuleKey(Team $team) {
-        return TeamService::getTeamRule($team)->getRuleKey();
+        return $team->getRule()->getRuleKey();
     }
 
     public function getRosterName(Team $team) {
-        return TeamService::getRosterNameForTranslation($team);
+        return TeamHelper::getRosterNameForTranslation($team);
     }
 
     public function getRerollCost(Team $team) {
-        return TeamService::getRerollCost($team);
+        return $this->teamHelper->getRerollCost($team);
     }
 
     public function getTeamValue(Team $team) {
-        $helper = $this->ruleHelper->getHelper(TeamService::getTeamRule($team));
-        return $helper->calculateTeamValue(TeamService::getLastVersion($team));
+        return $this->teamHelper->calculateTeamValue(TeamHelper::getLastVersion($team));
     }
 
     public function getCharacteristics(Player $player, $characteristic) {
@@ -103,7 +99,7 @@ class TeamExtension extends AbstractExtension {
     }
 
     public function getInjuryEffects(Team $team, $injuries) {
-        $helper = $this->ruleHelper->getHelper(TeamService::getTeamRule($team));
+        $helper = $this->ruleHelper->getHelper($team->getRule());
         $arr = [
             'dictionary' => $helper->getAttachedRule()->getRuleKey(),
             'injuries' => []

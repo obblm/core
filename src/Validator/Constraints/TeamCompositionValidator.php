@@ -4,13 +4,19 @@ namespace Obblm\Core\Validator\Constraints;
 
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
+use Obblm\Core\Helper\TeamHelper;
 use Obblm\Core\Service\PlayerService;
-use Obblm\Core\Service\TeamService;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class TeamCompositionValidator extends ConstraintValidator {
+
+    private $teamHelper;
+
+    public function __construct(TeamHelper $teamHelper) {
+        $this->teamHelper = $teamHelper;
+    }
 
     public function validate($value, Constraint $constraint)
     {
@@ -21,7 +27,7 @@ class TeamCompositionValidator extends ConstraintValidator {
             throw new UnexpectedTypeException($value, Team::class);
         }
         if($value instanceof Team) {
-            $value = TeamService::getLastVersion($value);
+            $value = TeamHelper::getLastVersion($value);
         }
         $count = [];
 
@@ -42,12 +48,12 @@ class TeamCompositionValidator extends ConstraintValidator {
     }
 
     protected function getMaxPlayersByTypes(Team $team):array {
-        $rule = $team->getRule();
+        $helper = $this->teamHelper->getRuleHelper($team);
         $max_positions = [];
 
-        if($types = $rule->getTypes($team->getRoster())) {
+        if($types = $helper->getTeamAvailablePlayerTypes($team)) {
             foreach($types as $key => $type) {
-                $key = PlayerService::composePlayerKey($rule->getRuleKey(), $team->getRoster(), $key);
+                $key = PlayerService::composePlayerKey($helper->getAttachedRule()->getRuleKey(), $team->getRoster(), $key);
                 $max_positions[$key] = $type['max'];
             }
         }

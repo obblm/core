@@ -23,7 +23,7 @@ class TeamVersion
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Team::class, fetch="EAGER", inversedBy="versions")
+     * @ORM\ManyToOne(targetEntity=Team::class, fetch="EAGER", inversedBy="versions", cascade="persist")
      * @ORM\JoinColumn(nullable=false)
      */
     private $team;

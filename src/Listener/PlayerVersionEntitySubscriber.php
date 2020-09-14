@@ -23,13 +23,7 @@ class PlayerVersionEntitySubscriber implements EventSubscriberInterface {
 
     public function prePersist(TeamVersionEvent $event) {
         $version = $event->getTeamVersion();
-        // PlayerVersion
         $helper = $this->ruleHelper->getHelper($version->getTeam()->getRule());
-        foreach($version->getPlayerVersions() as $playerVersion) {
-            if(!$playerVersion->getId()) {
-                $helper->setDefaultValues($playerVersion);
-            }
-        }
         $version->setTr($helper->calculateTeamRate($version));
     }
 }

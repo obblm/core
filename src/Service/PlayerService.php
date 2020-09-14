@@ -4,6 +4,7 @@ namespace Obblm\Core\Service;
 
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\PlayerVersion;
+use Obblm\Core\Exception\NoVersionException;
 use Obblm\Core\Helper\RuleHelper;
 
 class PlayerService {
@@ -53,33 +54,14 @@ class PlayerService {
         $versions = $player->getVersions();
         /** @var PlayerVersion $last */
         $last = $versions->first();
-        if($last) {
-            return $last;
+        if(!$last) {
+            throw new NoVersionException($player);
         }
-        $base = self::getBasePlayerVersion($player);
-        return (new PlayerVersion())
-            ->setPlayer($player)
-            // TODO : this part id linked to rules
-            ->setCharacteristics([
-                'ma' => $base['ma'],
-                'st' => $base['st'],
-                'ag' => $base['ag'],
-                'av' => $base['av']
-            ])
-            ->setActions([
-                'td' => 0,
-                'cas' => 0,
-                'pas' => 0,
-                'int' => 0,
-                'mvp' => 0,
-            ])
-            ->setSkills(($base['skills'] ?? []))
-            ->setValue($base['cost'])
-            ->setSppLevel('rookie');;
+        return $last;
     }
     public static function getBasePlayerVersion(Player $player):array {
         list($rule_key, $roster, $type) = explode('.', $player->getType());
-        $rule = TeamService::getTeamRule($player->getTeam());
+        $rule = $player->getTeam()->getRule();
         $base = $rule->getRule()['rosters'][$roster]['players'][$type];
         $base['injuries'] = [];
         return $base;

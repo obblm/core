@@ -10,30 +10,27 @@
     <section class="row">
         <header>
             <h1>{{ version.team.name }} ({{ version.tr }})</h1>
-            {# % if team.championship is defined %}
-            <h2>{{ team.championship.name }}</h2>
-            {% endif % #}
         </header>
         {% include '@ObblmCore/team/sheet.html.twig' with { 'team': version.team } %}
         <footer>
             <ul>
                 <li>
-                    Rerolls : {{ version.rerolls }} (x{{ version.team|reroll_cost|price }})
+                    {{ 'Rerolls'|trans }} : {{ version.rerolls }} (x{{ version.team|reroll_cost|price }})
                 </li>
                 <li>
-                    Popularity : {{ version.popularity }}
+                    {{ 'Popularity'|trans }} : {{ version.popularity }}
                 </li>
                 <li>
-                    Assistants : {{ version.assistants }}
+                    {{ 'Assistants'|trans }} : {{ version.assistants }}
                 </li>
                 <li>
-                    Cheerleaders : {{ version.cheerleaders }}
+                    {{ 'Cheerleaders'|trans }} : {{ version.cheerleaders }}
                 </li>
                 <li>
-                    Apothecary : {{ version.apothecary|yesno }}
+                    {{ 'Apothecary'|trans }} : {{ version.apothecary|yesno }}
                 </li>
                 <li>
-                    Total cost : {{ version.team|calculate_value|price }}
+                    {{ 'Total cost'|trans }} : {{ version.team|calculate_value|price }}
                 </li>
             </ul>
         </footer>

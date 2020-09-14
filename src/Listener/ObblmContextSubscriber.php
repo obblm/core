@@ -2,11 +2,10 @@
 
 namespace Obblm\Core\Listener;
 
-use Obblm\Championship\Entity\Championship;
 use Obblm\Core\Entity\Team;
-use Obblm\Core\Service\ObblmContextualizer;
+use Obblm\Core\Helper\TeamHelper;
 use Obblm\Core\Helper\RuleHelper;
-use Obblm\Core\Service\TeamService;
+use Obblm\Core\Service\ObblmContextualizer;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -15,10 +14,12 @@ class ObblmContextSubscriber implements EventSubscriberInterface
 {
     protected $context;
     protected $ruleHelper;
+    protected $teamHelper;
 
-    public function __construct(ObblmContextualizer $context, RuleHelper $ruleHelper) {
+    public function __construct(ObblmContextualizer $context, RuleHelper $ruleHelper, TeamHelper $teamHelper) {
         $this->context = $context;
         $this->ruleHelper = $ruleHelper;
+        $this->teamHelper = $teamHelper;
     }
 
     public static function getSubscribedEvents()
@@ -35,7 +36,7 @@ class ObblmContextSubscriber implements EventSubscriberInterface
             if($team instanceof Team) {
                 $this->context->setTeam($team);
                 if(!$rule_set) {
-                    $this->context->setRule($this->ruleHelper->getHelper(TeamService::getTeamRule($team)));
+                    $this->context->setRule($this->ruleHelper->getHelper($team->getRule()));
                 }
             }
         }

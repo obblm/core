@@ -24,8 +24,8 @@ abstract class AbstractTeamController extends AbstractController {
         $form->handleRequest($request);
 
         if($form->isSubmitted() and $form->isValid()) {
-            $team = $form->getData();
-            $this->ruleHelper->getHelper($team->getRule())->createNewTeamVersion($team);
+            //$team = $form->getData();
+            $this->ruleHelper->createNewTeamVersion($team);
             $em = $this->getDoctrine()->getManager();
             $em->persist($team);
             $em->flush();

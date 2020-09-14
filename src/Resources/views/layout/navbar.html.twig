@@ -25,14 +25,14 @@
 {% endmacro %}
 {% import _self as macros %}
 <nav id="navigation" class="ui vertical inverted sidebar menu left">
-    <div class="item"><b>BBLM</b></div>
+    <div class="item"><b>{{ 'obblm.layout.navigation.title'|trans }}</b></div>
     <a class="item" href="{{ path('obblm_dashboard') }}">
         <i aria-hidden="true" class="icon notranslate mdi mdi-view-dashboard"></i>
-        Dashboard
+        {{ 'obblm.layout.navigation.dashboard'|trans }}
     </a>
     <a class="item" href="{{ path('obblm_team_mine') }}">
         <i aria-hidden="true" class="icon notranslate mdi mdi-football"></i>
-        My teams
+        {{ 'obblm.layout.navigation.my_teams'|trans }}
     </a>
     {{ macros.navigationCollectionToHtml(get_navigation_links()) }}
     {# <a class="item" href="{{ path('my_championships') }}">
@@ -43,13 +43,15 @@
     <div class="item">
         <i class="options icon"></i>
         <i aria-hidden="true" class="v-icon notranslate mdi mdi-options"></i>
-        Admin
+        {{ 'obblm.layout.navigation.admin.title'|trans }}
         <div class="menu">
             {# <a class="item" href="{{ path('admin_leagues') }}">Leagues</a> #}
-            <a class="item" href="{{ path('admin_rules') }}">Rules</a>
+            <a class="item" href="{{ path('admin_rules') }}">
+                {{ 'obblm.layout.navigation.admin.rules'|trans }}
+            </a>
             <a class="item" href="{{ path('admin_users') }}">
                 <i aria-hidden="true" class="icon notranslate user"></i>
-                Users
+                {{ 'obblm.layout.navigation.admin.users'|trans }}
             </a>
             {{ macros.navigationCollectionToHtml(get_admin_links()) }}
         </div>
