@@ -1,0 +1,56 @@
+rules:
+    lrb6:
+        rosters:
+            chaos_dwarf:
+                players:
+                    hobgoblin:
+                        min: 0
+                        max: 16
+                        ma: 6
+                        st: 3
+                        ag: 3
+                        av: 7
+                        cost: 40000
+                        available_skills: [ 'g' ]
+                        available_skills_on_double: [ 'a', 'p', 's' ]
+                        is_journeyman: true
+                    blocker:
+                        min: 0
+                        max: 6
+                        ma: 4
+                        st: 3
+                        ag: 2
+                        av: 9
+                        cost: 70000
+                        skills: [ 'block', 'thick_skull', 'tackle' ]
+                        available_skills: [ 'g', 's' ]
+                        available_skills_on_double: [ 'p', 'a', 'm' ]
+                    centaur:
+                        min: 0
+                        max: 2
+                        ma: 6
+                        st: 4
+                        ag: 2
+                        av: 9
+                        cost: 130000
+                        skills: [ 'thick_skull', 'sprint', 'sure_feet' ]
+                        available_skills: [ 'g', 's' ]
+                        available_skills_on_double: [ 'p', 'a', 'm' ]
+                    minotaur:
+                        min: 0
+                        max: 1
+                        ma: 5
+                        st: 5
+                        ag: 2
+                        av: 8
+                        cost: 150000
+                        skills: [ 'loner', 'wild_animal', 'mighty_blow', 'horns', 'thick_skull', 'frenzy' ]
+                        available_skills: [ 's', 'm' ]
+                        available_skills_on_double: [ 'g', 'a', 'p' ]
+                options:
+                    reroll_cost: 70000
+                    available_star_players: [morg_n_thorg, zzharg_madeye, rashnak_rackstabber]
+                    can_have_apothecary: true
+                    can_have_sorcerer: true
+                    can_have_igor: false
+                    can_have_halfing_kitchener: false

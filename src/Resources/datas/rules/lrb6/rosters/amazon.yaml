@@ -1,0 +1,57 @@
+rules:
+    lrb6:
+        rosters:
+            amazon:
+                players:
+                    linewoman:
+                        min: 0
+                        max: 16
+                        ma: 6
+                        st: 3
+                        ag: 3
+                        av: 7
+                        cost: 50000
+                        skills: ['dodge']
+                        available_skills: ['g']
+                        available_skills_on_double: ['s', 'a', 'p']
+                        is_journeyman: true
+                    thrower:
+                        min: 0
+                        max: 2
+                        ma: 6
+                        st: 3
+                        ag: 3
+                        av: 7
+                        cost: 70000
+                        skills: ['dodge', 'pass']
+                        available_skills: ['g', 'p']
+                        available_skills_on_double: ['s', 'a']
+                    catcher:
+                        min: 0
+                        max: 2
+                        ma: 6
+                        st: 3
+                        ag: 3
+                        av: 7
+                        cost: 70000
+                        skills: ['dodge', 'catch']
+                        available_skills: ['g', 'a']
+                        available_skills_on_double: ['s', 'p']
+                    blitzer:
+                        min: 0
+                        max: 4
+                        ma: 6
+                        st: 3
+                        ag: 3
+                        av: 7
+                        cost: 90000
+                        skills: ['dodge', 'block']
+                        available_skills: ['g', 's']
+                        available_skills_on_double: ['a', 'p']
+                options:
+                    reroll_cost: 50000
+                    available_star_players: [bertha_bigfist, helmut_wulf, morg_n_thorg, roxanna_darknail, willow_rosebark, zara_the_slayer]
+                    can_have_apothecary: true
+                    can_have_sorcerer: true
+                    can_have_igor: false
+                    can_have_halfing_kitchener: false

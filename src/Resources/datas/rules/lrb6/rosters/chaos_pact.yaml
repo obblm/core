@@ -1,0 +1,89 @@
+rules:
+    lrb6:
+        rosters:
+            chaos_pact:
+                players:
+                    marauder:
+                        min: 0
+                        max: 16
+                        ma: 6
+                        st: 3
+                        ag: 3
+                        av: 8
+                        cost: 50000
+                        available_skills: ['g', 's', 'p', 'm']
+                        available_skills_on_double: ['a']
+                        is_journeyman: true
+                    goblin:
+                        min: 0
+                        max: 1
+                        ma: 6
+                        st: 2
+                        ag: 3
+                        av: 7
+                        skills: [ 'dodge', 'right_stuff', 'stunty', 'animosity' ]
+                        cost: 40000
+                        available_skills: [ 'a', 'm' ]
+                        available_skills_on_double: [ 'g', 's', 'p' ]
+                    dark_elf:
+                        min: 0
+                        max: 1
+                        ma: 6
+                        st: 3
+                        ag: 4
+                        av: 8
+                        cost: 70000
+                        skills: [ 'animosity' ]
+                        available_skills: ['g', 'a', 'm']
+                        available_skills_on_double: ['s', 'p']
+                    skaven:
+                        min: 0
+                        max: 1
+                        ma: 7
+                        st: 3
+                        ag: 3
+                        av: 7
+                        cost: 50000
+                        skills: [ 'animosity' ]
+                        available_skills: [ 'g', 'm' ]
+                        available_skills_on_double: [ 's', 'p', 'a' ]
+                    minotaur:
+                        min: 0
+                        max: 1
+                        ma: 5
+                        st: 5
+                        ag: 2
+                        av: 8
+                        cost: 150000
+                        skills: [ 'loner', 'wild_animal', 'mighty_blow', 'horns', 'thick_skull', 'frenzy' ]
+                        available_skills: ['s']
+                        available_skills_on_double: ['g', 'a', 'p', 'm']
+                    ogre:
+                        min: 0
+                        max: 6
+                        ma: 5
+                        st: 5
+                        ag: 2
+                        av: 9
+                        skills: [ 'bone_head', 'mighty_blow', 'thick_skull', 'throw_team_mate' ]
+                        cost: 140000
+                        available_skills: ['s']
+                        available_skills_on_double: ['g', 'a', 'p', 'm']
+                    troll:
+                        min: 0
+                        max: 2
+                        ma: 4
+                        st: 5
+                        ag: 1
+                        av: 9
+                        skills: [ 'loner', 'always_hungry', 'mighty_blow', 'really_stupid', 'regeneration', 'throw_team_mate' ]
+                        cost: 110000
+                        available_skills: ['s']
+                        available_skills_on_double: ['g', 'a', 'p', 'm']
+                options:
+                    reroll_cost: 70000
+                    available_star_players: [max_spleenripper, morg_n_thorg, rashnak_rackstabber]
+                    can_have_apothecary: true
+                    can_have_sorcerer: true
+                    can_have_igor: false
+                    can_have_halfing_kitchener: false

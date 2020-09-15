@@ -1,0 +1,45 @@
+rules:
+    lrb6:
+        rosters:
+            chaos:
+                players:
+                    beastman:
+                        min: 0
+                        max: 16
+                        ma: 6
+                        st: 3
+                        ag: 3
+                        av: 8
+                        cost: 60000
+                        skills: [ 'horns' ]
+                        available_skills: ['g', 's', 'm']
+                        available_skills_on_double: ['a', 'p']
+                        is_journeyman: true
+                    warrior:
+                        min: 0
+                        max: 4
+                        ma: 5
+                        st: 4
+                        ag: 3
+                        av: 9
+                        cost: 100000
+                        available_skills: ['g', 's', 'm']
+                        available_skills_on_double: ['p', 'a']
+                    minotaur:
+                        min: 0
+                        max: 1
+                        ma: 5
+                        st: 5
+                        ag: 2
+                        av: 8
+                        cost: 150000
+                        skills: [ 'loner', 'wild_animal', 'mighty_blow', 'horns', 'thick_skull', 'frenzy' ]
+                        available_skills: ['s', 'm']
+                        available_skills_on_double: ['g', 'a', 'p']
+                options:
+                    reroll_cost: 60000
+                    available_star_players: [max_spleenripper, morg_n_thorg, rashnak_rackstabber]
+                    can_have_apothecary: true
+                    can_have_sorcerer: true
+                    can_have_igor: false
+                    can_have_halfing_kitchener: false

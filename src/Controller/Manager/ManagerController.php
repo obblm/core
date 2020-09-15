@@ -11,11 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/manage")
  */
-class ManagerController extends AbstractController {
+class ManagerController extends AbstractController
+{
     /**
      * @Route("/")
      */
-    public function index() {
+    public function index()
+    {
         $this->denyAccessUnlessGranted('OBBLM_USER');
         return $this->render('@ObblmCore/todo.html.twig', []);
     }

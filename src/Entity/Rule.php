@@ -58,7 +58,8 @@ class Rule
 
     protected $injury_table = [];
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->post_bb_2020 = false;
         $this->read_only = false;
         $this->teams = new ArrayCollection();
@@ -183,7 +184,8 @@ class Rule
         return $this;
     }
 
-    public function __toString(): ?string {
+    public function __toString(): ?string
+    {
         return $this->rule_key;
     }
 
@@ -197,14 +199,14 @@ class Rule
      * @param array $rule
      *
      */
-    protected function constructInjuryTable($rule) {
-        foreach($rule['injuries'] as $injury_key => $injury) {
-            if(isset($injury['from']) && isset($injury['to'])) {
-                for($key = $injury['from']; $key <= $injury['to']; $key++) {
+    protected function constructInjuryTable($rule)
+    {
+        foreach ($rule['injuries'] as $injury_key => $injury) {
+            if (isset($injury['from']) && isset($injury['to'])) {
+                for ($key = $injury['from']; $key <= $injury['to']; $key++) {
                     $this->injury_table[$key] = $injury_key;
                 }
-            }
-            elseif(isset($injury['from'])) {
+            } elseif (isset($injury['from'])) {
                 $this->injury_table[$injury['from']] = $injury_key;
             }
         }
@@ -217,12 +219,15 @@ class Rule
      *
      * @return string|boolean
      */
-    public function getExperienceLevelForValue($experience) {
+    public function getExperienceLevelForValue($experience)
+    {
         $datas = $this->getRule();
         ksort($datas['experience']);
         $last = false;
-        foreach($datas['experience'] as $key => $level) {
-            if($experience >= $key) $last = $level;
+        foreach ($datas['experience'] as $key => $level) {
+            if ($experience >= $key) {
+                $last = $level;
+            }
         }
         return $last;
     }
@@ -234,7 +239,8 @@ class Rule
      *
      * @return array|boolean
      */
-    public function getInjury($value) {
+    public function getInjury($value)
+    {
         return (isset($this->injury_table[$value])) ? array(
             'key_name' => $this->injury_table[$value],
             'effect' => $this->getInjuryEffect($this->injury_table[$value])
@@ -248,7 +254,8 @@ class Rule
      *
      * @return array|boolean
      */
-    public function getInjuryEffect($key_name) {
+    public function getInjuryEffect($key_name)
+    {
         $datas = $this->getRule();
         return ($datas['injuries'][$key_name]) ? $datas['injuries'][$key_name]['effects'] : false;
     }

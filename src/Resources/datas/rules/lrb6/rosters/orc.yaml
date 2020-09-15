@@ -1,0 +1,77 @@
+rules:
+    lrb6:
+        rosters:
+            orc:
+                players:
+                    lineman:
+                        min: 0
+                        max: 16
+                        ma: 5
+                        st: 3
+                        ag: 3
+                        av: 9
+                        cost: 50000
+                        available_skills: ['g']
+                        available_skills_on_double: ['s', 'p', 'a']
+                        is_journeyman: true
+                    goblin:
+                        min: 0
+                        max: 4
+                        ma: 6
+                        st: 2
+                        ag: 3
+                        av: 7
+                        skills: [ 'dodge', 'right_stuff', 'stunty' ]
+                        cost: 40000
+                        available_skills: [ 'a' ]
+                        available_skills_on_double: [ 'g', 's', 'p' ]
+                    thrower:
+                        min: 0
+                        max: 2
+                        ma: 5
+                        st: 3
+                        ag: 3
+                        av: 8
+                        skills: [ 'pass', 'sure_hands' ]
+                        cost: 70000
+                        available_skills: ['g', 'p']
+                        available_skills_on_double: ['s', 'a']
+                    blitzer:
+                        min: 0
+                        max: 4
+                        ma: 6
+                        st: 3
+                        ag: 3
+                        av: 9
+                        skills: [ 'block' ]
+                        cost: 80000
+                        available_skills: ['g', 's']
+                        available_skills_on_double: ['a', 'p']
+                    black_ork:
+                        min: 0
+                        max: 4
+                        ma: 4
+                        st: 4
+                        ag: 2
+                        av: 9
+                        cost: 80000
+                        available_skills: [ 'g', 's' ]
+                        available_skills_on_double: [ 'a', 'p' ]
+                    troll:
+                        min: 0
+                        max: 2
+                        ma: 4
+                        st: 5
+                        ag: 1
+                        av: 9
+                        skills: [ 'loner', 'always_hungry', 'mighty_blow', 'really_stupid', 'regeneration', 'throw_team_mate' ]
+                        cost: 110000
+                        available_skills: [ 's' ]
+                        available_skills_on_double: [ 'g', 'a', 'p' ]
+                options:
+                    reroll_cost: 50000
+                    available_star_players: [helmut_wulf, puggy_baconbreath, mighty_zug, griff_oberwald, zara_the_slayer, morg_n_thorg]
+                    can_have_apothecary: true
+                    can_have_sorcerer: true
+                    can_have_igor: false
+                    can_have_halfing_kitchener: false

@@ -16,7 +16,8 @@ class ObblmContextSubscriber implements EventSubscriberInterface
     protected $ruleHelper;
     protected $teamHelper;
 
-    public function __construct(ObblmContextualizer $context, RuleHelper $ruleHelper, TeamHelper $teamHelper) {
+    public function __construct(ObblmContextualizer $context, RuleHelper $ruleHelper, TeamHelper $teamHelper)
+    {
         $this->context = $context;
         $this->ruleHelper = $ruleHelper;
         $this->teamHelper = $teamHelper;
@@ -29,13 +30,14 @@ class ObblmContextSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onFinishRequest(ControllerArgumentsEvent $event) {
+    public function onFinishRequest(ControllerArgumentsEvent $event)
+    {
         $request = $event->getRequest();
         $rule_set = false;
-        if($team = $request->get('team')) {
-            if($team instanceof Team) {
+        if ($team = $request->get('team')) {
+            if ($team instanceof Team) {
                 $this->context->setTeam($team);
-                if(!$rule_set) {
+                if (!$rule_set) {
                     $this->context->setRule($this->ruleHelper->getHelper($team->getRule()));
                 }
             }

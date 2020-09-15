@@ -13,12 +13,13 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
-class CoreExtension extends AbstractExtension {
-
+class CoreExtension extends AbstractExtension
+{
     private $ruleHelper;
     private $dispatcher;
 
-    public function __construct(RuleHelper $ruleHelper, EventDispatcherInterface $dispatcher) {
+    public function __construct(RuleHelper $ruleHelper, EventDispatcherInterface $dispatcher)
+    {
         $this->ruleHelper = $ruleHelper;
         $this->dispatcher = $dispatcher;
     }
@@ -40,9 +41,10 @@ class CoreExtension extends AbstractExtension {
         ];
     }
 
-    public function getRulesNavigation() {
+    public function getRulesNavigation()
+    {
         $rules_collection = new NavigationCollection('obblm.forms.team.create.select.rules', 'list');
-        foreach($this->getAvailableRules() as $rule) {
+        foreach ($this->getAvailableRules() as $rule) {
             $rule_name = 'obblm.rules.' . $rule->getRuleKey() . '.title';
             $rules_collection->addToCollection(
                 new NavigationLink('obblm_team_create_rule', $rule_name, ['rule' => $rule->getId()])
@@ -61,21 +63,25 @@ class CoreExtension extends AbstractExtension {
         return $this->ruleHelper->getRulesAvailableForTeamCreation();
     }
 
-    public function getNavigationLinks():array {
+    public function getNavigationLinks():array
+    {
         $collection = new NavigationCollection();
         $this->dispatcher->dispatch(new TwigCollectorEvent($collection), TwigCollectorEvent::COLLECT_NAV_BAR);
         return $collection->getCollection();
     }
 
-    public function isCollection(NavigationElementInterface $item) {
+    public function isCollection(NavigationElementInterface $item)
+    {
         return $item instanceof NavigationCollection;
     }
 
-    public function isLink(NavigationElementInterface $item) {
+    public function isLink(NavigationElementInterface $item)
+    {
         return $item instanceof NavigationLink;
     }
 
-    public function getAdminLinks():array  {
+    public function getAdminLinks():array
+    {
         $collection = new NavigationCollection();
         $this->dispatcher->dispatch(new TwigCollectorEvent($collection), TwigCollectorEvent::COLLECT_ADMIN_BAR);
         return $collection->getCollection();

@@ -208,7 +208,8 @@ class Coach implements UserInterface, EmailObjectInterface
         return $this;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->email;
     }
 

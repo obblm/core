@@ -1,0 +1,57 @@
+rules:
+    lrb6:
+        rosters:
+            khemri:
+                players:
+                    skeleton:
+                        min: 0
+                        max: 16
+                        ma: 5
+                        st: 3
+                        ag: 2
+                        av: 7
+                        cost: 40000
+                        skills: ['regeneration', 'thick_skull']
+                        available_skills: ['g']
+                        available_skills_on_double: ['s', 'p', 'a']
+                        is_journeyman: true
+                    thro_ras:
+                        min: 0
+                        max: 2
+                        ma: 6
+                        st: 3
+                        ag: 2
+                        av: 7
+                        cost: 70000
+                        skills: [ 'sure_hands', 'pass', 'regeneration' ]
+                        available_skills: [ 'g', 'p' ]
+                        available_skills_on_double: [ 's', 'a' ]
+                    blitz_ras:
+                        min: 0
+                        max: 2
+                        ma: 6
+                        st: 3
+                        ag: 2
+                        av: 8
+                        cost: 90000
+                        skills: [ 'block', 'regeneration' ]
+                        available_skills: [ 'g', 's' ]
+                        available_skills_on_double: [ 'p', 'a' ]
+                    tomb_guardian:
+                        min: 0
+                        max: 4
+                        ma: 4
+                        st: 5
+                        ag: 1
+                        av: 0
+                        skills: [ 'decay', 'regeneration' ]
+                        cost: 100000
+                        available_skills: ['g', 's']
+                        available_skills_on_double: ['a', 'p']
+                options:
+                    reroll_cost: 70000
+                    available_star_players: [hack_enslash, j_earlice, setekh, wilhelm_chaney, ramtut_iii]
+                    can_have_apothecary: false
+                    can_have_sorcerer: true
+                    can_have_igor: true
+                    can_have_halfing_kitchener: false

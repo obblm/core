@@ -2,12 +2,14 @@
 
 namespace Obblm\Core\Twig\Parts;
 
-class NavigationCollection implements NavigationElementInterface {
+class NavigationCollection implements NavigationElementInterface
+{
     protected $collection = [];
     protected $name = null;
     protected $icon = null;
 
-    public function __construct($name = null, $icon = null, array $collection = []) {
+    public function __construct($name = null, $icon = null, array $collection = [])
+    {
         $this->collection = $collection;
         $this->name = $name;
         $this->icon = $icon;

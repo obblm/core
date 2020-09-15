@@ -12,12 +12,13 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
-class TeamExtension extends AbstractExtension {
-
+class TeamExtension extends AbstractExtension
+{
     protected $ruleHelper;
     protected $teamHelper;
 
-    public function __construct(RuleHelper $ruleHelper, TeamHelper $teamHelper) {
+    public function __construct(RuleHelper $ruleHelper, TeamHelper $teamHelper)
+    {
         $this->ruleHelper = $ruleHelper;
         $this->teamHelper = $teamHelper;
     }
@@ -53,52 +54,63 @@ class TeamExtension extends AbstractExtension {
         return $width * $length;
     }
 
-    public function getTeamRate(Team $team) {
+    public function getTeamRate(Team $team)
+    {
         return $this->teamHelper->calculateTeamRate(TeamHelper::getLastVersion($team));
     }
 
-    public function getRuleKey(Team $team) {
+    public function getRuleKey(Team $team)
+    {
         return $team->getRule()->getRuleKey();
     }
 
-    public function getRosterName(Team $team) {
+    public function getRosterName(Team $team)
+    {
         return TeamHelper::getRosterNameForTranslation($team);
     }
 
-    public function getRerollCost(Team $team) {
+    public function getRerollCost(Team $team)
+    {
         return $this->teamHelper->getRerollCost($team);
     }
 
-    public function getTeamValue(Team $team) {
+    public function getTeamValue(Team $team)
+    {
         return $this->teamHelper->calculateTeamValue(TeamHelper::getLastVersion($team));
     }
 
-    public function getCharacteristics(Player $player, $characteristic) {
+    public function getCharacteristics(Player $player, $characteristic)
+    {
         $characteristics = PlayerService::getPlayerCharacteristics($player);
-        if(!isset($characteristics[$characteristic])) {
+        if (!isset($characteristics[$characteristic])) {
             throw new InvalidParameterException("The characteristic " . $characteristic . " does not exists");
         }
 
         return $characteristics[$characteristic];
     }
 
-    public function getSkills(Player $player) {
+    public function getSkills(Player $player)
+    {
         return PlayerService::getPlayerSkills($player);
     }
 
-    public function getType(Player $player) {
+    public function getType(Player $player)
+    {
         return PlayerService::getPlayerTranslationKey($player);
     }
 
-    public function getSpp(Player $player) {
+    public function getSpp(Player $player)
+    {
         return PlayerService::getPlayerSpp($player);
     }
 
-    public function getPlayerValue(Player $player) {
+    public function getPlayerValue(Player $player)
+    {
         return PlayerService::getPlayerValue($player);
     }
 
-    public function getInjuryEffects(Team $team, $injuries) {
+    public function getInjuryEffects(Team $team, $injuries)
+    {
         $helper = $this->ruleHelper->getHelper($team->getRule());
         $arr = [
             'dictionary' => $helper->getAttachedRule()->getRuleKey(),

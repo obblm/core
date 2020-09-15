@@ -8,8 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class InjuryBb2020Type extends AbstractType {
-
+class InjuryBb2020Type extends AbstractType
+{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $rule = $options['rule'];

@@ -10,21 +10,22 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditTeamType extends AbstractType {
-
+class EditTeamType extends AbstractType
+{
     protected $teamHelper;
 
-    public function __construct(TeamHelper $teamHelper) {
+    public function __construct(TeamHelper $teamHelper)
+    {
         $this->teamHelper = $teamHelper;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if($version = $builder->getData()) {
+        if ($version = $builder->getData()) {
             $team = $version->getTeam();
             //TODO: add listener to lock the team
             $locked = false;
-            if(!$locked) {
+            if (!$locked) {
                 $builder
                     ->add('team', TeamType::class, [
                         'data' => $team
@@ -33,7 +34,7 @@ class EditTeamType extends AbstractType {
                     ->add('cheerleaders')
                     ->add('assistants')
                     ->add('popularity');
-                if($this->teamHelper->couldHaveApothecary($team)) {
+                if ($this->teamHelper->couldHaveApothecary($team)) {
                     $builder->add('apothecary');
                 }
             }

@@ -10,7 +10,6 @@ use Doctrine\Persistence\ObjectManager;
 
 class TeamFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const TEAM_REFERENCE_CHAMPIONSHIP = 'team_by_championship';
     public const TEAM_REFERENCE_RULE = 'team_by_rule';
 
     public function load(ObjectManager $em)

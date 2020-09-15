@@ -1,0 +1,56 @@
+rules:
+  lrb6:
+    rosters:
+      elf_union:
+        players:
+          lineman:
+            min: 0
+            max: 16
+            ma: 6
+            st: 3
+            ag: 4
+            av: 7
+            cost: 60000
+            available_skills: ['g', 'a']
+            available_skills_on_double: ['s', 'p']
+            is_journeyman: true
+          thrower:
+            min: 0
+            max: 2
+            ma: 6
+            st: 3
+            ag: 4
+            av: 7
+            skills: [ 'pass' ]
+            cost: 70000
+            available_skills: ['g', 'a', 'p']
+            available_skills_on_double: ['s']
+          catcher:
+            min: 0
+            max: 4
+            ma: 8
+            st: 3
+            ag: 4
+            av: 7
+            skills: [ 'catch', 'nerves_of_steel' ]
+            cost: 100000
+            available_skills: ['g', 'a']
+            available_skills_on_double: ['s', 'p']
+          blitzer:
+            min: 0
+            max: 2
+            ma: 7
+            st: 3
+            ag: 4
+            av: 8
+            skills: [ 'block', 'side_step' ]
+            cost: 110000
+            available_skills: ['g', 'a']
+            available_skills_on_double: ['s', 'p']
+        options:
+          reroll_cost: 50000
+          available_star_players: [dolfar_longstride, eldril_sidewinder, soaren_hightower, prince_moranion, zara_the_slayer, morg_n_thorg]
+          can_have_apothecary: true
+          can_have_sorcerer: true
+          can_have_igor: false
+          can_have_halfing_kitchener: false

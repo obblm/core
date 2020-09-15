@@ -10,21 +10,21 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PlayerTeamType extends AbstractType {
-
+class PlayerTeamType extends AbstractType
+{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name')
             ->add('number');
-        if(!$builder->getData()) {
+        if (!$builder->getData()) {
             /** @var RuleHelperInterface $helper */
             $helper = $options['rule_helper'];
             $roster = $options['roster'];
-            if($helper && $roster) {
+            if ($helper && $roster) {
                 $types = $helper->getAvailablePlayerKeyTypes($roster);
 
                 $choices = [];
-                foreach($types as $type) {
+                foreach ($types as $type) {
                     $translation_key = PlayerService::composeTranslationPlayerKey($helper->getAttachedRule()->getRuleKey(), $roster, $type);
                     $player_key = PlayerService::composePlayerKey($helper->getAttachedRule()->getRuleKey(), $roster, $type);
                     $choices[$translation_key] = $player_key;

@@ -15,18 +15,19 @@ class TeamRulesSelectorForm extends AbstractType
     protected $coach;
     protected $ruleHelper;
 
-    public function __construct(TokenStorageInterface $tokenStorage, RuleHelper $ruleHelper) {
+    public function __construct(TokenStorageInterface $tokenStorage, RuleHelper $ruleHelper)
+    {
         $this->coach = $tokenStorage->getToken()->getUser();
         $this->ruleHelper = $ruleHelper;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if($team = $builder->getData()) {
-            if($rule = $team->getRule()) {
+        if ($team = $builder->getData()) {
+            if ($rule = $team->getRule()) {
                 $rosters = $this->ruleHelper->getAvailableRosters($rule);
                 $choices = [];
-                foreach($rosters as $roster) {
+                foreach ($rosters as $roster) {
                     $translation_key = $this->ruleHelper->composeTranslationRosterKey($rule->getRuleKey(), $roster);
                     $choices[$translation_key] = $roster;
                 }

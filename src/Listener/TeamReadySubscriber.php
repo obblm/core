@@ -7,12 +7,13 @@ use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Helper\TeamHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class TeamReadySubscriber implements EventSubscriberInterface {
-
+class TeamReadySubscriber implements EventSubscriberInterface
+{
     private $teamHelper;
     private $ruleHelper;
 
-    public function __construct(TeamHelper $teamHelper, RuleHelper $ruleHelper) {
+    public function __construct(TeamHelper $teamHelper, RuleHelper $ruleHelper)
+    {
         $this->teamHelper = $teamHelper;
         $this->ruleHelper = $ruleHelper;
     }
@@ -24,11 +25,12 @@ class TeamReadySubscriber implements EventSubscriberInterface {
             TeamEvent::NOT_READY => 'onNotReady',
         ];
     }
-    public function onReady(TeamEvent $event) {
+    public function onReady(TeamEvent $event)
+    {
         $team = $event->getTeam();
         $helper = $this->ruleHelper->getHelper($team->getRule());
     }
-    public function onNotReady(TeamEvent $event) {
-
+    public function onNotReady(TeamEvent $event)
+    {
     }
 }

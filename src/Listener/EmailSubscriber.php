@@ -23,7 +23,8 @@ class EmailSubscriber implements EventSubscriberInterface
     protected $sender_name = "BBLM"; // TODO: change with env var
     protected $default_sender;
 
-    public function __construct(MessageBusInterface $bus) {
+    public function __construct(MessageBusInterface $bus)
+    {
         $this->bus = $bus;
         $this->default_sender = new Address($this->sender_mail, $this->sender_name);
     }
@@ -36,30 +37,32 @@ class EmailSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onCoachRegistred(RegisterCoachEvent $event) {
+    public function onCoachRegistred(RegisterCoachEvent $event)
+    {
         $coach = $event->getCoach();
         $address = new Address($coach->getEmail(), $coach->getUsername());
         $email = (new TemplatedEmail())
-            ->from( $this->default_sender )
-            ->to( $address )
+            ->from($this->default_sender)
+            ->to($address)
             ->subject('Welcome')
-            ->htmlTemplate('emails/coach/register.html.twig')
-            ->textTemplate('emails/coach/register.text.twig')
+            ->htmlTemplate('@ObblmCore/emails/coach/register.html.twig')
+            ->textTemplate('@ObblmCore/emails/coach/register.text.twig')
             ->context([
                 'coach' => $coach,
             ]);
         $this->bus->dispatch(new EmailMessage($email));
     }
 
-    public function onCoachActivated(ActivateCoachEvent $event) {
+    public function onCoachActivated(ActivateCoachEvent $event)
+    {
         $coach = $event->getCoach();
         $address = new Address($coach->getEmail(), $coach->getUsername());
         $email = (new TemplatedEmail())
-            ->from( $this->default_sender )
-            ->to( $address )
+            ->from($this->default_sender)
+            ->to($address)
             ->subject('Activation complete')
-            ->htmlTemplate('emails/coach/activation.html.twig')
-            ->textTemplate('emails/coach/activation.text.twig')
+            ->htmlTemplate('@ObblmCore/emails/coach/activation.html.twig')
+            ->textTemplate('@ObblmCore/emails/coach/activation.text.twig')
             ->context([
                 'coach' => $coach,
             ]);

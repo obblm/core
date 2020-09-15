@@ -6,11 +6,12 @@ use Obblm\Core\Event\TeamVersionEvent;
 use Obblm\Core\Helper\RuleHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class PlayerVersionEntitySubscriber implements EventSubscriberInterface {
-
+class PlayerVersionEntitySubscriber implements EventSubscriberInterface
+{
     private $ruleHelper;
 
-    public function __construct(RuleHelper $ruleHelper) {
+    public function __construct(RuleHelper $ruleHelper)
+    {
         $this->ruleHelper = $ruleHelper;
     }
 
@@ -21,7 +22,8 @@ class PlayerVersionEntitySubscriber implements EventSubscriberInterface {
         ];
     }
 
-    public function prePersist(TeamVersionEvent $event) {
+    public function prePersist(TeamVersionEvent $event)
+    {
         $version = $event->getTeamVersion();
         $helper = $this->ruleHelper->getHelper($version->getTeam()->getRule());
         $version->setTr($helper->calculateTeamRate($version));

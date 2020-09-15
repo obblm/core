@@ -10,12 +10,13 @@ use Obblm\Core\Helper\Rule\RuleHelperInterface;
  * Class TeamHelper
  * @package Obblm\Core\Helper
  */
-class TeamHelper {
-
+class TeamHelper
+{
     const TRANSLATION_GLUE = '.';
     private $ruleHelper;
 
-    public function __construct(RuleHelper $ruleHelper) {
+    public function __construct(RuleHelper $ruleHelper)
+    {
         $this->ruleHelper = $ruleHelper;
     }
 
@@ -24,18 +25,20 @@ class TeamHelper {
      * @return RuleHelperInterface
      * @throws \Exception
      */
-    public function getRuleHelper(Team $team):RuleHelperInterface {
-        if(!$team->getRule()) {
+    public function getRuleHelper(Team $team):RuleHelperInterface
+    {
+        if (!$team->getRule()) {
             throw new \Exception('This team does not have a rule');
         }
         return $this->ruleHelper->getHelper($team->getRule());
     }
 
-    public static function getLastVersion(Team  $team):TeamVersion {
+    public static function getLastVersion(Team  $team):TeamVersion
+    {
         $versions = $team->getVersions();
         /** @var TeamVersion $last */
         $last = $versions->first();
-        if($last) {
+        if ($last) {
             return $last;
         }
         $version = new TeamVersion();
@@ -52,7 +55,8 @@ class TeamHelper {
      * @return int
      * @throws \Exception
      */
-    public function calculateTeamValue(TeamVersion $version):int {
+    public function calculateTeamValue(TeamVersion $version):int
+    {
         return $this->getRuleHelper($version->getTeam())
             ->calculateTeamValue($version);
     }
@@ -62,9 +66,24 @@ class TeamHelper {
      * @return int
      * @throws \Exception
      */
-    public function calculateTeamRate(TeamVersion $version):int {
+    public function calculateTeamRate(TeamVersion $version):int
+    {
         return $this->getRuleHelper($version->getTeam())
             ->calculateTeamRate($version);
+    }
+
+    /**
+     * @param Team $team
+     * @return TeamVersion
+     * @throws \Psr\Cache\InvalidArgumentException
+     */
+    public function createNewTeamVersion(Team $team):TeamVersion
+    {
+        return (TeamHelper::getLastVersion($team))
+            ->setTreasure($this->ruleHelper->getHelper($team->getRule())->getMaxTeamCost());
+    }
+    public function destructTeamVersion(Team $team):TeamVersion
+    {
     }
 
     /****************************
@@ -76,7 +95,8 @@ class TeamHelper {
      * @return int
      * @throws \Exception
      */
-    public function getRerollCost(Team $team):int {
+    public function getRerollCost(Team $team):int
+    {
         return (int) $this->getRuleHelper($team)->getRerollCost($team);
     }
 
@@ -85,7 +105,8 @@ class TeamHelper {
      * @return int
      * @throws \Exception
      */
-    public function getApothecaryCost(Team $team):int {
+    public function getApothecaryCost(Team $team):int
+    {
         return (int) $this->getRuleHelper($team)->getApothecaryCost($team);
     }
 
@@ -94,7 +115,8 @@ class TeamHelper {
      * @return int
      * @throws \Exception
      */
-    public function getCheerleadersCost(Team $team):int {
+    public function getCheerleadersCost(Team $team):int
+    {
         return (int) $this->getRuleHelper($team)->getCheerleadersCost($team);
     }
 
@@ -103,7 +125,8 @@ class TeamHelper {
      * @return int
      * @throws \Exception
      */
-    public function getAssistantsCost(Team $team):int {
+    public function getAssistantsCost(Team $team):int
+    {
         return (int) $this->getRuleHelper($team)->getAssistantsCost($team);
     }
 
@@ -112,7 +135,8 @@ class TeamHelper {
      * @return int
      * @throws \Exception
      */
-    public function getPopularityCost(Team $team):int {
+    public function getPopularityCost(Team $team):int
+    {
         return (int) $this->getRuleHelper($team)->getPopularityCost($team);
     }
 
@@ -121,8 +145,9 @@ class TeamHelper {
      * @return bool
      * @throws \Exception
      */
-    public function couldHaveApothecary(Team $team):bool {
-        if(!$team->getRule()) {
+    public function couldHaveApothecary(Team $team):bool
+    {
+        if (!$team->getRule()) {
             throw new \Exception('This team does not have a rule');
         }
         return (bool) $this->getRuleHelper($team)->couldHaveApothecary($team);
@@ -136,7 +161,8 @@ class TeamHelper {
      * @param Team $team
      * @return string
      */
-    public static function getRosterNameForTranslation(Team $team):string {
+    public static function getRosterNameForTranslation(Team $team):string
+    {
         return join(self::TRANSLATION_GLUE, ['obblm', $team->getRule()->getRuleKey(), 'rosters', $team->getRoster(), 'title']);
     }
 }

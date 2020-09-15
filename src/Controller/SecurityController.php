@@ -64,13 +64,13 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EventDispatcherInterface $dispatcher) {
-
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EventDispatcherInterface $dispatcher)
+    {
         $coach = new Coach();
         $form = $this->createForm(RegistrationForm::class, $coach);
 
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $password = $passwordEncoder->encodePassword($coach, $coach->getPlainPassword());
             $coach->setPassword($password)
                 ->setHash(hash('sha256', $coach->getEmail()));
@@ -88,24 +88,23 @@ class SecurityController extends AbstractController
         return $this->render('@ObblmCore/security/register.html.twig', [
             'form' => $form->createView(),
         ]);
-
     }
 
     /**
      * @Route("/activate/{hash}", name="activate_account")
      */
-    public function activate(string $hash, EventDispatcherInterface $dispatcher) {
-
+    public function activate(string $hash, EventDispatcherInterface $dispatcher)
+    {
         $entityManager = $this->getDoctrine()->getManager();
 
         /** @var ?Coach $coach */
         $coach = $entityManager->getRepository(Coach::class)->findOneByHash($hash);
 
-        if(!$coach) {
+        if (!$coach) {
             throw $this->createNotFoundException('The coach does not exist');
         }
 
-        if(!$coach->isActive()) {
+        if (!$coach->isActive()) {
             $coach->setActive(true);
             $entityManager->persist($coach);
 

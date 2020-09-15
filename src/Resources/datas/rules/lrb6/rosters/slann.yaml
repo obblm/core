@@ -1,0 +1,57 @@
+rules:
+  lrb6:
+    rosters:
+      slann:
+        players:
+          lineman:
+            min: 0
+            max: 16
+            ma: 6
+            st: 3
+            ag: 3
+            av: 8
+            cost: 60000
+            skills: [ 'leap', 'very_long_legs' ]
+            available_skills: ['g']
+            available_skills_on_double: ['s', 'p', 'a', 'm']
+            is_journeyman: true
+          catcher:
+            min: 0
+            max: 4
+            ma: 7
+            st: 2
+            ag: 4
+            av: 7
+            cost: 80000
+            skills: [ 'leap', 'very_long_legs', 'diving_catch' ]
+            available_skills: [ 'g', 'a' ]
+            available_skills_on_double: [ 's', 'a', 'm' ]
+          blitzer:
+            min: 0
+            max: 4
+            ma: 7
+            st: 3
+            ag: 3
+            av: 8
+            skills: [ 'leap', 'very_long_legs', 'diving_tackle', 'jump_up' ]
+            cost: 110000
+            available_skills: ['g', 's']
+            available_skills_on_double: ['a', 'p', 'm']
+          kroxigor:
+            min: 0
+            max: 1
+            ma: 6
+            st: 5
+            ag: 1
+            av: 9
+            skills: [ 'loner', 'bone_head', 'mighty_blow', 'thick_skull', 'prehensile_tail' ]
+            cost: 140000
+            available_skills: [ 's' ]
+            available_skills_on_double: [ 'g', 'a', 'p' ]
+        options:
+          reroll_cost: 50000
+          available_star_players: [helmut_wulf, puggy_baconbreath, mighty_zug, griff_oberwald, zara_the_slayer, morg_n_thorg]
+          can_have_apothecary: true
+          can_have_sorcerer: true
+          can_have_igor: false
+          can_have_halfing_kitchener: false
