@@ -1,0 +1,68 @@
+rules:
+    lrb6:
+        rosters:
+            undead:
+                players:
+                    skeleton:
+                        min: 0
+                        max: 16
+                        ma: 5
+                        st: 3
+                        ag: 2
+                        av: 7
+                        cost: 40000
+                        skills: [ 'regeneration', 'thick_skull' ]
+                        available_skills: [ 'g' ]
+                        available_skills_on_double: [ 's', 'p', 'a' ]
+                    zombi:
+                        min: 0
+                        max: 16
+                        ma: 4
+                        st: 3
+                        ag: 2
+                        av: 8
+                        cost: 40000
+                        skills: [ 'regeneration' ]
+                        available_skills: [ 'g' ]
+                        available_skills_on_double: [ 's', 'p', 'a' ]
+                        is_journeyman: true
+                    ghoul:
+                        min: 0
+                        max: 4
+                        ma: 7
+                        st: 3
+                        ag: 3
+                        av: 7
+                        cost: 70000
+                        skills: ['dodge']
+                        available_skills: ['g', 'a']
+                        available_skills_on_double: ['s', 'p']
+                    wight:
+                        min: 0
+                        max: 2
+                        ma: 6
+                        st: 3
+                        ag: 3
+                        av: 8
+                        cost: 90000
+                        skills: ['block', 'regeneration']
+                        available_skills: ['g', 's']
+                        available_skills_on_double: ['a', 'p']
+                    mummy:
+                        min: 0
+                        max: 2
+                        ma: 3
+                        st: 5
+                        ag: 1
+                        av: 9
+                        cost: 110000
+                        skills: [ 'mighty_blow', 'regeneration' ]
+                        available_skills: [ 's' ]
+                        available_skills_on_double: [ 'g', 'a', 'p' ]
+                options:
+                    reroll_cost: 70000
+                    available_star_players: [bertha_bigfist, helmut_wulf, morg_n_thorg, roxanna_darknail, willow_rosebark, zara_the_slayer]
+                    can_have_apothecary: false
+                    can_have_sorcerer: true
+                    can_have_igor: false
+                    can_have_halfing_kitchener: false

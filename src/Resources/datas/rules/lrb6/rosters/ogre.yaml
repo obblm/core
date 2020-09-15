@@ -1,0 +1,35 @@
+rules:
+    lrb6:
+        rosters:
+            ogre:
+                players:
+                    snotling:
+                        min: 0
+                        max: 16
+                        ma: 5
+                        st: 1
+                        ag: 3
+                        av: 5
+                        skills: [ 'dodge', 'right_stuff', 'side_step', 'stunty', 'titchy' ]
+                        cost: 20000
+                        available_skills: ['a']
+                        available_skills_on_double: ['g', 's', 'p']
+                        is_journeyman: true
+                    ogre:
+                        min: 0
+                        max: 6
+                        ma: 5
+                        st: 5
+                        ag: 2
+                        av: 9
+                        skills: [ 'bone_head', 'mighty_blow', 'thick_skull', 'throw_team_mate' ]
+                        cost: 140000
+                        available_skills: ['s']
+                        available_skills_on_double: ['g', 'a', 'p']
+                options:
+                    reroll_cost: 60000
+                    available_star_players: [bomber_dribblesnot, nobbla_blackwart, scrappa_sorehead, bertha_bigfist, brick_farth_grotty, morg_n_thorg]
+                    can_have_apothecary: true
+                    can_have_sorcerer: true
+                    can_have_igor: false
+                    can_have_halfing_kitchener: false

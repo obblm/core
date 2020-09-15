@@ -1,0 +1,35 @@
+rules:
+    lrb6:
+        rosters:
+            halfling:
+                players:
+                    halfling:
+                        min: 0
+                        max: 16
+                        ma: 5
+                        st: 2
+                        ag: 3
+                        av: 6
+                        cost: 30000
+                        skills: ['dodge', 'stunty', 'right_stuff']
+                        available_skills: ['a']
+                        available_skills_on_double: ['g', 's', 'p']
+                        is_journeyman: true
+                    treeman:
+                        min: 0
+                        max: 2
+                        ma: 2
+                        st: 6
+                        ag: 1
+                        av: 10
+                        cost: 120000
+                        skills: ['mighty_blow', 'strong_arm', 'thick_skull', 'throw_team_mate', 'take_root', 'stand_firm']
+                        available_skills: ['s']
+                        available_skills_on_double: ['g', 'a', 'p']
+                options:
+                    reroll_cost: 60000
+                    available_star_players: [puggy_baconbreath, willow_rosebark, deeproot_strongbranch, bertha_bigfist, zara_the_slayer, morg_n_thorg]
+                    can_have_apothecary: true
+                    can_have_sorcerer: true
+                    can_have_igor: false
+                    can_have_halfing_kitchener: true

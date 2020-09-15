@@ -1,0 +1,68 @@
+rules:
+    lrb6:
+        rosters:
+            dwarf:
+                players:
+                    slayer:
+                        min: 0
+                        max: 2
+                        ma: 5
+                        st: 3
+                        ag: 2
+                        av: 8
+                        cost: 90000
+                        skills: ['block', 'dauntless', 'frenzy', 'thick_skull']
+                        available_skills: ['g', 's']
+                        available_skills_on_double: ['a', 'p']
+                    blitzer:
+                        min: 0
+                        max: 2
+                        ma: 5
+                        st: 3
+                        ag: 3
+                        av: 9
+                        cost: 80000
+                        skills: ['block', 'thick_skull']
+                        available_skills: ['g', 's']
+                        available_skills_on_double: ['a', 'p']
+                    runner:
+                        min: 0
+                        max: 2
+                        ma: 6
+                        st: 3
+                        ag: 3
+                        av: 8
+                        cost: 80000
+                        skills: ['sure_hands', 'thick_skull']
+                        available_skills: ['g', 'p']
+                        available_skills_on_double: ['s', 'a']
+                    blocker:
+                        min: 0
+                        max: 16
+                        ma: 4
+                        st: 3
+                        ag: 2
+                        av: 9
+                        cost: 70000
+                        skills: ['block', 'tackle', 'thick_skull']
+                        available_skills: ['g', 's']
+                        available_skills_on_double: ['a', 'p']
+                        is_journeyman: true
+                    death_roller:
+                        min: 0
+                        max: 1
+                        ma: 4
+                        st: 7
+                        ag: 1
+                        av: 10
+                        cost: 160000
+                        skills: ['break_tackle', 'loner', 'dirty_player', 'juggernaut', 'mighty_blow', 'no_hands', 'secret_weapon', 'stand_firm']
+                        available_skills: ['s']
+                        available_skills_on_double: ['g', 'a', 'p']
+                options:
+                    reroll_cost: 50000
+                    available_star_players: []
+                    can_have_apothecary: true
+                    can_have_sorcerer: true
+                    can_have_igor: false
+                    can_have_halfing_kitchener: false

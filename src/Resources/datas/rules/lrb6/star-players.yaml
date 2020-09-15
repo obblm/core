@@ -1,0 +1,165 @@
+rules:
+    lrb6:
+        star_players:
+            bertha_bigfist:
+                cost: 20
+                ma: 6
+                st: 3
+                ag: 3
+                av: 7
+                skills: ~
+            helmut_wulf:
+                cost: 20
+                ma: 6
+                st: 3
+                ag: 3
+                av: 7
+                skills: ~
+            max_spleenripper:
+                cost: 130000
+                ma: 5
+                st: 4
+                ag: 3
+                av: 8
+                skills: ['loner','chainsaw', 'secret_weapon']
+            morg_n_thorg:
+                cost: 20
+                ma: 6
+                st: 3
+                ag: 3
+                av: 7
+                skills: ~
+            prince_moranion:
+                cost: 230000
+                ma: 7
+                st: 4
+                ag: 4
+                av: 8
+                skills: ['loner', 'block', 'dauntless', 'tackle', 'wrestle']
+            puggy_baconbreath:
+                cost: 140000
+                ma: 5
+                st: 3
+                ag: 3
+                av: 6
+                skills: ['loner', 'block', 'dodge', 'nerves_of_steel', 'right_stuff', 'stunty']
+            quetzal_leap:
+                cost: 250000
+                ma: 8
+                st: 2
+                ag: 4
+                av: 7
+                skills: ['loner', 'catch', 'diving_catch', 'fend', 'kick_off_return', 'leap', 'nerves_of_steel', 'very_long_legs']
+            ramtut_iii:
+                cost: 380000
+                ma: 5
+                st: 6
+                ag: 1
+                av: 9
+                skills: ['loner', 'break_tackle', 'mighty_blow', 'regeneration', 'wrestle']
+            rashnak_rackstabber:
+                cost: 270000
+                ma: 7
+                st: 3
+                ag: 3
+                av: 7
+                skills: ['loner', 'dodge', 'side_step', 'sneaky_git', 'stab']
+            ripper:
+                cost: 240000
+                ma: 4
+                st: 6
+                ag: 1
+                av: 9
+                skills: ['loner', 'grab', 'mighty_blow', 'regeneration', 'throw_team_mate']
+            roxanna_darknail:
+                cost: 250000
+                ma: 8
+                st: 3
+                ag: 5
+                av: 7
+                skills: ['loner', 'dodge', 'jump_up', 'frenzy', 'juggernaut', 'leap']
+            scrappa_sorehead:
+                cost: 150000
+                ma: 7
+                st: 2
+                ag: 3
+                av: 7
+                skills: ['loner', 'dirty_player', 'dodge', 'leap', 'right_stuff', 'sprint', 'stunty', 'sure_feet', 'very_long_legs']
+            setekh:
+                cost: 220000
+                ma: 6
+                st: 4
+                ag: 2
+                av: 8
+                skills: ['loner', 'block', 'break_tackle', 'juggernaut', 'regeneration', 'strip_ball']
+            slibli:
+                cost: 250000
+                ma: 7
+                st: 4
+                ag: 1
+                av: 9
+                skills: ['loner', 'block', 'grab', 'stand_firm']
+
+            sinnedbad:
+                cost: 240000
+                ma: 6
+                st: 3
+                ag: 2
+                av: 7
+                skills: ['loner', 'block', 'jump_up', 'pass_block', 'regeneration', 'secret_weapon', 'side_step', 'stab']
+            skitter_stab_stab:
+                cost: 160000
+                ma: 9
+                st: 2
+                ag: 4
+                av: 7
+                skills: ['loner', 'dodge', 'prehensile_tail', 'shadowing', 'stab']
+            soaren_hightower:
+                cost: 180000
+                ma: 6
+                st: 3
+                ag: 4
+                av: 8
+                skills: ['loner', 'fend', 'kick_off_return', 'pass', 'safe_throw', 'strong_arm', 'sure_hands']
+            ugroth_bolgrot:
+                cost: 100000
+                ma: 5
+                st: 3
+                ag: 3
+                av: 9
+                skills: ['loner', 'chainsaw', 'secret_weapon']
+            varag_ghoul_chewer:
+                cost: 290000
+                ma: 6
+                st: 4
+                ag: 3
+                av: 9
+                skills: ['loner', 'block', 'jump_up', 'mighty_blow', 'thick_skull']
+            wilhelm_chaney:
+                cost: 240000
+                ma: 8
+                st: 4
+                ag: 3
+                av: 8
+                skills: ['loner', 'catch', 'claws', 'frenzy', 'regeneration', 'wrestle']
+            willow_rosebark:
+                cost: 150000
+                ma: 5
+                st: 4
+                ag: 3
+                av: 8
+                skills: ['loner', 'dauntless', 'side_step', 'thick_skull']
+            zara_the_slayer:
+                cost: 270000
+                ma: 6
+                st: 4
+                ag: 3
+                av: 8
+                skills: ['loner', 'block', 'dauntless', 'dodge', 'jump_up', 'stab', 'stakes']
+            zzharg_madeye:
+                cost: 90000
+                ma: 4
+                st: 4
+                ag: 3
+                av: 9
+                skills: ['loner', 'hail_mary_pass', 'pass', 'secret_weapon', 'strong_arm', 'sure_hands', 'tackle', 'thick_skull']

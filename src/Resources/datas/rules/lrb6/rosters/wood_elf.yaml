@@ -1,0 +1,67 @@
+rules:
+  lrb6:
+    rosters:
+      wood_elf:
+        players:
+          lineman:
+            min: 0
+            max: 16
+            ma: 7
+            st: 3
+            ag: 4
+            av: 7
+            cost: 70000
+            available_skills: ['g', 'a']
+            available_skills_on_double: ['s', 'p']
+            is_journeyman: true
+          thrower:
+            min: 0
+            max: 2
+            ma: 7
+            st: 3
+            ag: 4
+            av: 7
+            skills: [ 'pass' ]
+            cost: 90000
+            available_skills: ['g', 'a', 'p']
+            available_skills_on_double: ['s']
+          catcher:
+            min: 0
+            max: 4
+            ma: 8
+            st: 2
+            ag: 4
+            av: 7
+            skills: [ 'catch', 'dodge', 'sprint' ]
+            cost: 90000
+            available_skills: ['g', 'a']
+            available_skills_on_double: ['s', 'p']
+          war_dancer:
+            min: 0
+            max: 2
+            ma: 8
+            st: 3
+            ag: 4
+            av: 8
+            skills: [ 'block', 'dodge', 'leap' ]
+            cost: 120000
+            available_skills: ['g', 'a']
+            available_skills_on_double: ['s', 'p']
+          treeman:
+            min: 0
+            max: 2
+            ma: 2
+            st: 6
+            ag: 1
+            av: 10
+            cost: 120000
+            skills: [ 'loner', 'mighty_blow', 'strong_arm', 'thick_skull', 'throw_team_mate', 'take_root', 'stand_firm' ]
+            available_skills: [ 's' ]
+            available_skills_on_double: [ 'g', 'a', 'p' ]
+        options:
+          reroll_cost: 50000
+          available_star_players: [dolfar_longstride, eldril_sidewinder, soaren_hightower, prince_moranion, zara_the_slayer, morg_n_thorg]
+          can_have_apothecary: true
+          can_have_sorcerer: true
+          can_have_igor: false
+          can_have_halfing_kitchener: false

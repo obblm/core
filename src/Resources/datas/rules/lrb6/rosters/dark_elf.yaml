@@ -1,0 +1,67 @@
+rules:
+    lrb6:
+        rosters:
+            dark_elf:
+                players:
+                    lineman:
+                        min: 0
+                        max: 16
+                        ma: 6
+                        st: 3
+                        ag: 4
+                        av: 8
+                        cost: 70000
+                        available_skills: ['g', 'a']
+                        available_skills_on_double: ['s', 'p']
+                        is_journeyman: true
+                    runner:
+                        min: 0
+                        max: 2
+                        ma: 7
+                        st: 3
+                        ag: 4
+                        av: 7
+                        skills: [ 'dump_off' ]
+                        cost: 80000
+                        available_skills: ['g', 'a', 'p']
+                        available_skills_on_double: ['s']
+                    assassin:
+                        min: 0
+                        max: 2
+                        ma: 6
+                        st: 3
+                        ag: 4
+                        av: 7
+                        skills: [ 'shadowing', 'stab' ]
+                        cost: 90000
+                        available_skills: ['g', 'a']
+                        available_skills_on_double: ['s', 'p']
+                    blitzer:
+                        min: 0
+                        max: 4
+                        ma: 7
+                        st: 3
+                        ag: 4
+                        av: 8
+                        skills: [ 'block' ]
+                        cost: 100000
+                        available_skills: ['g', 'a']
+                        available_skills_on_double: ['s', 'p']
+                    witch:
+                        min: 0
+                        max: 2
+                        ma: 7
+                        st: 3
+                        ag: 4
+                        av: 7
+                        skills: [ 'frenzy', 'dodge', 'jump_up' ]
+                        cost: 110000
+                        available_skills: ['g', 'a']
+                        available_skills_on_double: ['s', 'p']
+                options:
+                    reroll_cost: 50000
+                    available_star_players: [eldril_sidewinder, horkon_heartripper, ithaca_benoin, morg_n_thorg, roxanna_darknail, hubris_rakarth]
+                    can_have_apothecary: true
+                    can_have_sorcerer: true
+                    can_have_igor: false
+                    can_have_halfing_kitchener: false

@@ -1,0 +1,57 @@
+rules:
+    lrb6:
+        rosters:
+            nurgle:
+                players:
+                    rotter:
+                        min: 0
+                        max: 16
+                        ma: 5
+                        st: 3
+                        ag: 3
+                        av: 8
+                        cost: 40000
+                        skills: ['decay', 'nurgle_rot']
+                        available_skills: ['g', 'm']
+                        available_skills_on_double: ['s', 'a', 'p']
+                        is_journeyman: true
+                    pestigor:
+                        min: 0
+                        max: 4
+                        ma: 6
+                        st: 3
+                        ag: 3
+                        av: 8
+                        cost: 80000
+                        skills: [ 'horns', 'nurgle_rot', 'regeneration' ]
+                        available_skills: [ 'g', 's', 'm' ]
+                        available_skills_on_double: [ 'a', 'p' ]
+                    warrior:
+                        min: 0
+                        max: 4
+                        ma: 5
+                        st: 4
+                        ag: 3
+                        av: 9
+                        cost: 110000
+                        skills: [ 'nurgle_rot', 'disturbing_presence', 'regeneration', 'foul_appearance' ]
+                        available_skills: ['g', 's', 'm']
+                        available_skills_on_double: ['p', 'a']
+                    beast:
+                        min: 0
+                        max: 1
+                        ma: 4
+                        st: 5
+                        ag: 2
+                        av: 9
+                        cost: 140000
+                        skills: [ 'loner', 'mighty_blow', 'really_stupid', 'nurgle_rot', 'disturbing_presence', 'foul_appearance', 'regeneration', 'tentacles' ]
+                        available_skills: ['s', 'm']
+                        available_skills_on_double: ['g', 'a', 'p']
+                options:
+                    reroll_cost: 70000
+                    available_star_players: [max_spleenripper, morg_n_thorg, rashnak_rackstabber]
+                    can_have_apothecary: true
+                    can_have_sorcerer: true
+                    can_have_igor: false
+                    can_have_halfing_kitchener: false

@@ -1,0 +1,34 @@
+rules:
+  lrb6:
+    rosters:
+      vampire:
+        players:
+          thrall:
+            min: 0
+            max: 16
+            ma: 6
+            st: 3
+            ag: 3
+            av: 7
+            cost: 40000
+            available_skills: [ 'g' ]
+            available_skills_on_double: [ 's', 'a', 'p' ]
+            is_journeyman: true
+          vampire:
+            min: 0
+            max: 4
+            ma: 6
+            st: 4
+            ag: 4
+            av: 8
+            skills: [ 'blood_lust', 'hypnotic_gaze', 'regeneration' ]
+            cost: 110000
+            available_skills: [ 'g', 'a', 's' ]
+            available_skills_on_double: [ 'p' ]
+        options:
+          reroll_cost: 70000
+          available_star_players: [ dolfar_longstride, eldril_sidewinder, soaren_hightower, prince_moranion, zara_the_slayer, morg_n_thorg ]
+          can_have_apothecary: true
+          can_have_sorcerer: true
+          can_have_igor: false
+          can_have_halfing_kitchener: false
