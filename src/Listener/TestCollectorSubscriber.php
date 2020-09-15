@@ -17,7 +17,8 @@ class TestCollectorSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onCollect(RulesCollectorEvent $event) {
+    public function onCollect(RulesCollectorEvent $event)
+    {
         /**
          * Do something like
          * $helper = $event->getHelper();

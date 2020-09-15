@@ -9,11 +9,12 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class TeamValueValidator extends ConstraintValidator {
-
+class TeamValueValidator extends ConstraintValidator
+{
     protected $teamHelper;
 
-    public function __construct(TeamHelper $teamHelper) {
+    public function __construct(TeamHelper $teamHelper)
+    {
         $this->teamHelper = $teamHelper;
     }
 
@@ -25,14 +26,14 @@ class TeamValueValidator extends ConstraintValidator {
         if (!$value instanceof Team && !$value instanceof TeamVersion) {
             throw new UnexpectedTypeException($value, Team::class);
         }
-        if($value instanceof Team) {
+        if ($value instanceof Team) {
             $value = TeamHelper::getLastVersion($value);
         }
 
         $team_cost = $this->teamHelper->calculateTeamValue($value);
         $limit = $this->teamHelper->getRuleHelper($value->getTeam())->getMaxTeamCost();
 
-        if($team_cost > $limit) {
+        if ($team_cost > $limit) {
             $this->context->buildViolation($constraint->limitMessage)
                 ->setParameter('{{ limit }}', $limit)
                 ->setParameter('{{ current }}', $team_cost)

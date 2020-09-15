@@ -20,11 +20,13 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/teams", name="obblm_team")
  */
-class TeamController extends AbstractTeamController {
+class TeamController extends AbstractTeamController
+{
     /**
      * @Route("/", name="_mine")
      */
-    public function index(): Response {
+    public function index(): Response
+    {
         $this->denyAccessUnlessGranted(Roles::COACH);
 
         $teams = $this->getUser()->getTeams();
@@ -36,7 +38,8 @@ class TeamController extends AbstractTeamController {
     /**
      * @Route("/create", name="_create")
      */
-    public function create(Request $request): Response {
+    public function create(Request $request): Response
+    {
         $this->denyAccessUnlessGranted(Roles::COACH);
 
         return $this->render('@ObblmCore/form/team/rules-selector.html.twig', [
@@ -45,7 +48,8 @@ class TeamController extends AbstractTeamController {
     /**
      * @Route("/create/from-rule/{rule}", name="_create_rule")
      */
-    public function createFromRule(Rule $rule, Request $request): Response {
+    public function createFromRule(Rule $rule, Request $request): Response
+    {
         $this->denyAccessUnlessGranted(Roles::COACH);
 
         $team = (new Team())
@@ -56,7 +60,8 @@ class TeamController extends AbstractTeamController {
     /**
      * @Route("/{team}", name="_detail")
      */
-    public function detail(Team $team): Response {
+    public function detail(Team $team): Response
+    {
         $this->denyAccessUnlessGranted(TeamVoter::VIEW, $team);
         return $this->render('@ObblmCore/team/detail.html.twig', [
             'version' => TeamHelper::getLastVersion($team),
@@ -65,14 +70,15 @@ class TeamController extends AbstractTeamController {
     /**
      * @Route("/{team}/edit", name="_edit")
      */
-    public function edit(Team $team, Request $request, EventDispatcherInterface $dispatcher): Response {
+    public function edit(Team $team, Request $request, EventDispatcherInterface $dispatcher): Response
+    {
         $this->denyAccessUnlessGranted(TeamVoter::EDIT, $team);
 
         $form = $this->createForm(EditTeamType::class, TeamHelper::getLastVersion($team));
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $version = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $dispatcher->dispatch(new TeamVersionEvent($version), TeamVersionEvent::PRE_SAVE);
@@ -89,11 +95,12 @@ class TeamController extends AbstractTeamController {
     /**
      * @Route("/{team}/delete", name="_delete")
      */
-    public function delete(Team $team, Request $request): Response {
+    public function delete(Team $team, Request $request): Response
+    {
         $this->denyAccessUnlessGranted(TeamVoter::EDIT, $team);
 
         $confirm = $request->get('confirm');
-        if($confirm !== null) {
+        if ($confirm !== null) {
             if ($confirm == 1) {
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($team);

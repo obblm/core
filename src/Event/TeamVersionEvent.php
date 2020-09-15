@@ -5,7 +5,8 @@ namespace Obblm\Core\Event;
 use Obblm\Core\Entity\TeamVersion;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class TeamVersionEvent extends Event {
+class TeamVersionEvent extends Event
+{
     public const LOCKED = 'team.version.locked';
     public const HAS_LEVEL_UP = 'team.version.has_level_up';
     public const TREASURE_BASE = 'team.version.treasure.base';

@@ -12,11 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package Obblm\Core\Controller\Api
  * @Route("/obblm-api/team", name="api_team")
  */
-class TeamApiController extends AbstractController {
-
+class TeamApiController extends AbstractController
+{
     private $teamHelper;
 
-    public function __construct(TeamHelper $teamHelper) {
+    public function __construct(TeamHelper $teamHelper)
+    {
         $this->teamHelper = $teamHelper;
     }
 
@@ -24,7 +25,8 @@ class TeamApiController extends AbstractController {
      * @param Team $team
      * @Route("/{team}/available-types", name="_available_types")
      */
-    public function getAvailablePlayerTypes(Team $team) {
+    public function getAvailablePlayerTypes(Team $team)
+    {
         $helper = $this->teamHelper->getRuleHelper($team);
         return $this->json($helper->getAvailablePlayerTypes($team->getRoster()))
             ->setPublic()
@@ -35,7 +37,7 @@ class TeamApiController extends AbstractController {
      * @param Team $team
      * @Route("/available-types/{rule}/{roster}")
      */
-    public function getAvailablePlayerTypesByRoster(Team $team) {
-
+    public function getAvailablePlayerTypesByRoster(Team $team)
+    {
     }
 }

@@ -2,13 +2,15 @@
 
 namespace Obblm\Core\Twig\Parts;
 
-class NavigationLink implements NavigationElementInterface {
+class NavigationLink implements NavigationElementInterface
+{
     protected $route;
     protected $link;
     protected $parameters;
     protected $icon;
 
-    public function __construct(string $route = 'obblm_dashboard', string $link = "Home", array $parameters = [], string $icon = null) {
+    public function __construct(string $route = 'obblm_dashboard', string $link = "Home", array $parameters = [], string $icon = null)
+    {
         $this->route = $route;
         $this->link = $link;
         $this->parameters = $parameters;

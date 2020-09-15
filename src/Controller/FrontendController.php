@@ -5,20 +5,20 @@ namespace Obblm\Core\Controller;
 use Obblm\Core\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route(name="obblm_")
  */
-class FrontendController extends AbstractController {
+class FrontendController extends AbstractController
+{
     /**
      * @Route("/", name="dashboard")
      */
-    public function home(SerializerInterface $serializer) {
+    public function home()
+    {
+        $this->denyAccessUnlessGranted(Roles::COACH);
 
-        $response = $this->render('@ObblmCore/dashboard/index.html.twig', [
-            //'user' => $serializer->serialize($this->getUser(), 'json'),
-        ]);
+        $response = $this->render('@ObblmCore/dashboard/index.html.twig');
         // cache for 3600 seconds
         $response->setSharedMaxAge(3600);
 

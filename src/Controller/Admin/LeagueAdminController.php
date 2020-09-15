@@ -15,11 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/admin/leagues")
  */
-class LeagueAdminController extends AbstractController {
+class LeagueAdminController extends AbstractController
+{
     /**
      * @Route("/", name="admin_leagues")
      */
-    public function index(EntityManagerInterface $em) {
+    public function index(EntityManagerInterface $em)
+    {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $leagues = $em->getRepository(League::class)
@@ -32,14 +34,15 @@ class LeagueAdminController extends AbstractController {
     /**
      * @Route("/add", name="admin_leagues_add")
      */
-    public function add(Request $request, EntityManagerInterface $em) {
+    public function add(Request $request, EntityManagerInterface $em)
+    {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $league = new League();
         $form = $this->createForm(AdminLeagueForm::class, $league);
 
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($league);
             $em->flush();
             return $this->redirectToRoute('admin_leagues');
@@ -52,13 +55,14 @@ class LeagueAdminController extends AbstractController {
     /**
      * @Route("/edit/{league}", name="admin_leagues_edit")
      */
-    public function edit(League $league, Request $request, EntityManagerInterface $em) {
+    public function edit(League $league, Request $request, EntityManagerInterface $em)
+    {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $form = $this->createForm(AdminLeagueForm::class, $league);
 
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($league);
             $em->flush();
             return $this->redirectToRoute('admin_leagues');
@@ -71,7 +75,8 @@ class LeagueAdminController extends AbstractController {
     /**
      * @Route("/delete/{league}", name="admin_leagues_delete")
      */
-    public function delete(League $league, Request $request, EntityManagerInterface $em) {
+    public function delete(League $league, Request $request, EntityManagerInterface $em)
+    {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
         return $this->render('@ObblmCore/todo.html.twig', []);
     }

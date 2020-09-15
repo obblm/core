@@ -96,7 +96,7 @@ class ObblmAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-        if($targetPath = $request->request->get('_target_path')) {
+        if ($targetPath = $request->request->get('_target_path')) {
             return new RedirectResponse($targetPath);
         }
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));

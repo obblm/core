@@ -11,11 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/admin")
  */
-class AdminController extends AbstractController {
+class AdminController extends AbstractController
+{
     /**
      * @Route("/", name="admin")
      */
-    public function index() {
+    public function index()
+    {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
         return $this->render('@ObblmCore/admin/index.html.twig', []);
     }

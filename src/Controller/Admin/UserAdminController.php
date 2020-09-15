@@ -16,11 +16,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  *
  * @Route("/admin/users")
  */
-class UserAdminController extends AbstractController {
+class UserAdminController extends AbstractController
+{
     /**
      * @Route("/", name="admin_users")
      */
-    public function index(EntityManagerInterface $em) {
+    public function index(EntityManagerInterface $em)
+    {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $users = $em->getRepository(Coach::class)
@@ -33,14 +35,15 @@ class UserAdminController extends AbstractController {
     /**
      * @Route("/add", name="admin_users_add")
      */
-    public function add(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em) {
+    public function add(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
+    {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $user = new Coach();
         $form = $this->createForm(AdminUserForm::class, $user);
 
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password)->setPlainPassword('');
             $em->persist($user);
@@ -53,14 +56,15 @@ class UserAdminController extends AbstractController {
     /**
      * @Route("/edit/{user}", name="admin_users_edit")
      */
-    public function edit(Coach $user, Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em) {
+    public function edit(Coach $user, Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
+    {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $form = $this->createForm(AdminUserForm::class, $user);
 
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            if($user->getPlainPassword()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($user->getPlainPassword()) {
                 $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
                 $user->setPassword($password)->setPlainPassword('');
             }

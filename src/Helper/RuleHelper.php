@@ -6,8 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Obblm\Core\Entity\Rule;
-use Obblm\Core\Entity\Team;
-use Obblm\Core\Entity\TeamVersion;
 use Obblm\Core\Event\RulesCollectorEvent;
 use Obblm\Core\Form\Player\ActionBb2020Type;
 use Obblm\Core\Form\Player\ActionType;
@@ -15,12 +13,13 @@ use Obblm\Core\Form\Player\InjuryBb2020Type;
 use Obblm\Core\Form\Player\InjuryType;
 use Obblm\Core\Helper\Rule\CanHaveRuleInterface;
 use Obblm\Core\Helper\Rule\RuleHelperInterface;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
-class RuleHelper {
-
+class RuleHelper
+{
     const TRANSLATION_GLUE = '.';
 
     private $helpers;
@@ -29,7 +28,8 @@ class RuleHelper {
     private $rules;
     private $cache;
 
-    public function __construct(AdapterInterface $cache, EntityManagerInterface $em, EventDispatcherInterface $dispatcher) {
+    public function __construct(AdapterInterface $cache, EntityManagerInterface $em, EventDispatcherInterface $dispatcher)
+    {
         $this->helpers = new ArrayCollection();
         $this->em = $em;
         $this->dispatcher = $dispatcher;
@@ -40,7 +40,8 @@ class RuleHelper {
     /**
      * @return ArrayCollection
      */
-    public function getRules():ArrayCollection {
+    public function getRules():ArrayCollection
+    {
         return $this->rules;
     }
 
@@ -51,12 +52,7 @@ class RuleHelper {
     public function addRule($item): self
     {
         if (!$this->rules->contains($item)) {
-            if($item instanceof Rule) {
-                $this->rules[] = $item;
-            }
-            else if($item instanceof CanHaveRuleInterface) {
-                $this->rules[] = $item;
-            }
+            $this->rules[] = $item;
         }
 
         return $this;
@@ -76,7 +72,8 @@ class RuleHelper {
     /**
      * @param RuleHelperInterface $rule
      */
-    public function addHelper(RuleHelperInterface $rule) {
+    public function addHelper(RuleHelperInterface $rule)
+    {
         if (!$rule instanceof RuleHelperInterface) {
             throw new UnexpectedTypeException($rule, RuleHelperInterface::class);
         }
@@ -86,7 +83,8 @@ class RuleHelper {
     /**
      * @return ArrayCollection|Rule[]|object[]
      */
-    public function getRuleChoices() {
+    public function getRuleChoices()
+    {
         $rules = $this->em->getRepository(Rule::class)->findAll();
 
         $this->rules = (!$rules instanceof ArrayCollection) ? new ArrayCollection($rules) : $rules;
@@ -99,7 +97,8 @@ class RuleHelper {
     /**
      * @return Rule[]|object[]
      */
-    public function getRulesAvailableForTeamCreation() {
+    public function getRulesAvailableForTeamCreation()
+    {
         return $this->em->getRepository(Rule::class)->findAll();
     }
 
@@ -108,7 +107,8 @@ class RuleHelper {
      * @param $roster
      * @return string
      */
-    public static function composeTranslationRosterKey($rule_key, $roster):string {
+    public static function composeTranslationRosterKey($rule_key, $roster):string
+    {
         return join(self::TRANSLATION_GLUE, ['obblm', $rule_key, 'rosters', $roster, 'title']);
     }
 
@@ -117,7 +117,8 @@ class RuleHelper {
      * @param $roster
      * @return string
      */
-    public static function composeTranslationRosterDescription($rule_key, $roster):string {
+    public static function composeTranslationRosterDescription($rule_key, $roster):string
+    {
         return join(self::TRANSLATION_GLUE, ['obblm', $rule_key, 'rosters', $roster, 'description']);
     }
 
@@ -126,7 +127,8 @@ class RuleHelper {
      * @param $injury_key
      * @return string
      */
-    public static function composeTranslationInjuryKey($rule_key, $injury_key):string {
+    public static function composeTranslationInjuryKey($rule_key, $injury_key):string
+    {
         return join(self::TRANSLATION_GLUE, ['obblm', $rule_key, 'injuries', $injury_key, 'name']);
     }
 
@@ -135,7 +137,8 @@ class RuleHelper {
      * @param $injury_key
      * @return string
      */
-    public static function composeTranslationInjuryEffect($rule_key, $injury_key):string {
+    public static function composeTranslationInjuryEffect($rule_key, $injury_key):string
+    {
         return join(self::TRANSLATION_GLUE, ['obblm', $rule_key, 'injuries', $injury_key, 'effect']);
     }
 
@@ -143,7 +146,8 @@ class RuleHelper {
      * @param Rule $object
      * @return array
      */
-    public static function getAvailableRosters(Rule $object):array {
+    public static function getAvailableRosters(Rule $object):array
+    {
         $rule = $object->getRule();
         return array_keys($rule['rosters']);
     }
@@ -152,7 +156,8 @@ class RuleHelper {
      * @param Rule $rule
      * @return string
      */
-    public static function getActionFormType(Rule $rule):string {
+    public static function getActionFormType(Rule $rule):string
+    {
         return ($rule->isPostBb2020()) ? ActionBb2020Type::class : ActionType::class;
     }
 
@@ -160,24 +165,9 @@ class RuleHelper {
      * @param Rule $rule
      * @return string
      */
-    public static function getInjuryFormType(Rule $rule):string {
+    public static function getInjuryFormType(Rule $rule):string
+    {
         return ($rule->isPostBb2020()) ? InjuryBb2020Type::class : InjuryType::class;
-    }
-
-    /**
-     * @param Team $team
-     * @return TeamVersion
-     * @throws \Psr\Cache\InvalidArgumentException
-     */
-    //TODO: move to team helper
-    public function createNewTeamVersion(Team $team):TeamVersion {
-        $version = (TeamHelper::getLastVersion($team))
-            ->setTreasure($this->getHelper($team->getRule())->getMaxTeamCost());
-        return $version;
-    }
-    //TODO: move to team helper
-    public function destructTeamVersion(Team $team):TeamVersion {
-
     }
 
     /****************
@@ -189,11 +179,11 @@ class RuleHelper {
      * @return RuleHelperInterface
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function getHelper($item):RuleHelperInterface {
-        if($item instanceof Rule) {
+    public function getHelper($item):RuleHelperInterface
+    {
+        if ($item instanceof Rule) {
             $rule = $item;
-        }
-        else if($item instanceof CanHaveRuleInterface) {
+        } elseif ($item instanceof CanHaveRuleInterface) {
             $rule = $item->getRule();
         }
         $key = $this->getCacheKey($rule);
@@ -204,16 +194,22 @@ class RuleHelper {
      * @param $key
      * @param Rule $rule
      * @return RuleHelperInterface
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public function getCacheOrCreate($key, Rule $rule):RuleHelperInterface {
-        $item = $this->cache->getItem($key);
-        if (!$item->isHit()) {
+    public function getCacheOrCreate($key, Rule $rule):RuleHelperInterface
+    {
+        try {
+            $item = $this->cache->getItem($key);
+            if (!$item->isHit()) {
+                $helper = $this->getNotCachedHelper($rule->getRuleKey());
+                $helper->attachRule($rule);
+                $this->cache->save($item->set($helper));
+            } else {
+                $helper = $item->get();
+            }
+        } catch (InvalidArgumentException $e) {
             $helper = $this->getNotCachedHelper($rule->getRuleKey());
             $helper->attachRule($rule);
-            $this->cache->save($item->set($helper));
-        } else {
-            $helper = $item->get();
         }
 
         return $helper;
@@ -224,7 +220,8 @@ class RuleHelper {
      * @return RuleHelperInterface|null
      * @throws Exception
      */
-    private function getNotCachedHelper($key):?RuleHelperInterface {
+    private function getNotCachedHelper($key):?RuleHelperInterface
+    {
         if (!isset($this->helpers[$key])) {
             throw new Exception('No RuleHelperInterface found for ' . $key);
         }
@@ -235,7 +232,8 @@ class RuleHelper {
      * @param Rule $rule
      * @return string
      */
-    protected static function getCacheKey(Rule $rule) {
+    protected static function getCacheKey(Rule $rule)
+    {
         return join(self::TRANSLATION_GLUE, ['obblm', 'rules', $rule->getRuleKey(), $rule->getId()]);
     }
 }

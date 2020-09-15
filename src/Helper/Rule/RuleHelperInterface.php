@@ -7,7 +7,8 @@ use Obblm\Core\Entity\Rule;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
 
-interface RuleHelperInterface {
+interface RuleHelperInterface
+{
     /****************
      * COMPLIER PASS
      ****************/

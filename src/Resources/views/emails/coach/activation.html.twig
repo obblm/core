@@ -1,14 +1,14 @@
-{% extends 'emails/email-template.html.twig'%}
-{% block header_title 'emails.coach.activation.welldone'|trans({'%login%': coach.username}) %}
+{% extends '@ObblmCore/emails/email-template.html.twig'%}
+{% block header_title 'obblm.emails.coach.activation.welldone'|trans({'%login%': coach.username}) %}
 {% block content %}
-    {% do email.setSubject( 'emails.coach.activation.title'|trans({'%login%': coach.username }) ) %}
+    {% do email.setSubject( 'obblm.emails.coach.activation.title'|trans({'%login%': coach.username }) ) %}
     <div>
         <p>{{ 'obblm.emails.coach.activation.success'|trans }}</p>
         <p>{{ 'obblm.emails.coach.activation.resume.title'|trans }}</p>
         <ul>
             <li>{{ 'obblm.emails.coach.activation.resume.email'|trans({'%email%': coach.email}) }}</li>
             <li>{{ 'obblm.emails.coach.activation.resume.login'|trans({'%login%': coach.username}) }}</li>
-            <li>{{ 'obblm.emails.coach.activation.resume.password'|trans({'%password%': 'emails.coach.activation.resume.password_joke'|trans }) }}</li>
+            <li>{{ 'obblm.emails.coach.activation.resume.password'|trans({'%password%': 'obblm.emails.coach.activation.resume.password_joke'|trans }) }}</li>
         </ul>
         <p>{{ 'obblm.emails.coach.activation.text'|trans }}</p>
         <p><a href="{{ absolute_url(path('app_login')) }}">{{ 'obblm.emails.coach.activation.link_to_login'|trans }}</a></p>

@@ -9,7 +9,8 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 class EmailHandler implements MessageHandlerInterface
 {
     protected $mailer;
-    public function __construct(MailerInterface $mailer) {
+    public function __construct(MailerInterface $mailer)
+    {
         $this->mailer = $mailer;
     }
     public function __invoke(EmailMessage $message)

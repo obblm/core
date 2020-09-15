@@ -10,11 +10,12 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TeamType extends AbstractType {
-
+class TeamType extends AbstractType
+{
     private $ruleHelper;
 
-    public function __construct(RuleHelper $ruleHelper) {
+    public function __construct(RuleHelper $ruleHelper)
+    {
         $this->ruleHelper = $ruleHelper;
     }
 

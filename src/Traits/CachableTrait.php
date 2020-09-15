@@ -2,7 +2,6 @@
 
 namespace Obblm\Core\Traits;
 
-trait CachableTrait {
-
-
+trait CachableTrait
+{
 }

@@ -11,16 +11,17 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 
-class RulesLoaderCommand extends Command {
-
+class RulesLoaderCommand extends Command
+{
     protected static $defaultName = 'obblm:rules:load';
-    protected static $rulesDirectory = 'datas/rules';
+    protected $rulesDirectory = 'datas/rules';
 
     private $em;
 
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
+        $this->rulesDirectory = dirname(__DIR__).'/Resources/datas/rules';
         parent::__construct();
     }
 
@@ -34,8 +35,8 @@ class RulesLoaderCommand extends Command {
     {
         $finder = new Finder();
         $io = new SymfonyStyle($input, $output);
-        $io->title("Importing pre fetched rules from " . self::$rulesDirectory);
-        $finder->directories()->ignoreDotFiles(true)->depth(0)->in(self::$rulesDirectory);
+        $io->title("Importing pre fetched rules from " . $this->rulesDirectory);
+        $finder->directories()->ignoreDotFiles(true)->depth(0)->in($this->rulesDirectory);
         if ($finder->hasResults()) {
             foreach ($finder as $ruleDirectory) {
                 $rules = [];
@@ -45,17 +46,17 @@ class RulesLoaderCommand extends Command {
                 $fileFinder->files()->ignoreDotFiles(true)->name(['*.yaml', '*.yml'])->in($ruleDirectory->getPathname());
                 if ($fileFinder->hasResults()) {
                     $io->progressStart($finder->count());
-                    foreach($fileFinder as $file) {
+                    foreach ($fileFinder as $file) {
                         $content = Yaml::parseFile($file->getPathname());
                         $rules = array_merge_recursive($rules, $content);
                         $io->progressAdvance(1);
                     }
-                    if(!isset($rules['rules'][$key])) {
+                    if (!isset($rules['rules'][$key])) {
                         $io->error("The rules.{$key} rule does not exist in {$ruleDirectory->getPathname()} directory.");
                     }
                     $rule_array = $rules['rules'][$key];
                     $rule = $this->em->getRepository(Rule::class)->findOneBy(['rule_key' => $key]);
-                    if(!$rule) {
+                    if (!$rule) {
                         $rule = (new Rule())
                             ->setRuleKey($key)
                             ->setReadOnly(true);
@@ -68,8 +69,7 @@ class RulesLoaderCommand extends Command {
                     ;
                     $this->em->persist($rule);
                     $io->progressFinish();
-                }
-                else {
+                } else {
                     $io->warning("There is no rule files in {$ruleDirectory->getPathname()} directory.");
                 }
             }

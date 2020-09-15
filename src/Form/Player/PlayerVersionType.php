@@ -9,8 +9,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PlayerVersionType extends AbstractType {
-
+class PlayerVersionType extends AbstractType
+{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         /** @var RuleHelperInterface $helper */

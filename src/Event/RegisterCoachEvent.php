@@ -5,7 +5,8 @@ namespace Obblm\Core\Event;
 use Obblm\Core\Entity\Coach;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class RegisterCoachEvent extends Event {
+class RegisterCoachEvent extends Event
+{
     public const NAME = 'coach.register';
 
     protected $coach;

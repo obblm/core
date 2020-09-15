@@ -218,14 +218,14 @@ class PlayerVersion
      */
     public function loadDefaultDatas(): void
     {
-        if($this->getPlayer()) {
-            if(!$this->getPlayer()->getTeam()) {
+        if ($this->getPlayer()) {
+            if (!$this->getPlayer()->getTeam()) {
                 $this->getPlayer()->setTeam($this->getTeamVersion()->getTeam());
             }
-            if(!$this->getCharacteristics()) {
+            if (!$this->getCharacteristics()) {
                 $this->setCharacteristics(PlayerService::getPlayerCharacteristics($this->getPlayer()));
             }
-            if(!$this->getSkills()) {
+            if (!$this->getSkills()) {
                 $this->setSkills(PlayerService::getPlayerSkills($this->getPlayer()));
             }
         }

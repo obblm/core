@@ -13,11 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/admin/rules")
  */
-class RuleAdminController extends AbstractController {
+class RuleAdminController extends AbstractController
+{
     /**
      * @Route("/", name="admin_rules")
      */
-    public function index(EntityManagerInterface $em) {
+    public function index(EntityManagerInterface $em)
+    {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
         $rules = $em->getRepository(Rule::class)

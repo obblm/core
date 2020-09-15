@@ -4,17 +4,18 @@ namespace Obblm\Core\Controller;
 
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Form\Team\TeamRulesSelectorForm;
-use Obblm\Core\Helper\RuleHelper;
+use Obblm\Core\Helper\TeamHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-abstract class AbstractTeamController extends AbstractController {
+abstract class AbstractTeamController extends AbstractController
+{
+    protected $teamHelper;
 
-    protected $ruleHelper;
-
-    public function __construct(RuleHelper $ruleHelper) {
-        $this->ruleHelper = $ruleHelper;
+    public function __construct(TeamHelper $teamHelper)
+    {
+        $this->teamHelper = $teamHelper;
     }
 
     protected function createAndComputeTeamForm(Team $team, Request $request):Response
@@ -23,9 +24,8 @@ abstract class AbstractTeamController extends AbstractController {
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() and $form->isValid()) {
-            //$team = $form->getData();
-            $this->ruleHelper->createNewTeamVersion($team);
+        if ($form->isSubmitted() and $form->isValid()) {
+            $this->teamHelper->createNewTeamVersion($team);
             $em = $this->getDoctrine()->getManager();
             $em->persist($team);
             $em->flush();

@@ -7,8 +7,8 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ActionBb2020Type extends AbstractType {
-
+class ActionBb2020Type extends AbstractType
+{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('td', NumberType::class);
@@ -18,7 +18,6 @@ class ActionBb2020Type extends AbstractType {
         $builder->add('int', NumberType::class);
         $builder->add('ttm', NumberType::class);
         $builder->add('mvp', NumberType::class);
-
     }
     public function configureOptions(OptionsResolver $resolver)
     {

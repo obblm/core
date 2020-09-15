@@ -5,7 +5,8 @@ namespace Obblm\Core\Event;
 use Obblm\Core\Helper\RuleHelper;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class RulesCollectorEvent extends Event {
+class RulesCollectorEvent extends Event
+{
     public const COLLECT = 'rule_helper.collector';
 
     protected $helper;

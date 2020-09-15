@@ -2,7 +2,8 @@
 
 namespace Obblm\Core\Traits;
 
-trait ClassNameAsKeyTrait {
+trait ClassNameAsKeyTrait
+{
     /**
      * @internal
      */

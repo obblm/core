@@ -2,6 +2,7 @@
 
 namespace Obblm\Core\Helper\Rule;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Exception;
 use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Rule;
@@ -15,12 +16,15 @@ use Obblm\Core\Service\PlayerService;
 use Obblm\Core\Traits\ClassNameAsKeyTrait;
 use Obblm\Core\Validator\Constraints\TeamValue;
 
-abstract class AbstractRuleHelper implements RuleHelperInterface {
+abstract class AbstractRuleHelper implements RuleHelperInterface
+{
     use ClassNameAsKeyTrait;
 
     protected $attachedRule;
     protected $rule = [];
     protected $injuries = [];
+    /** @var $spp_levels ArrayCollection */
+    protected $spp_levels = null;
 
     /****************
      * COMPLIER PASS
@@ -29,32 +33,53 @@ abstract class AbstractRuleHelper implements RuleHelperInterface {
      * @param Rule $rule
      * @return $this
      */
-    public function attachRule(Rule $rule):RuleHelperInterface {
+    public function attachRule(Rule $rule):RuleHelperInterface
+    {
         $this->attachedRule = $rule;
         $this->rule = $rule->getRule();
         $this->prepareInjuriesTable();
+        $this->prepareSppTable();
         return $this;
     }
 
     /**
      * @return Rule
      */
-    public function getAttachedRule():Rule {
+    public function getAttachedRule():Rule
+    {
         return $this->attachedRule;
     }
 
-    protected function prepareInjuriesTable() {
-        foreach($this->rule['injuries'] as $key => $injury) {
+    protected function prepareInjuriesTable()
+    {
+        foreach ($this->rule['injuries'] as $key => $injury) {
             $label = RuleHelper::composeTranslationInjuryKey($this->getAttachedRule()->getRuleKey(), $key);
             $effect_label = RuleHelper::composeTranslationInjuryEffect($this->getAttachedRule()->getRuleKey(), $key);
-            if(isset($injury['to'])) {
-                for($i = $injury['from']; $i <= $injury['to']; $i++) {
+            if (isset($injury['to'])) {
+                for ($i = $injury['from']; $i <= $injury['to']; $i++) {
                     $this->injuries[$i] = (object) ['value' => $i, 'label' => $label, 'effect_label' => $effect_label, 'effects' => $injury['effects']];
                 }
             } else {
                 $this->injuries[$injury['from']] = (object) ['value' => $injury['from'], 'label' => $label, 'effect_label' => $effect_label, 'effects' => $injury['effects']];
             }
         }
+    }
+    protected function prepareSppTable()
+    {
+        $spps = new ArrayCollection($this->rule['experience']);
+        foreach ($spps as $from => $level) {
+            $to = $spps->next();
+            if ($to) {
+                for ($i = $from; $i < $spps->indexOf($to); $i++) {
+                    if (!isset($spps[$i])) {
+                        $spps[$i] = $level;
+                    }
+                }
+            }
+        }
+        $spps = $spps->toArray();
+        ksort($spps);
+        $this->spp_levels = new ArrayCollection($spps);
     }
 
     /**********************
@@ -64,21 +89,24 @@ abstract class AbstractRuleHelper implements RuleHelperInterface {
     /**
      * @return string
      */
-    public function getInjuriesFormClass():string {
+    public function getInjuriesFormClass():string
+    {
         return InjuryType::class;
     }
 
     /**
      * @return string
      */
-    public function getActionsFormClass():string {
+    public function getActionsFormClass():string
+    {
         return ActionType::class;
     }
 
     /**
      * @return string
      */
-    public function getTemplateKey():string {
+    public function getTemplateKey():string
+    {
         return $this->getKey();
     }
 
@@ -90,7 +118,8 @@ abstract class AbstractRuleHelper implements RuleHelperInterface {
      *
      * @return int
      */
-    public function getMaxTeamCost():int {
+    public function getMaxTeamCost():int
+    {
         return ($this->rule['max_team_cost']) ? $this->rule['max_team_cost'] : TeamValue::LIMIT;
     }
 
@@ -99,7 +128,8 @@ abstract class AbstractRuleHelper implements RuleHelperInterface {
      * @return int
      * @throws \Exception
      */
-    public function getRerollCost(Team $team):int {
+    public function getRerollCost(Team $team):int
+    {
         return (int) $this->rule['rosters'][$team->getRoster()]['options']['reroll_cost'];
     }
 
@@ -107,7 +137,8 @@ abstract class AbstractRuleHelper implements RuleHelperInterface {
      * @param Team $team
      * @return int
      */
-    public function getApothecaryCost(Team $team):int {
+    public function getApothecaryCost(Team $team):int
+    {
         return (int) $this->rule['sidelines_cost']['apothecary'];
     }
 
@@ -115,7 +146,8 @@ abstract class AbstractRuleHelper implements RuleHelperInterface {
      * @param Team $team
      * @return int
      */
-    public function getCheerleadersCost(Team $team):int {
+    public function getCheerleadersCost(Team $team):int
+    {
         return (int) $this->rule['sidelines_cost']['cheerleaders'];
     }
 
@@ -123,7 +155,8 @@ abstract class AbstractRuleHelper implements RuleHelperInterface {
      * @param Team $team
      * @return int
      */
-    public function getAssistantsCost(Team $team):int {
+    public function getAssistantsCost(Team $team):int
+    {
         return (int) $this->rule['sidelines_cost']['assistants'];
     }
 
@@ -131,7 +164,8 @@ abstract class AbstractRuleHelper implements RuleHelperInterface {
      * @param Team $team
      * @return int
      */
-    public function getPopularityCost(Team $team):int {
+    public function getPopularityCost(Team $team):int
+    {
         return (int) $this->rule['sidelines_cost']['popularity'];
     }
 
@@ -140,29 +174,31 @@ abstract class AbstractRuleHelper implements RuleHelperInterface {
      * @return bool
      * @throws \Exception
      */
-    public function couldHaveApothecary(Team $team):bool {
+    public function couldHaveApothecary(Team $team):bool
+    {
         return (bool) $this->rule['rosters'][$team->getRoster()]['options']['can_have_apothecary'];
     }
 
-    public function calculateTeamRate(TeamVersion $version):?int {
+    public function calculateTeamRate(TeamVersion $version):?int
+    {
         return $this->calculateTeamValue($version) / 10000;
     }
 
-    public function calculateTeamValue(TeamVersion $version, bool $excludeDisposable = false):int {
+    public function calculateTeamValue(TeamVersion $version, bool $excludeDisposable = false):int
+    {
         $team_cost = 0;
 
         // Players
-        foreach($version->getTeam()->getNotDeadPlayers() as $basePlayer) {
+        foreach ($version->getTeam()->getNotDeadPlayers() as $basePlayer) {
             $player = (new PlayerVersion());
             try {
                 $player = PlayerService::getLastVersion($basePlayer);
-            }
-            catch(NoVersionException $e) { // It's a new player !
+            } catch (NoVersionException $e) { // It's a new player !
                 $basePlayer->addVersion($player);
                 $version->addPlayerVersion($player);
                 $this->setPlayerDefaultValues($player);
             }
-            if(!$player->isMissingNextGame() && !($this->playerIsDisposable($player) && $excludeDisposable)) {
+            if (!$player->isMissingNextGame() && !($this->playerIsDisposable($player) && $excludeDisposable)) {
                 $team_cost += $player->getValue();
             }
         }
@@ -176,46 +212,48 @@ abstract class AbstractRuleHelper implements RuleHelperInterface {
         return $team_cost;
     }
 
-    public function playerIsDisposable(PlayerVersion $playerVersion):bool {
+    public function playerIsDisposable(PlayerVersion $playerVersion):bool
+    {
         return in_array('disposable', $playerVersion->getSkills());
     }
 
-    /**
-     *
-     */
+    /*****************
+     * PLAYER METHODS
+     ****************/
 
-    public function getTeamAvailablePlayerTypes(Team $team) {
+    /**
+     * @param Team $team
+     * @return array
+     */
+    public function getTeamAvailablePlayerTypes(Team $team)
+    {
         return $this->getAvailablePlayerTypes($team->getRoster());
     }
-    public function getAvailablePlayerTypes(string $roster):array {
+
+    /**
+     * @param string $roster
+     * @return array
+     */
+    public function getAvailablePlayerTypes(string $roster):array
+    {
         return $this->rule['rosters'][$roster]['players'];
     }
-    public function getAvailablePlayerKeyTypes(string $roster):array {
+
+    /**
+     * @param string $roster
+     * @return array
+     */
+    public function getAvailablePlayerKeyTypes(string $roster):array
+    {
         return array_keys($this->getAvailablePlayerTypes($roster));
     }
 
-    /***************
-     * MISC METHODS
-     **************/
-    public function getInjuriesTable():array {
-        return $this->injuries;
-    }
-
-    public function getInjury($key):?object {
-        if (!isset($this->injuries[$key])) {
-            throw new Exception('No Injury found for ' . $key);
-        }
-        return $this->injuries[$key];
-    }
-
-    public function getSppLevel(PlayerVersion $version):?string {
-        foreach($this->rule['experience'] as $start => $level) {
-            if($version->getSpp() < $start) return $last;
-            $last = $level;
-        }
-        return $this->rule['experience'][0];
-    }
-    public function setPlayerDefaultValues(PlayerVersion $version): ?PlayerVersion {
+    /**
+     * @param PlayerVersion $version
+     * @return PlayerVersion|null
+     */
+    public function setPlayerDefaultValues(PlayerVersion $version): ?PlayerVersion
+    {
         /**
          * -characteristics: []
          * -skills: []
@@ -243,5 +281,48 @@ abstract class AbstractRuleHelper implements RuleHelperInterface {
             ->setSppLevel($this->getSppLevel($version));
 
         return $version;
+    }
+
+    /**
+     * @return array
+     */
+    public function getInjuriesTable():array
+    {
+        return $this->injuries;
+    }
+
+    /**
+     * @param $key
+     * @return object|null
+     * @throws Exception
+     */
+    public function getInjury($key):?object
+    {
+        if (!isset($this->injuries[$key])) {
+            throw new Exception('No Injury found for ' . $key);
+        }
+        return $this->injuries[$key];
+    }
+
+    /**************************
+     * PLAYER EVOLUTION METHOD
+     *************************/
+
+    /**
+     * @param PlayerVersion $version
+     * @return string|null
+     */
+    public function getSppLevel(PlayerVersion $version):?string
+    {
+        if ($version->getSpp() >= $this->spp_levels->last()) {
+            return $this->spp_levels->last();
+        } elseif ($this->spp_levels->containsKey($version->getSpp())) {
+            return $this->spp_levels->get($version->getSpp());
+        }
+
+        return $this->spp_levels->first();
+    }
+    public function a()
+    {
     }
 }

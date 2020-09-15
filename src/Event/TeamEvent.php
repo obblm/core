@@ -5,7 +5,8 @@ namespace Obblm\Core\Event;
 use Obblm\Core\Entity\Team;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class TeamEvent extends Event {
+class TeamEvent extends Event
+{
     public const READY = 'team.ready';
     public const NOT_READY = 'team.not.ready';
 

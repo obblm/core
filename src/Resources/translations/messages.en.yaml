@@ -21,6 +21,8 @@ obblm:
       error: There were some errors with your submission
     team:
       create:
+        title: Create a team
+        rule-selector: Create a team for ?
         buttons:
           submit: Create this team and add players & sidelines
       edit:
@@ -54,43 +56,6 @@ obblm:
         number: Number
         type: Type
         name: Name
-    championship:
-      titles:
-        informations: General informations
-        points: Earned Points
-        tiebreaks: Ranking Tie Breakers
-        caochs:
-      fields:
-        name: Name
-        format: Championship format
-        points_per_win: Earned Points per victory
-        points_per_draw: Earned Points per draw
-        points_per_loss: Earned Points per loss
-        tie_break_1: First Tie Breaker
-        tie_break_2: Second Tie Breaker
-        tie_break_3: Third Tie Breaker
-        is_private: Is championship private ?
-        is_locked: Launch the championship ?
-        invitations: Invite people to join this championship
-        current_invitations: Current invitations
-        coach_w_account: Coaches with an account
-        coachs:
-          no_one: No coach
-    invitation:
-      fields:
-        email: Invited email
-    encounter:
-      fields:
-        team_actions: Player actions for %team_name%
-  format:
-    open: Open championship
-    championship: Journey championship
-  tiebreak:
-    injury_take: Taken Injuries -
-    injury_give: Given Injuries +
-    td_take: Taken Touchdowns -
-    td_give: Scored Touchdowns +
-    win_encounter: Win encounters +
 
   emails:
     championship_invitation:
