@@ -27,8 +27,4 @@ rules:
             available_skills_on_double: [ 'p' ]
         options:
           reroll_cost: 70000
-          available_star_players: [ dolfar_longstride, eldril_sidewinder, soaren_hightower, prince_moranion, zara_the_slayer, morg_n_thorg ]
           can_have_apothecary: true
-          can_have_sorcerer: true
-          can_have_igor: false
-          can_have_halfing_kitchener: false

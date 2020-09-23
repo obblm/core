@@ -2,3 +2,6 @@
 /.idea
 /vendor
 /composer.lock
+/node_modules
+/assets/semantic
+/assets/editable-table-master
