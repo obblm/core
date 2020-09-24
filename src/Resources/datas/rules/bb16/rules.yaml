@@ -1,0 +1,217 @@
+rules:
+  bb16:
+    post_bb_2020: false
+    max_team_cost: 1000000
+    sidelines_cost:
+      apothecary: 50000
+      cheerleaders: 10000
+      assistants: 10000
+      popularity: 10000
+    default_team_inducements:
+      babe: true
+      bribe: true
+      extra_apothecary: true
+      extra_training: true
+      igor: false
+      wizard: true
+      halfing_master_chef: true
+    inducements:
+      star_players:
+        cost: ~
+        max: 2
+      babe:
+        cost: 50000
+        max: 2
+      bribe:
+        cost: 100000
+        discounted_cost: 50000
+        max: 3
+      extra_apothecary:
+        cost: 100000
+        only_for_apothecary: true
+        max: 2
+      extra_training:
+        cost: 100000
+        max: 4
+      igor:
+        cost: 100000
+        only_for_no_apothecary: true
+        max: 1
+      wizard:
+        cost: 150000
+        max: 1
+      halfing_master_chef:
+        cost: 300000
+        discounted_cost: 100000
+        max: 1
+    spp_levels:
+      0: rookie
+      6: experienced
+      16: veteran
+      31: emerging_star
+      51: star
+      76: super_star
+      176: legend
+    experience_value_modifiers:
+      new_skill: 20000
+      new_skill_double: 30000
+      move_bonus: 30000
+      average_bonus: 30000
+      agility_bonus: 40000
+      strength_bonus: 50000
+    fields:
+      default:
+        weather:
+          - blizzard
+          - rain
+          - normal
+          - sunny
+          - hot
+    injuries:
+      badly_hurt:
+        from: 11
+        to: 38
+        effects: ~
+      broken_ribs:
+        from: 41
+        effects: [ M ]
+      groin_strain:
+        from: 42
+        effects: [ M ]
+      gouged_eye:
+        from: 43
+        effects: [ M ]
+      broken_jaw:
+        from: 44
+        effects: [ M ]
+      fractured_arm:
+        from: 45
+        effects: [ M ]
+      fractured_leg:
+        from: 46
+        effects: [ M ]
+      smashed_hand:
+        from: 47
+        effects: [ M ]
+      pinched_nerve:
+        from: 48
+        effects: [ M ]
+      damaged_back:
+        from: 51
+        effects: [ M, N ]
+      smashed_knee:
+        from: 52
+        effects: [ M, N ]
+      smashed_hip:
+        from: 53
+        effects: [ M, MA ]
+      smashed_ankle:
+        from: 54
+        effects: [ M, MA ]
+      smashed_concussion:
+        from: 55
+        effects: [ M, AV ]
+      smashed_skull:
+        from: 56
+        effects: [ M, AV ]
+      broken_neck:
+        from: 57
+        effects: [ M, AG ]
+      smashed_collar:
+        from: 58
+        effects: [ M, ST ]
+      dead:
+        from: 61
+        to: 68
+        effects: [ DEAD ]
+    skills:
+      g:
+        - block
+        - dauntless
+        - dirty_player
+        - fend
+        - frenzy
+        - kick
+        - kick_off_return
+        - pass_block
+        - pro
+        - shadowing
+        - strip_ball
+        - sure_hands
+        - tackle
+        - wrestle
+      a:
+        - catch
+        - diving_catch
+        - diving_tackle
+        - dodge
+        - jump_up
+        - leap
+        - side_step
+        - sneaky_git
+        - sprint
+        - sure_feet
+      p:
+        - accurate
+        - dump_off
+        - hail_mary_pass
+        - leader
+        - nerves_of_steel
+        - pass
+        - safe_throw
+      s:
+        - break_tackle
+        - grab
+        - guard
+        - juggernaut
+        - mighty_blow
+        - multiple_block
+        - piling_on
+        - stand_firm
+        - strong_arm
+        - thick_skull
+      m:
+        - big_hand
+        - claw_claws
+        - disturbing_presence
+        - extra_arms
+        - foul_appearance
+        - horns
+        - prehensile_tail
+        - tentacles
+        - two_heads
+        - very_long_legs
+      e:
+        - always_hungry
+        - animosity
+        - ball_chain
+        - blood_lust
+        - bombardier
+        - bone_head
+        - chainsaw
+        - decay
+        - disposable
+        - fan_favourite
+        - hypnotic_gaze
+        - loner
+        - no_hands
+        - nurgle_rot
+        - really_stupid
+        - regeneration
+        - right_stuff
+        - secret_weapon
+        - stab
+        - stakes
+        - stunty
+        - swarming
+        - swoop
+        - take_root
+        - throw_team_mate
+        - timber
+        - titchy
+        - wild_animal
+      c:
+        - move_increase
+        - agility_increase
+        - armor_increase
+        - strength_increase

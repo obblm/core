@@ -2,7 +2,7 @@
 
 namespace Obblm\Core\Entity;
 
-use Obblm\Core\Helper\Rule\CanHaveRuleInterface;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Obblm\Core\Repository\RuleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -25,6 +25,11 @@ class Rule
      * @ORM\Column(type="string", unique=true, length=255)
      */
     private $rule_key;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $template;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -53,6 +58,7 @@ class Rule
 
     /**
      * @ORM\OneToMany(targetEntity=Team::class, mappedBy="rule")
+     * @Ignore()
      */
     private $teams;
 
@@ -78,6 +84,18 @@ class Rule
     public function setRuleKey(string $rule_key): self
     {
         $this->rule_key = $rule_key;
+
+        return $this;
+    }
+
+    public function getTemplate(): ?string
+    {
+        return $this->template;
+    }
+
+    public function setTemplate(string $template): self
+    {
+        $this->template = $template;
 
         return $this;
     }
@@ -155,6 +173,7 @@ class Rule
 
     /**
      * @return Collection|Team[]
+     * @Ignore()
      */
     public function getTeams(): Collection
     {

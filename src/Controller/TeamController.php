@@ -82,6 +82,7 @@ class TeamController extends AbstractTeamController
             $version = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $dispatcher->dispatch(new TeamVersionEvent($version), TeamVersionEvent::PRE_SAVE);
+            $dispatcher->dispatch(new TeamVersionEvent($version), TeamVersionEvent::TREASURE_BASE);
             $em->persist($version);
             $em->flush();
             return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);

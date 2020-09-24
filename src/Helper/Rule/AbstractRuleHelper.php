@@ -2,29 +2,28 @@
 
 namespace Obblm\Core\Helper\Rule;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Exception;
+use Doctrine\Common\Collections\Criteria;
+use Obblm\Core\Contracts\RuleHelperInterface;
+use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Rule;
 use Obblm\Core\Entity\Team;
-use Obblm\Core\Entity\TeamVersion;
-use Obblm\Core\Exception\NoVersionException;
 use Obblm\Core\Form\Player\ActionType;
 use Obblm\Core\Form\Player\InjuryType;
-use Obblm\Core\Helper\RuleHelper;
-use Obblm\Core\Service\PlayerService;
+use Obblm\Core\Helper\CoreTranslation;
+use Obblm\Core\Contracts\InducementInterface;
+use Obblm\Core\Helper\Rule\Inducement\StarPlayer;
+use Obblm\Core\Helper\Rule\Traits\AbstractInducementRuleTrait;
+use Obblm\Core\Helper\Rule\Traits\AbstractPlayerRuleTrait;
+use Obblm\Core\Helper\Rule\Traits\AbstractTeamRuleTrait;
 use Obblm\Core\Traits\ClassNameAsKeyTrait;
-use Obblm\Core\Validator\Constraints\TeamValue;
 
-abstract class AbstractRuleHelper implements RuleHelperInterface
+abstract class AbstractRuleHelper extends RuleConfigBuilder implements RuleHelperInterface
 {
     use ClassNameAsKeyTrait;
 
     protected $attachedRule;
     protected $rule = [];
-    protected $injuries = [];
-    /** @var $spp_levels ArrayCollection */
-    protected $spp_levels = null;
 
     /****************
      * COMPLIER PASS
@@ -35,51 +34,49 @@ abstract class AbstractRuleHelper implements RuleHelperInterface
      */
     public function attachRule(Rule $rule):RuleHelperInterface
     {
-        $this->attachedRule = $rule;
-        $this->rule = $rule->getRule();
-        $this->prepareInjuriesTable();
-        $this->prepareSppTable();
+        $this->setAttachedRule($rule);
+        $this->build($rule->getRuleKey(), $rule->getRule());
         return $this;
     }
 
-    /**
-     * @return Rule
-     */
-    public function getAttachedRule():Rule
+    public function getAvailableStarPlayers(Team $team):array
+    {
+        $criteria = Criteria::create();
+        $criteria->where(Criteria::expr()->andX(
+            $this->getInducementExpression([
+                'type' => 'star_players',
+                'roster' => $team->getRoster()
+            ])
+        ));
+        return $this->getInducementTable()->matching($criteria)->toArray();
+    }
+
+    public function getTransformedInducementsFor(string $roster)
+    {
+        $table = $this->getInducementTable();
+        foreach ($table as $inducement) {
+            if ($roster == 'halfling') {
+                $inducement->setValue(10000);
+            }
+        }
+
+        return $table;
+    }
+
+    /**********
+     * CACHING
+     *********/
+
+    public function getAttachedRule():?Rule
     {
         return $this->attachedRule;
     }
 
-    protected function prepareInjuriesTable()
+    public function setAttachedRule(Rule $rule):RuleHelperInterface
     {
-        foreach ($this->rule['injuries'] as $key => $injury) {
-            $label = RuleHelper::composeTranslationInjuryKey($this->getAttachedRule()->getRuleKey(), $key);
-            $effect_label = RuleHelper::composeTranslationInjuryEffect($this->getAttachedRule()->getRuleKey(), $key);
-            if (isset($injury['to'])) {
-                for ($i = $injury['from']; $i <= $injury['to']; $i++) {
-                    $this->injuries[$i] = (object) ['value' => $i, 'label' => $label, 'effect_label' => $effect_label, 'effects' => $injury['effects']];
-                }
-            } else {
-                $this->injuries[$injury['from']] = (object) ['value' => $injury['from'], 'label' => $label, 'effect_label' => $effect_label, 'effects' => $injury['effects']];
-            }
-        }
-    }
-    protected function prepareSppTable()
-    {
-        $spps = new ArrayCollection($this->rule['experience']);
-        foreach ($spps as $from => $level) {
-            $to = $spps->next();
-            if ($to) {
-                for ($i = $from; $i < $spps->indexOf($to); $i++) {
-                    if (!isset($spps[$i])) {
-                        $spps[$i] = $level;
-                    }
-                }
-            }
-        }
-        $spps = $spps->toArray();
-        ksort($spps);
-        $this->spp_levels = new ArrayCollection($spps);
+        $this->attachedRule = $rule;
+        $this->rule = $rule->getRule();
+        return $this;
     }
 
     /**********************
@@ -110,219 +107,70 @@ abstract class AbstractRuleHelper implements RuleHelperInterface
         return $this->getKey();
     }
 
-    /****************************
-     * TEAM INFORMATION METHODS
-     ***************************/
-    /**
-     * Get Max Team Cost
-     *
-     * @return int
-     */
-    public function getMaxTeamCost():int
-    {
-        return ($this->rule['max_team_cost']) ? $this->rule['max_team_cost'] : TeamValue::LIMIT;
-    }
+    use AbstractTeamRuleTrait;
 
-    /**
-     * @param Team $team
-     * @return int
-     * @throws \Exception
-     */
-    public function getRerollCost(Team $team):int
-    {
-        return (int) $this->rule['rosters'][$team->getRoster()]['options']['reroll_cost'];
-    }
+    use AbstractPlayerRuleTrait;
 
-    /**
-     * @param Team $team
-     * @return int
-     */
-    public function getApothecaryCost(Team $team):int
+    /***************
+     * MISC METHODS
+     **************/
+    public function getWeatherChoices():array
     {
-        return (int) $this->rule['sidelines_cost']['apothecary'];
-    }
-
-    /**
-     * @param Team $team
-     * @return int
-     */
-    public function getCheerleadersCost(Team $team):int
-    {
-        return (int) $this->rule['sidelines_cost']['cheerleaders'];
-    }
-
-    /**
-     * @param Team $team
-     * @return int
-     */
-    public function getAssistantsCost(Team $team):int
-    {
-        return (int) $this->rule['sidelines_cost']['assistants'];
-    }
-
-    /**
-     * @param Team $team
-     * @return int
-     */
-    public function getPopularityCost(Team $team):int
-    {
-        return (int) $this->rule['sidelines_cost']['popularity'];
-    }
-
-    /**
-     * @param Team $team
-     * @return bool
-     * @throws \Exception
-     */
-    public function couldHaveApothecary(Team $team):bool
-    {
-        return (bool) $this->rule['rosters'][$team->getRoster()]['options']['can_have_apothecary'];
-    }
-
-    public function calculateTeamRate(TeamVersion $version):?int
-    {
-        return $this->calculateTeamValue($version) / 10000;
-    }
-
-    public function calculateTeamValue(TeamVersion $version, bool $excludeDisposable = false):int
-    {
-        $team_cost = 0;
-
-        // Players
-        foreach ($version->getTeam()->getNotDeadPlayers() as $basePlayer) {
-            $player = (new PlayerVersion());
-            try {
-                $player = PlayerService::getLastVersion($basePlayer);
-            } catch (NoVersionException $e) { // It's a new player !
-                $basePlayer->addVersion($player);
-                $version->addPlayerVersion($player);
-                $this->setPlayerDefaultValues($player);
-            }
-            if (!$player->isMissingNextGame() && !($this->playerIsDisposable($player) && $excludeDisposable)) {
-                $team_cost += $player->getValue();
+        $weather = [];
+        $rule_key = $this->getAttachedRule()->getRuleKey();
+        $fields = $this->rule['fields'];
+        foreach ($fields as $field_key => $field) {
+            $field_label = CoreTranslation::getFieldKey($rule_key, $field_key);
+            $weather[$field_label] = [];
+            foreach ($field['weather'] as $field_weather) {
+                $label = CoreTranslation::getWeatherKey($rule_key, $field_key, $field_weather);
+                $value = join(CoreTranslation::TRANSLATION_GLUE, [$rule_key, 'default', $field_weather]);
+                $weather[$field_label][$label] = $value;
             }
         }
-        // Sidelines
-        $team_cost += $version->getRerolls() * $this->getRerollCost($version->getTeam());
-        $team_cost += $version->getAssistants() * $this->getAssistantsCost($version->getTeam());
-        $team_cost += $version->getCheerleaders() * $this->getCheerleadersCost($version->getTeam());
-        $team_cost += $version->getPopularity() * $this->getPopularityCost($version->getTeam());
-        $team_cost += ($version->getApothecary()) ? $this->getApothecaryCost($version->getTeam()) : 0;
-
-        return $team_cost;
+        return $weather;
     }
 
-    public function playerIsDisposable(PlayerVersion $playerVersion):bool
+    public function createInducementAsPlayer(InducementInterface $inducement, $number = 0):?Player
     {
-        return in_array('disposable', $playerVersion->getSkills());
-    }
-
-    /*****************
-     * PLAYER METHODS
-     ****************/
-
-    /**
-     * @param Team $team
-     * @return array
-     */
-    public function getTeamAvailablePlayerTypes(Team $team)
-    {
-        return $this->getAvailablePlayerTypes($team->getRoster());
-    }
-
-    /**
-     * @param string $roster
-     * @return array
-     */
-    public function getAvailablePlayerTypes(string $roster):array
-    {
-        return $this->rule['rosters'][$roster]['players'];
-    }
-
-    /**
-     * @param string $roster
-     * @return array
-     */
-    public function getAvailablePlayerKeyTypes(string $roster):array
-    {
-        return array_keys($this->getAvailablePlayerTypes($roster));
-    }
-
-    /**
-     * @param PlayerVersion $version
-     * @return PlayerVersion|null
-     */
-    public function setPlayerDefaultValues(PlayerVersion $version): ?PlayerVersion
-    {
-        /**
-         * -characteristics: []
-         * -skills: []
-         * -spp_level: null
-         * -value: null
-         */
-        list($rule_key, $roster, $type) = explode('.', $version->getPlayer()->getType());
-        $base = $this->getAttachedRule()->getRule()['rosters'][$roster]['players'][$type];
-
-        $version->setCharacteristics([
-            'ma' => $base['ma'],
-            'st' => $base['st'],
-            'ag' => $base['ag'],
-            'av' => $base['av']
-        ])
-            ->setActions([
-                'td' => 0,
-                'cas' => 0,
-                'pas' => 0,
-                'int' => 0,
-                'mvp' => 0,
-            ])
-            ->setSkills(($base['skills'] ?? []))
-            ->setValue($base['cost'])
-            ->setSppLevel($this->getSppLevel($version));
-
-        return $version;
-    }
-
-    /**
-     * @return array
-     */
-    public function getInjuriesTable():array
-    {
-        return $this->injuries;
-    }
-
-    /**
-     * @param $key
-     * @return object|null
-     * @throws Exception
-     */
-    public function getInjury($key):?object
-    {
-        if (!isset($this->injuries[$key])) {
-            throw new Exception('No Injury found for ' . $key);
+        if (!$inducement instanceof StarPlayer) {
+            return null;
         }
-        return $this->injuries[$key];
-    }
-
-    /**************************
-     * PLAYER EVOLUTION METHOD
-     *************************/
-
-    /**
-     * @param PlayerVersion $version
-     * @return string|null
-     */
-    public function getSppLevel(PlayerVersion $version):?string
-    {
-        if ($version->getSpp() >= $this->spp_levels->last()) {
-            return $this->spp_levels->last();
-        } elseif ($this->spp_levels->containsKey($version->getSpp())) {
-            return $this->spp_levels->get($version->getSpp());
+        $version = (new PlayerVersion())
+            ->setCharacteristics($inducement->getCharacteristics())
+            ->setValue($inducement->getValue());
+        if ($inducement->getSkills()) {
+            $version->setSkills($inducement->getSkills());
         }
+        $player = (new Player())
+            ->setNumber($number)
+            ->setType($inducement->getType()->getTranslationKey())
+            ->setName($inducement->getTranslationKey())
+            ->addVersion($version);
+        return $player;
+    }
 
-        return $this->spp_levels->first();
-    }
-    public function a()
+    public function createStarPlayerAsPlayer(string $key, int $number):Player
     {
+        $rule_key = $this->getAttachedRule()->getRuleKey();
+
+        $star_player = $this->getStarPlayer($key);
+        if (isset($star_player['multi_parts']) && $star_player['multi_parts']) {
+            throw new \Exception('You cannot create a player with a multiple parts InducementInterface');
+        }
+        $version = (new PlayerVersion())
+            ->setCharacteristics($star_player['characteristics'])
+            ->setValue($star_player['cost']);
+        if ($star_player['skills']) {
+            $version->setSkills($star_player['skills']);
+        }
+        $player = (new Player())
+            ->setNumber($number)
+            ->setType(CoreTranslation::getStarPlayerTitle($rule_key))
+            ->setName(CoreTranslation::getStarPlayerName($rule_key, $key))
+            ->addVersion($version);
+        return $player;
     }
+
+    use AbstractInducementRuleTrait;
 }

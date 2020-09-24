@@ -44,7 +44,7 @@ rules:
         cost: 300000
         discount_cost: 100000
         max: 1
-    experience:
+    spp_levels:
       0: rookie
       6: experienced
       16: veteran
@@ -74,56 +74,56 @@ rules:
         effects: ~
       broken_ribs:
         from: 41
-        effects: [ 'M' ]
+        effects: [ M ]
       groin_strain:
         from: 42
-        effects: [ 'M' ]
+        effects: [ M ]
       gouged_eye:
         from: 43
-        effects: [ 'M' ]
+        effects: [ M ]
       broken_jaw:
         from: 44
-        effects: [ 'M' ]
+        effects: [ M ]
       fractured_arm:
         from: 45
-        effects: [ 'M' ]
+        effects: [ M ]
       fractured_leg:
         from: 46
-        effects: [ 'M' ]
+        effects: [ M ]
       smashed_hand:
         from: 47
-        effects: [ 'M' ]
+        effects: [ M ]
       pinched_nerve:
         from: 48
-        effects: [ 'M' ]
+        effects: [ M ]
       damaged_back:
         from: 51
-        effects: [ 'M', 'N' ]
+        effects: [ M, N ]
       smashed_knee:
         from: 52
-        effects: [ 'M', 'N' ]
+        effects: [ M, N ]
       smashed_hip:
         from: 53
-        effects: [ 'M', 'MA' ]
+        effects: [ M, MA ]
       smashed_ankle:
         from: 54
-        effects: [ 'M', 'MA' ]
+        effects: [ M, MA ]
       smashed_concussion:
         from: 55
-        effects: [ 'M', 'AV' ]
+        effects: [ M, AV ]
       smashed_skull:
         from: 56
-        effects: [ 'M', 'AV' ]
+        effects: [ M, AV ]
       broken_neck:
         from: 57
-        effects: [ 'M', 'AG' ]
+        effects: [ M, AG ]
       smashed_collar:
         from: 58
-        effects: [ 'M', 'ST' ]
+        effects: [ M, ST ]
       dead:
         from: 61
         to: 68
-        effects: [ 'DEAD' ]
+        effects: [ DEAD ]
     skills:
       g:
         - block

@@ -5,7 +5,7 @@ namespace Obblm\Core\Exception;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\Team;
 
-class NoVersionException extends \Exception
+class NoVersionException extends \Exception implements ExceptionInterface
 {
     public function __construct(object $on = null)
     {

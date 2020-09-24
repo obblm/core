@@ -7,6 +7,7 @@ obblm:
       title: OBBLM
       dashboard: Dashboard
       my_teams: My teams
+      rules: Rules
       admin:
         title: Admin
         rules: Rules

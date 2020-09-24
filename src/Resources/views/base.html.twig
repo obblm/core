@@ -7,7 +7,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
-        {{ encore_entry_link_tags('app') }}
+        <link rel="stylesheet" href="{{ asset('/bundles/obblmcore/build/vendors~obblm-core.css') }}">
+        <link rel="stylesheet" href="{{ asset('/bundles/obblmcore/build/obblm-core.css') }}">
     {% endblock %}
     <script>
         window.user = {{ app.user|json_encode()|raw }};
@@ -21,7 +22,9 @@
 <div class="pusher"><div class="ui main container">{% block body %}{% endblock %}</div></div>
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    {{ encore_entry_script_tags('app') }}
+    <script src="{{ asset('/bundles/obblmcore/build/runtime.js') }}"></script>
+    <script src="{{ asset('/bundles/obblmcore/build/vendors~obblm-core.js') }}"></script>
+    <script src="{{ asset('/bundles/obblmcore/build/obblm-core.js') }}"></script>
 {% endblock %}
 </body>
 </html>

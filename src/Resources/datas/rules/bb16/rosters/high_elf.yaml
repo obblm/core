@@ -1,0 +1,57 @@
+rules:
+  bb16:
+    rosters:
+      high_elf: # Teams of legend
+        players:
+          lineman:
+            min: 0
+            max: 16
+            characteristics:
+              ma: 6
+              st: 3
+              ag: 4
+              av: 8
+            cost: 70000
+            available_skills: [ g, a ]
+            available_skills_on_double: [ s, p ]
+            is_journeyman: true
+          thrower:
+            min: 0
+            max: 2
+            characteristics:
+              ma: 6
+              st: 3
+              ag: 4
+              av: 8
+            skills: [ pass, safe_throw ]
+            cost: 90000
+            available_skills: [ g, a, p ]
+            available_skills_on_double: [ s ]
+          catcher:
+            min: 0
+            max: 4
+            characteristics:
+              ma: 8
+              st: 3
+              ag: 4
+              av: 7
+            skills: [ catch ]
+            cost: 90000
+            available_skills: [ g, a ]
+            available_skills_on_double: [ s, p ]
+          blitzer:
+            min: 0
+            max: 2
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 4
+              av: 8
+            skills: [ block ]
+            cost: 100000
+            available_skills: [ g, a ]
+            available_skills_on_double: [ s, p ]
+        reroll_cost: 50000
+        options:
+          can_have_apothecary: true
+

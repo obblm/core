@@ -4,11 +4,15 @@ namespace Obblm\Core\Command;
 
 use Obblm\Core\Entity\Rule;
 use Doctrine\ORM\EntityManagerInterface;
+use Obblm\Core\Helper\CoreTranslation;
+use Obblm\Core\Helper\Rule\Config\ConfigResolver;
+use Obblm\Core\Helper\Rule\Config\RuleConfigResolver;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
 use Symfony\Component\Yaml\Yaml;
 
 class RulesLoaderCommand extends Command
@@ -55,20 +59,31 @@ class RulesLoaderCommand extends Command
                         $io->error("The rules.{$key} rule does not exist in {$ruleDirectory->getPathname()} directory.");
                     }
                     $rule_array = $rules['rules'][$key];
-                    $rule = $this->em->getRepository(Rule::class)->findOneBy(['rule_key' => $key]);
-                    if (!$rule) {
-                        $rule = (new Rule())
-                            ->setRuleKey($key)
-                            ->setReadOnly(true);
+
+                    try {
+                        $treeResolver = new ConfigResolver(new RuleConfigResolver());
+                        $rule_array = $treeResolver->resolve($rule_array);
+
+
+                        $rule = $this->em->getRepository(Rule::class)->findOneBy(['rule_key' => $key]);
+                        if (!$rule) {
+                            $rule = (new Rule())
+                                ->setRuleKey($key)
+                                ->setReadOnly(true);
+                        }
+                        ksort($rule_array['rosters']);
+                        $rule
+                            ->setName(CoreTranslation::getRuleTitle($key))
+                            ->setPostBb2020($rule_array['post_bb_2020'] ?? false)
+                            ->setTemplate($rule_array['template'] ?? 'base')
+                            ->setRule($rule_array);
+                        $this->em->persist($rule);
+                        $io->progressFinish();
                     }
-                    ksort($rule_array['rosters']);
-                    $rule
-                        ->setName($key)
-                        ->setPostBb2020($rule_array['post_bb_2020'] ?? false)
-                        ->setRule($rule_array)
-                    ;
-                    $this->em->persist($rule);
-                    $io->progressFinish();
+                    catch (InvalidArgumentException $e) {
+                        $io->progressFinish();
+                        $io->error("The rule.{$key} is not valid, resolver said :\n{$e->getMessage()}");
+                    }
                 } else {
                     $io->warning("There is no rule files in {$ruleDirectory->getPathname()} directory.");
                 }

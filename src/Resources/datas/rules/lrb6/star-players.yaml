@@ -8,8 +8,8 @@ rules:
           ma: 6
           st: 3
           ag: 3
-          av: 7
-        skills: [ 'loner', 'hail_mary_pass', 'pass', 'secret_weapon', 'strong_arm', 'sure_hands', 'thick_skull' ]
+          av: 8
+        skills: [ loner, hail_mary_pass, pass, secret_weapon, strong_arm, sure_hands, thick_skull ]
       bertha_bigfist:
         cost: 290000
         rosters: [ amazon, halfling, ogre ]
@@ -18,7 +18,7 @@ rules:
           st: 5
           ag: 2
           av: 9
-        skills: [ 'loner', 'bone_head', 'break_tackle', 'dodge', 'mighty_blow', 'thick_skull', 'throw_team_mate' ]
+        skills: [ loner, bone_head, break_tackle, dodge, mighty_blow, thick_skull, throw_team_mate ]
       brick_farth_grotty:
         cost: 290000
         rosters: [ chaos, nurgle, ogre ]
@@ -29,14 +29,14 @@ rules:
               st: 5
               ag: 2
               av: 9
-            skills: [ 'loner', 'bone_head', 'mighty_blow', 'nerves_of_steel', 'strong_arm', 'thick_skull', 'throw_team_mate' ]
+            skills: [ loner, bone_head, mighty_blow, nerves_of_steel, strong_arm, thick_skull, throw_team_mate ]
           grotty:
             characteristics:
               ma: 6
               st: 2
               ag: 4
               av: 7
-            skills: [ 'loner', 'dodge', 'right_stuff', 'stunty' ]
+            skills: [ loner, dodge, right_stuff, stunty ]
       boomer_dribblesnot:
         cost: 60000
         rosters: [ chaos_pact, goblin, ogre, orc, underworld ]
@@ -45,7 +45,7 @@ rules:
           st: 2
           ag: 3
           av: 7
-        skills: [ 'loner', 'accurate', 'bombardier', 'dodge', 'right_stuff', 'secret_weapon', 'stunty' ]
+        skills: [ loner, accurate, bombardier, dodge, right_stuff, secret_weapon, stunty ]
       boomer_eziasson:
         cost: 60000
         rosters: [ dwarf, norse ]
@@ -54,7 +54,7 @@ rules:
           st: 3
           ag: 2
           av: 9
-        skills: [ 'loner', 'accurate', 'block', 'bombardier', 'secret_weapon', 'thick_skull' ]
+        skills: [ loner, accurate, block, bombardier, secret_weapon, thick_skull ]
       count_luthor_von_drakenborg:
         cost: 390000
         rosters: [ necromantic, undead, vampire ]
@@ -63,7 +63,7 @@ rules:
           st: 5
           ag: 4
           av: 9
-        skills: [ 'loner', 'block', 'hypnotic_gaze', 'regeneration', 'side_step' ]
+        skills: [ loner, block, hypnotic_gaze, regeneration, side_step ]
       crazy_igor:
         cost: 120000
         rosters: [ chaos_pact, vampire ]
@@ -72,7 +72,7 @@ rules:
           st: 3
           ag: 3
           av: 8
-        skills: [ 'loner', 'dauntless', 'regeneration', 'thick_skull' ]
+        skills: [ loner, dauntless, regeneration, thick_skull ]
       deeproot_strongbranch:
         cost: 300000
         rosters: [ halfling ]
@@ -81,25 +81,25 @@ rules:
           st: 7
           ag: 1
           av: 10
-        skills: [ 'loner', 'block', 'mighty_blow', 'stand_firm', 'thick_skull', 'throw_team_mate' ]
+        skills: [ loner, block, mighty_blow, stand_firm, strong_arm, thick_skull, throw_team_mate ]
       dolfar_longstride:
         cost: 150000
-        rosters: [ elf_union, high_elf, wood_elf ]
+        rosters: [ elf, high_elf, wood_elf ]
         characteristics:
           ma: 7
           st: 3
           ag: 4
           av: 7
-        skills: [ 'loner', 'diving_catch', 'hail_mary_pass', 'kick', 'kick_off_return', 'pass_block' ]
+        skills: [ loner, diving_catch, hail_mary_pass, kick, kick_off_return, pass_block ]
       eldril_sidewinder:
         cost: 200000
-        rosters: [ dark_elf, elf_union, high_elf, wood_elf ]
+        rosters: [ dark_elf, elf, high_elf, wood_elf ]
         characteristics:
           ma: 8
           st: 3
           ag: 4
           av: 7
-        skills: [ 'loner', 'catch', 'dodge', 'hypnotic_gaze', 'nerves_of_steel', 'pass_block' ]
+        skills: [ loner, catch, dodge, hypnotic_gaze, nerves_of_steel, pass_block ]
       fezglitch:
         cost: 100000
         rosters: [ skaven, underworld ]
@@ -108,7 +108,7 @@ rules:
           st: 7
           ag: 3
           av: 7
-        skills: [ 'loner', 'ball_chain', 'disturbing_presence', 'foul_appearance', 'no_hands', 'secret_weapon' ]
+        skills: [ loner, ball_chain, disturbing_presence, foul_appearance, no_hands, secret_weapon ]
       flint_churnblade:
         cost: 130000
         rosters: [ dwarf ]
@@ -117,7 +117,7 @@ rules:
           st: 3
           ag: 2
           av: 8
-        skills: [ 'loner', 'block', 'chainsaw', 'secret_weapon', 'thick_skull' ]
+        skills: [ loner, block, chainsaw, secret_weapon, thick_skull ]
       fungus_the_loon:
         cost: 80000
         rosters: [ goblin ]
@@ -126,7 +126,7 @@ rules:
           st: 7
           ag: 3
           av: 7
-        skills: [ 'loner', 'ball_chain', 'mighty_blow', 'no_hands', 'secret_weapon', 'stunty' ]
+        skills: [ loner, ball_chain, mighty_blow, no_hands, secret_weapon, stunty ]
       glart_smashrip_jr:
         cost: 210000
         rosters: [ skaven, underworld ]
@@ -135,7 +135,7 @@ rules:
           st: 4
           ag: 3
           av: 9
-        skills: [ 'loner', 'block', 'claw_claws', 'juggernaut' ]
+        skills: [ loner, block, claw_claws, juggernaut ]
       grashnak_blackhoof:
         cost: 310000
         rosters: [ chaos, chaos_dwarf, nurgle ]
@@ -144,7 +144,7 @@ rules:
           st: 6
           ag: 2
           av: 8
-        skills: [ 'loner', 'frenzy', 'horns', 'mighty_blow', 'thick_skull' ]
+        skills: [ loner, frenzy, horns, mighty_blow, thick_skull ]
       griff_oberwald:
         cost: 320000
         rosters: [ human ]
@@ -153,7 +153,7 @@ rules:
           st: 4
           ag: 4
           av: 8
-        skills: [ 'loner', 'block', 'dodge', 'fend', 'sprint', 'sure_feet' ]
+        skills: [ loner, block, dodge, fend, sprint, sure_feet ]
       grim_ironjaw:
         cost: 220000
         rosters: [ dwarf ]
@@ -162,7 +162,7 @@ rules:
           st: 4
           ag: 3
           av: 8
-        skills: [ 'loner', 'block', 'dauntless', 'frenzy', 'multiple_block', 'thick_skull' ]
+        skills: [ loner, block, dauntless, frenzy, multiple_block, thick_skull ]
       hack_enslash:
         cost: 120000
         rosters: [ khemri, necromantic, undead ]
@@ -171,7 +171,7 @@ rules:
           st: 3
           ag: 2
           av: 7
-        skills: [ 'loner', 'chainsaw', 'regeneration', 'secret_weapon', 'side_step' ]
+        skills: [ loner, chainsaw, regeneration, secret_weapon, side_step ]
       hakflem_skuttlespike:
         cost: 200000
         rosters: [ skaven ]
@@ -180,7 +180,7 @@ rules:
           st: 3
           ag: 4
           av: 7
-        skills: [ 'loner', 'dodge', 'extra_arms', 'prehensile_tail', 'two_heads' ]
+        skills: [ loner, dodge, extra_arms, prehensile_tail, two_heads ]
       headsplitter:
         cost: 340000
         rosters: [ skaven ]
@@ -189,7 +189,7 @@ rules:
           st: 6
           ag: 3
           av: 8
-        skills: [ 'loner', 'frenzy', 'mighty_blow', 'prehensile_tail' ]
+        skills: [ loner, frenzy, mighty_blow, prehensile_tail ]
       helmut_wulf:
         cost: 110000
         rosters: [ amazon, human, lizardmen, norse, slann, vampire ]
@@ -198,7 +198,7 @@ rules:
           st: 3
           ag: 3
           av: 8
-        skills: [ 'loner', 'chainsaw', 'secret_weapon', 'stand_firm' ]
+        skills: [ loner, chainsaw, secret_weapon, stand_firm ]
       hemlock:
         cost: 170000
         rosters: [ lizardmen, slann ]
@@ -207,7 +207,7 @@ rules:
           st: 2
           ag: 3
           av: 7
-        skills: [ 'loner', 'block', 'dodge', 'side_step', 'jump_up', 'stab', 'stunty' ]
+        skills: [ loner, block, dodge, side_step, jump_up, stab, stunty ]
       horkon_heartripper:
         cost: 210000
         rosters: [ dark_elf ]
@@ -216,7 +216,7 @@ rules:
           st: 3
           ag: 4
           av: 7
-        skills: [ 'loner', 'dodge', 'leap', 'multiple_block', 'shadowing', 'stab' ]
+        skills: [ loner, dodge, leap, multiple_block, shadowing, stab ]
       hthark_the_unstoppable:
         cost: 330000
         rosters: [ chaos_dwarf ]
@@ -225,16 +225,16 @@ rules:
           st: 5
           ag: 2
           av: 9
-        skills: [ 'loner', 'block', 'break_tackle', 'juggernaut', 'sprint', 'sure_feet', 'thick_skull' ]
+        skills: [ loner, block, break_tackle, juggernaut, sprint, sure_feet, thick_skull ]
       hubris_rakarth:
         cost: 260000
-        rosters: [ dark_elf, elf_union ]
+        rosters: [ dark_elf, elf ]
         characteristics:
           ma: 7
           st: 4
           ag: 4
           av: 8
-        skills: [ 'loner', 'block', 'dirty_player', 'jump_up', 'mighty_blow', 'strip_ball' ]
+        skills: [ loner, block, dirty_player, jump_up, mighty_blow, strip_ball ]
       humerus_carpal:
         cost: 130000
         rosters: [ khemri ]
@@ -243,7 +243,7 @@ rules:
           st: 2
           ag: 3
           av: 7
-        skills: [ 'loner', 'catch', 'dodge', 'regeneration', 'nerves_of_steel' ]
+        skills: [ loner, catch, dodge, regeneration, nerves_of_steel ]
       icepelt_hammerblow:
         cost: 330000
         rosters: [ norse ]
@@ -252,7 +252,7 @@ rules:
           st: 6
           ag: 1
           av: 8
-        skills: [ 'loner', 'claw_claws', 'disturbing_presence', 'frenzy', 'regeneration', 'thick_skull' ]
+        skills: [ loner, claw_claws, disturbing_presence, frenzy, regeneration, thick_skull ]
       ithaca_benoin:
         cost: 220000
         rosters: [ dark_elf, khemri ]
@@ -261,7 +261,7 @@ rules:
           st: 3
           ag: 3
           av: 7
-        skills: [ 'loner', 'accurate', 'dump_off', 'nerves_of_steel', 'pass', 'regeneration', 'sure_hands' ]
+        skills: [ loner, accurate, dump_off, nerves_of_steel, pass, regeneration, sure_hands ]
       j_earlice:
         cost: 180000
         rosters: [ necromantic, undead, vampire ]
@@ -270,16 +270,16 @@ rules:
           st: 3
           ag: 3
           av: 7
-        skills: [ 'loner', 'catch', 'diving_catch', 'dodge', 'sprint' ]
+        skills: [ loner, catch, diving_catch, dodge, sprint ]
       jordell_freshbreeze:
         cost: 260000
-        rosters: [ elf_union, wood_elf ]
+        rosters: [ elf, wood_elf ]
         characteristics:
           ma: 8
           st: 3
           ag: 5
           av: 7
-        skills: [ 'loner', 'block', 'diving_catch', 'dodge', 'leap', 'side_step' ]
+        skills: [ loner, block, diving_catch, dodge, leap, side_step ]
       lewdgrip_whiparm:
         cost: 150000
         rosters: [ chaos, chaos_pact, nurgle ]
@@ -288,7 +288,7 @@ rules:
           st: 3
           ag: 3
           av: 9
-        skills: [ 'loner', 'pass', 'strong_arm', 'sure_hands', 'tentacles' ]
+        skills: [ loner, pass, strong_arm, sure_hands, tentacles ]
       lord_borak:
         cost: 300000
         rosters: [ chaos, nurgle ]
@@ -297,7 +297,7 @@ rules:
           st: 5
           ag: 3
           av: 9
-        skills: [ 'loner', 'block', 'dirty_player', 'mighty_blow' ]
+        skills: [ loner, block, dirty_player, mighty_blow ]
       lottabottol:
         cost: 220000
         rosters: [ lizardmen, slann ]
@@ -306,7 +306,7 @@ rules:
           st: 3
           ag: 3
           av: 8
-        skills: [ 'loner', 'catch', 'diving_tackle', 'jump_up', 'leap', 'pass_block', 'shadowing', 'very_long_legs' ]
+        skills: [ loner, catch, diving_tackle, jump_up, leap, pass_block, shadowing, very_long_legs ]
       max_spleenripper:
         cost: 130000
         rosters: [ chaos, nurgle ]
@@ -315,7 +315,7 @@ rules:
           st: 4
           ag: 3
           av: 8
-        skills: [ 'loner','chainsaw', 'secret_weapon' ]
+        skills: [ loner,chainsaw, secret_weapon ]
       mighty_zug:
         cost: 260000
         rosters: [ human ]
@@ -324,7 +324,7 @@ rules:
           st: 5
           ag: 2
           av: 9
-        skills: [ 'loner', 'block', 'mighty_blow' ]
+        skills: [ loner, block, mighty_blow ]
       morg_n_thorg:
         cost: 430000
         rosters:
@@ -334,7 +334,7 @@ rules:
           - chaos_pact
           - dark_elf
           - dwarf
-          - elf_union
+          - elf
           - goblin
           - halfling
           - high_elf
@@ -354,7 +354,7 @@ rules:
           st: 6
           ag: 3
           av: 10
-        skills: [ 'loner', 'block', 'mighty_blow', 'thick_skull', 'throw_team_mate' ]
+        skills: [ loner, block, mighty_blow, thick_skull, throw_team_mate ]
       nobbla_blackwart:
         cost: 130000
         rosters: [ chaos_dwarf, goblin, ogre, underworld ]
@@ -363,16 +363,16 @@ rules:
           st: 2
           ag: 3
           av: 7
-        skills: [ 'loner', 'block', 'dodge', 'chainsaw', 'secret_weapon', 'stunty' ]
+        skills: [ loner, block, dodge, chainsaw, secret_weapon, stunty ]
       prince_moranion:
         cost: 230000
-        rosters: [ elf_union, high_elf ]
+        rosters: [ elf, high_elf ]
         characteristics:
           ma: 7
           st: 4
           ag: 4
           av: 8
-        skills: [ 'loner', 'block', 'dauntless', 'tackle', 'wrestle' ]
+        skills: [ loner, block, dauntless, tackle, wrestle ]
       puggy_baconbreath:
         cost: 140000
         rosters: [ human, halfling ]
@@ -381,7 +381,7 @@ rules:
           st: 3
           ag: 3
           av: 6
-        skills: [ 'loner', 'block', 'dodge', 'nerves_of_steel', 'right_stuff', 'stunty' ]
+        skills: [ loner, block, dodge, nerves_of_steel, right_stuff, stunty ]
       quetzal_leap:
         cost: 250000
         rosters: [ lizardmen, slann ]
@@ -390,7 +390,7 @@ rules:
           st: 2
           ag: 4
           av: 7
-        skills: [ 'loner', 'catch', 'diving_catch', 'fend', 'kick_off_return', 'leap', 'nerves_of_steel', 'very_long_legs' ]
+        skills: [ loner, catch, diving_catch, fend, kick_off_return, leap, nerves_of_steel, very_long_legs ]
       ramtut_iii:
         cost: 380000
         rosters: [ khemri, necromantic, undead ]
@@ -399,7 +399,7 @@ rules:
           st: 6
           ag: 1
           av: 9
-        skills: [ 'loner', 'break_tackle', 'mighty_blow', 'regeneration', 'wrestle' ]
+        skills: [ loner, break_tackle, mighty_blow, regeneration, wrestle ]
       rashnak_rackstabber:
         cost: 270000
         rosters: [ chaos_dwarf ]
@@ -408,7 +408,7 @@ rules:
           st: 3
           ag: 3
           av: 7
-        skills: [ 'loner', 'dodge', 'side_step', 'sneaky_git', 'stab' ]
+        skills: [ loner, dodge, side_step, sneaky_git, stab ]
       ripper:
         cost: 240000
         rosters: [ goblin, orc ]
@@ -417,7 +417,7 @@ rules:
           st: 6
           ag: 1
           av: 9
-        skills: [ 'loner', 'grab', 'mighty_blow', 'regeneration', 'throw_team_mate' ]
+        skills: [ loner, grab, mighty_blow, regeneration, throw_team_mate ]
       roxanna_darknail:
         cost: 250000
         rosters: [ amazon, dark_elf ]
@@ -426,7 +426,7 @@ rules:
           st: 3
           ag: 5
           av: 7
-        skills: [ 'loner', 'dodge', 'jump_up', 'frenzy', 'juggernaut', 'leap' ]
+        skills: [ loner, dodge, jump_up, frenzy, juggernaut, leap ]
       scrappa_sorehead:
         cost: 150000
         rosters: [ goblin, ogre, orc ]
@@ -435,7 +435,7 @@ rules:
           st: 2
           ag: 3
           av: 7
-        skills: [ 'loner', 'dirty_player', 'dodge', 'leap', 'right_stuff', 'sprint', 'stunty', 'sure_feet', 'very_long_legs' ]
+        skills: [ loner, dirty_player, dodge, leap, right_stuff, sprint, stunty, sure_feet, very_long_legs ]
       setekh:
         cost: 220000
         rosters: [ khemri, necromantic, undead ]
@@ -444,7 +444,7 @@ rules:
           st: 4
           ag: 2
           av: 8
-        skills: [ 'loner', 'block', 'break_tackle', 'juggernaut', 'regeneration', 'strip_ball' ]
+        skills: [ loner, block, break_tackle, juggernaut, regeneration, strip_ball ]
       slibli:
         cost: 250000
         rosters: [ lizardmen, slann ]
@@ -453,7 +453,7 @@ rules:
           st: 4
           ag: 1
           av: 9
-        skills: [ 'loner', 'block', 'grab', 'stand_firm' ]
+        skills: [ loner, block, grab, stand_firm ]
       sinnedbad:
         cost: 80000
         rosters: [ khemri, undead ]
@@ -462,7 +462,7 @@ rules:
           st: 3
           ag: 2
           av: 7
-        skills: [ 'loner', 'block', 'jump_up', 'pass_block', 'regeneration', 'secret_weapon', 'side_step', 'stab' ]
+        skills: [ loner, block, jump_up, pass_block, regeneration, secret_weapon, side_step, stab ]
       skitter_stab_stab:
         cost: 160000
         rosters: [ skaven, underworld ]
@@ -471,7 +471,7 @@ rules:
           st: 2
           ag: 4
           av: 7
-        skills: [ 'loner', 'dodge', 'prehensile_tail', 'shadowing', 'stab' ]
+        skills: [ loner, dodge, prehensile_tail, shadowing, stab ]
       soaren_hightower:
         cost: 180000
         rosters: [ high_elf ]
@@ -480,7 +480,7 @@ rules:
           st: 3
           ag: 4
           av: 8
-        skills: [ 'loner', 'fend', 'kick_off_return', 'pass', 'safe_throw', 'strong_arm', 'sure_hands' ]
+        skills: [ loner, fend, kick_off_return, pass, safe_throw, strong_arm, sure_hands ]
       ugroth_bolgrot:
         cost: 100000
         rosters: [ chaos_pact, orc ]
@@ -489,7 +489,7 @@ rules:
           st: 3
           ag: 3
           av: 9
-        skills: [ 'loner', 'chainsaw', 'secret_weapon' ]
+        skills: [ loner, chainsaw, secret_weapon ]
       varag_ghoul_chewer:
         cost: 290000
         rosters: [ orc ]
@@ -498,7 +498,7 @@ rules:
           st: 4
           ag: 3
           av: 9
-        skills: [ 'loner', 'block', 'jump_up', 'mighty_blow', 'thick_skull' ]
+        skills: [ loner, block, jump_up, mighty_blow, thick_skull ]
       wilhelm_chaney:
         cost: 240000
         rosters: [ necromantic, norse, vampire ]
@@ -507,7 +507,7 @@ rules:
           st: 4
           ag: 3
           av: 8
-        skills: [ 'loner', 'catch', 'claw_claws', 'frenzy', 'regeneration', 'wrestle' ]
+        skills: [ loner, catch, claw_claws, frenzy, regeneration, wrestle ]
       willow_rosebark:
         cost: 150000
         rosters: [ amazon, halfling, wood_elf ]
@@ -516,7 +516,7 @@ rules:
           st: 4
           ag: 3
           av: 8
-        skills: [ 'loner', 'dauntless', 'side_step', 'thick_skull' ]
+        skills: [ loner, dauntless, side_step, thick_skull ]
       zara_the_slayer:
         cost: 270000
         rosters: [ amazon, dwarf, halfling, high_elf, human, norse, wood_elf ]
@@ -525,7 +525,7 @@ rules:
           st: 4
           ag: 3
           av: 8
-        skills: [ 'loner', 'block', 'dauntless', 'dodge', 'jump_up', 'stab', 'stakes' ]
+        skills: [ loner, block, dauntless, dodge, jump_up, stab, stakes ]
       zzharg_madeye:
         cost: 90000
         rosters: [ chaos_dwarf, chaos_pact ]
@@ -534,4 +534,4 @@ rules:
           st: 4
           ag: 3
           av: 9
-        skills: [ 'loner', 'hail_mary_pass', 'pass', 'secret_weapon', 'strong_arm', 'sure_hands', 'tackle', 'thick_skull' ]
+        skills: [ loner, hail_mary_pass, pass, secret_weapon, strong_arm, sure_hands, tackle, thick_skull ]

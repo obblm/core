@@ -4,6 +4,7 @@ namespace Obblm\Core\Twig;
 
 use Obblm\Core\Event\RulesCollectorEvent;
 use Obblm\Core\Event\TwigCollectorEvent;
+use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Twig\Parts\NavigationCollection;
 use Obblm\Core\Twig\Parts\NavigationElementInterface;
@@ -45,9 +46,10 @@ class CoreExtension extends AbstractExtension
     {
         $rules_collection = new NavigationCollection('obblm.forms.team.create.select.rules', 'list');
         foreach ($this->getAvailableRules() as $rule) {
-            $rule_name = 'obblm.rules.' . $rule->getRuleKey() . '.title';
+            $rule_name = CoreTranslation::getRuleTitle($rule->getRuleKey());
             $rules_collection->addToCollection(
-                new NavigationLink('obblm_team_create_rule', $rule_name, ['rule' => $rule->getId()])
+                (new NavigationLink('obblm_team_create_rule', $rule_name, ['rule' => $rule->getId()]))
+                    ->setTranslationDomain($rule->getRuleKey())
             );
         }
 

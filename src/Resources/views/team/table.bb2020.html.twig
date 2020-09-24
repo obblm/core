@@ -1,9 +1,4 @@
-<ul>
-    {% for player in team.notDeadPlayers %}
-        <li>
-            {% include '@ObblmCore/team/player-line.bb2020.html.twig' with { 'player': player } %}
-        </li>
-    {% else %}
-        <li>{{ 'No players'|trans }}</li>
-    {% endfor %}
-</ul>
+{% extends '@ObblmCore/team/table.lrb6.html.twig' %}
+{% block player_line %}
+    {% include '@ObblmCore/team/player-line.bb2020.html.twig' with { 'player': player } %}
+{% endblock %}

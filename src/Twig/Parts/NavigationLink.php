@@ -8,6 +8,7 @@ class NavigationLink implements NavigationElementInterface
     protected $link;
     protected $parameters;
     protected $icon;
+    protected $translation_domain = null;
 
     public function __construct(string $route = 'obblm_dashboard', string $link = "Home", array $parameters = [], string $icon = null)
     {
@@ -47,5 +48,22 @@ class NavigationLink implements NavigationElementInterface
     public function getIcon(): ?string
     {
         return $this->icon;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTranslationDomain()
+    {
+        return $this->translation_domain;
+    }
+
+    /**
+     * @param string|null $translation_domain
+     */
+    public function setTranslationDomain(?string $translation_domain): self
+    {
+        $this->translation_domain = $translation_domain;
+        return $this;
     }
 }

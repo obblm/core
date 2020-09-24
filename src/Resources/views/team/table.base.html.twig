@@ -1,0 +1,26 @@
+{% set translation_domain = team ? team.rule.ruleKey : rule.ruleKey %}
+{% trans_default_domain translation_domain %}
+<table id="player-sheet" class="ui celled selectable center aligned table">
+    <thead>
+        <tr>
+            {% block player_head_number %}<th>#</th>{% endblock %}
+            {% block player_head_name %}<th class="left aligned">{{ 'obblm.forms.player.fields.name'|trans({}, 'messages') }}</th>{% endblock %}
+            {% block player_head_type %}<th class="left aligned">{{ 'obblm.forms.player.fields.type'|trans({}, 'messages') }}</th>{% endblock %}
+            {% block player_head_characteristics %}<th>{{ (translation_domain ~ '.trait.ma.abbr')|trans }}</th>
+            <th>{{ (translation_domain ~ '.trait.st.abbr')|trans }}</th>
+            <th>{{ (translation_domain ~ '.trait.ag.abbr')|trans }}</th>
+            <th>{{ (translation_domain ~ '.trait.av.abbr')|trans }}</th>{% endblock %}
+            {% block player_head_skills %}<th class="left aligned">{{ (translation_domain ~ '.trait.skill.title')|trans }}</th>{% endblock %}
+            {% block player_head_injuries %}<th class="left aligned">{{ (translation_domain ~ '.trait.injury.title')|trans }}</th>{% endblock %}
+            {% block player_head_spp %}<th>{{ (translation_domain ~ '.trait.spp.abbr')|trans }}</th>{% endblock %}
+            {% block player_head_value %}<th class="right aligned">{{ (translation_domain ~ '.trait.value.title')|trans }}</th>{% endblock %}
+        </tr>
+    </thead>
+    {% for player in players %}
+        {% block player_line %}
+            {% embed '@ObblmCore/team/player-line.base.html.twig' with { 'player': player, 'rule': rule } %}{% endembed %}
+        {% endblock %}
+    {% else %}
+        <tr colspan="5">{{ 'No players'|trans({}, 'messages') }}</tr>
+    {% endfor %}
+</table>

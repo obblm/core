@@ -4,9 +4,10 @@ namespace Obblm\Core\Twig;
 
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\Team;
+use Obblm\Core\Helper\CoreTranslation;
+use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Helper\TeamHelper;
-use Obblm\Core\Service\PlayerService;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -66,7 +67,7 @@ class TeamExtension extends AbstractExtension
 
     public function getRosterName(Team $team)
     {
-        return TeamHelper::getRosterNameForTranslation($team);
+        return CoreTranslation::getRosterNameFor($team);
     }
 
     public function getRerollCost(Team $team)
@@ -81,7 +82,10 @@ class TeamExtension extends AbstractExtension
 
     public function getCharacteristics(Player $player, $characteristic)
     {
-        $characteristics = PlayerService::getPlayerCharacteristics($player);
+        if (!$player->getType()) {
+            return '';
+        }
+        $characteristics = PlayerHelper::getPlayerCharacteristics($player);
         if (!isset($characteristics[$characteristic])) {
             throw new InvalidParameterException("The characteristic " . $characteristic . " does not exists");
         }
@@ -91,22 +95,34 @@ class TeamExtension extends AbstractExtension
 
     public function getSkills(Player $player)
     {
-        return PlayerService::getPlayerSkills($player);
+        if (!$player->getType()) {
+            return null;
+        }
+        return PlayerHelper::getPlayerSkills($player);
     }
 
     public function getType(Player $player)
     {
-        return PlayerService::getPlayerTranslationKey($player);
+        if (!$player->getType()) {
+            return '';
+        }
+        return CoreTranslation::getPlayerTranslationKey($player);
     }
 
     public function getSpp(Player $player)
     {
-        return PlayerService::getPlayerSpp($player);
+        if (!$player->getType()) {
+            return '';
+        }
+        return PlayerHelper::getPlayerSpp($player);
     }
 
     public function getPlayerValue(Player $player)
     {
-        return PlayerService::getPlayerValue($player);
+        if (!$player->getType()) {
+            return '';
+        }
+        return PlayerHelper::getPlayerValue($player);
     }
 
     public function getInjuryEffects(Team $team, $injuries)

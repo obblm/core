@@ -430,8 +430,8 @@ lrb6:
         blitzer: Blitzer
         blocker: Blocker
         death_roller: Death roller
-    elf_union:
-      title: Elven Union
+    elf:
+      title: Pro Elves
       description: ~
       positions:
         blitzer: Blitzer
@@ -449,7 +449,7 @@ lrb6:
         fanatic: Fanatic
         goblin: Goblin
     halfling:
-      title: Goblins
+      title: Halflings
       description: ~
       positions:
         treeman: Treeman
@@ -499,12 +499,12 @@ lrb6:
       title: Norse
       description: ~
       positions:
-        yhetee: Yhetee
-        ulfwerener: Ulfwerener
-        blitzer: Blitzer
         lineman: Lineman
-        catcher: Catcher
         thrower: Thrower
+        catcher: Catcher
+        blitzer: Blitzer
+        ulfwerener: Ulfwerenar
+        yhetee: Yhetee
     nurgle:
       title: Nurgle
       description: ~

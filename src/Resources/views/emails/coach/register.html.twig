@@ -1,0 +1,9 @@
+{% extends '@ObblmCore/emails/email-template.html.twig'%}
+{% block header_title 'obblm.emails.coach.registration.welcome'|trans({'%login%': coach.username}) %}
+{% block content %}
+    {% do email.setSubject( 'obblm.emails.coach.registration.welcome'|trans({'%login%': coach.username }) ) %}
+    <div>
+        <p>{{ 'obblm.emails.coach.registration.text'|trans }}</p>
+        <p><a href="{{ absolute_url(path('activate_account', {'hash': coach.hash})) }}">{{ 'obblm.emails.coach.registration.link_to_activate'|trans }}</a></p>
+    </div>
+{% endblock%}

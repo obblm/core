@@ -4,21 +4,16 @@
         {{ form_errors( playerFields ) }}
         <div class="inline fields">
             <div class="field">
-                <a href="#" data-item-selector=".item" class="remove-collection-widget pull-right">
-                    <i class="ui icon close red"></i>
-                </a>
-            </div>
-            <div class="field">
-                {{ form_label( playerFields.number, 'obblm.forms.player.fields.number' ) }}
+                <label>{{ playerFields.vars.value.number }}</label>
                 {{ form_widget( playerFields.number ) }}
-            </div>
-            <div class="field">
-                {{ form_label( playerFields.type, 'obblm.forms.player.fields.type', {'translation_domain': 'messages'} ) }}
-                {{ form_widget( playerFields.type, {'attr': {'class': 'ui dropdown'}} ) }}
             </div>
             <div class="field">
                 {{ form_label( playerFields.name, 'obblm.forms.player.fields.name' ) }}
                 {{ form_widget( playerFields.name ) }}
+            </div>
+            <div class="field">
+                {{ form_label( playerFields.type, 'obblm.forms.player.fields.type', {'translation_domain': 'messages'} ) }}
+                {{ form_widget( playerFields.type, {'attr': {'class': 'ui dropdown'}} ) }}
             </div>
         </div>
         {{ form_rest( playerFields ) }}
@@ -52,23 +47,13 @@
         <label>{{ 'obblm.forms.team.fields.treasury'|trans }}</label>
         {{ form.vars.value.treasure }}
     </div>
-    <div class="field attach-collection-actions">
-        <div class="field">
-            <button type="button"
-                    class="add-another-collection-widget ui button primary"
-                    data-list-selector="#players-fields-list">
-                {{ 'obblm.forms.team.edit.buttons.add_player'|trans }}
-            </button>
-        </div>
-        <div id="players-fields-list"
-            data-prototype="{{ formMacros.printPlayerFieldsRow(form.team.children.players.vars.prototype)|e('html_attr') }}"
-            data-widget-counter="{{ form.team.children.players|length }}">
-            {% for playerFields in form.team.children.players %}
-                {{ formMacros.printPlayerFieldsRow( playerFields ) }}
-            {% else %}
-                {{ form_widget(form.team.players) }}
-            {% endfor %}
-        </div>
+    <div class="field">
+        {{ form_label(form.team.players) }}
+        {% for playerFields in form.team.children.players %}
+            {{ formMacros.printPlayerFieldsRow( playerFields ) }}
+        {% else %}
+            {{ form_widget(form.team.players) }}
+        {% endfor %}
     </div>
     <div class="four fields">
         <div class="field">

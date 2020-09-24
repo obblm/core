@@ -1,0 +1,11 @@
+{% extends '@ObblmCore/base.html.twig' %}
+
+{% block body %}
+    <ul class="ui list">
+    {% for rule in rules %}
+        <li>
+            <a href="{{ path('obblm_rules_detail', {'rule': rule.id}) }}">{{ rule.name|trans({}, rule.ruleKey) }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,26 @@
+<?php
+
+namespace Obblm\Core\Form\Dices;
+
+use Obblm\Core\Validator\Constraints\Dices\D6;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class DiceD6Type extends AbstractType
+{
+    public function getParent()
+    {
+        return DiceType::class;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+        $resolver->setDefaults([
+            'dice_value' => 6,
+            'constraints' => [
+                new D6()
+            ]
+        ]);
+    }
+}

@@ -1,0 +1,108 @@
+rules:
+  bb16:
+    rosters:
+      goblin: # RuleBook
+        players:
+          goblin:
+            min: 0
+            max: 16
+            characteristics:
+              ma: 6
+              st: 2
+              ag: 3
+              av: 7
+            skills: [ dodge, right_stuff, stunty ]
+            cost: 40000
+            available_skills: [ a ]
+            available_skills_on_double: [ g, s, p ]
+            is_journeyman: true
+          bombardier:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 6
+              st: 2
+              ag: 3
+              av: 7
+            skills: [ bombardier, dodge, secret_weapon, stunty ]
+            cost: 40000
+            available_skills: [ a ]
+            available_skills_on_double: [ g, s, p ]
+          looney:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 6
+              st: 2
+              ag: 3
+              av: 7
+            skills: [ chainsaw, secret_weapon, stunty ]
+            cost: 40000
+            available_skills: [ a ]
+            available_skills_on_double: [ g, s, p ]
+          fanatic:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 3
+              st: 7
+              ag: 3
+              av: 7
+            skills: [ ball_chain, no_hands, secret_weapon, stunty ]
+            cost: 70000
+            available_skills: [ s ]
+            available_skills_on_double: [ g, a, p ]
+          pogoer:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 7
+              st: 2
+              ag: 3
+              av: 7
+            skills: [ dodge, leap, stunty, very_long_legs ]
+            cost: 70000
+            available_skills: [ a ]
+            available_skills_on_double: [ g, s, p ]
+          doom_diver:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 6
+              st: 2
+              ag: 3
+              av: 7
+            skills: [ right_stuff, stunty, swoop ]
+            cost: 60000
+            available_skills: [ a ]
+            available_skills_on_double: [ g, s, p ]
+          ooligan:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 6
+              st: 2
+              ag: 3
+              av: 7
+            skills: [ disturbing_presence, dodge, fan_favourite, right_stuff, stunty ]
+            cost: 70000
+            available_skills: [ a ]
+            available_skills_on_double: [ g, s, p ]
+          troll:
+            min: 0
+            max: 2
+            characteristics:
+              ma: 4
+              st: 5
+              ag: 1
+              av: 9
+            skills: [ loner, always_hungry, mighty_blow, really_stupid, regeneration, throw_team_mate ]
+            cost: 110000
+            available_skills: [ s ]
+            available_skills_on_double: [ g, a, p ]
+        reroll_cost: 60000
+        options:
+          can_have_apothecary: true
+          inducements:
+            babe: true
+            bribe: discount

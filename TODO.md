@@ -1,3 +1,3 @@
 #TODO
-
-- Add OptionResolvers to Rules and RuleHelpers elements ?
+- Fixing player type change when editing a team
+- Add OptionResolvers to Roster Players

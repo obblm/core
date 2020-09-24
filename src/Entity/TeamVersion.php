@@ -142,10 +142,22 @@ class TeamVersion
     {
         return $this->playerVersions;
     }
+
     /**
      * @return Collection|PlayerVersion[]
      */
     public function getNotDeadPlayerVersions(): Collection
+    {
+        $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('dead', false))
+        ;
+        return $this->playerVersions->matching($criteria);
+    }
+
+    /**
+     * @return Collection|PlayerVersion[]
+     */
+    public function getAvailablePlayerVersions(): Collection
     {
         $criteria = Criteria::create()
             ->andWhere(Criteria::expr()->eq('dead', false))

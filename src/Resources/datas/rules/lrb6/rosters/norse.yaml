@@ -6,71 +6,77 @@ rules:
           lineman:
             min: 0
             max: 16
-            ma: 6
-            st: 3
-            ag: 3
-            av: 7
+            characteristics:
+              ma: 6
+              st: 3
+              ag: 3
+              av: 7
             cost: 50000
-            skills: [ 'block' ]
-            available_skills: [ 'g' ]
-            available_skills_on_double: [ 's', 'a', 'p' ]
+            skills: [ block ]
+            available_skills: [ g ]
+            available_skills_on_double: [ s, a, p ]
             is_journeyman: true
           thrower:
             min: 0
             max: 2
-            ma: 6
-            st: 3
-            ag: 3
-            av: 7
+            characteristics:
+              ma: 6
+              st: 3
+              ag: 3
+              av: 7
             cost: 70000
-            skills: [ 'block', 'pass' ]
-            available_skills: [ 'g', 'p' ]
-            available_skills_on_double: [ 's', 'a' ]
+            skills: [ block, pass ]
+            available_skills: [ g, p ]
+            available_skills_on_double: [ s, a ]
           catcher:
             min: 0
             max: 2
-            ma: 7
-            st: 3
-            ag: 3
-            av: 7
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 3
+              av: 7
             cost: 90000
-            skills: [ 'block', 'dauntless' ]
-            available_skills: [ 'g', 'a' ]
-            available_skills_on_double: [ 's', 'p' ]
+            skills: [ block, dauntless ]
+            available_skills: [ g, a ]
+            available_skills_on_double: [ s, p ]
           blitzer:
             min: 0
             max: 2
-            ma: 6
-            st: 3
-            ag: 3
-            av: 7
+            characteristics:
+              ma: 6
+              st: 3
+              ag: 3
+              av: 7
             cost: 90000
-            skills: [ 'block', 'jump_up', 'frenzy' ]
-            available_skills: [ 'g', 's' ]
-            available_skills_on_double: [ 'a', 'p' ]
+            skills: [ block, jump_up, frenzy ]
+            available_skills: [ g, s ]
+            available_skills_on_double: [ a, p ]
           ulfwerener:
             min: 0
             max: 2
-            ma: 6
-            st: 4
-            ag: 2
-            av: 8
+            characteristics:
+              ma: 6
+              st: 4
+              ag: 2
+              av: 8
             cost: 110000
-            skills: [ 'frenzy' ]
-            available_skills: [ 'g', 's' ]
-            available_skills_on_double: [ 'a', 'p' ]
+            skills: [ frenzy ]
+            available_skills: [ g, s ]
+            available_skills_on_double: [ a, p ]
           yhetee:
             min: 0
             max: 1
-            ma: 5
-            st: 5
-            ag: 1
-            av: 8
+            characteristics:
+              ma: 5
+              st: 5
+              ag: 1
+              av: 8
             cost: 140000
-            skills: [ 'loner', 'wild_animal', 'frenzy', 'claw_claws', 'disturbing_presence' ]
-            available_skills: [ 'g', 's' ]
-            available_skills_on_double: [ 'a', 'p' ]
+            skills: [ loner, wild_animal, frenzy, claw_claws, disturbing_presence ]
+            available_skills: [ g, s ]
+            available_skills_on_double: [ a, p ]
+        reroll_cost: 60000
         options:
-          reroll_cost: 60000
           can_have_apothecary: true
 

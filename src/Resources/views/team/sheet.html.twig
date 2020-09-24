@@ -1,2 +1,2 @@
 {% set sheet = team.rule.ruleKey %}
-{% include '@ObblmCore/team/table.' ~ sheet ~ '.html.twig' with { 'team': team } %}
+{% include '@ObblmCore/team/table.' ~ sheet ~ '.html.twig' with { 'team': team, 'players': team.availablePlayersSheet } %}

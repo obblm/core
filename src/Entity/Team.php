@@ -171,13 +171,32 @@ class Team
     /**
      * @return Collection|Player[]
      */
-    public function getNotDeadPlayers(): Collection
+    public function getAvailablePlayers(): Collection
     {
         $criteria = Criteria::create()
             ->andWhere(Criteria::expr()->eq('dead', false))
+            ->andWhere(Criteria::expr()->eq('fire', false))
             ->orderBy(['number' => 'ASC'])
         ;
         return $this->players->matching($criteria);
+    }
+
+    public function getAvailablePlayersSheet(): Collection
+    {
+        // In want to have 16 players in the list, no less, no more
+        $used_numbers = [];
+        $new_player_list = $this->getAvailablePlayers();
+        foreach ($new_player_list as $player) {
+            $used_numbers[$player->getNumber()] = $player;
+        }
+        for ($i=1; $i<=16; $i++) {
+            if (!isset($used_numbers[$i])) {
+                $new_player_list->add((new Player())->setNumber($i));
+            }
+        }
+        $criteria = Criteria::create();
+        $criteria->orderBy(['number' => 'ASC']);
+        return $new_player_list->matching($criteria);
     }
 
     public function addPlayer(Player $player): self

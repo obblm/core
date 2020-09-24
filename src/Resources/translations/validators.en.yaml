@@ -14,6 +14,8 @@ obblm:
           violation: The championship is already started and does not allow you to join.
         teams_limit:
           violation: The championship has already reached the maximum number of teams ({{ limit }}).
-    encounter:
-      different_teams:
-        violation: Home and Visitor teams must be different
+    inducements:
+      amount:
+        violation: You can't buy all this shits, you can only spend {{ budget }}.
+      quantity:
+        violation: You can't buy all this shits, you can only have {{ limit }} of {{ type }}.

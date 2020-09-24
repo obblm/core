@@ -2,8 +2,8 @@
 
 namespace Obblm\Core\Entity;
 
+use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Repository\PlayerVersionRepository;
-use Obblm\Core\Service\PlayerService;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,7 +43,12 @@ class PlayerVersion
     private $skills = [];
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $additional_skills = [];
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
      */
     private $injuries = [];
 
@@ -61,6 +66,21 @@ class PlayerVersion
      * @ORM\Column(type="boolean")
      */
     private $dead = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $fire = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $hired_star_player = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $mercenary = false;
 
     /**
      * @ORM\Column(type="integer")
@@ -114,6 +134,18 @@ class PlayerVersion
     public function setSkills(array $skills): self
     {
         $this->skills = $skills;
+
+        return $this;
+    }
+
+    public function getAdditionalSkills(): ?array
+    {
+        return $this->additional_skills;
+    }
+
+    public function setAdditionalSkills(array $additional_skills): self
+    {
+        $this->additional_skills = $additional_skills;
 
         return $this;
     }
@@ -175,6 +207,55 @@ class PlayerVersion
         return $this;
     }
 
+    public function getFire(): ?bool
+    {
+        return $this->fire;
+    }
+
+    public function isFire(): ?bool
+    {
+        return $this->getFire();
+    }
+
+    public function setFire(bool $fire): self
+    {
+        $this->fire = $fire;
+        $this->getPlayer()->setFire($this->fire);
+        return $this;
+    }
+
+    public function getHiredStarPlayer(): ?bool
+    {
+        return $this->hired_star_player;
+    }
+
+    public function isHiredStarPlayer(): ?bool
+    {
+        return $this->getHiredStarPlayer();
+    }
+
+    public function setHiredStarPlayer(bool $hired_star_player): self
+    {
+        $this->hired_star_player = $hired_star_player;
+        return $this;
+    }
+
+    public function getMercenary(): ?bool
+    {
+        return $this->mercenary;
+    }
+
+    public function isMercenary(): ?bool
+    {
+        return $this->getMercenary();
+    }
+
+    public function setMercenary(bool $mercenary): self
+    {
+        $this->mercenary = $mercenary;
+        return $this;
+    }
+
     public function getSpp(): ?int
     {
         return $this->spp;
@@ -223,10 +304,10 @@ class PlayerVersion
                 $this->getPlayer()->setTeam($this->getTeamVersion()->getTeam());
             }
             if (!$this->getCharacteristics()) {
-                $this->setCharacteristics(PlayerService::getPlayerCharacteristics($this->getPlayer()));
+                $this->setCharacteristics(PlayerHelper::getPlayerCharacteristics($this->getPlayer()));
             }
             if (!$this->getSkills()) {
-                $this->setSkills(PlayerService::getPlayerSkills($this->getPlayer()));
+                $this->setSkills(PlayerHelper::getPlayerSkills($this->getPlayer()));
             }
         }
     }
@@ -241,5 +322,10 @@ class PlayerVersion
         $this->spp_level = $spp_level;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getPlayer()->getName() . "#" . $this->getId();
     }
 }

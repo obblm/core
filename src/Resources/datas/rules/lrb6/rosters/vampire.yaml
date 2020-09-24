@@ -6,25 +6,27 @@ rules:
           thrall:
             min: 0
             max: 16
-            ma: 6
-            st: 3
-            ag: 3
-            av: 7
+            characteristics:
+              ma: 6
+              st: 3
+              ag: 3
+              av: 7
             cost: 40000
-            available_skills: [ 'g' ]
-            available_skills_on_double: [ 's', 'a', 'p' ]
+            available_skills: [ g ]
+            available_skills_on_double: [ s, a, p ]
             is_journeyman: true
           vampire:
             min: 0
             max: 4
-            ma: 6
-            st: 4
-            ag: 4
-            av: 8
-            skills: [ 'blood_lust', 'hypnotic_gaze', 'regeneration' ]
+            characteristics:
+              ma: 6
+              st: 4
+              ag: 4
+              av: 8
+            skills: [ blood_lust, hypnotic_gaze, regeneration ]
             cost: 110000
-            available_skills: [ 'g', 'a', 's' ]
-            available_skills_on_double: [ 'p' ]
+            available_skills: [ g, a, s ]
+            available_skills_on_double: [ p ]
+        reroll_cost: 70000
         options:
-          reroll_cost: 70000
           can_have_apothecary: true

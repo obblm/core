@@ -1,0 +1,21 @@
+{% extends '@ObblmCore/base.html.twig' %}
+
+{% block body %}
+    {% set star_players = get_all_star_players(rule) %}
+    <h1>Star players ({{ star_players.count }})</h1>
+    {% embed '@ObblmCore/team/table.' ~ rule.template ~ '.html.twig' with { 'team': null, 'rule': rule, 'players': star_players } %}
+        {% block player_head_number %}{% endblock %}
+        {% block player_head_type %}{% endblock %}
+        {% block player_head_injuries %}{% endblock %}
+        {% block player_head_spp %}{% endblock %}
+        {% block player_line %}
+            {% embed '@ObblmCore/team/player-line.' ~ rule.template ~ '.html.twig' with { 'player': player } %}
+                {% block number %}{% endblock %}
+                {% block name %}<td class="left aligned editable">{{ player.name|trans({}, rule.ruleKey) }}</td>{% endblock %}
+                {% block type %}{% endblock %}
+                {% block injuries %}{% endblock %}
+                {% block spp %}{% endblock %}
+            {% endembed %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

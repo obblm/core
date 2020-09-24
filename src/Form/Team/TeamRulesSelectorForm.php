@@ -3,6 +3,7 @@
 namespace Obblm\Core\Form\Team;
 
 use Obblm\Core\Entity\Team;
+use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\RuleHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -28,7 +29,7 @@ class TeamRulesSelectorForm extends AbstractType
                 $rosters = $this->ruleHelper->getAvailableRosters($rule);
                 $choices = [];
                 foreach ($rosters as $roster) {
-                    $translation_key = $this->ruleHelper->composeTranslationRosterKey($rule->getRuleKey(), $roster);
+                    $translation_key = CoreTranslation::getRosterKey($rule->getRuleKey(), $roster);
                     $choices[$translation_key] = $roster;
                 }
                 ksort($choices);

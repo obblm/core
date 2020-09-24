@@ -1,0 +1,15 @@
+{% extends '@ObblmCore/base.html.twig' %}
+
+{% block body %}
+    {% set skills = get_all_skills(rule) %}
+    <h1>Skills ({{ skills|length }})</h1>
+    <table class="table ui">
+    {% for skill in skills %}
+        <tr>
+            <td class="top aligned">{{ skill.name|trans({}, skill.domain) }}</td>
+            <td class="top aligned">{{ skill.type|trans({}, skill.domain) }}</td>
+            <td class="top aligned">{{ skill.description|trans({}, skill.domain) }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

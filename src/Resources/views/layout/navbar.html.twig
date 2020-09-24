@@ -39,6 +39,10 @@
         <i aria-hidden="true" class="icon notranslate mdi mdi-trophy-variant"></i>
         My Championships
     </a> #}
+    <a class="item" href="{{ path('obblm_rules') }}">
+        <i aria-hidden="true" class="icon notranslate mdi mdi-ruler-square"></i>
+        {{ 'obblm.layout.navigation.rules'|trans }}
+    </a>
     {% if(is_granted('ROLE_OBBLM_ADMIN')) %}
     <div class="item">
         <i class="options icon"></i>

@@ -1,0 +1,28 @@
+{% set translation_domain = player.team ? player.team.rule.ruleKey : rule.ruleKey %}
+{% trans_default_domain translation_domain %}
+<tr>
+    {% block number %}<td>{{ player.number }}</td>{% endblock %}
+    {% block name %}<td class="left aligned editable">{{ player.name }}</td>{% endblock %}
+    {% block type %}<td class="left aligned editable">{{ player|type|trans }}</td>{% endblock %}
+    {% block characteristics %}
+        <td>{{ player|characteristics('ma') }}</td>
+        <td>{{ player|characteristics('st') }}</td>
+        <td>{{ player|characteristics('ag') }}</td>
+        <td>{{ player|characteristics('av') }}</td>
+    {% endblock %}
+    {% block skills %}<td class="left aligned">
+        {% for skill in player|skills %}
+            {# TODO: replace with skill helper #}
+            {% set skill_name = translation_domain ~ '.skills.' ~ skill ~ '.title' %}
+            {% set skill_text = translation_domain ~ '.skills.' ~ skill ~ '.description' %}
+            <span title="{{ skill_text|trans }}">
+                {{ skill_name|trans }}{% if loop.index != loop.last %}, {% endif %}
+            </span>
+        {% else %}
+        {{ 'None'|trans }}
+        {% endfor %}
+    </td>{% endblock %}
+    {% block injuries %}<td class="left aligned"></td>{% endblock %}
+    {% block spp %}<td>{{ player|spp }}</td>{% endblock %}
+    {% block value %}<td class="right aligned">{{ player|value|price }}</td>{% endblock %}
+</tr>

@@ -1,10 +1,12 @@
 <?php
 
-namespace Obblm\Core\Helper\Rule;
+namespace Obblm\Core\Service\Rule;
 
+use Obblm\Core\Contracts\RuleHelperInterface;
 use Obblm\Core\Form\Player\ActionBb2020Type;
+use Obblm\Core\Helper\Rule\AbstractRuleHelper;
 
-class Bb2020Rule extends AbstractRuleHelper
+class Bb2020Rule extends AbstractRuleHelper implements RuleHelperInterface
 {
     public function getActionsFormClass(): string
     {

@@ -6,58 +6,63 @@ rules:
           lineman:
             min: 0
             max: 16
-            ma: 6
-            st: 3
-            ag: 4
-            av: 8
+            characteristics:
+              ma: 6
+              st: 3
+              ag: 4
+              av: 8
             cost: 70000
-            available_skills: [ 'g', 'a' ]
-            available_skills_on_double: [ 's', 'p' ]
+            available_skills: [ g, a ]
+            available_skills_on_double: [ s, p ]
             is_journeyman: true
           runner:
             min: 0
             max: 2
-            ma: 7
-            st: 3
-            ag: 4
-            av: 7
-            skills: [ 'dump_off' ]
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 4
+              av: 7
+            skills: [ dump_off ]
             cost: 80000
-            available_skills: [ 'g', 'a', 'p' ]
-            available_skills_on_double: [ 's' ]
+            available_skills: [ g, a, p ]
+            available_skills_on_double: [ s ]
           assassin:
             min: 0
             max: 2
-            ma: 6
-            st: 3
-            ag: 4
-            av: 7
-            skills: [ 'shadowing', 'stab' ]
+            characteristics:
+              ma: 6
+              st: 3
+              ag: 4
+              av: 7
+            skills: [ shadowing, stab ]
             cost: 90000
-            available_skills: [ 'g', 'a' ]
-            available_skills_on_double: [ 's', 'p' ]
+            available_skills: [ g, a ]
+            available_skills_on_double: [ s, p ]
           blitzer:
             min: 0
             max: 4
-            ma: 7
-            st: 3
-            ag: 4
-            av: 8
-            skills: [ 'block' ]
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 4
+              av: 8
+            skills: [ block ]
             cost: 100000
-            available_skills: [ 'g', 'a' ]
-            available_skills_on_double: [ 's', 'p' ]
+            available_skills: [ g, a ]
+            available_skills_on_double: [ s, p ]
           witch:
             min: 0
             max: 2
-            ma: 7
-            st: 3
-            ag: 4
-            av: 7
-            skills: [ 'frenzy', 'dodge', 'jump_up' ]
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 4
+              av: 7
+            skills: [ frenzy, dodge, jump_up ]
             cost: 110000
-            available_skills: [ 'g', 'a' ]
-            available_skills_on_double: [ 's', 'p' ]
+            available_skills: [ g, a ]
+            available_skills_on_double: [ s, p ]
+        reroll_cost: 50000
         options:
-          reroll_cost: 50000
           can_have_apothecary: true

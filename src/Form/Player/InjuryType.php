@@ -2,7 +2,7 @@
 
 namespace Obblm\Core\Form\Player;
 
-use Obblm\Core\Helper\Rule\RuleHelperInterface;
+use Obblm\Core\Contracts\RuleHelperInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

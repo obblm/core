@@ -21,7 +21,11 @@
                     {% if item.icon %}
                         <i aria-hidden="true" class="icon notranslate {{ item.icon }}"></i>
                     {% endif %}
-                    {{ item.link }}
+                    {% if(item.translationDomain) %}
+                        {{ item.link|trans({}, item.translationDomain) }}
+                    {% else %}
+                      {{ item.link }}
+                    {% endif %}
                 </a>
             </div>
         {% endif %}

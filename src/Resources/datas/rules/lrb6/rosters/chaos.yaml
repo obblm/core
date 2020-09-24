@@ -6,36 +6,39 @@ rules:
           beastman:
             min: 0
             max: 16
-            ma: 6
-            st: 3
-            ag: 3
-            av: 8
+            characteristics:
+              ma: 6
+              st: 3
+              ag: 3
+              av: 8
             cost: 60000
-            skills: [ 'horns' ]
-            available_skills: [ 'g', 's', 'm' ]
-            available_skills_on_double: [ 'a', 'p' ]
+            skills: [ horns ]
+            available_skills: [ g, s, m ]
+            available_skills_on_double: [ a, p ]
             is_journeyman: true
           warrior:
             min: 0
             max: 4
-            ma: 5
-            st: 4
-            ag: 3
-            av: 9
+            characteristics:
+              ma: 5
+              st: 4
+              ag: 3
+              av: 9
             cost: 100000
-            available_skills: [ 'g', 's', 'm' ]
-            available_skills_on_double: [ 'p', 'a' ]
+            available_skills: [ g, s, m ]
+            available_skills_on_double: [ p, a ]
           minotaur:
             min: 0
             max: 1
-            ma: 5
-            st: 5
-            ag: 2
-            av: 8
+            characteristics:
+              ma: 5
+              st: 5
+              ag: 2
+              av: 8
             cost: 150000
-            skills: [ 'loner', 'wild_animal', 'mighty_blow', 'horns', 'thick_skull', 'frenzy' ]
-            available_skills: [ 's', 'm' ]
-            available_skills_on_double: [ 'g', 'a', 'p' ]
+            skills: [ loner, wild_animal, mighty_blow, horns, thick_skull, frenzy ]
+            available_skills: [ s, m ]
+            available_skills_on_double: [ g, a, p ]
+        reroll_cost: 60000
         options:
-          reroll_cost: 60000
           can_have_apothecary: true

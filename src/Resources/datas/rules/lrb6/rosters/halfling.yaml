@@ -6,28 +6,30 @@ rules:
           halfling:
             min: 0
             max: 16
-            ma: 5
-            st: 2
-            ag: 3
-            av: 6
+            characteristics:
+              ma: 5
+              st: 2
+              ag: 3
+              av: 6
             cost: 30000
-            skills: [ 'dodge', 'stunty', 'right_stuff' ]
-            available_skills: [ 'a' ]
-            available_skills_on_double: [ 'g', 's', 'p' ]
+            skills: [ dodge, stunty, right_stuff ]
+            available_skills: [ a ]
+            available_skills_on_double: [ g, s, p ]
             is_journeyman: true
           treeman:
             min: 0
             max: 2
-            ma: 2
-            st: 6
-            ag: 1
-            av: 10
+            characteristics:
+              ma: 2
+              st: 6
+              ag: 1
+              av: 10
             cost: 120000
-            skills: [ 'mighty_blow', 'strong_arm', 'thick_skull', 'throw_team_mate', 'take_root', 'stand_firm' ]
-            available_skills: [ 's' ]
-            available_skills_on_double: [ 'g', 'a', 'p' ]
+            skills: [ mighty_blow, strong_arm, thick_skull, throw_team_mate, take_root, stand_firm ]
+            available_skills: [ s ]
+            available_skills_on_double: [ g, a, p ]
+        reroll_cost: 60000
         options:
-          reroll_cost: 60000
           can_have_apothecary: true
           inducements:
             discount_halfling_master_chef: true
