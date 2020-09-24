@@ -220,12 +220,9 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
             }
         }
         foreach ($rule['star_players'] as $key => $starPlayer) {
-            try {
-                $inducement = $this->createStarPlayerInducement($ruleKey, $key, $starPlayer);
-                if (!$this->inducements->contains($inducement)) {
-                    $this->inducements->add($inducement);
-                }
-            } catch (NotFoundRuleKeyExcepion $e) {
+            $inducement = $this->createStarPlayerInducement($ruleKey, $key, $starPlayer);
+            if (!$this->inducements->contains($inducement)) {
+                $this->inducements->add($inducement);
             }
         }
     }
@@ -332,11 +329,11 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
         $criteria->where(Criteria::expr()->andX(
             $this->getInducementExpression($expr)
         ));
-        $availableInducements = $this->getInducements()->matching($criteria);
+        $availableInducements = $this->getInducementTable()->matching($criteria);
         return $availableInducements->toArray();
     }
 
-    public function getAllStarPlayers():array
+    public function getAllStarPlayers():ArrayCollection
     {
         $criteria = Criteria::create();
 
@@ -345,6 +342,6 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
                 'type' => 'star_players'
             ])
         ));
-        return $this->getInducementTable()->matching($criteria)->toArray();
+        return $this->getInducementTable()->matching($criteria);
     }
 }

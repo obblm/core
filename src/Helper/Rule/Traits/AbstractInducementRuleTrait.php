@@ -2,12 +2,12 @@
 
 namespace Obblm\Core\Helper\Rule\Traits;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
-use Obblm\Core\Entity\Team;
+use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Obblm\Core\Exception\NotFoundRuleKeyExcepion;
 use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\Rule\Inducement\Inducement;
-use Obblm\Core\Helper\Rule\Inducement\InducementType;
 
 /*********************
  * INDUCEMENT METHODS
@@ -21,25 +21,13 @@ trait AbstractInducementRuleTrait
 
     public function getInducements():array
     {
-        $inducements = [];
-        $ruleKey = $this->getAttachedRule()->getRuleKey();
-        $availableInducements = $this->rule['inducements'];
-
-        foreach ($availableInducements as $key => $value) {
-            if ($key !== 'star_players') {
-                $inducement = [
-                    'type' => $this->getInducementType('inducements'),
-                    'key' => join(CoreTranslation::TRANSLATION_GLUE, [$ruleKey, 'inducements', $key]),
-                    'translation_domain' => $this->getAttachedRule()->getRuleKey(),
-                    'translation_key' => CoreTranslation::getInducementName($ruleKey, $key),
-                    'max' => $value['max'] ?? 0,
-                    'value' => $value['cost'],
-                ];
-                $inducements[] = new Inducement($inducement);
-            }
-        }
-        return $inducements;
+        $criteria = Criteria::create()
+            ->where($this->getInducementExpression(['type' => 'inducements']));
+        return $this->getInducementTable()->matching($criteria)->toArray();
     }
+
+    abstract public function getInducementTable():ArrayCollection;
+    abstract public function getInducementExpression(array $options):CompositeExpression;
 
     public function getInducementsByTeamOptions(array $options):array
     {
