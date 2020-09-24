@@ -4,7 +4,8 @@ namespace Obblm\Core\Helper\Rule\Config;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RosterResolver extends AbstractTreeResolver implements ConfigInterface, ConfigTreeInterface {
+class RosterResolver extends AbstractTreeResolver implements ConfigInterface, ConfigTreeInterface
+{
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

@@ -45,7 +45,7 @@ class PlayerVersion
     /**
      * @ORM\Column(type="array", nullable=true)
      */
-    private $additional_skills = [];
+    private $additionalSkills = [];
 
     /**
      * @ORM\Column(type="array", nullable=true)
@@ -60,7 +60,7 @@ class PlayerVersion
     /**
      * @ORM\Column(type="boolean")
      */
-    private $missing_next_game = false;
+    private $missingNextGame = false;
 
     /**
      * @ORM\Column(type="boolean")
@@ -75,7 +75,7 @@ class PlayerVersion
     /**
      * @ORM\Column(type="boolean")
      */
-    private $hired_star_player = false;
+    private $hiredStarPlayer = false;
 
     /**
      * @ORM\Column(type="boolean")
@@ -90,7 +90,7 @@ class PlayerVersion
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $spp_level;
+    private $sppLevel;
 
     /**
      * @ORM\Column(type="integer")
@@ -140,12 +140,12 @@ class PlayerVersion
 
     public function getAdditionalSkills(): ?array
     {
-        return $this->additional_skills;
+        return $this->additionalSkills;
     }
 
-    public function setAdditionalSkills(array $additional_skills): self
+    public function setAdditionalSkills(array $additionalSkills): self
     {
-        $this->additional_skills = $additional_skills;
+        $this->additionalSkills = $additionalSkills;
 
         return $this;
     }
@@ -176,7 +176,7 @@ class PlayerVersion
 
     public function getMissingNextGame(): ?bool
     {
-        return $this->missing_next_game;
+        return $this->missingNextGame;
     }
 
     public function isMissingNextGame(): ?bool
@@ -184,9 +184,9 @@ class PlayerVersion
         return $this->getMissingNextGame();
     }
 
-    public function setMissingNextGame(bool $missing_next_game): self
+    public function setMissingNextGame(bool $missingNextGame): self
     {
-        $this->missing_next_game = $missing_next_game;
+        $this->missingNextGame = $missingNextGame;
         return $this;
     }
 
@@ -226,7 +226,7 @@ class PlayerVersion
 
     public function getHiredStarPlayer(): ?bool
     {
-        return $this->hired_star_player;
+        return $this->hiredStarPlayer;
     }
 
     public function isHiredStarPlayer(): ?bool
@@ -234,9 +234,9 @@ class PlayerVersion
         return $this->getHiredStarPlayer();
     }
 
-    public function setHiredStarPlayer(bool $hired_star_player): self
+    public function setHiredStarPlayer(bool $hiredStarPlayer): self
     {
-        $this->hired_star_player = $hired_star_player;
+        $this->hiredStarPlayer = $hiredStarPlayer;
         return $this;
     }
 
@@ -314,12 +314,12 @@ class PlayerVersion
 
     public function getSppLevel(): ?string
     {
-        return $this->spp_level;
+        return $this->sppLevel;
     }
 
-    public function setSppLevel(string $spp_level): self
+    public function setSppLevel(string $sppLevel): self
     {
-        $this->spp_level = $spp_level;
+        $this->sppLevel = $sppLevel;
 
         return $this;
     }

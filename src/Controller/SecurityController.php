@@ -64,7 +64,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EventDispatcherInterface $dispatcher)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EventDispatcherInterface $dispatcher):Response
     {
         $coach = new Coach();
         $form = $this->createForm(RegistrationForm::class, $coach);
@@ -93,7 +93,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/activate/{hash}", name="activate_account")
      */
-    public function activate(string $hash, EventDispatcherInterface $dispatcher)
+    public function activate(string $hash, EventDispatcherInterface $dispatcher):Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 

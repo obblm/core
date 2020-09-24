@@ -30,13 +30,13 @@ class TeamValueValidator extends ConstraintValidator
             $value = TeamHelper::getLastVersion($value);
         }
 
-        $team_cost = $this->teamHelper->calculateTeamValue($value);
+        $teamCost = $this->teamHelper->calculateTeamValue($value);
         $limit = $this->teamHelper->getRuleHelper($value->getTeam())->getMaxTeamCost();
 
-        if ($team_cost > $limit) {
+        if ($teamCost > $limit) {
             $this->context->buildViolation($constraint->limitMessage)
                 ->setParameter('{{ limit }}', $limit)
-                ->setParameter('{{ current }}', $team_cost)
+                ->setParameter('{{ current }}', $teamCost)
                 ->addViolation();
         }
     }

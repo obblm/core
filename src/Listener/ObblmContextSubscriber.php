@@ -33,11 +33,12 @@ class ObblmContextSubscriber implements EventSubscriberInterface
     public function onFinishRequest(ControllerArgumentsEvent $event)
     {
         $request = $event->getRequest();
-        $rule_set = false;
-        if ($team = $request->get('team')) {
+        $set = false;
+        if ($request->get('team')) {
+            $team = $request->get('team');
             if ($team instanceof Team) {
                 $this->context->setTeam($team);
-                if (!$rule_set) {
+                if (!$set) {
                     $this->context->setRule($this->ruleHelper->getHelper($team->getRule()));
                 }
             }

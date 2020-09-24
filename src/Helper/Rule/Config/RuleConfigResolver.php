@@ -4,9 +4,10 @@ namespace Obblm\Core\Helper\Rule\Config;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RuleConfigResolver extends AbstractTreeResolver implements ConfigInterface {
-
-    public static function getChildren():array {
+class RuleConfigResolver extends AbstractTreeResolver implements ConfigInterface
+{
+    public static function getChildren():array
+    {
         return [
             'rosters' => RosterResolver::class,
             //'inducements' => RosterTreeResolver::class,

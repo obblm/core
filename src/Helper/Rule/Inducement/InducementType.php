@@ -8,10 +8,10 @@ class InducementType
     public $key;
 
     /** @var string */
-    private $translation_key;
+    private $translationKey;
 
     /** @var string */
-    private $translation_domain;
+    private $translationDomain;
 
     public function __construct(array $options = [])
     {
@@ -21,8 +21,8 @@ class InducementType
     private function hydrateWithOptions($options)
     {
         $this->key = $options['key'] ?? false;
-        $this->translation_key = $options['translation_key'] ?? false;
-        $this->translation_domain = $options['translation_domain'] ?? false;
+        $this->translationKey = $options['translation_key'] ?? false;
+        $this->translationDomain = $options['translation_domain'] ?? false;
     }
     /**
      * @return string
@@ -37,7 +37,7 @@ class InducementType
      */
     public function getTranslationKey(): string
     {
-        return $this->translation_key;
+        return $this->translationKey;
     }
 
     /**
@@ -45,11 +45,11 @@ class InducementType
      */
     public function getTranslationDomain(): string
     {
-        return $this->translation_domain;
+        return $this->translationDomain;
     }
 
     public function __toString(): string
     {
-        return $this->translation_key;
+        return $this->translationKey;
     }
 }

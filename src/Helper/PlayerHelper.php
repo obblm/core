@@ -27,16 +27,16 @@ class PlayerHelper
     }
     public function getBasePlayerVersion(Player $player):array
     {
-        list($rule_key, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $player->getType());
+        list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $player->getType());
         $helper = $this->teamHelper->getRuleHelper($player->getTeam());
         $base = $helper->getAttachedRule()->getRule()['rosters'][$roster]['players'][$type];
         $base['injuries'] = [];
         return $base;
     }
 
-    public static function composePlayerKey($rule_key, $roster, $type):string
+    public static function composePlayerKey($ruleKey, $roster, $type):string
     {
-        return join(CoreTranslation::TRANSLATION_GLUE, [$rule_key, $roster, $type]);
+        return join(CoreTranslation::TRANSLATION_GLUE, [$ruleKey, $roster, $type]);
     }
 
     public static function getPlayerSkills(Player $player):array

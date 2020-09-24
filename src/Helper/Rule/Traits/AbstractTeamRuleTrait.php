@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
+use Obblm\Core\Exception\InvalidArgumentException;
 use Obblm\Core\Exception\NotFoundRuleKeyExcepion;
 use Obblm\Core\Exception\NoVersionException;
 use Obblm\Core\Helper\PlayerHelper;
@@ -106,32 +107,38 @@ trait AbstractTeamRuleTrait
 
     public function calculateTeamValue(TeamVersion $version, bool $excludeDisposable = false):int
     {
-        $team_cost = 0;
+        if (!$version->getTeam()) {
+            throw new InvalidArgumentException();
+        }
+        $value = 0;
         // Players
-        foreach ($version->getTeam()->getAvailablePlayers() as $basePlayer) {
-            if ($basePlayer->getType()) {
-                $player = (new PlayerVersion());
+        foreach ($version->getTeam()->getAvailablePlayers() as $player) {
+            if ($player->getType()) {
                 try {
-                    $player = PlayerHelper::getLastVersion($basePlayer);
+                    $playerVersion = PlayerHelper::getLastVersion($player);
                 } catch (NoVersionException $e) { // It's a new player !
-                    $basePlayer->addVersion($player);
-                    $version->addPlayerVersion($player);
-                    $this->setPlayerDefaultValues($player);
+                    $playerVersion = (new PlayerVersion());
+                    $player->addVersion($playerVersion);
+                    $version->addPlayerVersion($playerVersion);
+                    $this->setPlayerDefaultValues($playerVersion);
                 }
-                if (!$player->isMissingNextGame() && !($this->playerIsDisposable($player) && $excludeDisposable)) {
-                    $team_cost += $player->getValue();
+                if (!$playerVersion->isMissingNextGame() && !($this->playerIsDisposable($playerVersion) && $excludeDisposable)) {
+                    $value += $playerVersion->getValue();
                 }
             }
         }
         // Sidelines
-        $team_cost += $version->getRerolls() * $this->getRerollCost($version->getTeam());
-        $team_cost += $version->getAssistants() * $this->getAssistantsCost($version->getTeam());
-        $team_cost += $version->getCheerleaders() * $this->getCheerleadersCost($version->getTeam());
-        $team_cost += $version->getPopularity() * $this->getPopularityCost($version->getTeam());
-        $team_cost += ($version->getApothecary()) ? $this->getApothecaryCost($version->getTeam()) : 0;
+        $value += $version->getRerolls() * $this->getRerollCost($version->getTeam());
+        $value += $version->getAssistants() * $this->getAssistantsCost($version->getTeam());
+        $value += $version->getCheerleaders() * $this->getCheerleadersCost($version->getTeam());
+        $value += $version->getPopularity() * $this->getPopularityCost($version->getTeam());
+        $value += ($version->getApothecary()) ? $this->getApothecaryCost($version->getTeam()) : 0;
 
-        return $team_cost;
+        return $value;
     }
+
+    abstract public function setPlayerDefaultValues(PlayerVersion $version): ?PlayerVersion;
+    abstract public function playerIsDisposable(PlayerVersion $version):bool;
 
     /**
      * @return array
@@ -141,12 +148,12 @@ trait AbstractTeamRuleTrait
         return $this->getInjuries();
     }
 
-    public function getMaxPlayersByType($roster_key, $type_key): int
+    public function getMaxPlayersByType($rosterKey, $typeKey): int
     {
         /** @var Roster $roster */
-        $roster = $this->getRosters()->get($roster_key);
-        if (!$type = $roster->getPlayerTypes()[$type_key]) {
-            throw new NotFoundRuleKeyExcepion($type_key, 'toto');
+        $roster = $this->getRosters()->get($rosterKey);
+        if (!$type = $roster->getPlayerTypes()[$typeKey]) {
+            throw new NotFoundRuleKeyExcepion($typeKey, 'toto');
         }
         return (int) $type['max'];
     }

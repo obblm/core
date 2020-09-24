@@ -10,12 +10,13 @@ class DiceType extends ChoiceType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($die_faces = $options['dice_value']) {
-            $die_choices = [];
-            for ($i = 1; $i <= $die_faces; $i++) {
-                $die_choices[$i] = (int) $i;
+        if (isset($options['dice_value'])) {
+            $dieFaces = $options['dice_value'];
+            $dieChoices = [];
+            for ($i = 1; $i <= $dieFaces; $i++) {
+                $dieChoices[$i] = (int) $i;
             }
-            $options['choices'] = $die_choices;
+            $options['choices'] = $dieChoices;
         }
         parent::buildForm($builder, $options);
     }

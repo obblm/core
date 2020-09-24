@@ -14,133 +14,133 @@ class CoreTranslation
      **************/
 
     /**
-     * @param $rule_key
+     * @param $ruleKey
      * @return string
      */
-    public static function getRuleTitle($rule_key):string
+    public static function getRuleTitle($ruleKey):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'title']);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'title']);
     }
 
     /**
-     * @param $rule_key
+     * @param $ruleKey
      * @param $roster
      * @return string
      */
-    public static function getRosterKey($rule_key, $roster):string
+    public static function getRosterKey($ruleKey, $roster):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'rosters', $roster, 'title']);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'rosters', $roster, 'title']);
     }
 
     /**
-     * @param $rule_key
+     * @param $ruleKey
      * @param $roster
      * @return string
      */
-    public static function getRosterDescription($rule_key, $roster):string
+    public static function getRosterDescription($ruleKey, $roster):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'rosters', $roster, 'description']);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'rosters', $roster, 'description']);
     }
 
     /**
-     * @param $rule_key
+     * @param $ruleKey
      * @param $roster
      * @return string
      */
-    public static function getSkillNameKey($rule_key, $skill):string
+    public static function getSkillNameKey($ruleKey, $skill):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'skills', $skill, 'title']);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'skills', $skill, 'title']);
     }
 
     /**
-     * @param $rule_key
+     * @param $ruleKey
      * @param $roster
      * @return string
      */
-    public static function getSkillType($rule_key, $type):string
+    public static function getSkillType($ruleKey, $type):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'skill_types', $type]);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'skill_types', $type]);
     }
 
     /**
-     * @param $rule_key
+     * @param $ruleKey
      * @param $roster
      * @return string
      */
-    public static function getSkillDescription($rule_key, $skill):string
+    public static function getSkillDescription($ruleKey, $skill):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'skills', $skill, 'description']);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'skills', $skill, 'description']);
     }
 
     /**
-     * @param $rule_key
-     * @param $injury_key
+     * @param $ruleKey
+     * @param $field
      * @return string
      */
-    public static function getFieldKey($rule_key, $field):string
+    public static function getFieldKey($ruleKey, $field):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'fields', $field, 'title']);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'fields', $field, 'title']);
     }
 
     /**
-     * @param $rule_key
-     * @param $injury_key
+     * @param $ruleKey
+     * @param $field
      * @return string
      */
-    public static function getWeatherKey($rule_key, $field, $weather):string
+    public static function getWeatherKey($ruleKey, $field, $weather):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'fields', $field, 'weather', $weather]);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'fields', $field, 'weather', $weather]);
     }
 
     /**
-     * @param $rule_key
-     * @param $injury_key
+     * @param $ruleKey
+     * @param $field
      * @return string
      */
-    public static function getInjuryKey($rule_key, $injury_key):string
+    public static function getInjuryKey($ruleKey, $injuryKey):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'injuries', $injury_key, 'name']);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'injuries', $injuryKey, 'name']);
     }
 
     /**
-     * @param $rule_key
-     * @param $injury_key
+     * @param $ruleKey
+     * @param $injuryKey
      * @return string
      */
-    public static function getInjuryEffect($rule_key, $injury_key):string
+    public static function getInjuryEffect($ruleKey, $injuryKey):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'injuries', $injury_key, 'effect']);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'injuries', $injuryKey, 'effect']);
     }
 
     /**
-     * @param $rule_key
-     * @param $injury_key
+     * @param $ruleKey
+     * @param $injuryKey
      * @return string
      */
-    public static function getInducementName($rule_key, $inducement_key):string
+    public static function getInducementName($ruleKey, $inducementKey):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'inducements', $inducement_key]);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'inducements', $inducementKey]);
     }
-    public static function getInducementTitle($rule_key):string
+    public static function getInducementTitle($ruleKey):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'inducements', 'title']);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'inducements', 'title']);
     }
-    public static function getMercenaryTitle($rule_key):string
+    public static function getMercenaryTitle($ruleKey):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'mercenary', 'title']);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'mercenary', 'title']);
     }
     /**
-     * @param $rule_key
-     * @param $injury_key
+     * @param $ruleKey
+     * @param $injuryKey
      * @return string
      */
-    public static function getStarPlayerName($rule_key, $star_player_key):string
+    public static function getStarPlayerName($ruleKey, $starPlayerKey):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'star_players', $star_player_key, 'name']);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'star_players', $starPlayerKey, 'name']);
     }
-    public static function getStarPlayerTitle($rule_key):string
+    public static function getStarPlayerTitle($ruleKey):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'star_players', 'title']);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'star_players', 'title']);
     }
 
     /***************
@@ -158,15 +158,15 @@ class CoreTranslation
 
     public static function getPlayerTranslationKey(Player $player):string
     {
-        list($rule_key, $type, $position) = explode(self::TRANSLATION_GLUE, $player->getType());
+        list($ruleKey, $type, $position) = explode(self::TRANSLATION_GLUE, $player->getType());
         if ($type == 'star_players') {
-            return self::getStarPlayerName($rule_key, $position);
+            return self::getStarPlayerName($ruleKey, $position);
         }
-        return self::getPlayerKeyType($rule_key, $type, $position);
+        return self::getPlayerKeyType($ruleKey, $type, $position);
     }
 
-    public static function getPlayerKeyType($rule_key, $roster, $type):string
+    public static function getPlayerKeyType($ruleKey, $roster, $type):string
     {
-        return join(self::TRANSLATION_GLUE, [$rule_key, 'rosters', $roster, 'positions', $type]);
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'rosters', $roster, 'positions', $type]);
     }
 }

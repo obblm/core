@@ -4,6 +4,7 @@ namespace Obblm\Core\Controller;
 
 use Obblm\Core\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -14,7 +15,7 @@ class FrontendController extends AbstractController
     /**
      * @Route("/", name="dashboard")
      */
-    public function home()
+    public function home():Response
     {
         $this->denyAccessUnlessGranted(Roles::COACH);
 

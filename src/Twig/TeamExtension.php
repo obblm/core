@@ -137,7 +137,7 @@ class TeamExtension extends AbstractExtension
             $arr['injuries'][] = [
                 'value' => $ruleInjury->value,
                 'label' => $ruleInjury->label,
-                'effect' => $ruleInjury->effect_label
+                'effect' => $ruleInjury->effectLabel
             ];
         }
         return $arr;

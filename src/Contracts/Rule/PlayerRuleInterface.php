@@ -12,7 +12,7 @@ interface PlayerRuleInterface
 {
     public function setPlayerDefaultValues(PlayerVersion $version):?PlayerVersion;
     public function playerIsDisposable(PlayerVersion $playerVersion):bool;
-    public function getInjury($key):?object;
+    public function getInjury(string $key):?object;
     public function getAvailablePlayerKeyTypes(string $roster):array;
     public function getAvailablePlayerTypes(string $roster):array;
 
@@ -21,5 +21,5 @@ interface PlayerRuleInterface
      *************************/
     public function getSppLevel(PlayerVersion $version):?string;
     public function getContextForRoll(array $roll):?array;
-    public function getAvailableSkills(?PlayerVersion $version, $context = null):?ArrayCollection;
+    public function getAvailableSkills(?PlayerVersion $version, array $context = null):?ArrayCollection;
 }

@@ -27,24 +27,24 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
     /** @var ArrayCollection|Skill[] */
     private $skills;
     /** @var ArrayCollection|InducementType[] */
-    private $inducement_types;
+    private $inducementTypes;
     /** @var ArrayCollection */
-    private $spp_levels;
+    private $sppLevels;
     /** @var ArrayCollection|InducementInterface[] */
     private $inducements;
     /** @var ArrayCollection|RosterInterface[] */
     private $rosters;
 
-    protected function build(string $rule_key, array $rule) {
-
+    protected function build(string $ruleKey, array $rule)
+    {
         $treeResolver = new ConfigResolver($this);
         $rule = $treeResolver->resolve($rule);
-        $this->prepareInjuriesTable($rule_key, $rule);
-        $this->prepareSppTable($rule_key, $rule);
-        $this->prepareSkillsTable($rule_key, $rule);
-        $this->prepareInducementTypes($rule_key, $rule);
-        $this->prepareInducementTable($rule_key, $rule);
-        $this->prepareRosterTable($rule_key, $rule);
+        $this->prepareInjuriesTable($ruleKey, $rule);
+        $this->prepareSppTable($ruleKey, $rule);
+        $this->prepareSkillsTable($ruleKey, $rule);
+        $this->prepareInducementTypes($ruleKey, $rule);
+        $this->prepareInducementTable($ruleKey, $rule);
+        $this->prepareRosterTable($ruleKey, $rule);
     }
 
     public function getInjuries():ArrayCollection
@@ -60,23 +60,28 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
 
     public function getInducementTypes():ArrayCollection
     {
-        return $this->inducement_types;
+        return $this->inducementTypes;
     }
 
-    public function setInducementTypes(ArrayCollection $inducement_types):self
+    public function setInducementTypes(ArrayCollection $inducementTypes):self
     {
-        $this->inducement_types = $inducement_types;
+        $this->inducementTypes = $inducementTypes;
         return $this;
+    }
+
+    public function getInducementType(string $type):InducementType
+    {
+        return $this->getInducementTypes()->get($type);
     }
 
     public function getSppLevels():ArrayCollection
     {
-        return $this->spp_levels;
+        return $this->sppLevels;
     }
 
-    public function setSppLevels(ArrayCollection $spp_levels):self
+    public function setSppLevels(ArrayCollection $sppLevels):self
     {
-        $this->spp_levels = $spp_levels;
+        $this->sppLevels = $sppLevels;
         return $this;
     }
 
@@ -113,49 +118,49 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
         return $this;
     }
 
-    private function prepareInjuriesTable(string $rule_key, array $rule)
+    private function prepareInjuriesTable(string $ruleKey, array $rule)
     {
         $this->injuries = new ArrayCollection();
         foreach ($rule['injuries'] as $key => $injury) {
-            $label = CoreTranslation::getInjuryKey($rule_key, $key);
-            $effect_label = CoreTranslation::getInjuryEffect($rule_key, $key);
+            $label = CoreTranslation::getInjuryKey($ruleKey, $key);
+            $effectLabel = CoreTranslation::getInjuryEffect($ruleKey, $key);
             if (isset($injury['to'])) {
                 for ($i = $injury['from']; $i <= $injury['to']; $i++) {
                     $this->injuries->set(
                         $i,
-                        (object) ['value' => $i, 'label' => $label, 'effect_label' => $effect_label, 'effects' => $injury['effects']]
+                        (object) ['value' => $i, 'label' => $label, 'effect_label' => $effectLabel, 'effects' => $injury['effects']]
                     );
                 }
             } else {
                 $this->injuries->set(
                     $injury['from'],
-                    (object) ['value' => $injury['from'], 'label' => $label, 'effect_label' => $effect_label, 'effects' => $injury['effects']]
+                    (object) ['value' => $injury['from'], 'label' => $label, 'effect_label' => $effectLabel, 'effects' => $injury['effects']]
                 );
             }
         }
     }
 
-    private function prepareInducementTypes(string $rule_key, array $rule)
+    private function prepareInducementTypes(string $ruleKey, array $rule)
     {
-        $this->inducement_types = new ArrayCollection();
-        $this->inducement_types->set('star_players', new InducementType([
+        $this->inducementTypes = new ArrayCollection();
+        $this->inducementTypes->set('star_players', new InducementType([
             'key' => 'star_players',
-            'translation_key' => CoreTranslation::getStarPlayerTitle($rule_key),
-            'translation_domain' => $rule_key,
+            'translation_key' => CoreTranslation::getStarPlayerTitle($ruleKey),
+            'translation_domain' => $ruleKey,
         ]));
-        $this->inducement_types->set('inducements', new InducementType([
+        $this->inducementTypes->set('inducements', new InducementType([
             'key' => 'inducements',
-            'translation_key' => CoreTranslation::getInducementTitle($rule_key),
-            'translation_domain' => $rule_key,
+            'translation_key' => CoreTranslation::getInducementTitle($ruleKey),
+            'translation_domain' => $ruleKey,
         ]));
-        $this->inducement_types->set('mercenary', new InducementType([
+        $this->inducementTypes->set('mercenary', new InducementType([
             'key' => 'mercenary',
-            'translation_key' => CoreTranslation::getMercenaryTitle($rule_key),
-            'translation_domain' => $rule_key,
+            'translation_key' => CoreTranslation::getMercenaryTitle($ruleKey),
+            'translation_domain' => $ruleKey,
         ]));
     }
 
-    private function prepareSppTable(string $rule_key, array $rule)
+    private function prepareSppTable(string $ruleKey, array $rule)
     {
         $spps = new ArrayCollection($rule['spp_levels']);
         foreach ($spps as $from => $level) {
@@ -170,10 +175,10 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
         }
         $spps = $spps->toArray();
         ksort($spps);
-        $this->spp_levels = new ArrayCollection($spps);
+        $this->sppLevels = new ArrayCollection($spps);
     }
 
-    private function prepareSkillsTable(string $rule_key, array $rule)
+    private function prepareSkillsTable(string $ruleKey, array $rule)
     {
         $this->skills = new ArrayCollection();
         foreach ($rule['skills'] as $type => $skills) {
@@ -184,26 +189,26 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
                     new Skill([
                         'key' => $skill,
                         'type' => $type,
-                        'translation_key' => CoreTranslation::getSkillNameKey($rule_key, $skill),
-                        'type_translation_key' => CoreTranslation::getSkillType($rule_key, $type),
-                        'translation_domain' => $rule_key,
+                        'translation_key' => CoreTranslation::getSkillNameKey($ruleKey, $skill),
+                        'type_translation_key' => CoreTranslation::getSkillType($ruleKey, $type),
+                        'translation_domain' => $ruleKey,
                     ])
                 );
             }
         }
     }
 
-    private function prepareInducementTable(string $rule_key, array $rule)
+    private function prepareInducementTable(string $ruleKey, array $rule)
     {
         $this->inducements = new ArrayCollection();
 
         foreach ($rule['inducements'] as $key => $value) {
             if ($key !== 'star_players') {
                 $inducement = new Inducement([
-                    'type' => $this->inducement_types['inducements'],
-                    'key' => join(CoreTranslation::TRANSLATION_GLUE, [$rule_key, 'inducements', $key]),
-                    'translation_domain' => $rule_key,
-                    'translation_key' => CoreTranslation::getInducementName($rule_key, $key),
+                    'type' => $this->inducementTypes['inducements'],
+                    'key' => join(CoreTranslation::TRANSLATION_GLUE, [$ruleKey, 'inducements', $key]),
+                    'translation_domain' => $ruleKey,
+                    'translation_key' => CoreTranslation::getInducementName($ruleKey, $key),
                     'max' => $value['max'] ?? 0,
                     'rosters' => $value['rosters'] ?? null,
                     'value' => $value['cost'],
@@ -214,9 +219,9 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
                 }
             }
         }
-        foreach ($rule['star_players'] as $key => $star_player) {
+        foreach ($rule['star_players'] as $key => $starPlayer) {
             try {
-                $inducement = $this->createStarPlayerInducement($rule_key, $key, $star_player);
+                $inducement = $this->createStarPlayerInducement($ruleKey, $key, $starPlayer);
                 if (!$this->inducements->contains($inducement)) {
                     $this->inducements->add($inducement);
                 }
@@ -225,7 +230,7 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
         }
     }
 
-    private function prepareRosterTable(string $rule_key, array $rule)
+    private function prepareRosterTable(string $ruleKey, array $rule)
     {
         $this->rosters = new ArrayCollection();
         foreach ($rule['rosters'] as $key => $roster) {
@@ -233,8 +238,8 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
                 $key,
                 new Roster([
                     'key' => $key,
-                    'translation_key' => CoreTranslation::getRosterKey($rule_key, $key),
-                    'translation_domain' => $rule_key,
+                    'translation_key' => CoreTranslation::getRosterKey($ruleKey, $key),
+                    'translation_domain' => $ruleKey,
                     'player_types' => $roster['players'],
                     'reroll_cost' => $roster['reroll_cost'] ?? 0,
                     'can_have_apothecary' => $roster['options']['can_have_apothecary'] ?? true,
@@ -244,26 +249,26 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
         }
     }
 
-    private function createStarPlayerInducement(string $rule_key, string $key, array $star_player):InducementInterface
+    private function createStarPlayerInducement(string $ruleKey, string $key, array $starPlayer):InducementInterface
     {
         $options = [
-            'type' => $this->inducement_types['star_players'],
-            'key' => join(CoreTranslation::TRANSLATION_GLUE, [$rule_key, 'star_players', $key]),
-            'value' => $star_player['cost'],
-            'discount_cost' => $value['discount_cost'] ?? null,
-            'characteristics' => $star_player['characteristics'] ?? null,
-            'skills' => $star_player['skills'] ?? null,
-            'rosters' => $star_player['rosters'] ?? null,
-            'translation_domain' => $rule_key,
-            'translation_key' => CoreTranslation::getStarPlayerName($rule_key, $key),
-            'max' => $options['max'] ?? 1,
+            'type' => $this->inducementTypes['star_players'],
+            'key' => join(CoreTranslation::TRANSLATION_GLUE, [$ruleKey, 'star_players', $key]),
+            'value' => $starPlayer['cost'],
+            'discount_cost' => $starPlayer['discount_cost'] ?? null,
+            'characteristics' => $starPlayer['characteristics'] ?? null,
+            'skills' => $starPlayer['skills'] ?? null,
+            'rosters' => $starPlayer['rosters'] ?? null,
+            'translation_domain' => $ruleKey,
+            'translation_key' => CoreTranslation::getStarPlayerName($ruleKey, $key),
+            'max' => $starPlayer['max'] ?? 1,
         ];
-        if (isset($star_player['multi_parts']) && $star_player['multi_parts']) {
+        if (isset($starPlayer['multi_parts']) && $starPlayer['multi_parts']) {
             $options['parts'] = [];
             $first = true;
-            foreach ($star_player['multi_parts'] as $key => $part) {
-                $part['cost'] = $first ? $star_player['cost'] : 0;
-                $options['parts'][] = $this->createStarPlayerInducement($rule_key, $key, $part);
+            foreach ($starPlayer['multi_parts'] as $key => $part) {
+                $part['cost'] = $first ? $starPlayer['cost'] : 0;
+                $options['parts'][] = $this->createStarPlayerInducement($ruleKey, $key, $part);
                 $first = false;
             }
             $inducement = new MultipleStarPlayer($options);
@@ -275,7 +280,7 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
 
     protected function getInducementExpression($options = ['type' => 'inducements']):CompositeExpression
     {
-        $sub_expressions = [];
+        $subExpressions = [];
         if (isset($options['type'])) {
             // Criteria by inducement type
             if (is_array($options['type'])) {
@@ -286,30 +291,29 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
                         $types[] = Criteria::expr()->eq('type', $inducementType);
                     }
                 }
-                $sub_expressions['type'] = new CompositeExpression(CompositeExpression::TYPE_OR, $types);
+                $subExpressions['type'] = new CompositeExpression(CompositeExpression::TYPE_OR, $types);
                 ;
             } elseif (is_string($options['type'])) {
                 $inducementType = $this->getInducementType($options['type']);
-                $sub_expressions['type'] = Criteria::expr()->eq('type', $inducementType);
+                $subExpressions['type'] = Criteria::expr()->eq('type', $inducementType);
             }
         }
         if (isset($options['cost_limit'])) {
             // Criteria by cost limit
             if (is_int($options['cost_limit'])) {
-                $sub_expressions['cost'] = Criteria::expr()->lte('value', $options['cost_limit']);
+                $subExpressions['cost'] = Criteria::expr()->lte('value', $options['cost_limit']);
             }
         }
         if (isset($options['roster'])) {
             // Criteria by roster
             if (is_string($options['roster'])) {
-                $sub_expressions['roster'] = Criteria::expr()->orX(
+                $subExpressions['roster'] = Criteria::expr()->orX(
                     Criteria::expr()->memberOf('rosters', $options['roster']),
                     Criteria::expr()->eq('rosters', [])
                 );
             }
         }
-        $composite = new CompositeExpression(CompositeExpression::TYPE_AND, $sub_expressions);
-        return $composite;
+        return new CompositeExpression(CompositeExpression::TYPE_AND, $subExpressions);
     }
 
     public function getInducementsFor(Team $team, ?int $budget = null):array
@@ -328,8 +332,8 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
         $criteria->where(Criteria::expr()->andX(
             $this->getInducementExpression($expr)
         ));
-        $available_inducements = $this->getInducements()->matching($criteria);
-        return $available_inducements->toArray();
+        $availableInducements = $this->getInducements()->matching($criteria);
+        return $availableInducements->toArray();
     }
 
     public function getAllStarPlayers():array

@@ -26,9 +26,9 @@ class PlayerTeamType extends AbstractType
 
             $choices = [];
             foreach ($types as $type) {
-                $translation_key = CoreTranslation::getPlayerKeyType($helper->getAttachedRule()->getRuleKey(), $roster, $type);
-                $player_key = PlayerHelper::composePlayerKey($helper->getAttachedRule()->getRuleKey(), $roster, $type);
-                $choices[$translation_key] = $player_key;
+                $translationKey = CoreTranslation::getPlayerKeyType($helper->getAttachedRule()->getRuleKey(), $roster, $type);
+                $playerKey = PlayerHelper::composePlayerKey($helper->getAttachedRule()->getRuleKey(), $roster, $type);
+                $choices[$translationKey] = $playerKey;
             }
         }
         $builder->add('type', ChoiceType::class, [

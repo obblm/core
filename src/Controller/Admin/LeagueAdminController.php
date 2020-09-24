@@ -7,6 +7,7 @@ use Obblm\Core\Form\League\AdminLeagueForm;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -20,7 +21,7 @@ class LeagueAdminController extends AbstractController
     /**
      * @Route("/", name="admin_leagues")
      */
-    public function index(EntityManagerInterface $em)
+    public function index(EntityManagerInterface $em):Response
     {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
@@ -34,7 +35,7 @@ class LeagueAdminController extends AbstractController
     /**
      * @Route("/add", name="admin_leagues_add")
      */
-    public function add(Request $request, EntityManagerInterface $em)
+    public function add(Request $request, EntityManagerInterface $em):Response
     {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
@@ -55,7 +56,7 @@ class LeagueAdminController extends AbstractController
     /**
      * @Route("/edit/{league}", name="admin_leagues_edit")
      */
-    public function edit(League $league, Request $request, EntityManagerInterface $em)
+    public function edit(League $league, Request $request, EntityManagerInterface $em):Response
     {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
 
@@ -75,7 +76,7 @@ class LeagueAdminController extends AbstractController
     /**
      * @Route("/delete/{league}", name="admin_leagues_delete")
      */
-    public function delete(League $league, Request $request, EntityManagerInterface $em)
+    public function delete(League $league, Request $request, EntityManagerInterface $em):Response
     {
         $this->denyAccessUnlessGranted('OBBLM_ADMIN');
         return $this->render('@ObblmCore/todo.html.twig', []);

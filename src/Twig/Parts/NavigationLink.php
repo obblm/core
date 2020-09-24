@@ -8,7 +8,7 @@ class NavigationLink implements NavigationElementInterface
     protected $link;
     protected $parameters;
     protected $icon;
-    protected $translation_domain = null;
+    protected $translationDomain = null;
 
     public function __construct(string $route = 'obblm_dashboard', string $link = "Home", array $parameters = [], string $icon = null)
     {
@@ -55,15 +55,15 @@ class NavigationLink implements NavigationElementInterface
      */
     public function getTranslationDomain()
     {
-        return $this->translation_domain;
+        return $this->translationDomain;
     }
 
     /**
-     * @param string|null $translation_domain
+     * @param string|null $translationDomain
      */
-    public function setTranslationDomain(?string $translation_domain): self
+    public function setTranslationDomain(?string $translationDomain): self
     {
-        $this->translation_domain = $translation_domain;
+        $this->translationDomain = $translationDomain;
         return $this;
     }
 }

@@ -21,9 +21,8 @@ class EditTeamType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /** @var TeamVersion $version */
-        if ($version = $builder->getData()) {
-            $team = $version->getTeam();
+        if ($builder->getData() && $builder->getData() instanceof TeamVersion) {
+            $team = $builder->getData()->getTeam();
             if (!$team->isLockedByManagment() && !$team->isReady()) {
                 $builder
                     ->add('team', TeamType::class, [

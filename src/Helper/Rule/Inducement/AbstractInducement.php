@@ -11,16 +11,16 @@ abstract class AbstractInducement
     protected $value;
 
     /** @var int */
-    protected $discount_value;
+    protected $discountValue;
 
     /** @var string */
-    protected $translation_key;
+    protected $translationKey;
 
     /** @var string */
-    protected $translation_domain;
+    protected $translationDomain;
 
     /** @var string */
-    protected $translation_type;
+    protected $translationType;
 
     /** @var InducementType */
     protected $type;
@@ -42,13 +42,13 @@ abstract class AbstractInducement
 
     protected function hydrateWithOptions($options)
     {
-        $this->translation_type = $options['translation_type'] ?? false;
+        $this->translationType = $options['translation_type'] ?? false;
         $this->type = $options['type'] ?? null;
         $this->key = $options['key'] ?? false;
         $this->value = $options['value'] ?? false;
-        $this->discount_value = $options['discount_value'] ?? $this->value;
-        $this->translation_key = $options['translation_key'] ?? false;
-        $this->translation_domain = $options['translation_domain'] ?? false;
+        $this->discountValue = $options['discount_value'] ?? $this->value;
+        $this->translationKey = $options['translation_key'] ?? false;
+        $this->translationDomain = $options['translation_domain'] ?? false;
         $this->max = $options['max'] ?? false;
         $this->rosters = $options['rosters'] ?? [];
     }
@@ -87,7 +87,7 @@ abstract class AbstractInducement
      */
     public function getDiscountValue(): int
     {
-        return $this->discount_value;
+        return $this->discountValue;
     }
 
     /**
@@ -103,7 +103,7 @@ abstract class AbstractInducement
      */
     public function getTranslationType(): string
     {
-        return $this->translation_type;
+        return $this->translationType;
     }
 
     /**
@@ -111,7 +111,7 @@ abstract class AbstractInducement
      */
     public function getTranslationKey(): string
     {
-        return $this->translation_key;
+        return $this->translationKey;
     }
 
     /**
@@ -119,7 +119,7 @@ abstract class AbstractInducement
      */
     public function getTranslationDomain(): string
     {
-        return $this->translation_domain;
+        return $this->translationDomain;
     }
 
     /**
@@ -155,27 +155,27 @@ abstract class AbstractInducement
     }
 
     /**
-     * @param string $translation_key
+     * @param string $translationKey
      */
-    public function setTranslationKey(string $translation_key): void
+    public function setTranslationKey(string $translationKey): void
     {
-        $this->translation_key = $translation_key;
+        $this->translationKey = $translationKey;
     }
 
     /**
-     * @param string $translation_domain
+     * @param string $translationDomain
      */
-    public function setTranslationDomain(string $translation_domain): void
+    public function setTranslationDomain(string $translationDomain): void
     {
-        $this->translation_domain = $translation_domain;
+        $this->translationDomain = $translationDomain;
     }
 
     /**
-     * @param string $translation_type
+     * @param string $translationType
      */
-    public function setTranslationType(string $translation_type): void
+    public function setTranslationType(string $translationType): void
     {
-        $this->translation_type = $translation_type;
+        $this->translationType = $translationType;
     }
 
     /**
@@ -204,6 +204,6 @@ abstract class AbstractInducement
 
     public function __toString(): string
     {
-        return $this->translation_key;
+        return $this->translationKey;
     }
 }

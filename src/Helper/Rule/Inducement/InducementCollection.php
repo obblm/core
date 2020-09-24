@@ -33,15 +33,15 @@ class InducementCollection extends ArrayCollection
      */
     public function getLimitValue(): ?int
     {
-        return $this->limit_value;
+        return $this->limitValue;
     }
 
     /**
-     * @param int $limit_value
+     * @param int $limitValue
      */
-    public function setLimitValue(int $limit_value): self
+    public function setLimitValue(int $limitValue): self
     {
-        $this->limit_value = $limit_value;
+        $this->limitValue = $limitValue;
         return $this;
     }
 }

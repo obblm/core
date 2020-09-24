@@ -35,8 +35,8 @@ class PlayerVersionEntitySubscriber implements EventSubscriberInterface
     {
         $version = $event->getTeamVersion();
         $helper = $this->ruleHelper->getHelper($version->getTeam()->getRule());
-        $max_team_cost = $helper->getMaxTeamCost();
-        $base_treasure = $max_team_cost - $helper->calculateTeamValue($version);
-        $version->setTreasure($base_treasure);
+        $maxTeamCost = $helper->getMaxTeamCost();
+        $treasure = $maxTeamCost - $helper->calculateTeamValue($version);
+        $version->setTreasure($treasure);
     }
 }

@@ -53,10 +53,10 @@ class InducementsQuantityValidator extends ConstraintValidator
         $criteria->where(Criteria::expr()->eq('type', 'star_players'));
         $criteria->orderBy(['value' => 'ASC']);
 
-        $star_players = $value->matching($criteria);
+        $starPlayers = $value->matching($criteria);
 
-        if ($star_players->count() > $constraint->helper->getMaxStarPlayers()) {
-            $type = $this->translator->trans($inducement->getTranslationType(), [], $inducement->getTranslationDomain());
+        if ($starPlayers->count() > $constraint->helper->getMaxStarPlayers()) {
+            $type = $this->translator->trans($starPlayers->getTranslationType(), [], $starPlayers->getTranslationDomain());
             $this->context->buildViolation($constraint->limitMessage)
                 ->setParameter('{{ type }}', $type)
                 ->setParameter('{{ limit }}', $constraint->helper->getMaxStarPlayers())

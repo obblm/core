@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractTeamController extends AbstractController
 {
+    /** @var TeamHelper */
     protected $teamHelper;
 
     public function __construct(TeamHelper $teamHelper)

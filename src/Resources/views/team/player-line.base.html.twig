@@ -1,4 +1,4 @@
-{% set translation_domain = player.team ? player.team.rule.ruleKey : rule.ruleKey %}
+{% set translation_domain = rule.ruleKey %}
 {% trans_default_domain translation_domain %}
 <tr>
     {% block number %}<td>{{ player.number }}</td>{% endblock %}

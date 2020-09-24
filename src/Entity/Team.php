@@ -69,7 +69,7 @@ class Team
     /**
      * @ORM\Column(type="boolean")
      */
-    private $locked_by_managment = false;
+    private $lockedByManagment = false;
 
     /**
      * @ORM\OneToMany(targetEntity=TeamVersion::class, fetch="EAGER", mappedBy="team", orphanRemoval=true, cascade={"persist", "remove"})
@@ -184,19 +184,19 @@ class Team
     public function getAvailablePlayersSheet(): Collection
     {
         // In want to have 16 players in the list, no less, no more
-        $used_numbers = [];
-        $new_player_list = $this->getAvailablePlayers();
-        foreach ($new_player_list as $player) {
-            $used_numbers[$player->getNumber()] = $player;
+        $usedNumbers = [];
+        $newPlayerList = $this->getAvailablePlayers();
+        foreach ($newPlayerList as $player) {
+            $usedNumbers[$player->getNumber()] = $player;
         }
         for ($i=1; $i<=16; $i++) {
-            if (!isset($used_numbers[$i])) {
-                $new_player_list->add((new Player())->setNumber($i));
+            if (!isset($usedNumbers[$i])) {
+                $newPlayerList->add((new Player())->setNumber($i));
             }
         }
         $criteria = Criteria::create();
         $criteria->orderBy(['number' => 'ASC']);
-        return $new_player_list->matching($criteria);
+        return $newPlayerList->matching($criteria);
     }
 
     public function addPlayer(Player $player): self
@@ -255,7 +255,7 @@ class Team
 
     public function getLockedByManagment(): ?bool
     {
-        return $this->locked_by_managment;
+        return $this->lockedByManagment;
     }
 
     public function isLockedByManagment(): ?bool
@@ -263,9 +263,9 @@ class Team
         return $this->getLockedByManagment();
     }
 
-    public function setLockedByManagment(bool $locked_by_managment): self
+    public function setLockedByManagment(bool $lockedByManagment): self
     {
-        $this->locked_by_managment = $locked_by_managment;
+        $this->lockedByManagment = $lockedByManagment;
 
         return $this;
     }

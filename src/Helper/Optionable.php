@@ -11,7 +11,7 @@ abstract class Optionable implements OptionableInterface
     {
         $this->resolveOptions($options);
     }
-    public function resolveOptions($options)
+    public function resolveOptions($options):void
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);

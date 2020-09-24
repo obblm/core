@@ -7,6 +7,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 interface OptionableInterface
 {
     public function __construct(array $options);
-    public function resolveOptions($options);
-    public function configureOptions(OptionsResolver $resolver);
+    public function resolveOptions(array $options):void;
+    public function configureOptions(OptionsResolver $resolver):void;
 }

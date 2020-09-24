@@ -14,13 +14,13 @@ class Skill extends Optionable
     private $type;
 
     /** @var string */
-    private $translation_key;
+    private $translationKey;
 
     /** @var string */
-    private $type_translation_key;
+    private $typeTranslationKey;
 
     /** @var string */
-    private $translation_domain;
+    private $translationDomain;
 
     /**
      * Inducement constructor.
@@ -31,9 +31,9 @@ class Skill extends Optionable
     {
         $this->key = $options['key'] ?? false;
         $this->type = $options['type'] ?? false;
-        $this->translation_key = $options['translation_key'] ?? false;
-        $this->type_translation_key = $options['type_translation_key'] ?? false;
-        $this->translation_domain = $options['translation_domain'] ?? false;
+        $this->translationKey = $options['translation_key'] ?? false;
+        $this->typeTranslationKey = $options['type_translation_key'] ?? false;
+        $this->translationDomain = $options['translation_domain'] ?? false;
     }
 
     /**
@@ -73,15 +73,15 @@ class Skill extends Optionable
      */
     public function getTranslationKey(): string
     {
-        return $this->translation_key;
+        return $this->translationKey;
     }
 
     /**
-     * @param string $translation_key
+     * @param string $translationKey
      */
-    public function setTranslationKey(string $translation_key): void
+    public function setTranslationKey(string $translationKey): void
     {
-        $this->translation_key = $translation_key;
+        $this->translationKey = $translationKey;
     }
 
     /**
@@ -89,15 +89,15 @@ class Skill extends Optionable
      */
     public function getTypeTranslationKey(): string
     {
-        return $this->type_translation_key;
+        return $this->typeTranslationKey;
     }
 
     /**
-     * @param string $type_translation_key
+     * @param string $typeTranslationKey
      */
-    public function setTypeTranslationKey(string $type_translation_key): void
+    public function setTypeTranslationKey(string $typeTranslationKey): void
     {
-        $this->type_translation_key = $type_translation_key;
+        $this->typeTranslationKey = $typeTranslationKey;
     }
 
     /**
@@ -105,29 +105,29 @@ class Skill extends Optionable
      */
     public function getTranslationDomain(): string
     {
-        return $this->translation_domain;
+        return $this->translationDomain;
     }
 
     /**
-     * @param string $translation_domain
+     * @param string $translationDomain
      */
-    public function setTranslationDomain(string $translation_domain): void
+    public function setTranslationDomain(string $translationDomain): void
     {
-        $this->translation_domain = $translation_domain;
+        $this->translationDomain = $translationDomain;
     }
 
     public function __toString(): string
     {
-        return $this->translation_key;
+        return $this->translationKey;
     }
 
-    public function resolveOptions($options)
+    public function resolveOptions($options):void
     {
         parent::resolveOptions($options);
         $this->hydrateWithOptions($options);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver):void
     {
         $resolver->setDefaults([
             'key'                  => null,

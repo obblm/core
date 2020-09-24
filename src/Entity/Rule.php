@@ -24,7 +24,7 @@ class Rule
     /**
      * @ORM\Column(type="string", unique=true, length=255)
      */
-    private $rule_key;
+    private $ruleKey;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -49,12 +49,12 @@ class Rule
     /**
      * @ORM\Column(type="boolean")
      */
-    private $post_bb_2020;
+    private $postBb2020;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $read_only;
+    private $readOnly;
 
     /**
      * @ORM\OneToMany(targetEntity=Team::class, mappedBy="rule")
@@ -62,12 +62,12 @@ class Rule
      */
     private $teams;
 
-    protected $injury_table = [];
+    protected $injuryTable = [];
 
     public function __construct()
     {
-        $this->post_bb_2020 = false;
-        $this->read_only = false;
+        $this->postBb2020 = false;
+        $this->readOnly = false;
         $this->teams = new ArrayCollection();
     }
 
@@ -78,12 +78,12 @@ class Rule
 
     public function getRuleKey(): ?string
     {
-        return $this->rule_key;
+        return $this->ruleKey;
     }
 
-    public function setRuleKey(string $rule_key): self
+    public function setRuleKey(string $ruleKey): self
     {
-        $this->rule_key = $rule_key;
+        $this->ruleKey = $ruleKey;
 
         return $this;
     }
@@ -139,7 +139,7 @@ class Rule
 
     public function getPostBb2020(): ?bool
     {
-        return $this->post_bb_2020;
+        return $this->postBb2020;
     }
 
     public function isPostBb2020(): ?bool
@@ -147,16 +147,16 @@ class Rule
         return $this->getPostBb2020();
     }
 
-    public function setPostBb2020(bool $post_bb_2020): self
+    public function setPostBb2020(bool $postBb2020): self
     {
-        $this->post_bb_2020 = $post_bb_2020;
+        $this->postBb2020 = $postBb2020;
 
         return $this;
     }
 
     public function getReadOnly(): ?bool
     {
-        return $this->read_only;
+        return $this->readOnly;
     }
 
     public function isReadOnly(): ?bool
@@ -164,9 +164,9 @@ class Rule
         return $this->getReadOnly();
     }
 
-    public function setReadOnly(bool $read_only): self
+    public function setReadOnly(bool $readOnly): self
     {
-        $this->read_only = $read_only;
+        $this->readOnly = $readOnly;
 
         return $this;
     }
@@ -205,7 +205,7 @@ class Rule
 
     public function __toString(): ?string
     {
-        return $this->rule_key;
+        return $this->ruleKey;
     }
 
     /**
@@ -220,13 +220,13 @@ class Rule
      */
     protected function constructInjuryTable($rule)
     {
-        foreach ($rule['injuries'] as $injury_key => $injury) {
+        foreach ($rule['injuries'] as $injuryKey => $injury) {
             if (isset($injury['from']) && isset($injury['to'])) {
                 for ($key = $injury['from']; $key <= $injury['to']; $key++) {
-                    $this->injury_table[$key] = $injury_key;
+                    $this->injuryTable[$key] = $injuryKey;
                 }
             } elseif (isset($injury['from'])) {
-                $this->injury_table[$injury['from']] = $injury_key;
+                $this->injuryTable[$injury['from']] = $injuryKey;
             }
         }
     }
@@ -260,22 +260,22 @@ class Rule
      */
     public function getInjury($value)
     {
-        return (isset($this->injury_table[$value])) ? array(
-            'key_name' => $this->injury_table[$value],
-            'effect' => $this->getInjuryEffect($this->injury_table[$value])
+        return (isset($this->injuryTable[$value])) ? array(
+            'key_name' => $this->injuryTable[$value],
+            'effect' => $this->getInjuryEffect($this->injuryTable[$value])
         ) : false ;
     }
 
     /**
      * Get Injury Effect For Injury Key Name
      *
-     * @param string $key_name
+     * @param string $keyName
      *
      * @return array|boolean
      */
-    public function getInjuryEffect($key_name)
+    public function getInjuryEffect($keyName)
     {
         $datas = $this->getRule();
-        return ($datas['injuries'][$key_name]) ? $datas['injuries'][$key_name]['effects'] : false;
+        return ($datas['injuries'][$keyName]) ? $datas['injuries'][$keyName]['effects'] : false;
     }
 }

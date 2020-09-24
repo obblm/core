@@ -143,8 +143,7 @@ class RuleHelper
     {
         if ($item instanceof CanHaveRuleInterface) {
             $rule = $item->getRule();
-        }
-        else {
+        } else {
             $rule = $item;
         }
         $key = $this->getCacheKey($rule);

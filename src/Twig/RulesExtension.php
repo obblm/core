@@ -71,7 +71,7 @@ class RulesExtension extends AbstractExtension
 
     public function getMaxPositionType(Rule $rule, Player $player)
     {
-        list($rule_key, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $player->getType());
+        list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $player->getType());
         $helper = $this->ruleHelper->getHelper($rule);
         return $helper->getMaxPlayersByType($roster, $type);
     }
@@ -80,40 +80,40 @@ class RulesExtension extends AbstractExtension
     {
         $helper = $this->ruleHelper->getHelper($team->getRule());
         $sps = $helper->getAvailableStarPlayers($team);
-        $star_players = new ArrayCollection();
+        $starPlayers = new ArrayCollection();
         foreach ($sps as $sp) {
             if ($sp instanceof MultipleStarPlayer) {
                 $players = [];
-                foreach ($sp->getParts() as $star_part) {
-                    $players[] = $helper->createInducementAsPlayer($star_part);
-                    $star_players->add($helper->createInducementAsPlayer($star_part));
+                foreach ($sp->getParts() as $starPart) {
+                    $players[] = $helper->createInducementAsPlayer($starPart);
+                    $starPlayers->add($helper->createInducementAsPlayer($starPart));
                 }
                 $sp->setParts($players);
             } else {
-                $star_players->add($helper->createInducementAsPlayer($sp));
+                $starPlayers->add($helper->createInducementAsPlayer($sp));
             }
         }
-        return $star_players;
+        return $starPlayers;
     }
 
     public function getAllStarPlayers(Rule $rule)
     {
         $helper = $this->ruleHelper->getHelper($rule);
         $sps = $helper->getAllStarPlayers();
-        $star_players = new ArrayCollection();
+        $starPlayers = new ArrayCollection();
         foreach ($sps as $sp) {
             if ($sp instanceof MultipleStarPlayer) {
                 $players = [];
-                foreach ($sp->getParts() as $star_part) {
-                    $players[] = $helper->createInducementAsPlayer($star_part);
-                    $star_players->add($helper->createInducementAsPlayer($star_part));
+                foreach ($sp->getParts() as $starPart) {
+                    $players[] = $helper->createInducementAsPlayer($starPart);
+                    $starPlayers->add($helper->createInducementAsPlayer($starPart));
                 }
                 $sp->setParts($players);
             } else {
-                $star_players->add($helper->createInducementAsPlayer($sp));
+                $starPlayers->add($helper->createInducementAsPlayer($sp));
             }
         }
-        return $star_players;
+        return $starPlayers;
     }
 
     public function getAllSkills(Rule $rule)

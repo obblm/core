@@ -32,7 +32,8 @@ class TeamType extends AbstractType implements DataMapperInterface
             ->add('fluff')
             ->add('ready');
 
-        if ($team = $builder->getData()) {
+        if ($builder->getData()) {
+            $team = $builder->getData();
             $builder->add('players', CollectionType::class, [
                 'entry_type' => PlayerTeamType::class,
                 'allow_add' => true,
@@ -60,19 +61,19 @@ class TeamType extends AbstractType implements DataMapperInterface
         $forms = iterator_to_array($forms);
 
         // In want to have 16 players in the list, no less, no more
-        $used_numbers = [];
-        $new_player_list = $viewData->getPlayers();
-        foreach ($new_player_list as $player) {
-            $used_numbers[$player->getNumber()] = $player;
+        $usedNumbers = [];
+        $newPlayerList = $viewData->getPlayers();
+        foreach ($newPlayerList as $player) {
+            $usedNumbers[$player->getNumber()] = $player;
         }
         for ($i=1; $i<=16; $i++) {
-            if (!isset($used_numbers[$i])) {
-                $new_player_list->add((new Player())->setNumber($i));
+            if (!isset($usedNumbers[$i])) {
+                $newPlayerList->add((new Player())->setNumber($i));
             }
         }
         $criteria = Criteria::create();
         $criteria->orderBy(['number' => 'ASC']);
-        $forms['players']->setData($new_player_list->matching($criteria));
+        $forms['players']->setData($newPlayerList->matching($criteria));
 
         $forms['name']->setData($viewData->getName());
         $forms['anthem']->setData($viewData->getAnthem());

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\PlayerVersion;
+use Obblm\Core\Exception\InvalidArgumentException;
 use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\Rule\Roster\Roster;
 
@@ -25,13 +26,13 @@ trait AbstractPlayerRuleTrait
     }
 
     /**
-     * @param string $roster_key
+     * @param string $rosterKey
      * @return array
      */
-    public function getAvailablePlayerTypes(string $roster_key):array
+    public function getAvailablePlayerTypes(string $rosterKey):array
     {
         /** @var Roster $roster */
-        $roster = $this->getRosters()->get($roster_key);
+        $roster = $this->getRosters()->get($rosterKey);
         return $roster->getPlayerTypes();
     }
 
@@ -56,7 +57,7 @@ trait AbstractPlayerRuleTrait
          * -spp_level: null
          * -value: null
          */
-        list($rule_key, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $version->getPlayer()->getType());
+        list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $version->getPlayer()->getType());
         $types = $this->getAvailablePlayerTypes($roster);
         $base = $types[$type];
         $characteristics = $base['characteristics'];
@@ -141,13 +142,16 @@ trait AbstractPlayerRuleTrait
     {
         $criteria = Criteria::create();
         if ($version) {
-            $available_types = $this->getAvailableSkillsFor($version->getPlayer());
+            if (!$version->getPlayer()) {
+                throw new InvalidArgumentException();
+            }
+            $availableTypes = $this->getAvailableSkillsFor($version->getPlayer());
             $filers = [];
             if (in_array('single', $context)) {
-                $filers[] = Criteria::expr()->in('type', $available_types['single']);
+                $filers[] = Criteria::expr()->in('type', $availableTypes['single']);
             }
             if (in_array('double', $context)) {
-                $filers[] = Criteria::expr()->in('type', $available_types['double']);
+                $filers[] = Criteria::expr()->in('type', $availableTypes['double']);
             }
             if (in_array('av_up', $context)) {
                 $filers[] = Criteria::expr()->eq('key', 'c.armor_increase');
@@ -171,9 +175,11 @@ trait AbstractPlayerRuleTrait
         return $this->getSkills()->matching($criteria);
     }
 
+    abstract public function getSkills():ArrayCollection;
+
     private function getAvailableSkillsFor(Player $player):array
     {
-        list($rule_key, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $player->getType());
+        list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $player->getType());
         return [
             'single' => $this->rule['rosters'][$roster]['players'][$type]['available_skills'],
             'double' => $this->rule['rosters'][$roster]['players'][$type]['available_skills_on_double']

@@ -15,12 +15,12 @@ abstract class AbstractRoster extends Optionable
     ];
 
     protected $key;
-    protected $translation_key;
-    protected $translation_domain;
-    protected $player_types;
-    protected $reroll_cost;
-    protected $can_have_apothecary;
-    protected $inducement_options;
+    protected $translationKey;
+    protected $translationDomain;
+    protected $playerTypes;
+    protected $rerollCost;
+    protected $canHaveApothecary;
+    protected $inducementOptions;
 
     protected function hydrateWithOptions($options)
     {
@@ -46,7 +46,7 @@ abstract class AbstractRoster extends Optionable
      */
     public function getTranslationKey(): string
     {
-        return $this->translation_key;
+        return $this->translationKey;
     }
 
     /**
@@ -54,7 +54,7 @@ abstract class AbstractRoster extends Optionable
      */
     public function getTranslationDomain(): string
     {
-        return $this->translation_domain;
+        return $this->translationDomain;
     }
 
     /**
@@ -62,7 +62,7 @@ abstract class AbstractRoster extends Optionable
      */
     public function getPlayerTypes(): ?array
     {
-        return $this->player_types;
+        return $this->playerTypes;
     }
 
     /**
@@ -70,7 +70,7 @@ abstract class AbstractRoster extends Optionable
      */
     public function canHaveApothecary():bool
     {
-        return $this->can_have_apothecary;
+        return $this->canHaveApothecary;
     }
 
     /**
@@ -78,7 +78,7 @@ abstract class AbstractRoster extends Optionable
      */
     public function getCanHaveApothecary():bool
     {
-        return $this->can_have_apothecary;
+        return $this->canHaveApothecary;
     }
 
     /**
@@ -86,7 +86,7 @@ abstract class AbstractRoster extends Optionable
      */
     public function getRerollCost():int
     {
-        return $this->reroll_cost;
+        return $this->rerollCost;
     }
 
     /**
@@ -94,7 +94,7 @@ abstract class AbstractRoster extends Optionable
      */
     public function getInducementOptions():?array
     {
-        return $this->inducement_options;
+        return $this->inducementOptions;
     }
 
     /**
@@ -108,77 +108,77 @@ abstract class AbstractRoster extends Optionable
     }
 
     /**
-     * @param string $translation_key
+     * @param string $translationKey
      * @return $this
      */
-    public function setTranslationKey(string $translation_key): self
+    public function setTranslationKey(string $translationKey): self
     {
-        $this->translation_key = $translation_key;
+        $this->translationKey = $translationKey;
         return $this;
     }
 
     /**
-     * @param string $translation_domain
+     * @param string $translationDomain
      * @return $this
      */
-    public function setTranslationDomain(string $translation_domain): self
+    public function setTranslationDomain(string $translationDomain): self
     {
-        $this->translation_domain = $translation_domain;
+        $this->translationDomain = $translationDomain;
         return $this;
     }
 
     /**
-     * @param array $player_types
+     * @param array $playerTypes
      * @return $this
      */
-    public function setPlayerTypes(array $player_types): self
+    public function setPlayerTypes(array $playerTypes): self
     {
-        $this->player_types = $player_types;
+        $this->playerTypes = $playerTypes;
         return $this;
     }
 
     /**
-     * @param array $inducement_types
+     * @param array $inducementTypes
      * @return $this
      */
-    public function setInducementTypes(array $inducement_types): self
+    public function setInducementTypes(array $inducementTypes): self
     {
-        $this->inducement_types = $inducement_types;
+        $this->inducementTypes = $inducementTypes;
         return $this;
     }
 
     /**
-     * @param int $reroll_cost
+     * @param int $rerollCost
      * @return $this
      */
-    public function setRerollCost(int $reroll_cost): self
+    public function setRerollCost(int $rerollCost): self
     {
-        $this->reroll_cost = $reroll_cost;
+        $this->rerollCost = $rerollCost;
         return $this;
     }
 
     /**
-     * @param bool $can_have_apothecary
+     * @param bool $canHaveApothecary
      * @return $this
      */
-    public function setCanHaveApothecary(bool $can_have_apothecary): self
+    public function setCanHaveApothecary(bool $canHaveApothecary): self
     {
-        $this->can_have_apothecary = $can_have_apothecary;
+        $this->canHaveApothecary = $canHaveApothecary;
         return $this;
     }
 
     public function __toString(): string
     {
-        return $this->translation_key;
+        return $this->translationKey;
     }
 
-    public function resolveOptions($options)
+    public function resolveOptions($options):void
     {
         parent::resolveOptions($options);
         $this->hydrateWithOptions($options);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver):void
     {
         $resolver->setDefaults([
             'key'                 => null,

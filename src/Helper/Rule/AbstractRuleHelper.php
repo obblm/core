@@ -117,15 +117,15 @@ abstract class AbstractRuleHelper extends RuleConfigBuilder implements RuleHelpe
     public function getWeatherChoices():array
     {
         $weather = [];
-        $rule_key = $this->getAttachedRule()->getRuleKey();
+        $ruleKey = $this->getAttachedRule()->getRuleKey();
         $fields = $this->rule['fields'];
-        foreach ($fields as $field_key => $field) {
-            $field_label = CoreTranslation::getFieldKey($rule_key, $field_key);
-            $weather[$field_label] = [];
-            foreach ($field['weather'] as $field_weather) {
-                $label = CoreTranslation::getWeatherKey($rule_key, $field_key, $field_weather);
-                $value = join(CoreTranslation::TRANSLATION_GLUE, [$rule_key, 'default', $field_weather]);
-                $weather[$field_label][$label] = $value;
+        foreach ($fields as $fieldKey => $field) {
+            $fieldLabel = CoreTranslation::getFieldKey($ruleKey, $fieldKey);
+            $weather[$fieldLabel] = [];
+            foreach ($field['weather'] as $fieldWeather) {
+                $label = CoreTranslation::getWeatherKey($ruleKey, $fieldKey, $fieldWeather);
+                $value = join(CoreTranslation::TRANSLATION_GLUE, [$ruleKey, 'default', $fieldWeather]);
+                $weather[$fieldLabel][$label] = $value;
             }
         }
         return $weather;
@@ -152,22 +152,22 @@ abstract class AbstractRuleHelper extends RuleConfigBuilder implements RuleHelpe
 
     public function createStarPlayerAsPlayer(string $key, int $number):Player
     {
-        $rule_key = $this->getAttachedRule()->getRuleKey();
+        $ruleKey = $this->getAttachedRule()->getRuleKey();
 
-        $star_player = $this->getStarPlayer($key);
-        if (isset($star_player['multi_parts']) && $star_player['multi_parts']) {
+        $starPlayer = $this->getStarPlayer($key);
+        if (isset($starPlayer['multi_parts']) && $starPlayer['multi_parts']) {
             throw new \Exception('You cannot create a player with a multiple parts InducementInterface');
         }
         $version = (new PlayerVersion())
-            ->setCharacteristics($star_player['characteristics'])
-            ->setValue($star_player['cost']);
-        if ($star_player['skills']) {
-            $version->setSkills($star_player['skills']);
+            ->setCharacteristics($starPlayer['characteristics'])
+            ->setValue($starPlayer['cost']);
+        if ($starPlayer['skills']) {
+            $version->setSkills($starPlayer['skills']);
         }
         $player = (new Player())
             ->setNumber($number)
-            ->setType(CoreTranslation::getStarPlayerTitle($rule_key))
-            ->setName(CoreTranslation::getStarPlayerName($rule_key, $key))
+            ->setType(CoreTranslation::getStarPlayerTitle($ruleKey))
+            ->setName(CoreTranslation::getStarPlayerName($ruleKey, $key))
             ->addVersion($version);
         return $player;
     }

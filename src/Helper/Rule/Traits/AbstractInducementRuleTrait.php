@@ -14,11 +14,6 @@ use Obblm\Core\Helper\Rule\Inducement\InducementType;
  ********************/
 trait AbstractInducementRuleTrait
 {
-    public function getInducementType(string $type):InducementType
-    {
-        return $this->getInducementTypes()[$type];
-    }
-
     public function getMaxStarPlayers():int
     {
         return $this->rule['inducements']['star_players']['max'];
@@ -27,16 +22,16 @@ trait AbstractInducementRuleTrait
     public function getInducements():array
     {
         $inducements = [];
-        $rule_key = $this->getAttachedRule()->getRuleKey();
-        $available_inducements = $this->rule['inducements'];
+        $ruleKey = $this->getAttachedRule()->getRuleKey();
+        $availableInducements = $this->rule['inducements'];
 
-        foreach ($available_inducements as $key => $value) {
+        foreach ($availableInducements as $key => $value) {
             if ($key !== 'star_players') {
                 $inducement = [
                     'type' => $this->getInducementType('inducements'),
-                    'key' => join(CoreTranslation::TRANSLATION_GLUE, [$rule_key, 'inducements', $key]),
+                    'key' => join(CoreTranslation::TRANSLATION_GLUE, [$ruleKey, 'inducements', $key]),
                     'translation_domain' => $this->getAttachedRule()->getRuleKey(),
-                    'translation_key' => CoreTranslation::getInducementName($rule_key, $key),
+                    'translation_key' => CoreTranslation::getInducementName($ruleKey, $key),
                     'max' => $value['max'] ?? 0,
                     'value' => $value['cost'],
                 ];
@@ -49,17 +44,17 @@ trait AbstractInducementRuleTrait
     public function getInducementsByTeamOptions(array $options):array
     {
         $inducements = [];
-        $rule_key = $this->getAttachedRule()->getRuleKey();
-        $available_inducements = $this->rule['inducements'];
+        $ruleKey = $this->getAttachedRule()->getRuleKey();
+        $availableInducements = $this->rule['inducements'];
 
-        foreach ($available_inducements as $key => $value) {
+        foreach ($availableInducements as $key => $value) {
             if ($key !== 'star_players') {
                 if ($options[$key]) {
                     $inducement = [
                         'type' => $this->getInducementType('inducements'),
-                        'key' => join(CoreTranslation::TRANSLATION_GLUE, [$rule_key, 'inducements', $key]),
+                        'key' => join(CoreTranslation::TRANSLATION_GLUE, [$ruleKey, 'inducements', $key]),
                         'translation_domain' => $this->getAttachedRule()->getRuleKey(),
-                        'translation_key' => CoreTranslation::getInducementName($rule_key, $key),
+                        'translation_key' => CoreTranslation::getInducementName($ruleKey, $key),
                         'max' => $value['max'] ?? 0,
                         'value' => ($options[$key] === 'discount') ? $value['discounted_cost'] : $value['cost'],
                     ];

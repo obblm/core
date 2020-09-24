@@ -24,22 +24,22 @@ class TeamRulesSelectorForm extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($team = $builder->getData()) {
-            if ($rule = $team->getRule()) {
-                $rosters = $this->ruleHelper->getAvailableRosters($rule);
-                $choices = [];
-                foreach ($rosters as $roster) {
-                    $translation_key = CoreTranslation::getRosterKey($rule->getRuleKey(), $roster);
-                    $choices[$translation_key] = $roster;
-                }
-                ksort($choices);
-                $builder
-                    ->add('name')
-                    ->add('roster', ChoiceType::class, [
-                    'choices' => $choices,
-                    'choice_translation_domain' => $rule->getRuleKey() ?? false
-                ]);
+        if ($builder->getData()) {
+            $team = $builder->getData();
+            $rule = $team->getRule();
+            $rosters = $this->ruleHelper->getAvailableRosters($rule);
+            $choices = [];
+            foreach ($rosters as $roster) {
+                $translationKey = CoreTranslation::getRosterKey($rule->getRuleKey(), $roster);
+                $choices[$translationKey] = $roster;
             }
+            ksort($choices);
+            $builder
+                ->add('name')
+                ->add('roster', ChoiceType::class, [
+                'choices' => $choices,
+                'choice_translation_domain' => $rule->getRuleKey() ?? false
+            ]);
         }
     }
 

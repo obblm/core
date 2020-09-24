@@ -6,6 +6,7 @@ use Obblm\Core\Entity\Rule;
 use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -16,7 +17,7 @@ class RulesController extends AbstractController
     /**
      * @Route("", name="")
      */
-    public function list()
+    public function list():Response
     {
         $this->denyAccessUnlessGranted(Roles::COACH);
 
@@ -28,7 +29,7 @@ class RulesController extends AbstractController
     /**
      * @Route("/{rule}", name="_detail")
      */
-    public function detail(Rule $rule, RuleHelper $ruleHelper)
+    public function detail(Rule $rule, RuleHelper $ruleHelper):Response
     {
         $this->denyAccessUnlessGranted(Roles::COACH);
 
@@ -43,7 +44,7 @@ class RulesController extends AbstractController
     /**
      * @Route("/{rule}/roster/{roster}", name="_roster_sheet")
      */
-    public function rosterSheet(Rule $rule, string $roster)
+    public function rosterSheet(Rule $rule, string $roster):Response
     {
         $this->denyAccessUnlessGranted(Roles::COACH);
 
@@ -56,7 +57,7 @@ class RulesController extends AbstractController
     /**
      * @Route("/{rule}/star-players", name="_star_players")
      */
-    public function starPlayers(Rule $rule)
+    public function starPlayers(Rule $rule):Response
     {
         $this->denyAccessUnlessGranted(Roles::COACH);
 
@@ -68,7 +69,7 @@ class RulesController extends AbstractController
     /**
      * @Route("/{rule}/skills", name="_skills")
      */
-    public function skills(Rule $rule)
+    public function skills(Rule $rule):Response
     {
         $this->denyAccessUnlessGranted(Roles::COACH);
 

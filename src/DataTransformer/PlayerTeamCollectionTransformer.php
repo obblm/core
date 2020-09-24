@@ -23,13 +23,13 @@ class PlayerTeamCollectionTransformer implements DataTransformerInterface
 
         // In want to have 16 players in the list, no less, no more
 
-        $used_numbers = [];
+        $usedNumbers = [];
 
         foreach ($value->getPlayers() as $player) {
-            $used_numbers[$player->getNumber()] = $player;
+            $usedNumbers[$player->getNumber()] = $player;
         }
         for ($i=1; $i<=16; $i++) {
-            if (!isset($used_numbers[$i])) {
+            if (!isset($usedNumbers[$i])) {
                 $value->addPlayer((new Player())->setNumber($i));
             }
         }
