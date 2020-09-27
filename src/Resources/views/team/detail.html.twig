@@ -1,38 +1,104 @@
 {% extends '@ObblmCore/base.html.twig' %}
 
 {% block body %}
-    <nav class="action">
-    {% if(is_granted('team.edit', version.team)) %}
-        <a href="{{ path('obblm_team_edit', {'team': version.team.id}) }}">Edit</a> -
-        <a href="{{ path('obblm_team_delete', {'team': version.team.id}) }}">Delete</a>
-    {% endif %}
-    </nav>
-    <section class="row">
-        <header>
-            <h1>{{ version.team.name }} ({{ version.tr }})</h1>
+    <section id="team-sheet" class="container">
+        <nav class="action">
+        {% if(is_granted('team.edit', version.team)) %}
+            <a href="{{ path('obblm_team_edit', {'team': version.team.id}) }}">
+                {{ 'obblm.layout.tools.actions.edit'|trans }}
+            </a> -
+            <a href="{{ path('obblm_team_delete', {'team': version.team.id}) }}">
+                {{ 'obblm.layout.tools.actions.delete'|trans }}
+            </a>
+        {% endif %}
+        </nav>
+
+        <header class="header"{% if(version.team.coverFilename) %} style="background-image: url({{ get_team_cover(version.team) }});"{% endif %}>
+            <div class="logo">
+                <img alt="{{ version.team.name }}" class="image" src="{{ asset( get_team_logo(version.team) ) }}">
+            </div>
+            <div class="content">
+                <h1 class="title">{{ version.team.name }}</h1>
+                <div class="informations">
+                    <ul class="four boxes">
+                        <li class="box vertical aligned">
+                            <ul>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.layout.words.roster'|trans }} :</span>
+                                    {{ version.team|roster_name|trans({}, version.team.rule.ruleKey) }}
+                                </li>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.layout.words.coach'|trans }} :</span>
+                                    {{ version.team.coach.username }}
+                                </li>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.layout.words.rule'|trans }} :</span>
+                                    {{ version.team.rule|rule_name|trans({}, version.team.rule.ruleKey) }}
+                                </li>
+                                <!-- <li class="box information">
+                                    <span class="label">{{ 'League'|trans }} :</span>
+                                    Toto
+                                </li> -->
+                            </ul>
+                        </li>
+                        <li class="box vertical aligned">
+                            <ul>
+                                <li class="box information">
+                                    <span class="label">{{ 'TR'|trans }} :</span>
+                                    {{ version.tr }}
+                                </li>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.sheet.header.team_value'|trans }} :</span>
+                                    {{ version.team|calculate_value|price }}
+                                </li>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.forms.team.fields.treasury'|trans }} :</span>
+                                    {{ version.treasure|price }}
+                                </li>
+                                <!-- <li class="box information">
+                                    <span class="label">{{ 'Stadium'|trans }} :</span>
+                                    toto
+                                </li> -->
+                            </ul>
+                        </li>
+                        <li class="box vertical aligned">
+                            <ul>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.layout.words.rerolls'|trans }} :</span>
+                                    {{ version.rerolls }} (x{{ version.team|reroll_cost|price }})
+                                </li>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.layout.words.apothecary'|trans }} :</span>
+                                    {{ version.apothecary|yesno }}
+                                </li>
+                                <!-- <li class="box information">
+                                    <span class="label">{{ 'Sponsor'|trans }} :</span>
+                                    toto
+                                </li> -->
+                            </ul>
+                        </li>
+                        <li class="box vertical aligned">
+                            <ul>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.layout.words.popularity'|trans }} :</span>
+                                    {{ version.popularity }}
+                                </li>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.layout.words.assistants'|trans }} :</span>
+                                    {{ version.assistants }}
+                                </li>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.layout.words.cheerleaders'|trans }} :</span>
+                                    {{ version.cheerleaders }}
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </header>
-        {% include '@ObblmCore/team/sheet.html.twig' with { 'team': version.team } %}
-        <footer>
-            <ul>
-                <li>
-                    {{ 'Rerolls'|trans }} : {{ version.rerolls }} (x{{ version.team|reroll_cost|price }})
-                </li>
-                <li>
-                    {{ 'Popularity'|trans }} : {{ version.popularity }}
-                </li>
-                <li>
-                    {{ 'Assistants'|trans }} : {{ version.assistants }}
-                </li>
-                <li>
-                    {{ 'Cheerleaders'|trans }} : {{ version.cheerleaders }}
-                </li>
-                <li>
-                    {{ 'Apothecary'|trans }} : {{ version.apothecary|yesno }}
-                </li>
-                <li>
-                    {{ 'Total cost'|trans }} : {{ version.team|calculate_value|price }}
-                </li>
-            </ul>
-        </footer>
+        <section class="row">
+            {% include '@ObblmCore/team/sheet.html.twig' with { 'team': version.team } %}
+        </section>
     </section>
 {% endblock %}

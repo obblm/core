@@ -1,0 +1,43 @@
+.teams {
+  .team {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    background: @overlayBackground;
+    background-size: cover;
+    background-position: center;
+    .logo {
+      -ms-flex-preferred-size: auto;
+      flex-basis: auto;
+      padding: 3% 0 3% 3%;
+      width: 40%;
+      box-sizing: border-box;
+      overflow: hidden;
+      .image {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .content {
+      -ms-flex-preferred-size: auto;
+      flex-basis: auto;
+      width: 60%;
+      box-sizing: border-box;
+      padding: 5% 4% 5% 2%;
+      .header {
+        font-family: @h2Font, sans-serif;
+        font-size: @h2FontSize;
+        font-weight: @h2FontWeight;
+        text-transform: uppercase;
+      }
+      .description {
+
+      }
+      .actions {
+
+      }
+    }
+  }
+}

@@ -62,6 +62,26 @@ class Team
     private $players;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $logoFilename;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $logoMimeType;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $coverFilename;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $coverMimeType;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $ready = false;
@@ -222,19 +242,49 @@ class Team
         return $this;
     }
 
-    /*public static function loadValidatorMetadata(ClassMetadata $metadata)
+    public function getLogoFilename(): ?string
     {
-        $metadata->addConstraint(new Assert\Callback('validateRule'));
+        return $this->logoFilename;
     }
 
-    public function validateRule(ExecutionContextInterface $context, $payload)
+    public function setLogoFilename(?string $logoFilename): self
     {
-        if (!($context->getValue()->getRule() || $context->getValue()->getChampionship()) ||
-            $context->getValue()->getRule() && $context->getValue()->getChampionship()) {
-            $context->buildViolation('obblm.constraints.team.rule_or_championship.violation')
-                ->addViolation();
-        }
-    }*/
+        $this->logoFilename = $logoFilename;
+        return $this;
+    }
+
+    public function getLogoMimeType(): ?string
+    {
+        return $this->logoMimeType;
+    }
+
+    public function setLogoMimeType(?string $logoMimeType): self
+    {
+        $this->logoMimeType = $logoMimeType;
+        return $this;
+    }
+
+    public function getCoverFilename(): ?string
+    {
+        return $this->coverFilename;
+    }
+
+    public function setCoverFilename(?string $coverFilename): self
+    {
+        $this->coverFilename = $coverFilename;
+        return $this;
+    }
+
+    public function getCoverMimeType(): ?string
+    {
+        return $this->coverMimeType;
+    }
+
+    public function setCoverMimeType(?string $coverMimeType): self
+    {
+        $this->coverMimeType = $coverMimeType;
+        return $this;
+    }
 
     public function getReady(): ?bool
     {

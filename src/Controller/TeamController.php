@@ -9,6 +9,7 @@ use Obblm\Core\Form\Team\EditTeamType;
 use Obblm\Core\Helper\TeamHelper;
 use Obblm\Core\Security\Roles;
 use Obblm\Core\Security\Voter\TeamVoter;
+use Obblm\Core\Service\FileTeamUploader;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -96,7 +97,7 @@ class TeamController extends AbstractTeamController
     /**
      * @Route("/{team}/delete", name="_delete")
      */
-    public function delete(Team $team, Request $request): Response
+    public function delete(Team $team, Request $request, FileTeamUploader $uploader): Response
     {
         $this->denyAccessUnlessGranted(TeamVoter::EDIT, $team);
 
@@ -104,6 +105,8 @@ class TeamController extends AbstractTeamController
         if ($confirm !== null) {
             if ($confirm == 1) {
                 $em = $this->getDoctrine()->getManager();
+                $uploader->setObjectSubDirectory($team->getId());
+                $uploader->removeOldFile();
                 $em->remove($team);
                 $em->flush();
                 return $this->redirectToRoute('obblm_team_mine');

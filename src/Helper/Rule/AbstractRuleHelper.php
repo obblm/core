@@ -39,18 +39,6 @@ abstract class AbstractRuleHelper extends RuleConfigBuilder implements RuleHelpe
         return $this;
     }
 
-    public function getAvailableStarPlayers(Team $team):array
-    {
-        $criteria = Criteria::create();
-        $criteria->where(Criteria::expr()->andX(
-            $this->getInducementExpression([
-                'type' => 'star_players',
-                'roster' => $team->getRoster()
-            ])
-        ));
-        return $this->getInducementTable()->matching($criteria)->toArray();
-    }
-
     public function getTransformedInducementsFor(string $roster)
     {
         $table = $this->getInducementTable();

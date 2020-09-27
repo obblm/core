@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('obblm_dashboard');
         }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -82,7 +82,7 @@ class SecurityController extends AbstractController
             $dispatcher->dispatch($event, RegisterCoachEvent::NAME);
 
             $entityManager->flush();
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('obblm_dashboard');
         }
 
         return $this->render('@ObblmCore/security/register.html.twig', [

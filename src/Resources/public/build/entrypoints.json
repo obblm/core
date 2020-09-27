@@ -1,0 +1,27 @@
+{
+  "entrypoints": {
+    "obblm-core": {
+      "js": [
+        "/bundles/obblmcore/build/runtime.js",
+        "/bundles/obblmcore/build/vendors~obblm-core.js",
+        "/bundles/obblmcore/build/obblm-core.js"
+      ]
+    },
+    "obblm-core-light": {
+      "js": [
+        "/bundles/obblmcore/build/runtime.js"
+      ],
+      "css": [
+        "/bundles/obblmcore/build/obblm-core-light.css"
+      ]
+    },
+    "obblm-core-dark": {
+      "js": [
+        "/bundles/obblmcore/build/runtime.js"
+      ],
+      "css": [
+        "/bundles/obblmcore/build/obblm-core-dark.css"
+      ]
+    }
+  }
+}

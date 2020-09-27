@@ -35,9 +35,10 @@ class TeamRulesSelectorForm extends AbstractType
             }
             ksort($choices);
             $builder
-                ->add('name')
+                ->add('name', null, ['required' => true])
                 ->add('roster', ChoiceType::class, [
                 'choices' => $choices,
+                'required' => true,
                 'choice_translation_domain' => $rule->getRuleKey() ?? false
             ]);
         }

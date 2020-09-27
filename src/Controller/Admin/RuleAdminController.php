@@ -4,6 +4,7 @@ namespace Obblm\Core\Controller\Admin;
 
 use Obblm\Core\Entity\Rule;
 use Doctrine\ORM\EntityManagerInterface;
+use Obblm\Core\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +22,7 @@ class RuleAdminController extends AbstractController
      */
     public function index(EntityManagerInterface $em):Response
     {
-        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
+        $this->denyAccessUnlessGranted(Roles::ADMIN);
 
         $rules = $em->getRepository(Rule::class)
             ->findAll();

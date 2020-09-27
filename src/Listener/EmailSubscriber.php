@@ -2,17 +2,11 @@
 
 namespace Obblm\Core\Listener;
 
-use Obblm\Core\Entity\Coach;
-use Obblm\Core\Entity\EmailObjectInterface;
 use Obblm\Core\Event\ActivateCoachEvent;
-use Obblm\Core\Event\ChampionshipStartMessageEvent;
 use Obblm\Core\Event\RegisterCoachEvent;
-use Obblm\Core\Event\SendEncounterValidationMessageEvent;
-use Obblm\Core\Event\SendInvitationMessageEvent;
 use Obblm\Core\Message\EmailMessage;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Mime\Address;
 

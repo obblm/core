@@ -1,0 +1,14 @@
+#navigation {
+  width: @navWidth;
+  left: -@navWidth;
+  top: @headerHeight;
+  transition: left @transitionDefault @transitionDefaultDelay;
+  background: @navBackground;
+  z-index: 80;
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box;
+  .pushable.open & {
+    left: 0;
+  }
+}

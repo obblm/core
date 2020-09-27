@@ -15,8 +15,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CoachRepository::class)
- * @UniqueEntity("email")
  * @ORM\Table(name="obblm_coach")
+ * @UniqueEntity(fields="email", message="Email is already taken.")
+ * @UniqueEntity(fields="username", message="Username is already taken.")
  */
 class Coach implements UserInterface, EmailObjectInterface
 {
@@ -29,14 +30,18 @@ class Coach implements UserInterface, EmailObjectInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Email
      */
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $username;
+
+    /**
      * @ORM\Column(type="json")
      */
-    private $roles = ['OBBLM_USER'];
+    private $roles = [Roles::COACH];
 
     /**
      * @var string The hashed password
@@ -67,9 +72,9 @@ class Coach implements UserInterface, EmailObjectInterface
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=4, nullable=true)
      */
-    private $username;
+    private $locale;
 
     /**
      * @ORM\Column(type="boolean")
@@ -234,6 +239,17 @@ class Coach implements UserInterface, EmailObjectInterface
     {
         $this->lastName = $lastName;
 
+        return $this;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): self
+    {
+        $this->locale = $locale;
         return $this;
     }
 

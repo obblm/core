@@ -24,8 +24,7 @@
     {% endfor %}
 {% endmacro %}
 {% import _self as macros %}
-<nav id="navigation" class="ui vertical inverted sidebar menu left">
-    <div class="item"><b>{{ 'obblm.layout.navigation.title'|trans }}</b></div>
+<nav id="navigation" class="menu">
     <a class="item" href="{{ path('obblm_dashboard') }}">
         <i aria-hidden="true" class="icon notranslate mdi mdi-view-dashboard"></i>
         {{ 'obblm.layout.navigation.dashboard'|trans }}

@@ -2,20 +2,47 @@
 
 {% block body %}
     <div class="action">
-        <a href="{{ path('obblm_team_create')}}" class="ui button primary">Create a team</a>
+        <a href="{{ path('obblm_team_create')}}" class="ui button primary">
+            {{ 'obblm.team.actions.add'|trans }}
+        </a>
     </div>
-    <ul>
-        {% for team in teams %}
-            <li>
+    <h1 class="title">{{ 'obblm.team.mine.title'|trans }}</h1>
+    <div class="boxes three teams">
+    {% for team in teams %}
+        <div class="box team"{% if(team.coverFilename) %} style="background-image: url({{ get_team_cover(team) }});"{% endif %}>
+            <div class="logo">
                 <a href="{{ path('obblm_team_detail', {'team': team.id}) }}">
-                    {{ team.name }}</a>
+                    <img alt="{{ team.name }}" class="image" src="{{ asset( get_team_logo(team) ) }}">
+                </a>
+            </div>
+            <div class="content">
+                <a class="header" href="{{ path('obblm_team_detail', {'team': team.id}) }}">
+                    {{ team.name }}
+                </a>
+                <div class="meta">
+                    {{ team|roster_name|trans({}, team.rule.ruleKey) }} | TR : {{ team|tr }}
+                </div>
+                <div class="description">
+                    {% if team.ready == false %}
+                        <p>This team is not finished</p>
+                    {% endif %}
+                </div>
                 {% if(is_granted('team.edit', team)) %}
-                    - <a href="{{ path('obblm_team_edit', {'team': team.id}) }}">Edit</a>
-                    - <a href="{{ path('obblm_team_delete', {'team': team.id}) }}">Delete</a>
+                    <div class="links">
+                        <div class="two boxes buttons center aligned">
+                            <a class="box" href="{{ path('obblm_team_edit', {'team': team.id}) }}" class="ui basic green button">
+                                {{ 'obblm.layout.tools.actions.edit'|trans }}
+                            </a>
+                            <a class="box" href="{{ path('obblm_team_delete', {'team': team.id}) }}" class="ui basic red button">
+                                {{ 'obblm.layout.tools.actions.delete'|trans }}
+                            </a>
+                        </div>
+                    </div>
                 {% endif %}
-            </li>
-        {% else %}
-            <li>Nothing to see here</li>
-        {% endfor %}
-    </ul>
+            </div>
+        </div>
+    {% else %}
+        <div>Nothing to see here</div>
+    {% endfor %}
+    </div>
 {% endblock %}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Obblm\Core\Form;
+namespace Obblm\Core\Form\Coach;
 
 use Obblm\Core\Entity\Coach;
 use Symfony\Component\Form\AbstractType;

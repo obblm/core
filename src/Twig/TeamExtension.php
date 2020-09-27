@@ -8,6 +8,7 @@ use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Helper\TeamHelper;
+use Obblm\Core\Service\ObblmPackage;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -17,11 +18,13 @@ class TeamExtension extends AbstractExtension
 {
     protected $ruleHelper;
     protected $teamHelper;
+    protected $package;
 
-    public function __construct(RuleHelper $ruleHelper, TeamHelper $teamHelper)
+    public function __construct(RuleHelper $ruleHelper, TeamHelper $teamHelper, ObblmPackage $package)
     {
         $this->ruleHelper = $ruleHelper;
         $this->teamHelper = $teamHelper;
+        $this->package = $package;
     }
 
     public function getFilters()
@@ -46,13 +49,26 @@ class TeamExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('area', [$this, 'calculateArea']),
+            new TwigFunction('get_team_logo', [$this, 'getLogo']),
+            new TwigFunction('get_team_cover', [$this, 'getCover']),
         ];
     }
 
-    public function calculateArea(int $width, int $length)
+    public function getLogo(Team $team):string
     {
-        return $width * $length;
+        if($team->getLogoFilename()) {
+            return $this->package->getUrl($team->getId() . '/' . $team->getLogoFilename());
+        }
+        return "https://placekitten.com/800/800";
+        //return "@ObblmCore/Resources/public/images/default.png";
+    }
+
+    public function getCover(Team $team)
+    {
+        if($team->getCoverFilename()) {
+            return $this->package->getUrl($team->getId() . '/' . $team->getCoverFilename());
+        }
+        return "";
     }
 
     public function getTeamRate(Team $team)

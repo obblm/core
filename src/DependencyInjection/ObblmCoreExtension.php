@@ -8,7 +8,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 
 class ObblmCoreExtension extends Extension
 {
@@ -32,6 +31,12 @@ class ObblmCoreExtension extends Extension
                 $config = array_merge($config, $subConfig);
             }
         }
+
+        $uploadDirectory = (!isset($config['obblm.upload_directory'])) ?
+            $uploadDirectory = $container->getParameter('kernel.project_dir') . '/public/uploads/obblm' :
+            $config['obblm.upload_directory'];
+        $container->setParameter('obblm.config.upload_directory', $uploadDirectory);
+
         $locator = new FileLocator(dirname(__DIR__).'/Resources/config');
         $loader = new YamlFileLoader($container, $locator);
         $loader->load('services.yaml');

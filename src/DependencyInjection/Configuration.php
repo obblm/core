@@ -17,8 +17,7 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->getRootNode();
         $treeBuilder->getRootNode()
                 ->children()
-                    ->scalarNode('default_locale')
-                        ->defaultValue('en')
+                    ->scalarNode('upload_directory')
                     ->end()
                 ->end()
             ->end()

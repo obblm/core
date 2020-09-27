@@ -1,17 +1,32 @@
-<header class="ui fixed inverted main menu">
-    <nav class="ui container">
-        <a class="launch icon item">
-            <i class="content icon"></i>
+<header id="header">
+    <nav class="container">
+        <a class="launch item">
+            <i class="icon mdi mdi-menu"></i>
         </a>
         <div class="item">
-            <h1>{{ 'obblm.layout.header.title'|trans }}</h1>
+            <h1 class="title">{{ 'obblm.layout.header.title'|trans }}</h1>
         </div>
-        <div class="right menu">
         {% if(is_granted('ROLE_OBBLM_COACH')) %}
-            <a class="icon item" href="{{ path('obblm.logout')}}" title="{{ 'obblm.layout.header.logout'|trans }}">
-                <i aria-hidden="true" class="icon log out"></i>
-            </a>
+            <div class="right item menu">
+                <span>
+                    <i aria-hidden="true" class="icon notranslate mdi mdi-account"></i>
+                    {{ app.user.username }}
+                </span>
+                <ul>
+                    <li>
+                        <a class="link" href="{{ path('obblm_account')}}" title="{{ 'obblm.layout.header.my_account'|trans }}">
+                            <i aria-hidden="true" class="icon notranslate mdi mdi-account"></i>
+                            {{ 'obblm.layout.header.my_account'|trans }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="link" href="{{ path('obblm.logout')}}" title="{{ 'obblm.layout.header.logout'|trans }}">
+                            <i aria-hidden="true" class="icon notranslate mdi mdi-logout"></i>
+                            {{ 'obblm.layout.header.logout'|trans }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
         {% endif %}
-        </div>
     </nav>
 </header>

@@ -3,7 +3,6 @@
 namespace Obblm\Core\Form\Team;
 
 use Doctrine\Common\Collections\Criteria;
-use Obblm\Core\DataTransformer\PlayerTeamCollectionTransformer;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Form\Player\PlayerTeamType;

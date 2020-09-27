@@ -1,3 +1,112 @@
 obblm:
   layout:
+    header:
+      title: Open Blood Bowl league manager
+      my_account: Editer mon profil
+      logout: Se déconnecter
+    navigation:
+      title: OBBLM
+      dashboard: Tableau de board
+      my_teams: Mes équipes
+      rules: Les règles
+      admin:
+        title: Admin
+        rules: Règles
+        users: Utilisateurs
+    tools:
+      yes: Oui
+      no: Non
+      actions:
+        add: Ajouter
+        create: Créer
+        edit: Modifier
+        delete: Supprimer
     hi: Coucou
+    words:
+      roster: Roster
+      coach: Coach
+      rule: Règle
+      name: Nom
+      type: Position
+      skills: Compétences
+      injuries: Bléssures
+      value: Valeur
+      rerolls: Relances
+      assistants: Assistants
+      cheerleaders: Pom-pom girls
+      popularity: Popularité
+      apothecary: Apothicaire
+      star_players: Star Players
+      inducements: Inducements
+      options: Options
+
+  rules:
+    title: Règles
+
+  team:
+    actions:
+      add: Créer une équipe
+      edit: Modifier cette équipe
+      delete: Supprimer cette équipe
+    mine:
+      title: Mes équipes
+
+  sheet:
+    header:
+      team_value: Valeur d'équipe
+    table:
+      header:
+      players:
+        skill_none: Aucune
+
+  forms:
+    register:
+      title: Créer mon compte OBBLM
+      register: Créer mon account
+    login:
+      title: Se connecter à OBBML
+      login: Identifiant
+      password: Mot de passe
+      button: Me connecter
+    submission:
+      button: Envoyer
+      error: Il y a des erreurs dans votre formulaire
+    team:
+      create:
+        title: Créer une équipe pour ?
+        rule-selector: "Créer une équipe pour : %what%"
+        select:
+          rules: "Règles disponibles :"
+        buttons:
+          submit: Créer cette équipe et ajouter des joueurs
+      edit:
+        title: "Modifier l'équipe : %name%"
+        buttons:
+          add_player: Ajouter un joueur
+          submit: C'est bon, l'équipe est prête !
+          save: Sauvegarder et revenir plus tard
+          cencel: Annuler
+      delete:
+        question: Etes vous sur de vouloir supprimer cette équipe ?
+      fields:
+        parts:
+          story: L'histoire de l'équipe
+          players: Composition des joueurs
+          sidelines: Achats annexes
+        name: Nom de l'équipe
+        logo: Logo de l'équipe (sera visible partout)
+        cover: Couverture de l'équipe (sera visible sur la feuille d'équipe)
+        roster: Choisir un roster
+        anthem: Hymne de l'équipe
+        fluff: Fluff de l'équipe
+        rerolls: Relances
+        cheerleaders: Pom-pom girls
+        assistants: Assistants
+        apothecary: Prendre un apothicaire ?
+        popularity: Popularité
+        treasury: Trésor restant
+    player:
+      fields:
+        number: Numéro
+        type: Position du joueur
+        name: Nom du joueur

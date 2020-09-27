@@ -11,16 +11,18 @@
         <td>{{ player|characteristics('av') }}</td>
     {% endblock %}
     {% block skills %}<td class="left aligned">
-        {% for skill in player|skills %}
-            {# TODO: replace with skill helper #}
-            {% set skill_name = translation_domain ~ '.skills.' ~ skill ~ '.title' %}
-            {% set skill_text = translation_domain ~ '.skills.' ~ skill ~ '.description' %}
-            <span title="{{ skill_text|trans }}">
-                {{ skill_name|trans }}{% if loop.index != loop.last %}, {% endif %}
-            </span>
-        {% else %}
-        {{ 'None'|trans }}
-        {% endfor %}
+        {% if player.type %}
+            {% for skill in player|skills %}
+                {# TODO: replace with skill helper #}
+                {% set skill_name = translation_domain ~ '.skills.' ~ skill ~ '.title' %}
+                {% set skill_text = translation_domain ~ '.skills.' ~ skill ~ '.description' %}
+                <span title="{{ skill_text|trans }}">
+                    {{ skill_name|trans }}{% if loop.index != loop.last %}, {% endif %}
+                </span>
+            {% else %}
+            {{ 'obblm.sheet.table.players.skill_none'|trans({}, 'messages') }}
+            {% endfor %}
+        {% endif %}
     </td>{% endblock %}
     {% block injuries %}<td class="left aligned"></td>{% endblock %}
     {% block spp %}<td>{{ player|spp }}</td>{% endblock %}

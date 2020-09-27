@@ -2,6 +2,7 @@ obblm:
   layout:
     header:
       title: Open Blood Bowl league manager
+      my_account: Edit my profile
       logout: Log out
     navigation:
       title: OBBLM
@@ -15,15 +16,68 @@ obblm:
     tools:
       yes: Yes
       no: No
+      actions:
+        add: Add
+        create: Create
+        edit: Edit
+        delete: Delete
     hi: Hello
+    words:
+      roster: Roster
+      coach: Coach
+      rule: Rule
+      name: Name
+      type: Type
+      skills: Skills
+      injuries: Injuries
+      value: Value
+      rerolls: Rerolls
+      assistants: Assistants
+      cheerleaders: Cheerleaders
+      popularity: Popularity
+      apothecary: Apothecary
+      star_players: Star Players
+      inducements: Inducements
+      options: Options
+
+  rules:
+    title: Rules
+
+  team:
+    actions:
+      add: Create a team
+      edit: Edit this team
+      delete: Delete this team
+    mine:
+      title: My teams
+
+  sheet:
+    header:
+      team_value: Team value
+    table:
+      header:
+      players:
+        skill_none: None
+
   forms:
+    register:
+      question: You don't an account ?
+      title: Create your OBBLM account
+      register: Create my account
+    login:
+      title: Login to OBBML
+      login: Login
+      password: Password
+      button: Login
     submission:
       button: Submit
       error: There were some errors with your submission
     team:
       create:
-        title: Create a team
-        rule-selector: Create a team for ?
+        title: Create a team for ?
+        rule-selector: "Create a team for : %what%"
+        select:
+          rules: "Available rules :"
         buttons:
           submit: Create this team and add players & sidelines
       edit:
@@ -42,21 +96,27 @@ obblm:
         championship:
           label: ~
           question: Or want you to create a team for a championship ?
-        name: Name
-        roster: Roster
-        anthem: Anthem
-        fluff: Fluff
+        parts:
+          story: Your team story
+          players: Team composition
+          sidelines: Sidelines
+        name: Your team name
+        logo: Your team logo (will be seen everywhere)
+        cover: Your team name (will be seen on your sheet)
+        roster: Pick up a roster
+        anthem: Your team anthem
+        fluff: Your team fluff
         rerolls: Rerolls
         cheerleaders: Cheerleaders
         assistants: Assistants
-        apothecary: Apothecary
+        apothecary: Get an apothecary ?
         popularity: Popularity
-        treasury: Treasury
+        treasury: Available treasury
     player:
       fields:
         number: Number
-        type: Type
-        name: Name
+        type: Player position
+        name: Player name
 
   emails:
     championship_invitation:

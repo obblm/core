@@ -36,6 +36,17 @@ services:
   Obblm\Core\Helper\Rule\RuleHelperInterface:
     alias: Obblm\Core\Helper\Rule\BaseRule
 
+  Obblm\Core\Service\FileTeamUploader:
+    autowire: true
+    arguments:
+      $targetDirectory: '%obblm.config.upload_directory%/team'
+
+  Obblm\Core\Service\ObblmPackage:
+    autowire: true
+    arguments:
+      $kernetProjectDir: '%kernel.project_dir%/public'
+      $uploadDirectory: '%obblm.config.upload_directory%/team'
+
   Obblm\Core\Routing\RouteAutoloader:
     autowire: true
     public: false

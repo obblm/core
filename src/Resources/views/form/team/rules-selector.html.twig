@@ -8,9 +8,9 @@
                     {% if item.icon %}
                         <i aria-hidden="true" class="icon notranslate {{ item.icon }}"></i>
                     {% endif %}
-                    {{ item.name }}
+                    <h2 class="title">{{ item.name|trans }}</h2>
                 {% endif %}
-                <div class="menu">
+                <div class="selector">
                     {{ _self.navigationCollectionToHtml(item.collection) }}
                 </div>
             </div>
@@ -33,12 +33,10 @@
 {% endmacro %}
 {% import _self as macros %}
 {% block body %}
-    <div class="">
-        <h1 class="ui">
-            {{ 'obblm.forms.team.create.rule-selector'|trans }}
+    <div class="form container">
+        <h1 class="title">
+            {{ 'obblm.forms.team.create.title'|trans }}
         </h1>
-        <div class="">
-            {{ macros.navigationCollectionToHtml(rules_navigation()) }}
-        </div>
+        {{ macros.navigationCollectionToHtml(rules_navigation()) }}
     </div>
 {% endblock %}

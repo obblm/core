@@ -35,6 +35,7 @@ abstract class AbstractTeamController extends AbstractController
 
         return $this->render('@ObblmCore/form/team/create.rules-choice.html.twig', [
             'form' => $form->createView(),
+            'rule' => $team->getRule(),
         ]);
     }
 }

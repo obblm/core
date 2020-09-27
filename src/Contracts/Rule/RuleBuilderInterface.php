@@ -19,10 +19,6 @@ interface RuleBuilderInterface
     /**
      * @return \iterable
      */
-    public function getAllStarPlayers();
-    /**
-     * @return \iterable
-     */
     public function getSkills();
     /**
      * @return \iterable

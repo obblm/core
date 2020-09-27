@@ -6,6 +6,7 @@ use Obblm\Core\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route(name="obblm_")
@@ -15,7 +16,7 @@ class FrontendController extends AbstractController
     /**
      * @Route("/", name="dashboard")
      */
-    public function home():Response
+    public function home(TranslatorInterface $translator):Response
     {
         $this->denyAccessUnlessGranted(Roles::COACH);
 

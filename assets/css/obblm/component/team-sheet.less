@@ -1,0 +1,44 @@
+@logoSize: 150px;
+#team-sheet {
+  .header {
+    padding: @baseMargin;
+    box-sizing: border-box;
+    border: @border;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    flex-flow: row wrap;
+    .logo {
+      flex-basis: auto;
+      width: @logoSize;
+      img { width: 100%; height: auto;}
+    }
+    .content {
+      flex-basis: auto;
+      width: calc(100% - @logoSize - @baseMargin);
+      margin-left: @baseMargin;
+      .informations {
+        margin-top: @baseMargin;
+        .information {
+          &:before {
+            margin-top: 0.2rem;
+            content: '';
+            display: block;
+          }
+          .label {
+            font-weight: @h2FontWeight;
+          }
+        }
+        .box.vertical.aligned > * {
+          display: table;
+          vertical-align: middle;
+          height: 100%;
+          > * {
+            display: table-row;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+  }
+}

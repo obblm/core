@@ -1,0 +1,48 @@
+.main.container,
+.main .container {
+  > * {
+    margin-top: @baseMargin;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  .title {
+    font-family: @titleFont;
+  }
+  h1 {
+     &.title {
+       font-size: @h1FontSize;
+       text-transform: uppercase;
+       font-weight: @h1FontWeight;
+       border-bottom: @border;
+       padding: 0 0 0.7rem;
+     }
+   }
+  h2 {
+    &.title {
+      font-size: @h2FontSize;
+      text-transform: uppercase;
+      font-weight: @h2FontWeight;
+    }
+  }
+  .aligned {
+    &.left {
+      text-align: left;
+    }
+    &.center {
+      text-align: center;
+    }
+    &.right {
+      text-align: right;
+    }
+    &.top {
+      vertical-align: top;
+    }
+    &.middle {
+      vertical-align: center;
+    }
+    &.bottom {
+      vertical-align: bottom;
+    }
+  }
+}

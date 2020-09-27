@@ -1,11 +1,34 @@
 {% extends '@ObblmCore/base.html.twig' %}
 
 {% block body %}
-    <ul class="ui list">
-    {% for rule in rules %}
-        <li>
-            <a href="{{ path('obblm_rules_detail', {'rule': rule.id}) }}">{{ rule.name|trans({}, rule.ruleKey) }}</a>
-        </li>
-    {% endfor %}
-    </ul>
+    <h1 class="title">{{ 'obblm.rules.title'|trans }}</h1>
+    <div id="rules" class="four boxes">
+        {% for rule in rules %}
+        <div class="box rule">
+            <a class="image" href="{{ path('obblm_rules_detail', {'rule': rule.id}) }}">
+                <img src="https://placekitten.com/800/800">
+            </a>
+            <div class="content">
+                <a class="header" href="{{ path('obblm_rules_detail', {'rule': rule.id}) }}">
+                    <h2 class="title">{{ rule.name|trans({}, rule.ruleKey) }}</h2>
+                </a>
+                <div class="meta">
+                    <em>{{ rule.ruleKey }}</em>
+                </div>
+                <div class="description">
+                    #Rule desc
+                </div>
+            </div>
+            <div class="extra content">
+              <span class="right floated">
+                #Rule desc
+              </span>
+              <span>
+                <i class="user icon"></i>
+                #Rule desc
+              </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}

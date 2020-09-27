@@ -5,7 +5,8 @@
     {% if form.vars.errors is not empty %}
         {{ form_errors(form) }}
     {% endif %}
-    {{ form_start( form, {'attr': {'class': 'ui form', 'id': 'team-rule-choice'}} ) }}
+    {{ form_start( form, {'attr': {'class': 'container form', 'id': 'team-rule-choice'}} ) }}
+    <h1 class="title">{{ 'obblm.forms.team.create.rule-selector'|trans({ '%what%': rule|rule_name|trans({}, rule.ruleKey) }) }}</h1>
         {% if form.children.name is defined %}
             <div class="field">
                 {{ form_label(form.name, 'obblm.forms.team.fields.name') }}
@@ -14,7 +15,7 @@
                 {% endif %}
                 {{ form_widget(form.name) }}
             </div>
-            <div class="field">
+            <div class="field selector">
                 {{ form_label(form.roster, 'obblm.forms.team.fields.roster') }}
                 {{ form_errors(form.roster) }}
                 {{ form_widget(form.roster, {'attr': {'class': 'ui dropdown'}}) }}

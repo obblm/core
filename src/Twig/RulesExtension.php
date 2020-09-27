@@ -29,6 +29,7 @@ class RulesExtension extends AbstractExtension
     public function getFilters()
     {
         return [
+            new TwigFilter('rule_name', [$this, 'getRuleName']),
         ];
     }
 
@@ -42,6 +43,11 @@ class RulesExtension extends AbstractExtension
             new TwigFunction('get_all_star_players', [$this, 'getAllStarPlayers']),
             new TwigFunction('get_all_skills', [$this, 'getAllSkills']),
         ];
+    }
+
+    public function getRuleName(Rule $rule)
+    {
+        return CoreTranslation::getRuleTitle($rule->getRuleKey());
     }
 
     public function getAvailableRosters(Rule $rule)
@@ -99,7 +105,7 @@ class RulesExtension extends AbstractExtension
     public function getAllStarPlayers(Rule $rule)
     {
         $helper = $this->ruleHelper->getHelper($rule);
-        $sps = $helper->getAllStarPlayers();
+        $sps = $helper->getStarPlayers();
         $starPlayers = new ArrayCollection();
         foreach ($sps as $sp) {
             if ($sp instanceof MultipleStarPlayer) {

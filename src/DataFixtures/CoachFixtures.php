@@ -23,7 +23,7 @@ class CoachFixtures extends Fixture
     public function load(ObjectManager $em)
     {
         $coach = (new Coach())
-            ->setEmail('admin@oobblm.com')
+            ->setEmail('admin@obblm.com')
             ->setUsername('admin');
         $password = $this->encoder->encodePassword($coach, 'admin');
         $coach->setPassword($password);
@@ -33,7 +33,7 @@ class CoachFixtures extends Fixture
         $em->persist($coach);
         $this->addReference(self::ADMIN_USER_REFERENCE, $coach);
         $coach = (new Coach())
-            ->setEmail('manager@oobblm.com')
+            ->setEmail('manager@obblm.com')
             ->setUsername('manager');
         $password = $this->encoder->encodePassword($coach, 'manager');
         $coach->setPassword($password);
@@ -43,7 +43,7 @@ class CoachFixtures extends Fixture
         $em->persist($coach);
         $this->addReference(self::MANAGER_USER_REFERENCE, $coach);
         $coach = (new Coach())
-            ->setEmail('coach@oobblm.com')
+            ->setEmail('coach@obblm.com')
             ->setUsername('coach');
         $password = $this->encoder->encodePassword($coach, 'coach');
         $coach->setPassword($password);
