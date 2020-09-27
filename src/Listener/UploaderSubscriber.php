@@ -13,7 +13,8 @@ class UploaderSubscriber implements EventSubscriberInterface
 {
     private $uploader;
 
-    public function __construct(FileUploaderInterface $uploader) {
+    public function __construct(FileUploaderInterface $uploader)
+    {
         $this->uploader = $uploader;
     }
 
@@ -24,16 +25,16 @@ class UploaderSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onSubmit(FormEvent $event) {
-
+    public function onSubmit(FormEvent $event)
+    {
         $data = $event->getData();
         $form = $event->getForm();
 
-        if($data instanceof TeamVersion) {
+        if ($data instanceof TeamVersion) {
             $data = $data->getTeam();
         }
 
-        if($data instanceof Team) {
+        if ($data instanceof Team) {
             $this->uploader->uploadIfExists(
                 $data,
                 $form->get('logo')->getData(),

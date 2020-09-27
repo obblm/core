@@ -9,8 +9,8 @@ class ObblmPackage
 {
     private $package;
 
-    public function __construct($kernetProjectDir, $uploadDirectory, $publicUploadUrl = null) {
-
+    public function __construct($kernetProjectDir, $uploadDirectory, $publicUploadUrl = null)
+    {
         $directory = str_replace($kernetProjectDir, '', $uploadDirectory);
         $this->package = new PathPackage($directory, new EmptyVersionStrategy());
     }

@@ -74,7 +74,8 @@ class ObblmContextSubscriber implements EventSubscriberInterface
         }
     }
 
-    public function setUserLocale(InteractiveLoginEvent $event) {
+    public function setUserLocale(InteractiveLoginEvent $event)
+    {
         $user = $event->getAuthenticationToken()->getUser();
 
         if (null !== $user->getLocale()) {

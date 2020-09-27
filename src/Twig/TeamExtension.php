@@ -56,7 +56,7 @@ class TeamExtension extends AbstractExtension
 
     public function getLogo(Team $team):string
     {
-        if($team->getLogoFilename()) {
+        if ($team->getLogoFilename()) {
             return $this->package->getUrl($team->getId() . '/' . $team->getLogoFilename());
         }
         return "https://placekitten.com/800/800";
@@ -65,7 +65,7 @@ class TeamExtension extends AbstractExtension
 
     public function getCover(Team $team)
     {
-        if($team->getCoverFilename()) {
+        if ($team->getCoverFilename()) {
             return $this->package->getUrl($team->getId() . '/' . $team->getCoverFilename());
         }
         return "";

@@ -26,10 +26,9 @@ class AccountController extends AbstractController
         $form = $this->createForm(EditUserForm::class, $this->getUser());
 
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            if($data->getPlainPassword()) {
+            if ($data->getPlainPassword()) {
                 $password = $passwordEncoder->encodePassword($coach, $coach->getPlainPassword());
                 $coach->setPassword($password)
                     ->setHash(hash('sha256', $coach->getEmail()));

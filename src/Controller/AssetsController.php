@@ -20,7 +20,8 @@ class AssetsController extends AbstractController
     /**
      * @Route("/team/{team}/logo", name="_team_logo")
      */
-    public function teamLogo(FileTeamUploader $uploader, Team $team) {
+    public function teamLogo(FileTeamUploader $uploader, Team $team)
+    {
         if ($team->getLogoFilename()) {
             $uploader->setObjectSubDirectory($team->getId());
             $file = new File($uploader->getObjectDirectory() . '/' . $team->getLogoFilename());
@@ -32,7 +33,8 @@ class AssetsController extends AbstractController
     /**
      * @Route("/team/{team}/cover", name="_team_cover")
      */
-    public function teamCover(FileTeamUploader $uploader, Team $team) {
+    public function teamCover(FileTeamUploader $uploader, Team $team)
+    {
         if ($team->getCoverFilename()) {
             $uploader->setObjectSubDirectory($team->getId());
             $file = new File($uploader->getObjectDirectory() . '/' . $team->getCoverFilename());

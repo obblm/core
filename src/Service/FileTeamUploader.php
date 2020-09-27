@@ -31,11 +31,10 @@ class FileTeamUploader extends AbstractFileUploader implements FileUploaderInter
 
     public function uploadLogoIfExists(Team $object, $logoFile):?File
     {
-        if($logoFile) {
+        if ($logoFile) {
             $this->setObjectSubDirectory($object->getId());
-            if ($logo = $this->upload($logoFile))
-            {
-                if($object->getLogoFilename()) {
+            if ($logo = $this->upload($logoFile)) {
+                if ($object->getLogoFilename()) {
                     $this->removeOldFile($object->getLogoFilename());
                 }
                 $object->setLogoFilename($logo->getFilename());
@@ -47,11 +46,10 @@ class FileTeamUploader extends AbstractFileUploader implements FileUploaderInter
     }
     public function uploadCoverIfExists(Team $object, $coverFile):?File
     {
-        if($coverFile) {
+        if ($coverFile) {
             $this->setObjectSubDirectory($object->getId());
-            if ($cover = $this->upload($coverFile))
-            {
-                if($object->getCoverFilename()) {
+            if ($cover = $this->upload($coverFile)) {
+                if ($object->getCoverFilename()) {
                     $this->removeOldFile($object->getCoverFilename());
                 }
                 $object->setCoverFilename($cover->getFilename());
