@@ -2,6 +2,8 @@
 
 namespace Obblm\Core\Controller;
 
+use Doctrine\Common\Collections\Criteria;
+use Obblm\Core\Entity\Coach;
 use Obblm\Core\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,17 +18,28 @@ class FrontendController extends AbstractController
     /**
      * @Route("/", name="dashboard")
      */
-    public function home(TranslatorInterface $translator):Response
+    public function home():Response
     {
         $this->denyAccessUnlessGranted(Roles::COACH);
 
-        $response = $this->render('@ObblmCore/dashboard/index.html.twig');
-        // cache for 3600 seconds
-        $response->setSharedMaxAge(3600);
+        return $this->render('@ObblmCore/dashboard/index.html.twig');
+    }
 
-        // (optional) set a custom Cache-Control directive
-        $response->headers->addCacheControlDirective('must-revalidate', true);
+    public function lastTeams($max = 5):Response
+    {
+        $this->denyAccessUnlessGranted(Roles::COACH);
 
-        return $response;
+        $user = $this->getUser();
+        $teams = [];
+        if ($user instanceof Coach) {
+            $criteria = Criteria::create()
+                ->setMaxResults($max)
+                ->orderBy(['id' => 'DESC']);
+            $teams = $user->getTeams()->matching($criteria);
+        }
+
+        return $this->render('@ObblmCore/dashboard/last-teams.html.twig', [
+            'teams' => $teams,
+        ]);
     }
 }

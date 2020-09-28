@@ -1,0 +1,52 @@
+bb2020:
+  trait:
+    ma:
+      abbr: M
+      title: Move
+    st:
+      abbr: ST
+      title: Strength
+    ag:
+      abbr: AG
+      title: Agility
+    pa:
+      abbr: PA
+      title: Pass
+    av:
+      abbr: AV
+      title: Armor
+    com:
+      abbr: Com
+      title: Com...
+    td:
+      abbr: TD
+      title: Touchdowns
+    int:
+      abbr: Int
+      title: Interceptions
+    cas:
+      abbr: Cas
+      title: Casualties
+    mvp:
+      abbr: MVP
+      title: Most Valuable Player
+    spp:
+      abbr: SPP
+      title: Star Player Points
+    skill:
+      abbr: Sk
+      title: Skills
+    injury:
+      abbr: In
+      title: Injuries
+
+  rosters:
+    human:
+      title: Human
+      positions:
+        lineman: Lineman
+        thrower: Thrower
+        catcher: Catcher
+        blitzer: Blitzer
+        halfling: Halfling Hopeful
+        ogre: Ogre

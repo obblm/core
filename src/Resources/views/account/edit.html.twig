@@ -1,8 +1,9 @@
 {% extends '@ObblmCore/base.html.twig'%}
 
+{% block title 'obblm.account.title'|trans %}
 {% block body %}
     {{ form_start( form, {'attr': {'class': 'form container'}} ) }}
-
+    <h1 class="title">{{ 'obblm.account.title'|trans }}</h1>
     <div class="field">
         {{ form_label( form.username ) }}
         {{ form_widget( form.username ) }}

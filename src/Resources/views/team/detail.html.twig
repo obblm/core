@@ -1,5 +1,7 @@
 {% extends '@ObblmCore/base.html.twig' %}
 
+{% block title 'obblm.team.title'|trans
+        ~ ' > ' ~ version.team.name %}
 {% block body %}
     <section id="team-sheet" class="container">
         <nav class="action">
@@ -12,10 +14,10 @@
             </a>
         {% endif %}
         </nav>
-
-        <header class="header"{% if(version.team.coverFilename) %} style="background-image: url({{ get_team_cover(version.team) }});"{% endif %}>
+        {% include '@ObblmCore/partials/flash.html.twig' %}
+        <header class="header"{% if(version.team.coverFilename) %} style="background-image: url({{ team_cover(version.team) }});"{% endif %}>
             <div class="logo">
-                <img alt="{{ version.team.name }}" class="image" src="{{ asset( get_team_logo(version.team) ) }}">
+                <img alt="{{ version.team.name }}" class="image" src="{{ team_logo(version.team) }}">
             </div>
             <div class="content">
                 <h1 class="title">{{ version.team.name }}</h1>
@@ -24,15 +26,24 @@
                         <li class="box vertical aligned">
                             <ul>
                                 <li class="box information">
-                                    <span class="label">{{ 'obblm.layout.words.roster'|trans }} :</span>
+                                    <span class="label">
+                                        <i class="icon mdi mdi-label"></i>
+                                        {{ 'obblm.trait.roster'|trans }} :
+                                    </span>
                                     {{ version.team|roster_name|trans({}, version.team.rule.ruleKey) }}
                                 </li>
                                 <li class="box information">
-                                    <span class="label">{{ 'obblm.layout.words.coach'|trans }} :</span>
+                                    <span class="label">
+                                        <i class="icon mdi mdi-account"></i>
+                                        {{ 'obblm.trait.coach'|trans }} :
+                                    </span>
                                     {{ version.team.coach.username }}
                                 </li>
                                 <li class="box information">
-                                    <span class="label">{{ 'obblm.layout.words.rule'|trans }} :</span>
+                                    <span class="label">
+                                        <i class="icon mdi mdi-account"></i>
+                                        {{ 'obblm.trait.rule'|trans }} :
+                                    </span>
                                     {{ version.team.rule|rule_name|trans({}, version.team.rule.ruleKey) }}
                                 </li>
                                 <!-- <li class="box information">
@@ -44,7 +55,10 @@
                         <li class="box vertical aligned">
                             <ul>
                                 <li class="box information">
-                                    <span class="label">{{ 'TR'|trans }} :</span>
+                                    <span class="label">
+                                        <i class="icon mdi mdi-view-dashboard"></i>
+                                        {{ 'TR'|trans }} :
+                                    </span>
                                     {{ version.tr }}
                                 </li>
                                 <li class="box information">
@@ -64,11 +78,14 @@
                         <li class="box vertical aligned">
                             <ul>
                                 <li class="box information">
-                                    <span class="label">{{ 'obblm.layout.words.rerolls'|trans }} :</span>
+                                    <span class="label">
+                                        <i class="icon mdi mdi-dice-4"></i>
+                                        {{ 'obblm.trait.rerolls'|trans }} :
+                                    </span>
                                     {{ version.rerolls }} (x{{ version.team|reroll_cost|price }})
                                 </li>
                                 <li class="box information">
-                                    <span class="label">{{ 'obblm.layout.words.apothecary'|trans }} :</span>
+                                    <span class="label">{{ 'obblm.trait.apothecary'|trans }} :</span>
                                     {{ version.apothecary|yesno }}
                                 </li>
                                 <!-- <li class="box information">
@@ -80,15 +97,15 @@
                         <li class="box vertical aligned">
                             <ul>
                                 <li class="box information">
-                                    <span class="label">{{ 'obblm.layout.words.popularity'|trans }} :</span>
+                                    <span class="label">{{ 'obblm.trait.popularity'|trans }} :</span>
                                     {{ version.popularity }}
                                 </li>
                                 <li class="box information">
-                                    <span class="label">{{ 'obblm.layout.words.assistants'|trans }} :</span>
+                                    <span class="label">{{ 'obblm.trait.assistants'|trans }} :</span>
                                     {{ version.assistants }}
                                 </li>
                                 <li class="box information">
-                                    <span class="label">{{ 'obblm.layout.words.cheerleaders'|trans }} :</span>
+                                    <span class="label">{{ 'obblm.trait.cheerleaders'|trans }} :</span>
                                     {{ version.cheerleaders }}
                                 </li>
                             </ul>

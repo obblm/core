@@ -1,11 +1,11 @@
 obblm:
+  title: OBBLM
+  full_title: Open Blood Bowl league manager
   layout:
     header:
-      title: Open Blood Bowl league manager
       my_account: Edit my profile
       logout: Log out
     navigation:
-      title: OBBLM
       dashboard: Dashboard
       my_teams: My teams
       rules: Rules
@@ -22,28 +22,79 @@ obblm:
         edit: Edit
         delete: Delete
     hi: Hello
-    words:
-      roster: Roster
-      coach: Coach
-      rule: Rule
-      name: Name
-      type: Type
-      skills: Skills
-      injuries: Injuries
-      value: Value
-      rerolls: Rerolls
-      assistants: Assistants
-      cheerleaders: Cheerleaders
-      popularity: Popularity
-      apothecary: Apothecary
-      star_players: Star Players
-      inducements: Inducements
-      options: Options
+  trait:
+    number:
+      abbr: '#'
+      title: Number
+    name:
+      abbr: Name
+      title: Name
+    type:
+      abbr: Pos
+      title: Position
+    ma:
+      abbr: M
+      title: Move
+    st:
+      abbr: ST
+      title: Strength
+    ag:
+      abbr: AG
+      title: Agility
+    av:
+      abbr: AV
+      title: Armor
+    skill:
+      abbr: Sk
+      title: Skills
+    injury:
+      abbr: In
+      title: Injuries
+    com:
+      abbr: Réu
+      title: Réussites
+    td:
+      abbr: TD
+      title: Touchdowns
+    int:
+      abbr: Int
+      title: Interceptions
+    cas:
+      abbr: Sor
+      title: Sorties
+    mvp:
+      abbr: MVP
+      title: Joueur le Plus Valable
+    spp:
+      abbr: SPP
+      title: Star Player Points
+    value:
+      abbr: Value
+      title: Value
+    roster: Roster
+    coach: Coach
+    rule: Rule
+    rerolls: Rerolls
+    assistants: Assistants
+    cheerleaders: Cheerleaders
+    popularity: Popularity
+    apothecary: Apothecary
+    star_players: Star Players
+    inducements: Inducements
+    options: Options
+
+  dashboard:
+    title: Your dashbaord
+    last_teams: My last teams (%count%)
 
   rules:
     title: Rules
+    available_star_players: Available star players
 
   team:
+    title: Teams
+    none: Create some teams and see them here :)
+    not_finished: This team is not finished
     actions:
       add: Create a team
       edit: Edit this team
@@ -88,6 +139,8 @@ obblm:
           save: Save and come back later
           cencel: Cancel
       delete:
+        title: Delete %name%
+        warning: You are going to delete this team !
         question: Are you sure you want to use delete this team ?
       fields:
         rule:

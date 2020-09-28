@@ -1,29 +1,12 @@
 {% extends '@ObblmCore/base.html.twig' %}
-{% macro printPlayerFieldsRow( playerFields ) %}
-    <div class="item">
-        {{ form_errors( playerFields ) }}
-        <div class="three boxes fields">
-            <div class="box inline">
-                {{ playerFields.vars.value.number }}
-                {{ form_widget( playerFields.number ) }}
-            </div>
-            <div class="box field inline">
-                {{ form_label( playerFields.name, 'obblm.forms.player.fields.name' ) }}
-                {{ form_widget( playerFields.name ) }}
-            </div>
-            <div class="box field inline selector">
-                {{ form_label( playerFields.type, 'obblm.forms.player.fields.type', {'translation_domain': 'messages'} ) }}
-                {{ form_widget( playerFields.type, {'attr': {'class': 'ui dropdown'}} ) }}
-            </div>
-        </div>
-        {{ form_rest( playerFields ) }}
-    </div>
-{% endmacro %}
+{% set title = 'obblm.forms.team.edit.title'|trans({'%name%': team.name}) %}
+{% block title 'obblm.team.title'|trans
+    ~ ' > ' ~ title %}
 {% import _self as formMacros %}
 {% block body %}
     {% form_theme form '@ObblmCore/form/ui-form.html.twig'%}
     {{ form_start( form, {'attr': {'class': 'form container fixed-actions'}} ) }}
-    <h1 class="title">{{ 'obblm.forms.team.edit.title'|trans({'%name%': team.name}) }}</h1>
+    <h1 class="title">{{ title }}</h1>
     <h2 class="title">{{ team|roster_name|trans({}, team|rule_key) }}</h2>
     {{ form_errors( form ) }}
     <div class="field">
@@ -112,3 +95,23 @@
     {{ form_rest( form ) }}
     {{ form_end( form ) }}
 {% endblock %}
+{% macro printPlayerFieldsRow( playerFields ) %}
+    <div class="item">
+        {{ form_errors( playerFields ) }}
+        <div class="three boxes fields">
+            <div class="box inline">
+                {{ playerFields.vars.value.number }}
+                {{ form_widget( playerFields.number ) }}
+            </div>
+            <div class="box field inline">
+                {{ form_label( playerFields.name, 'obblm.forms.player.fields.name' ) }}
+                {{ form_widget( playerFields.name ) }}
+            </div>
+            <div class="box field inline selector">
+                {{ form_label( playerFields.type, 'obblm.forms.player.fields.type', {'translation_domain': 'messages'} ) }}
+                {{ form_widget( playerFields.type, {'attr': {'class': 'ui dropdown'}} ) }}
+            </div>
+        </div>
+        {{ form_rest( playerFields ) }}
+    </div>
+{% endmacro %}

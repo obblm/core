@@ -86,6 +86,10 @@ class TeamController extends AbstractTeamController
             $dispatcher->dispatch(new TeamVersionEvent($version), TeamVersionEvent::TREASURE_BASE);
             $em->persist($version);
             $em->flush();
+            $this->addFlash(
+                'success',
+                'Your changes were saved!'
+            );
             return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);
         }
 

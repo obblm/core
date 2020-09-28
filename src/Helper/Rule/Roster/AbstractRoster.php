@@ -22,15 +22,15 @@ abstract class AbstractRoster extends Optionable
     protected $canHaveApothecary;
     protected $inducementOptions;
 
-    protected function hydrateWithOptions($options)
+    protected function hydrateWithOptions()
     {
-        $this->setKey($options['key'])
-            ->setTranslationKey($options['translation_key'])
-            ->setTranslationDomain($options['translation_domain'])
-            ->setPlayerTypes($options['player_types'])
-            ->setInducementTypes($options['inducement_options'])
-            ->setRerollCost($options['reroll_cost'])
-            ->setCanHaveApothecary($options['can_have_apothecary']);
+        $this->setKey($this->options['key'])
+            ->setTranslationKey($this->options['translation_key'])
+            ->setTranslationDomain($this->options['translation_domain'])
+            ->setPlayerTypes($this->options['player_types'])
+            ->setInducementTypes($this->options['inducement_options'])
+            ->setRerollCost($this->options['reroll_cost'])
+            ->setCanHaveApothecary($this->options['can_have_apothecary']);
     }
 
     /**

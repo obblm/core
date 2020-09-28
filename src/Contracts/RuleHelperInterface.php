@@ -5,10 +5,11 @@ namespace Obblm\Core\Contracts;
 use Obblm\Core\Contracts\Rule\ApplicativeRuleInterface;
 use Obblm\Core\Contracts\Rule\InducementRuleInterface;
 use Obblm\Core\Contracts\Rule\PlayerRuleInterface;
+use Obblm\Core\Contracts\Rule\RuleBuilderInterface;
 use Obblm\Core\Contracts\Rule\TeamRuleInterface;
 use Obblm\Core\Entity\Rule;
 
-interface RuleHelperInterface extends ApplicativeRuleInterface, TeamRuleInterface, PlayerRuleInterface, InducementRuleInterface
+interface RuleHelperInterface extends ApplicativeRuleInterface, RuleBuilderInterface, TeamRuleInterface, PlayerRuleInterface, InducementRuleInterface
 {
     /****************
      * COMPLIER PASS

@@ -27,6 +27,11 @@ class Rule
     private $ruleKey;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ruleDirectory;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $template;
@@ -84,6 +89,18 @@ class Rule
     public function setRuleKey(string $ruleKey): self
     {
         $this->ruleKey = $ruleKey;
+
+        return $this;
+    }
+
+    public function getRuleDirectory(): ?string
+    {
+        return $this->ruleDirectory;
+    }
+
+    public function setRuleDirectory(string $ruleDirectory): self
+    {
+        $this->ruleDirectory = $ruleDirectory;
 
         return $this;
     }

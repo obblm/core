@@ -32,10 +32,7 @@ class ObblmCoreExtension extends Extension
             }
         }
 
-        $uploadDirectory = (!isset($config['obblm.upload_directory'])) ?
-            $uploadDirectory = $container->getParameter('kernel.project_dir') . '/public/uploads/obblm' :
-            $config['obblm.upload_directory'];
-        $container->setParameter('obblm.config.upload_directory', $uploadDirectory);
+        $this->createAssetsDirectoriesConfiguration($container, $config);
 
         $locator = new FileLocator(dirname(__DIR__).'/Resources/config');
         $loader = new YamlFileLoader($container, $locator);
@@ -48,8 +45,22 @@ class ObblmCoreExtension extends Extension
             ->addTag('obblm.routes')
         ;
 
-
         $this->createRulesPoolCacheDefinition($container, $config);
+    }
+
+    private function createAssetsDirectoriesConfiguration(ContainerBuilder $container, $config)
+    {
+        // Upload
+        $uploadDirectory = (!isset($config['obblm.upload_directory'])) ?
+            $uploadDirectory = $container->getParameter('kernel.project_dir') . '/public/obblm/uploads' :
+            $config['obblm.upload_directory'];
+        $container->setParameter('obblm.config.directory.upload', $uploadDirectory);
+
+        // Image resize cache
+        $uploadDirectory = (!isset($config['obblm.public_cache_directory'])) ?
+            $uploadDirectory = $container->getParameter('kernel.project_dir') . '/public/obblm/cache' :
+            $config['obblm.public_cache_directory'];
+        $container->setParameter('obblm.config.directory.public.cache', $uploadDirectory);
     }
 
     private function createRulesPoolCacheDefinition(ContainerBuilder $container, array $config) : string

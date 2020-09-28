@@ -24,9 +24,9 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('obblm-core', './assets/js/app')
-    .addStyleEntry('obblm-core-light', './assets/css/obblm/themes/light.less')
-    .addStyleEntry('obblm-core-dark',  './assets/css/obblm/themes/dark.less')
+    .addEntry('obblm-core', './src/Resources/assets/js/app')
+    .addStyleEntry('obblm-core-light', './src/Resources/assets/css/obblm/themes/light.less')
+    .addStyleEntry('obblm-core-dark',  './src/Resources/assets/css/obblm/themes/dark.less')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 

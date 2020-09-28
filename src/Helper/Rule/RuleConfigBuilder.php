@@ -187,11 +187,12 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
                 $this->skills->set(
                     $key,
                     new Skill([
-                        'key' => $skill,
-                        'type' => $type,
-                        'translation_key' => CoreTranslation::getSkillNameKey($ruleKey, $skill),
-                        'type_translation_key' => CoreTranslation::getSkillType($ruleKey, $type),
-                        'translation_domain' => $ruleKey,
+                        'key'         => $skill,
+                        'type'        => $type,
+                        'name'        => CoreTranslation::getSkillNameKey($ruleKey, $skill),
+                        'description' => CoreTranslation::getSkillDescription($ruleKey, $skill),
+                        'type_name'   => CoreTranslation::getSkillType($ruleKey, $type),
+                        'domain'      => $ruleKey,
                     ])
                 );
             }

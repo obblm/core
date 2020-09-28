@@ -1,13 +1,11 @@
 {% extends '@ObblmCore/base.html.twig' %}
 
+{% block title 'obblm.rules.title'|trans %}
 {% block body %}
     <h1 class="title">{{ 'obblm.rules.title'|trans }}</h1>
     <div id="rules" class="four boxes">
         {% for rule in rules %}
         <div class="box rule">
-            <a class="image" href="{{ path('obblm_rules_detail', {'rule': rule.id}) }}">
-                <img src="https://placekitten.com/800/800">
-            </a>
             <div class="content">
                 <a class="header" href="{{ path('obblm_rules_detail', {'rule': rule.id}) }}">
                     <h2 class="title">{{ rule.name|trans({}, rule.ruleKey) }}</h2>

@@ -2,30 +2,32 @@
 
 namespace Obblm\Core\Contracts\Rule;
 
+use Doctrine\Common\Collections\Collection;
+
 interface RuleBuilderInterface
 {
     /**
-     * @return \iterable
+     * @return Collection
      */
     public function getInjuries();
     /**
-     * @return \iterable
+     * @return Collection
      */
     public function getInducementTypes();
     /**
-     * @return \iterable
+     * @return Collection
      */
     public function getSppLevels();
     /**
-     * @return \iterable
+     * @return Collection
      */
     public function getSkills();
     /**
-     * @return \iterable
+     * @return Collection
      */
     public function getRosters();
     /**
-     * @return \iterable
+     * @return Collection
      */
     public function getInducementTable();
 }

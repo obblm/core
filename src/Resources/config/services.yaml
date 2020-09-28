@@ -23,15 +23,18 @@ services:
     arguments:
       - ''
       - 3600
-      - '%kernel.cache_dir%/obblm/rule'
-
-  obblm.cache.rules:
-    alias: "obblm.cache"
+      - '%kernel.cache_dir%/obblm/rules'
 
   Obblm\Core\Helper\RuleHelper:
     autowire: true
     arguments:
-      $adapter: "@obblm.cache.rules"
+      $adapter: "@obblm.cache"
+
+  Obblm\Core\Helper\ImageHelper:
+    autowire: true
+    arguments:
+      $kernetProjectDir: '%kernel.project_dir%/public'
+      $cacheDirectory: "%obblm.config.directory.public.cache%"
 
   Obblm\Core\Helper\Rule\RuleHelperInterface:
     alias: Obblm\Core\Helper\Rule\BaseRule
@@ -39,13 +42,13 @@ services:
   Obblm\Core\Service\FileTeamUploader:
     autowire: true
     arguments:
-      $targetDirectory: '%obblm.config.upload_directory%/team'
+      $targetDirectory: '%obblm.config.directory.upload%/team'
 
   Obblm\Core\Service\ObblmPackage:
     autowire: true
     arguments:
       $kernetProjectDir: '%kernel.project_dir%/public'
-      $uploadDirectory: '%obblm.config.upload_directory%/team'
+      $uploadDirectory: '%obblm.config.directory.upload%/team'
 
   Obblm\Core\Routing\RouteAutoloader:
     autowire: true

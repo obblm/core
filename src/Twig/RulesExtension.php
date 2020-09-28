@@ -42,6 +42,7 @@ class RulesExtension extends AbstractExtension
             new TwigFunction('get_star_players', [$this, 'getAvailableStarPlayers']),
             new TwigFunction('get_all_star_players', [$this, 'getAllStarPlayers']),
             new TwigFunction('get_all_skills', [$this, 'getAllSkills']),
+            new TwigFunction('get_player_skills', [$this, 'getPlayerSkills']),
         ];
     }
 
@@ -128,14 +129,18 @@ class RulesExtension extends AbstractExtension
         /* Aplha ordering */
         $alpha = Criteria::create()
             ->orderBy(['key' => 'ASC']);
-        $skills = $helper->getSkills()->matching($alpha);
-        return array_map(function (Skill $skill) use ($rule) {
-            return [
-                'name' => $skill->getTranslationKey(),
-                'type' => $skill->getTypeTranslationKey(),
-                'domain' => $skill->getTranslationDomain(),
-                'description' => CoreTranslation::getSkillDescription($rule->getRuleKey(), $skill->getKey()),
-            ];
-        }, $skills->toArray());
+        return $helper->getSkills()->matching($alpha);
+    }
+
+    public function getPlayerSkills(Rule $rule, Player $player)
+    {
+        $helper = $this->ruleHelper->getHelper($rule);
+        $version = PlayerHelper::getLastVersion($player);
+        $c = Criteria::create()
+            ->where(
+                Criteria::expr()->in('key', $version->getSkills())
+            )
+            ->orderBy(['key' => 'ASC']);
+        return $helper->getSkills()->matching($c);
     }
 }

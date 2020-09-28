@@ -20,15 +20,6 @@ lrb6:
     wizard: Wizard
     halfing_master_chef: Halfling Master Chef
   trait:
-    pos:
-      abbr: N°
-      title: Number
-    name:
-      abbr: Name
-      title: Name
-    type:
-      abbr: Pos
-      title: Position
     ma:
       abbr: M
       title: Move
@@ -41,15 +32,9 @@ lrb6:
     av:
       abbr: AV
       title: Armor
-    skill:
-      abbr: Sk
-      title: Skills
-    injury:
-      abbr: In
-      title: Injuries
     com:
-      abbr: Réu
-      title: Réussites
+      abbr: Com
+      title: Com...
     td:
       abbr: TD
       title: Touchdowns
@@ -57,17 +42,20 @@ lrb6:
       abbr: Int
       title: Interceptions
     cas:
-      abbr: Sor
-      title: Sorties
+      abbr: Cas
+      title: Casualities
     mvp:
       abbr: MVP
-      title: Joueur le Plus Valable
+      title: Most Valuable Player
     spp:
       abbr: SPP
-      title: Experience
-    value:
-      abbr: Value
-      title: Value
+      title: Star Player Points
+    skill:
+      abbr: Sk
+      title: Skills
+    injury:
+      abbr: In
+      title: Injuries
   skill_types:
     g: General skills
     s: Strength skills
@@ -142,16 +130,16 @@ lrb6:
   skills:
     move_increase:
       title: +1M
-      description:
+      description: "The player earn 1 point in movement characteristic."
     strength_increase:
       title: +1ST
-      description:
+      description: "The player earn 1 point in strength characteristic."
     agility_increase:
       title: +1AG
-      description:
+      description: "The player earn 1 point in agility characteristic."
     armor_increase:
       title: +1AV
-      description:
+      description: "The player earn 1 point in armour characteristic."
     block:
       title: Block
       description: "A player with the Block skill is proficient at knocking opponents down. The Block skill, if used,affects the results rolled with the Block dice, as explained in the Blocking rules."

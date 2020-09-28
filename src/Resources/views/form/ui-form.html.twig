@@ -5,7 +5,13 @@
         {{ 'obblm.forms.team.edit.buttons.submit'|trans }}
     </button>
 {% endblock %}
-
+{% block form_row %}
+    <div class="field">
+        {{ form_label( form ) }}
+        {{ form_widget( form ) }}
+        {{ form_errors( form ) }}
+    </div>
+{% endblock %}
 {% block form_errors %}
     {% if errors|length > 0 %}
         <div class="errors">

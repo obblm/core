@@ -26,6 +26,7 @@
         "babel-plugin-transform-builtin-extend": "^1.1.2",
         "babel-preset-es2015": "^6.24.1",
         "babel-preset-stage-2": "^6.24.1",
+        "jquery-ui": "^1.12.1",
         "less-loader": "^7.0.1",
         "lodash": "^4.17.15",
         "vue-router": "^3.3.2",

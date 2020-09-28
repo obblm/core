@@ -1,0 +1,119 @@
+/*******************************
+            Fonts
+*******************************/
+@googleProtocol : 'https://';
+
+/*******************************
+            Colors
+*******************************/
+@white          : #fff;
+@black          : #000;
+@dark-grey      : #2d2d2d;
+@dark-mid-grey  : #686767;
+@mid-grey       : #d5d5d5;
+@light-grey     : #f6f6f6;
+
+@quaterAlphaBlack      : rgba(0, 0, 0, 0.25);
+@halfAlphaBlack        : rgba(0, 0, 0, 0.5);
+@threeQuaterAlphaBlack : rgba(0, 0, 0, 0.75);
+
+@quaterAlphaWhite      : rgba(255, 255, 255, 0.25);
+@halfAlphaWhite        : rgba(255, 255, 255, 0.5);
+@threeQuaterAlphaWhite : rgba(255, 255, 255, 0.75);
+
+/*******************************
+               Sizes
+ ******************************/
+
+@borderWidth: 1px;
+@borderStyle: solid;
+@borderColor: @white;
+@border: @borderWidth @borderStyle @borderColor;
+@borderRadius: 5px;
+
+@baseMargin: 1.5rem;
+
+/*******************************
+          Breakpoints
+*******************************/
+@tiny-screen        : 480px; // tiny screens media query (less than 480px)
+@small-screen-min   : 481px; // screens between 481px and 768px
+@small-screen-max   : 768px; // screens between 481px and 768px
+@medium-screen-min  : 768px; // screens between 481px and 768px
+@medium-screen-max  : 1023px; // screens between 769px and 1024px
+@large-screen-min   : 1024px; // screens between 1025px and 1280px
+@large-screen-max   : 1279px; // screens between 1025px and 1280px
+@big-screen-min     : 1280px; // screens between 1025px and 1280px
+@smartphones        : ~"only screen and (max-width: @{tiny-screen})";
+@tablets-v          : ~"only screen and (min-width: @{small-screen-min}) and (max-width: @{small-screen-max})";
+@tablets            : ~"only screen and (min-width: @{medium-screen-min}) and (max-width: @{medium-screen-max})";
+@little-desktop     : ~"only screen and (min-width: @{large-screen-min}) and (max-width: @{large-screen-max})";
+@largerthantiny     : ~"(min-width: @{tiny-screen})";
+
+/*******************************
+          Transitions
+*******************************/
+
+@transitionDefault: ease;
+@transitionDefaultDelay: 0.5s;
+@transitionHoverDelay: 0.3s;
+
+/*******************************
+          Messages
+*******************************/
+
+@message-base-color    : #276f86;
+@message-base-bg       : #f8ffff;
+@message-error-color   : #9f3a38;
+@message-error-bg      : #fff6f6;
+@message-info-color    : #b58105;
+@message-info-bg       : #fff3da;
+@message-success-color : #2c662d;
+@message-success-bg    : #fcfff5;
+
+.gradient-background (@bottom: #0093CD, @top: #009DD1) {
+  background-image    : linear-gradient(bottom, @bottom 0%, @top 100%);
+  background-image    : -o-linear-gradient(bottom, @bottom 0%, @top 100%);
+  background-image    : -moz-linear-gradient(bottom, @bottom 0%, @top 100%);
+  background-image    : -webkit-linear-gradient(bottom, @bottom 0%, @top 100%);
+  background-image    : -ms-linear-gradient(bottom, @bottom 0%, @top 100%);
+
+  background-image    : -webkit-gradient(
+          linear,
+          left bottom,
+          left top,
+          color-stop(0, @bottom),
+          color-stop(1, @top)
+  );
+
+  filter              : progid:DXImageTransform.Microsoft.gradient(
+            startColorstr='@top', endColorstr='@bottom',GradientType=0
+  ); /* IE6-9 */
+}
+.charts-background (@dark-color: @chart-dark, @clear-color: @chart-clear) {
+  background  : @dark-color;
+  background  : -moz-linear-gradient(-45deg, @dark-color 0%, @clear-color 100%);
+  background  : -webkit-gradient(left top, right bottom, color-stop(0%, @dark-color), color-stop(100%, @clear-color));
+  background  : -webkit-linear-gradient(-45deg, @dark-color 0%, @clear-color 100%);
+  background  : -o-linear-gradient(-45deg, @dark-color 0%, @clear-color 100%);
+  background  : -ms-linear-gradient(-45deg, @dark-color 0%, @clear-color 100%);
+  background  : linear-gradient(135deg, @dark-color 0%, @clear-color 100%);
+  filter      : progid:DXImageTransform.Microsoft.gradient( startColorstr='@dark-color', endColorstr='@clear-color', GradientType=1 );
+}
+.border-radius (@size: 3px) {
+  -webkit-border-radius : @size;
+  -moz-border-radius    : @size;
+  border-radius         : @size;
+}
+.box-sizing (@size: border-box) {
+  -webkit-box-sizing    : @size;
+  -moz-box-sizing       : @size;
+  box-sizing            : @size;
+}
+.separator () {
+  border-top: 2px solid @separator-border-color;
+}
+
+.loadGoogleFont(@googleProtocol, @font, @fontSizes) when (@importGoogleFonts) {
+  @import (css) url('@{googleProtocol}fonts.googleapis.com/css?family=@{font}@{fontSizes}');
+}

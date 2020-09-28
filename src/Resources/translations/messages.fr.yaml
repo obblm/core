@@ -1,11 +1,11 @@
 obblm:
+  title: OBBLM
+  full_title: Open Blood Bowl league manager
   layout:
     header:
-      title: Open Blood Bowl league manager
       my_account: Editer mon profil
       logout: Se déconnecter
     navigation:
-      title: OBBLM
       dashboard: Tableau de board
       my_teams: Mes équipes
       rules: Les règles
@@ -44,6 +44,8 @@ obblm:
     title: Règles
 
   team:
+    none: Créez une nouvelle équipe, elle apparaitra ici :)
+    not_finished: L'équipe n'est pas encore terminée
     actions:
       add: Créer une équipe
       edit: Modifier cette équipe

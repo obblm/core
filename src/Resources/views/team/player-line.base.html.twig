@@ -1,9 +1,7 @@
-{% set translation_domain = rule.ruleKey %}
-{% trans_default_domain translation_domain %}
 <tr>
     {% block number %}<td>{{ player.number }}</td>{% endblock %}
     {% block name %}<td class="left aligned editable">{{ player.name }}</td>{% endblock %}
-    {% block type %}<td class="left aligned editable">{{ player|type|trans }}</td>{% endblock %}
+    {% block type %}<td class="left aligned editable">{{ player|type|trans({}, rule.ruleKey) }}</td>{% endblock %}
     {% block characteristics %}
         <td>{{ player|characteristics('ma') }}</td>
         <td>{{ player|characteristics('st') }}</td>
@@ -12,12 +10,10 @@
     {% endblock %}
     {% block skills %}<td class="left aligned">
         {% if player.type %}
-            {% for skill in player|skills %}
-                {# TODO: replace with skill helper #}
-                {% set skill_name = translation_domain ~ '.skills.' ~ skill ~ '.title' %}
-                {% set skill_text = translation_domain ~ '.skills.' ~ skill ~ '.description' %}
-                <span title="{{ skill_text|trans }}">
-                    {{ skill_name|trans }}{% if loop.index != loop.last %}, {% endif %}
+            {% set skills = get_player_skills(rule, player) %}
+            {% for skill in skills %}
+                <span title="{{ skill.description|trans({}, skill.domain) }}">
+                    {{ skill|trans({}, skill.domain) }}{% if loop.index != loop.last %}, {% endif %}
                 </span>
             {% else %}
             {{ 'obblm.sheet.table.players.skill_none'|trans({}, 'messages') }}

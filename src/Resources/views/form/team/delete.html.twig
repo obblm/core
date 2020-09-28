@@ -1,14 +1,18 @@
 {% extends '@ObblmCore/base.html.twig'%}
-
+{% set title = 'obblm.forms.team.delete.title'|trans({'%name%': team.name}) %}
+{% block title 'obblm.team.title'|trans
+    ~ ' > ' ~ title %}
 {% block body %}
-    <div>
-        <div class="ui message negative">
-            <h1 class="header">{{ 'obblm.forms.team.delete.question'|trans }}</h1>
-            <h2>{{ team.name }} ({{ team|tr }})</h2>
-            <p>
-                <a class="ui button red" href="{{ path('obblm_team_delete', {'team': team.id, 'confirm': 0}) }}">{{ 'obblm.layout.tools.no'|trans }}</a>
-                <a class="ui button green" href="{{ path('obblm_team_delete', {'team': team.id, 'confirm': 1}) }}">{{ 'obblm.layout.tools.yes'|trans }}</a>
-            </p>
+    <h1 class="title">{{ title }}</h1>
+    <div class="message error container">
+        <div>
+        <p><b>{{ 'obblm.forms.team.delete.warning'|trans }}</b></p>
+        <p><b>{{ team.name }}, TR : {{ team|tr }}</b></p>
+        <p>{{ 'obblm.forms.team.delete.question'|trans }}</p>
+        </div>
+        <div class="actions">
+            <a class="ui button green" href="{{ path('obblm_team_delete', {'team': team.id, 'confirm': 1}) }}">{{ 'obblm.layout.tools.yes'|trans }}</a>
+            <a class="ui button red" href="{{ path('obblm_team_delete', {'team': team.id, 'confirm': 0}) }}">{{ 'obblm.layout.tools.no'|trans }}</a>
         </div>
     </div>
 {% endblock %}

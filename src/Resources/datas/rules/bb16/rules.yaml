@@ -209,6 +209,7 @@ rules:
         - throw_team_mate
         - timber
         - titchy
+        - weeping_dagger
         - wild_animal
       c:
         - move_increase

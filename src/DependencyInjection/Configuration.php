@@ -19,6 +19,8 @@ class Configuration implements ConfigurationInterface
                 ->children()
                     ->scalarNode('upload_directory')
                     ->end()
+                    ->scalarNode('public_cache_directory')
+                    ->end()
                 ->end()
             ->end()
         ;

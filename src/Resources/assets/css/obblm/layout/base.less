@@ -1,0 +1,52 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body& {
+  font-family: @baseFont, sans-serif;
+  font-size: @baseFontSize;
+  font-weight: @baseFontWeight;
+  color: @fontColor;
+  background-color: @bodyBackground;
+
+  a {
+    color: @fontColor;
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
+
+
+  &.pushable {
+    padding-top: @headerHeight;
+    overflow-x: hidden;
+    .pusher {
+      transition: left @transitionDefault @transitionDefaultDelay;
+      z-index: 1;
+      position: relative;
+      left: 0;
+    }
+    > .overlay {
+      content: '';
+      background: @overlayBackground;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 70;
+      bottom: 0;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity @transitionDefault @transitionDefaultDelay;
+    }
+    &.open {
+      > .pusher {
+        left: @navWidth;
+      }
+      > .overlay {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}

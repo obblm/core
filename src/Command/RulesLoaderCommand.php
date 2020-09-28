@@ -62,7 +62,10 @@ class RulesLoaderCommand extends Command
     {
         $rules = [];
         $key = $ruleDirectory->getFilename();
-        $this->io->block("Importing {$key} rules form {$ruleDirectory->getPathname()}");
+
+        $directory = str_replace(dirname(__DIR__), '', $ruleDirectory->getPathname());
+
+        $this->io->block("Importing {$key} rules form {$directory}");
         $finder = new Finder();
         $finder->files()->ignoreDotFiles(true)->name(['*.yaml', '*.yml'])->in($ruleDirectory->getPathname());
         if ($finder->hasResults()) {
@@ -90,6 +93,7 @@ class RulesLoaderCommand extends Command
                 }
                 ksort($ruleArray['rosters']);
                 $rule->setName(CoreTranslation::getRuleTitle($key))
+                    ->setRuleDirectory($directory)
                     ->setPostBb2020($ruleArray['post_bb_2020'] ?? false)
                     ->setTemplate($ruleArray['template'] ?? 'base')
                     ->setRule($ruleArray);
