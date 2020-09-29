@@ -17,6 +17,7 @@ class DiceD8Type extends AbstractType
     {
         parent::configureOptions($resolver);
         $resolver->setDefaults([
+            'translation_domain' => 'obblm',
             'dice_value' => 8,
             'constraints' => new D6()
         ]);

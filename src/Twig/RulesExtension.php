@@ -8,6 +8,7 @@ use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Rule;
 use Obblm\Core\Entity\Team;
+use Obblm\Core\Entity\TeamVersion;
 use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\Rule\Inducement\MultipleStarPlayer;
@@ -43,6 +44,7 @@ class RulesExtension extends AbstractExtension
             new TwigFunction('get_all_star_players', [$this, 'getAllStarPlayers']),
             new TwigFunction('get_all_skills', [$this, 'getAllSkills']),
             new TwigFunction('get_player_skills', [$this, 'getPlayerSkills']),
+            new TwigFunction('get_skills_for_sheet', [$this, 'getSkillsForSheet']),
         ];
     }
 
@@ -139,6 +141,27 @@ class RulesExtension extends AbstractExtension
         $c = Criteria::create()
             ->where(
                 Criteria::expr()->in('key', $version->getSkills())
+            )
+            ->orderBy(['key' => 'ASC']);
+        return $helper->getSkills()->matching($c);
+    }
+
+    /**
+     * @param Rule $rule
+     * @param ArrayCollection|Player[] $players
+     * @return ArrayCollection
+     */
+    public function getSkillsForSheet(Rule $rule, TeamVersion $team)
+    {
+        $skills = [];
+        foreach ($team->getAvailablePlayerVersions() as $player) {
+            $skills = array_merge($skills, $player->getSkills());
+            $skills = array_merge($skills, $player->getAdditionalSkills());
+        }
+        $helper = $this->ruleHelper->getHelper($rule);
+        $c = Criteria::create()
+            ->where(
+                Criteria::expr()->in('key', $skills)
             )
             ->orderBy(['key' => 'ASC']);
         return $helper->getSkills()->matching($c);

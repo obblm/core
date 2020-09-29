@@ -2,17 +2,17 @@
 <table id="player-sheet" class="table aligned center lined">
     <thead>
         <tr>
-            {% block player_head_number %}<th>{{ 'obblm.trait.number.abbr'|trans }}</th>{% endblock %}
-            {% block player_head_name %}<th class="left aligned">{{ 'obblm.trait.name.title'|trans }}</th>{% endblock %}
-            {% block player_head_type %}<th class="left aligned">{{ 'obblm.trait.type.title'|trans }}</th>{% endblock %}
+            {% block player_head_number %}<th>{{ 'obblm.trait.number.abbr'|trans({}, 'obblm') }}</th>{% endblock %}
+            {% block player_head_name %}<th class="left aligned">{{ 'obblm.trait.name.title'|trans({}, 'obblm') }}</th>{% endblock %}
+            {% block player_head_type %}<th class="left aligned">{{ 'obblm.trait.type.title'|trans({}, 'obblm') }}</th>{% endblock %}
             {% block player_head_characteristics %}<th>{{ (domain ~ '.trait.ma.abbr')|trans({}, domain) }}</th>
             <th>{{ (domain ~ '.trait.st.abbr')|trans({}, domain) }}</th>
             <th>{{ (domain ~ '.trait.ag.abbr')|trans({}, domain) }}</th>
             <th>{{ (domain ~ '.trait.av.abbr')|trans({}, domain) }}</th>{% endblock %}
-            {% block player_head_skills %}<th class="left aligned">{{ 'obblm.trait.skill.title'|trans }}</th>{% endblock %}
-            {% block player_head_injuries %}<th class="left aligned">{{ 'obblm.trait.injury.abbr'|trans }}</th>{% endblock %}
+            {% block player_head_skills %}<th class="left aligned">{{ 'obblm.trait.skill.title'|trans({}, 'obblm') }}</th>{% endblock %}
+            {% block player_head_injuries %}<th class="left aligned">{{ 'obblm.trait.injury.title'|trans({}, 'obblm') }}</th>{% endblock %}
             {% block player_head_spp %}<th>{{ (domain ~ '.trait.spp.abbr')|trans({}, domain) }}</th>{% endblock %}
-            {% block player_head_value %}<th class="right aligned">{{ 'obblm.trait.value.title'|trans }}</th>{% endblock %}
+            {% block player_head_value %}<th class="right aligned">{{ 'obblm.trait.value.title'|trans({}, 'obblm') }}</th>{% endblock %}
         </tr>
     </thead>
     {% for player in players %}
@@ -20,6 +20,6 @@
             {% embed '@ObblmCore/team/player-line.base.html.twig' with { 'player': player, 'rule': rule } %}{% endembed %}
         {% endblock %}
     {% else %}
-        <tr colspan="5">{{ 'No players'|trans }}</tr>
+        <tr colspan="5">{{ 'No players'|trans({}, 'obblm') }}</tr>
     {% endfor %}
 </table>

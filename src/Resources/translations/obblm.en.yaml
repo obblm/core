@@ -21,6 +21,7 @@ obblm:
         create: Create
         edit: Edit
         delete: Delete
+        pdf: Print as PDF
     hi: Hello
   trait:
     number:
@@ -68,10 +69,14 @@ obblm:
     spp:
       abbr: SPP
       title: Star Player Points
+    tr:
+      abbr: TR
+      title: Team Ranking
     value:
       abbr: Value
       title: Value
     roster: Roster
+    team_ready: Team is ready
     coach: Coach
     rule: Rule
     rerolls: Rerolls
@@ -82,10 +87,11 @@ obblm:
     star_players: Star Players
     inducements: Inducements
     options: Options
-
   dashboard:
     title: Your dashbaord
     last_teams: My last teams (%count%)
+  account:
+    title: Edit my OBBLM Account
 
   rules:
     title: Rules
@@ -189,19 +195,22 @@ obblm:
     coach:
       registration:
         welcome: 'Hello %receiver%, welcome to OBBLM.'
-        text: 'You have to activate your account first.'
+        text:
+          hello: 'Hello %receiver%,'
+          success: 'You have successfully register to OBBML.'
+          activate: 'You have to activate your account by clicking on link below.'
         click_link_below: 'To do it click on the link below :'
         link_to_activate: 'Activate my account'
       activation:
         title: '%login%, you have successfully activated your account!'
         welldone: 'Well done %login%'
-        success: 'You have successfully activated your account!'
+        success: 'You have successfully activated your OBBLM account!'
         resume:
           title: 'Your informations you provided are :'
-          login: 'Your login : "%login%"'
-          email: 'Your email : "%email%"'
-          password: 'Your password : "%password%"'
-          password_joke: Shhh... It's the one you provided!
+          login: 'Your login : '
+          email: 'Your email : '
+          password: 'Your password : '
+          password_joke: Shhh... It's a secret between us!
         text: 'You can now login and create your first team!'
         click_link_below: 'To log in click on the link below :'
         link_to_login: 'Log me in'

@@ -1,9 +1,9 @@
 {% extends '@ObblmCore/base.html.twig' %}
 
-{% block title 'obblm.dashboard.title'|trans %}
+{% block title 'obblm.dashboard.title'|trans({}, 'obblm') %}
 
 {% block body %}
-    <h1 class="title">{{ 'obblm.dashboard.title'|trans }}</h1>
+    <h1 class="title">{{ 'obblm.dashboard.title'|trans({}, 'obblm') }}</h1>
     <div id="dashboard" class="two boxes">
         <div class="box main">
             {% block main_dashboard %}

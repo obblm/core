@@ -44,6 +44,7 @@ class PlayerTeamType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => Player::class,
             'allow_type_edit' => true,
+            'translation_domain' => 'obblm',
             'roster' => null,
             'rule_helper' => null,
         ));

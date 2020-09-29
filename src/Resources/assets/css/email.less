@@ -1,0 +1,91 @@
+& { @import 'obblm/vendor/reset.css'; }
+
+
+@import 'obblm/vars';
+@import 'obblm/email';
+@import 'obblm/component/icon';
+@import 'obblm/component/table';
+@import 'obblm/component/message';
+@import 'obblm/component/button';
+@import 'obblm/component/color';
+
+body {
+  background-color: @bodyBackground;
+  font-family: @baseFont, Arial, sans-serif;
+  font-size: @baseFontSize;
+  .main {
+    max-width: @small-screen-max;
+    background-color: @emailBackground;
+    color: @black !important;
+    margin: @baseMargin auto;
+    .header {
+      text-align: center;
+      background-color: @headerBackground;
+      color: @white;
+      padding: @baseMargin;
+      .email-title {
+        font-size: @h1FontSize;
+        font-family: @titleFont, Arial, sans-serif;
+        text-transform: uppercase;
+        font-weight: 300;
+      }
+    }
+    .container {
+      padding: @baseMargin;
+      > * {
+        margin-top: @baseMargin;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+      .text {
+        > * {
+          margin-top: @baseMargin / 2;
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+        b {
+          font-weight: bold;
+        }
+        em {
+          font-style: italic;
+        }
+        u {
+          text-decoration: underline;
+        }
+        ul {
+          > li {
+            list-style: disc;
+            padding-left: 0.4rem;
+            list-style-position: inside;
+            margin-top: @baseMargin / 4;
+            &:first-child {
+              margin-top: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  .aligned {
+    &.left {
+      text-align: left;
+    }
+    &.center {
+      text-align: center;
+    }
+    &.right {
+      text-align: right;
+    }
+    &.top {
+      vertical-align: top;
+    }
+    &.middle {
+      vertical-align: center;
+    }
+    &.bottom {
+      vertical-align: bottom;
+    }
+  }
+}

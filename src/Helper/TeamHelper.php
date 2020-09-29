@@ -54,10 +54,10 @@ class TeamHelper
      * @return int
      * @throws \Exception
      */
-    public function calculateTeamValue(TeamVersion $version):int
+    public function calculateTeamValue(TeamVersion $version, $excludeDisposable = false):int
     {
         return $this->getRuleHelper($version->getTeam())
-            ->calculateTeamValue($version);
+            ->calculateTeamValue($version, $excludeDisposable);
     }
 
     /**

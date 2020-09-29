@@ -87,6 +87,7 @@ class EditTeamType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => TeamVersion::class,
+            'translation_domain' => 'obblm',
             'constraints' => [
                 new TeamValue(),
                 new TeamComposition(),

@@ -23,18 +23,19 @@ class EditUserForm extends AbstractType
             ->add('locale', ChoiceType::class, [
                 'choices' => ['Français' => 'fr', 'English' => 'en']
             ])
-            ->add('plainPassword', RepeatedType::class, array(
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => false,
                 'first_options'  => array('label' => 'field.password'),
                 'second_options' => array('label' => 'field.password.repeat'),
-            ));
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
+            'translation_domain' => 'obblm',
             'data_class' => Coach::class,
-        ));
+        ]);
     }
 }

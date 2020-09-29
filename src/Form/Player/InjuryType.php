@@ -27,6 +27,7 @@ class InjuryType extends ChoiceType
         parent::configureOptions($resolver);
         $resolver->setDefaults(array(
             'rule_helper' => null,
+            'translation_domain' => 'obblm',
         ));
         $resolver->setAllowedTypes('rule_helper', [RuleHelperInterface::class]);
     }

@@ -2,7 +2,7 @@
 
 {% block _edit_team_team_ready_widget %}
     <button class="ui button green" id="{{ id }}" name="{{ full_name }}" type="submit" value="1">
-        {{ 'obblm.forms.team.edit.buttons.submit'|trans }}
+        {{ 'obblm.forms.team.edit.buttons.submit'|trans({}, 'obblm') }}
     </button>
 {% endblock %}
 {% block form_row %}
@@ -17,7 +17,7 @@
         <div class="errors">
             {% if not form.parent  %}
                 <div class="header">
-                    {{ 'obblm.forms.submission.error'|trans }}
+                    {{ 'obblm.forms.submission.error'|trans({}, 'obblm') }}
                 </div>
             {% endif %}
             <ul>
@@ -90,7 +90,7 @@
             <button type="button"
                     class="add-another-collection-widget ui button primary"
                     data-list-selector="#{{ form.vars.id }}">
-                {{ 'obblm.forms.team.edit.buttons.add_player'|trans }}
+                {{ 'obblm.forms.team.edit.buttons.add_player'|trans({}, 'obblm') }}
             </button>
         </div>
         <div id="{{ form.vars.id }}"

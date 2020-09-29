@@ -16,7 +16,7 @@
                     {{ skill|trans({}, skill.domain) }}{% if loop.index != loop.last %}, {% endif %}
                 </span>
             {% else %}
-            {{ 'obblm.sheet.table.players.skill_none'|trans({}, 'messages') }}
+            {{ 'obblm.sheet.table.players.skill_none'|trans({}, 'obblm') }}
             {% endfor %}
         {% endif %}
     </td>{% endblock %}

@@ -20,6 +20,7 @@ class InjuryBb2020Type extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+            'translation_domain' => 'obblm',
             'rule' => null
         ));
     }

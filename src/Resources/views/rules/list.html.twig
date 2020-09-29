@@ -1,8 +1,8 @@
 {% extends '@ObblmCore/base.html.twig' %}
 
-{% block title 'obblm.rules.title'|trans %}
+{% block title 'obblm.rules.title'|trans({}, 'obblm') %}
 {% block body %}
-    <h1 class="title">{{ 'obblm.rules.title'|trans }}</h1>
+    <h1 class="title">{{ 'obblm.rules.title'|trans({}, 'obblm') }}</h1>
     <div id="rules" class="four boxes">
         {% for rule in rules %}
         <div class="box rule">

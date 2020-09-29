@@ -51,7 +51,7 @@ class ImageHelper
             // full sized
             return $this->sanitizeFilePath($filePath);
         }
-        return null;
+        return $this->getRosterImage($team->getRule(), $team->getRoster(), $width, $height);
     }
 
     public function getTeamCover(Team $team, int $width = null, int $height = null): ?string

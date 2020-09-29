@@ -25,6 +25,7 @@ class DiceType extends ChoiceType
     {
         $resolver->setDefaults([
             'dice_value' => null,
+            'translation_domain' => 'obblm',
         ]);
         $resolver->setAllowedTypes('dice_value', ['int']);
         parent::configureOptions($resolver);

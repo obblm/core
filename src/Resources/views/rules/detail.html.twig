@@ -1,14 +1,14 @@
 {% extends '@ObblmCore/base.html.twig' %}
 
-{% block title 'obblm.rules.title'|trans
-    ~ ' > ' ~ rule.name|trans({}, rule.ruleKey) %}
+{% block title 'obblm.rules.title'|trans({}, 'obblm')
+~ ' > ' ~ rule.name|trans({}, rule.ruleKey) %}
 {% block body %}
     <div class="container" id="rule">
         <h1 class="title">{{ rule.name|trans({}, rule.ruleKey) }}</h1>
-        <h2 class="title">{{ 'obblm.trait.options'|trans }}</h2>
+        <h2 class="title">{{ 'obblm.trait.options'|trans({}, 'obblm') }}</h2>
         <a class="ui button primary" href="{{ path('obblm_rules_star_players', {'rule': rule.id}) }}">{{ (rule.ruleKey ~ '.star_players.title')|trans({}, rule.ruleKey) }}</a>
         <a class="ui button primary" href="{{ path('obblm_rules_skills', {'rule': rule.id}) }}">{{ (rule.ruleKey ~ '.trait.skill.title')|trans({}, rule.ruleKey) }}</a>
-        <h2 class="title">{{ 'obblm.trait.roster'|trans({'count': rosters.count}) }} ({{ rosters.count }})</h2>
+        <h2 class="title">{{ 'obblm.trait.roster'|trans({'count': rosters.count}, 'obblm') }} ({{ rosters.count }})</h2>
         <div class="ui four rosters boxes">
             {% for roster in rosters %}
                 <div class="box roster">

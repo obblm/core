@@ -21,7 +21,8 @@ class ActionBb2020Type extends AbstractType
     }
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-        ));
+        $resolver->setDefaults([
+            'translation_domain' => 'obblm',
+        ]);
     }
 }

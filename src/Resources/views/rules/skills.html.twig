@@ -1,18 +1,10 @@
 {% extends '@ObblmCore/base.html.twig' %}
 {% set title = (rule.ruleKey ~ '.trait.skill.title')|trans({}, rule.ruleKey) %}
-{% block title 'obblm.rules.title'|trans
-    ~ ' > ' ~ rule.name|trans({}, rule.ruleKey)
+{% block title 'obblm.rules.title'|trans({}, 'obblm')
+~ ' > ' ~ rule.name|trans({}, rule.ruleKey)
     ~ ' > ' ~ title %}
 {% block body %}
     {% set skills = get_all_skills(rule) %}
     <h1 class="title">{{ title }} ({{ skills|length }})</h1>
-    <table class="table lined">
-    {% for skill in skills %}
-        <tr>
-            <td class="top aligned">{{ skill.name|trans({}, skill.domain) }}</td>
-            <td class="top aligned">{{ skill.typeName|trans({}, skill.domain) }}</td>
-            <td class="top aligned">{{ skill.description|trans({}, skill.domain) }}</td>
-        </tr>
-    {% endfor %}
-    </table>
+    {% include '@ObblmCore/rules/skills-table.html.twig' with {'skills': skills} %}
 {% endblock %}

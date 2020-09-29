@@ -27,11 +27,12 @@ class AddSkillType extends ChoiceType
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
+                'translation_domain' => 'obblm',
                 'helper' => null,
                 'version' => null,
                 'context' => null,
-            ))
+            ])
             ->setAllowedTypes('context', ['array', 'null'])
             ->setAllowedTypes('version', [PlayerVersion::class, 'null'])
             ->setRequired('helper')

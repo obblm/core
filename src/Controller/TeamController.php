@@ -2,6 +2,8 @@
 
 namespace Obblm\Core\Controller;
 
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use Knp\Snappy\Pdf;
 use Obblm\Core\Entity\Rule;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Event\TeamVersionEvent;
@@ -13,6 +15,7 @@ use Obblm\Core\Service\FileTeamUploader;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -58,6 +61,7 @@ class TeamController extends AbstractTeamController
             ->setCoach($this->getUser());
         return $this->createAndComputeTeamForm($team, $request);
     }
+
     /**
      * @Route("/{team}", name="_detail")
      */
@@ -68,6 +72,26 @@ class TeamController extends AbstractTeamController
             'version' => TeamHelper::getLastVersion($team),
         ]);
     }
+
+    /**
+     * @Route("/{team}/pdf", name="_pdf")
+     */
+    public function generatePdf(Team $team, Pdf $pdf): Response
+    {
+        $this->denyAccessUnlessGranted(TeamVoter::VIEW, $team);
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('@ObblmCore/team/detail-pdf.html.twig', [
+            'version' => TeamHelper::getLastVersion($team),
+        ]);
+        $pdf->setOption('orientation', 'landscape');
+        $pdf->setOption('disable-javascript', true);
+        $pdf->setOption('title', $team->getName());
+
+        $fileName =  urlencode($team->getName()) . '.pdf';
+
+        return new PdfResponse($pdf->getOutputFromHtml($html), $fileName, null, ResponseHeaderBag::DISPOSITION_INLINE);
+    }
+
     /**
      * @Route("/{team}/edit", name="_edit")
      */

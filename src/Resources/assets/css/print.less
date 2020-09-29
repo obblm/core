@@ -1,0 +1,28 @@
+& { @import 'obblm/vendor/reset.css'; }
+
+
+@import 'obblm/vars';
+@import 'obblm/themes/light/vars';
+
+@borderColor: @black;
+
+
+@import 'obblm/layout/fonts';
+@import 'obblm/layout/base';
+@import 'obblm/container/main';
+@import 'obblm/container/content';
+@import 'obblm/container/boxes.less';
+@import 'obblm/component/icon';
+@import 'obblm/component/table';
+@import 'obblm/component/message';
+@import 'obblm/component/button';
+@import 'obblm/component/color';
+
+body {
+  > .container {
+  }
+  .page-jump {
+    overflow: hidden;
+    page-break-after: always;
+  }
+}

@@ -1,20 +1,20 @@
 {% extends '@ObblmCore/base.html.twig'%}
 
-{% block title 'obblm.team.mine.title'|trans %}
+{% block title 'obblm.team.mine.title'|trans({}, 'obblm') %}
 {% block body %}
     <div class="action">
         <a href="{{ path('obblm_team_create')}}" class="ui button primary">
-            {{ 'obblm.team.actions.add'|trans }}
+            {{ 'obblm.team.actions.add'|trans({}, 'obblm') }}
         </a>
     </div>
-    <h1 class="title">{{ 'obblm.team.mine.title'|trans }}</h1>
+    <h1 class="title">{{ 'obblm.team.mine.title'|trans({}, 'obblm') }}</h1>
     {% include '@ObblmCore/partials/flash.html.twig' %}
     <div class="boxes three teams">
     {% for team in teams %}
         {% include '@ObblmCore/team/team-list-item.html.twig' with { 'team': team } %}
     {% else %}
         <div>
-            {{ 'obblm.team.none'|trans }}
+            {{ 'obblm.team.none'|trans({}, 'obblm') }}
         </div>
     {% endfor %}
     </div>

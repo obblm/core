@@ -1,26 +1,13 @@
-{% extends '@ObblmCore/base.html.twig' %}
+{% extends '@ObblmCore/pdf.html.twig' %}
 
 {% block title 'obblm.team.title'|trans({}, 'obblm')
 ~ ' > ' ~ version.team.name %}
 {% block body %}
-    <section id="team-sheet" class="container">
-        <nav class="action">
-        {% if(is_granted('team.edit', version.team)) %}
-            <a href="{{ path('obblm_team_edit', {'team': version.team.id}) }}">
-                {{ 'obblm.layout.tools.actions.edit'|trans({}, 'obblm') }}
-            </a> -
-            <a href="{{ path('obblm_team_delete', {'team': version.team.id}) }}">
-                {{ 'obblm.layout.tools.actions.delete'|trans({}, 'obblm') }}
-            </a> -
-            <a target="_blank" href="{{ path('obblm_team_pdf', {'team': version.team.id}) }}">
-                {{ 'obblm.layout.tools.actions.pdf'|trans({}, 'obblm') }}
-            </a>
-        {% endif %}
-        </nav>
+    <section id="team-sheet" class="container page-jump">
         {% include '@ObblmCore/partials/flash.html.twig' %}
-        <header class="header"{% if(version.team.coverFilename) %} style="background-image: url({{ team_cover(version.team) }});"{% endif %}>
+        <header {% if(version.team.coverFilename) %}class="header has-background" style="background-image: url({{ 'http://web/' ~ team_cover(version.team) }});"{% else %}class="header"{% endif %}>
             <div class="logo">
-                <img alt="{{ version.team.name }}" class="image" src="{{ team_logo(version.team) }}">
+                <img alt="{{ version.team.name }}" class="image" src="{{ 'http://web/' ~ team_logo(version.team) }}">
             </div>
             <div class="content">
                 <h1 class="title">{{ version.team.name }}</h1>
@@ -120,11 +107,11 @@
         <section class="row">
             {% include '@ObblmCore/team/sheet.html.twig' with { 'team': version.team } %}
         </section>
-        <aside class="container">
-            {% set title = (version.team.rule.ruleKey ~ '.trait.skill.title')|trans({}, version.team.rule.ruleKey) %}
-            <h2 class="title">{{ title }}</h2>
-            {% set skills = get_skills_for_sheet(version.team.rule, version) %}
-            {% include '@ObblmCore/rules/skills-table.html.twig' with {'skills': skills} %}
-        </aside>
     </section>
+    <aside class="container">
+        {% set title = (version.team.rule.ruleKey ~ '.trait.skill.title')|trans({}, version.team.rule.ruleKey) %}
+        <h3 class="title">{{ title }}</h3>
+        {% set skills = get_skills_for_sheet(version.team.rule, version) %}
+        {% include '@ObblmCore/rules/skills-table.html.twig' with {'skills': skills} %}
+    </aside>
 {% endblock %}

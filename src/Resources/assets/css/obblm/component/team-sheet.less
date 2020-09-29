@@ -8,6 +8,12 @@
     background-size: cover;
     display: flex;
     flex-flow: row wrap;
+    &.has-background {
+      color: @white;
+      .title {
+        border-color: @halfAlphaWhite;
+      }
+    }
     .logo {
       flex-basis: auto;
       width: @logoSize;

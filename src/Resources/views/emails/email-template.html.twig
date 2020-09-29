@@ -1,6 +1,26 @@
-<header>
-    <h1>{% block header_title "OBBLM" %}</h1>
-</header>
-{% block content %}
-    The content
-{% endblock %}
+{% apply inline_css(source('@obblm_css/reset.css'), source('@obblm_css/email.css')) %}
+<html>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+    @import url('https://fonts.googleapis.com/css?family=Lato:300,400,500');
+</style>
+<body>
+<div class="main container">
+    <table class="table email">
+        <tr>
+            <td class="header">
+                <h1 class="email-title">{% block header_title "OBBLM" %}</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% block content %}
+                    The content
+                {% endblock %}
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+{% endapply %}

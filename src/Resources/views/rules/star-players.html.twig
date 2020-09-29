@@ -1,7 +1,7 @@
 {% extends '@ObblmCore/base.html.twig' %}
 {% set title = (rule.ruleKey ~ '.star_players.title')|trans({}, rule.ruleKey) %}
-{% block title 'obblm.rules.title'|trans
-    ~ ' > ' ~ rule.name|trans({}, rule.ruleKey)
+{% block title 'obblm.rules.title'|trans({}, 'obblm')
+~ ' > ' ~ rule.name|trans({}, rule.ruleKey)
     ~ ' > ' ~ title %}
 {% block body %}
     {% set star_players = get_all_star_players(rule) %}

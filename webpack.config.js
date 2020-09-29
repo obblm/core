@@ -27,6 +27,9 @@ Encore
     .addEntry('obblm-core', './src/Resources/assets/js/app')
     .addStyleEntry('obblm-core-light', './src/Resources/assets/css/obblm/themes/light.less')
     .addStyleEntry('obblm-core-dark',  './src/Resources/assets/css/obblm/themes/dark.less')
+    .addStyleEntry('email', './src/Resources/assets/css/email.less')
+    .addStyleEntry('print', './src/Resources/assets/css/print.less')
+    .addStyleEntry('reset', './src/Resources/assets/css/obblm/vendor/reset.css')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 

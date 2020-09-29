@@ -13,7 +13,7 @@ interface TeamRuleInterface
 {
     public function getAvailableRosters():ArrayCollection;
     public function getInjuriesTable():array;
-    public function calculateTeamValue(TeamVersion $version, bool $excludeDisposable = false):?int;
+    public function calculateTeamValue(TeamVersion $version, bool $excludeDisposable = false):int;
     public function calculateTeamRate(TeamVersion $version):?int;
     public function getMaxTeamCost():int;
     public function getRerollCost(Team $team):int;

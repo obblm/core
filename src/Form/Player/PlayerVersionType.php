@@ -27,6 +27,7 @@ class PlayerVersionType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => PlayerVersion::class,
             'roster' => null,
+            'translation_domain' => 'obblm',
             'rule_helper' => null,
         ));
 

@@ -2,8 +2,8 @@
 {% set team = create_rule_team(rule, roster) %}
 {% set title = team|roster_name|trans({}, rule.ruleKey) %}
 
-{% block title 'obblm.rules.title'|trans
-    ~ ' > ' ~ rule.name|trans({}, rule.ruleKey)
+{% block title 'obblm.rules.title'|trans({}, 'obblm')
+~ ' > ' ~ rule.name|trans({}, rule.ruleKey)
     ~ ' > ' ~ title %}
 {% block body %}
     <h1 class="title">{{ title }}</h1>
@@ -21,7 +21,7 @@
             {% endembed %}
         {% endblock %}
     {% endembed %}
-    <h2 class="title">{{ 'obblm.rules.available_star_players'|trans }}</h2>
+    <h2 class="title">{{ 'obblm.rules.available_star_players'|trans({}, 'obblm') }}</h2>
     {% set star_players = get_star_players(team) %}
     {% embed '@ObblmCore/team/table.' ~ rule.template ~ '.html.twig' with { 'team': team,  'players': star_players } %}
         {% block player_head_number %}{% endblock %}

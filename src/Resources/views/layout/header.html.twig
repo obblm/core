@@ -4,7 +4,7 @@
             <i class="icon mdi mdi-menu"></i>
         </a>
         <div class="item">
-            <h1 class="title">{{ 'obblm.full_title'|trans }}</h1>
+            <h1 class="title">{{ 'obblm.full_title'|trans({}, 'obblm') }}</h1>
         </div>
         {% if(is_granted('ROLE_OBBLM_COACH')) %}
             <div class="right item menu">
@@ -14,15 +14,15 @@
                 </span>
                 <ul>
                     <li>
-                        <a class="link" href="{{ path('obblm_account')}}" title="{{ 'obblm.layout.header.my_account'|trans }}">
+                        <a class="link" href="{{ path('obblm_account')}}" title="{{ 'obblm.layout.header.my_account'|trans({}, 'obblm') }}">
                             <i aria-hidden="true" class="icon notranslate mdi mdi-account"></i>
-                            {{ 'obblm.layout.header.my_account'|trans }}
+                            {{ 'obblm.layout.header.my_account'|trans({}, 'obblm') }}
                         </a>
                     </li>
                     <li>
-                        <a class="link" href="{{ path('obblm.logout')}}" title="{{ 'obblm.layout.header.logout'|trans }}">
+                        <a class="link" href="{{ path('obblm.logout')}}" title="{{ 'obblm.layout.header.logout'|trans({}, 'obblm') }}">
                             <i aria-hidden="true" class="icon notranslate mdi mdi-logout"></i>
-                            {{ 'obblm.layout.header.logout'|trans }}
+                            {{ 'obblm.layout.header.logout'|trans({}, 'obblm') }}
                         </a>
                     </li>
                 </ul>

@@ -112,6 +112,7 @@ trait AbstractTeamRuleTrait
         }
         $value = 0;
         // Players
+        // TODO: Bug => players are not version's one (because od dead players)
         foreach ($version->getTeam()->getAvailablePlayers() as $player) {
             if ($player->getType()) {
                 try {

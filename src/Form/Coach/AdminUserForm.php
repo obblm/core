@@ -20,6 +20,7 @@ class AdminUserForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+            'translation_domain' => 'obblm',
             'data_class' => Coach::class,
         ));
     }

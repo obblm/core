@@ -9,6 +9,18 @@
   a {
     color: inherit;
   }
+  .content {
+    > * {
+      margin-top: @baseMargin / 2;
+    }
+    > *:first-child {
+      margin-top: 0;
+    }
+    a {
+      text-decoration: underline;
+      &:hover { text-decoration: none; }
+    }
+  }
   .closer {
     font-weight: bold;
     cursor: pointer;

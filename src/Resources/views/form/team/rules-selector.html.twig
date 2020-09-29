@@ -1,7 +1,7 @@
 {% extends '@ObblmCore/base.html.twig'%}
-{% set title = 'obblm.forms.team.create.title'|trans %}
-{% block title 'obblm.team.title'|trans
-    ~ ' > ' ~ title %}
+{% set title = 'obblm.forms.team.create.title'|trans({}, 'obblm') %}
+{% block title 'obblm.team.title'|trans({}, 'obblm')
+~ ' > ' ~ title %}
 {% import _self as macros %}
 {% block body %}
     <div class="form container">
@@ -20,7 +20,7 @@
                     {% if item.icon %}
                         <i aria-hidden="true" class="icon notranslate {{ item.icon }}"></i>
                     {% endif %}
-                    <h2 class="title">{{ item.name|trans }}</h2>
+                    <h2 class="title">{{ item.name|trans({}, 'obblm') }}</h2>
                 {% endif %}
                 <div class="selector">
                     {{ _self.navigationCollectionToHtml(item.collection) }}

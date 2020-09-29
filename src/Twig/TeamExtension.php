@@ -93,7 +93,7 @@ class TeamExtension extends AbstractExtension
 
     public function getTeamValue(Team $team)
     {
-        return $this->teamHelper->calculateTeamValue(TeamHelper::getLastVersion($team));
+        return $this->teamHelper->calculateTeamValue(TeamHelper::getLastVersion($team), true);
     }
 
     public function getCharacteristics(Player $player, $characteristic)

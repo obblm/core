@@ -106,6 +106,7 @@ class TeamType extends AbstractType implements DataMapperInterface
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+            'translation_domain' => 'obblm',
             'data_class' => Team::class,
         ));
     }
