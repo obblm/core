@@ -4,6 +4,6 @@ doctrine:
       Obblm:
         is_bundle: true
         type: annotation
-        dir: '%bundle.project_dir%/src/Entity'
+        dir: '%bundle.project_dir%/Entity'
         prefix: 'Obblm\Core\Entity'
         alias: Obblm

@@ -6,5 +6,5 @@
 Ressources
 ----------------------------------
 
-- [Installation](src/Resources/docs/1.Installation.md)
-- [Modifiy navigation bar](src/Resources/docs/NavigationBar.md)
+- [Installation](Resources/docs/1.Installation.md)
+- [Modifiy navigation bar](Resources/docs/NavigationBar.md)

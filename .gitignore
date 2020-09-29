@@ -3,5 +3,5 @@
 /vendor
 /composer.lock
 /node_modules
-/src/Resources/public/build
+/Resources/public/build
 /.php_cs.cache

@@ -13,7 +13,6 @@
   ],
   "require": {
     "php": "^7.2.5",
-    "dompdf/dompdf": "^0.8.6",
     "ext-ctype": "*",
     "ext-iconv": "*",
     "knplabs/knp-snappy-bundle": "^1.7",
@@ -54,11 +53,14 @@
     "sort-packages": true
   },
   "autoload": {
-    "psr-4": { "Obblm\\Core\\": "" }
+    "psr-4": { "Obblm\\Core\\": "" },
+    "exclude-from-classmap": [
+      "Tests/"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
-      "Obblm\\Core\\Tests\\": "src/Tests/"
+      "Obblm\\Core\\Tests\\": "Tests/"
     }
   },
   "extra": {

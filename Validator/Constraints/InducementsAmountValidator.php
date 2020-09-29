@@ -2,7 +2,6 @@
 
 namespace Obblm\Core\Validator\Constraints;
 
-use Obblm\Championship\Entity\Encounter;
 use Obblm\Core\Helper\Rule\Inducement\Inducement;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
@@ -16,7 +15,7 @@ class InducementsAmountValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, InducementsAmount::class);
         }
         if (!is_array($value)) {
-            throw new UnexpectedTypeException($value, Encounter::class);
+            throw new UnexpectedTypeException($value, 'array');
         }
 
         $spend = 0;
