@@ -4,7 +4,6 @@ namespace Obblm\Core\Validator\Constraints;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
-use Obblm\Championship\Entity\Encounter;
 use Obblm\Core\Helper\Rule\Inducement\Inducement;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
@@ -26,7 +25,7 @@ class InducementsQuantityValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, InducementsQuantity::class);
         }
         if (!is_array($value)) {
-            throw new UnexpectedTypeException($value, Encounter::class);
+            throw new UnexpectedTypeException($value, 'array');
         }
 
         $count = [];
