@@ -1,7 +1,16 @@
 {
   "name": "obblm/core",
-  "license": "proprietary",
   "type": "symfony-bundle",
+  "license": "MIT",
+  "description": "Bundle to have Fantasy Bowl team management",
+  "keywords": [],
+  "homepage": "https://github.com/obblm/core",
+  "authors": [
+    {
+      "name": "Benjamin Lanet",
+      "homepage": "https://github.com/kumulo"
+    }
+  ],
   "require": {
     "php": "^7.2.5",
     "dompdf/dompdf": "^0.8.6",
