@@ -2,55 +2,42 @@
 
 namespace Obblm\Core\Helper\Rule\Inducement;
 
-abstract class AbstractInducement
+use Obblm\Core\Contracts\InducementInterface;
+use Obblm\Core\Helper\Optionable;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+abstract class AbstractInducement extends Optionable implements InducementInterface
 {
     /** @var string */
     protected $key;
-
     /** @var int */
     protected $value;
-
     /** @var int */
     protected $discountValue;
-
     /** @var string */
-    protected $translationKey;
-
+    protected $name;
     /** @var string */
     protected $translationDomain;
-
     /** @var string */
-    protected $translationType;
-
+    protected $typeName;
     /** @var InducementType */
     protected $type;
-
     /** @var int */
     protected $max;
-
     /** @var array */
     protected $rosters = null;
 
-    /**
-     * Inducement constructor.
-     * @param array $options
-     */
-    public function __construct(array $options = [])
+    protected function hydrateWithOptions()
     {
-        $this->hydrateWithOptions($options);
-    }
-
-    protected function hydrateWithOptions($options)
-    {
-        $this->translationType = $options['translation_type'] ?? false;
-        $this->type = $options['type'] ?? null;
-        $this->key = $options['key'] ?? false;
-        $this->value = $options['value'] ?? false;
-        $this->discountValue = $options['discount_value'] ?? $this->value;
-        $this->translationKey = $options['translation_key'] ?? false;
-        $this->translationDomain = $options['translation_domain'] ?? false;
-        $this->max = $options['max'] ?? false;
-        $this->rosters = $options['rosters'] ?? [];
+        $this->key = $this->options['key'] ?? false;
+        $this->type = $this->options['type'] ?? null;
+        $this->name = $this->options['name'] ?? false;
+        $this->translationDomain = $this->options['translation_domain'] ?? false;
+        $this->typeName = $this->options['type_name'] ?? false;
+        $this->value = $this->options['value'] ?? false;
+        $this->discountValue = $this->options['discount_value'] ?? $this->value;
+        $this->max = $this->options['max'] ?? false;
+        $this->rosters = $this->options['rosters'] ?? [];
     }
 
     /**
@@ -101,17 +88,17 @@ abstract class AbstractInducement
     /**
      * @return string
      */
-    public function getTranslationType(): string
+    public function getTypeName(): string
     {
-        return $this->translationType;
+        return $this->getType()->getName();
     }
 
     /**
      * @return string
      */
-    public function getTranslationKey(): string
+    public function getName(): string
     {
-        return $this->translationKey;
+        return $this->name;
     }
 
     /**
@@ -155,11 +142,11 @@ abstract class AbstractInducement
     }
 
     /**
-     * @param string $translationKey
+     * @param string $name
      */
-    public function setTranslationKey(string $translationKey): void
+    public function setName(string $name): void
     {
-        $this->translationKey = $translationKey;
+        $this->name = $name;
     }
 
     /**
@@ -168,14 +155,6 @@ abstract class AbstractInducement
     public function setTranslationDomain(string $translationDomain): void
     {
         $this->translationDomain = $translationDomain;
-    }
-
-    /**
-     * @param string $translationType
-     */
-    public function setTranslationType(string $translationType): void
-    {
-        $this->translationType = $translationType;
     }
 
     /**
@@ -204,6 +183,30 @@ abstract class AbstractInducement
 
     public function __toString(): string
     {
-        return $this->translationKey;
+        return $this->name;
+    }
+
+    public function configureOptions(OptionsResolver $resolver):void
+    {
+        $resolver->setDefaults([
+            'key'                => null,
+            'type'               => null,
+            'name'               => null,
+            'translation_domain' => null,
+            'value'              => null,
+            'discount_value'     => null,
+            'max'                => null,
+            'rosters'            => null,
+        ])
+            ->setRequired(['key', 'type', 'name', 'translation_domain', 'value', 'max'])
+            ->setAllowedTypes('key', ['string'])
+            ->setAllowedTypes('type', [InducementType::class])
+            ->setAllowedTypes('name', ['string'])
+            ->setAllowedTypes('translation_domain', ['string'])
+            ->setAllowedTypes('value', ['int'])
+            ->setAllowedTypes('discount_value', ['int', 'null'])
+            ->setAllowedTypes('max', ['int'])
+            ->setAllowedTypes('rosters', ['array', 'null'])
+        ;
     }
 }

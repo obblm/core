@@ -3,17 +3,16 @@
 namespace Obblm\Core\Helper\Rule\Inducement;
 
 use Obblm\Core\Contracts\InducementInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MultipleStarPlayer extends AbstractInducement implements InducementInterface
+class MultipleStarPlayer extends StarPlayer implements InducementInterface
 {
     protected $parts = [];
 
-    public function __construct(array $options = [])
+    protected function hydrateWithOptions()
     {
-        parent::__construct($options);
-        if (isset($options['parts']) && $options['parts']) {
-            $this->setParts($options['parts']);
-        }
+        parent::hydrateWithOptions();
+        $this->parts = $this->options['parts'] ?? [];
     }
 
     public function isMultiple(): bool
@@ -30,5 +29,16 @@ class MultipleStarPlayer extends AbstractInducement implements InducementInterfa
     public function getParts():array
     {
         return $this->parts;
+    }
+
+    public function configureOptions(OptionsResolver $resolver):void
+    {
+        parent::configureOptions($resolver);
+        $resolver->setDefaults([
+            'parts' => null,
+        ])
+            ->setRequired(['parts'])
+            ->setAllowedTypes('parts', ['array'])
+        ;
     }
 }

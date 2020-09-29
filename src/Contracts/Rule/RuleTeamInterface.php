@@ -9,7 +9,7 @@ use Obblm\Core\Entity\TeamVersion;
 /****************************
  * TEAM INFORMATION METHODS
  ***************************/
-interface TeamRuleInterface
+interface RuleTeamInterface
 {
     public function getAvailableRosters():ArrayCollection;
     public function getInjuriesTable():array;

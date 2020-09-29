@@ -5,7 +5,7 @@ namespace Obblm\Core\Contracts\Rule;
 /**********************
  * APPLICATION METHODS
  *********************/
-interface ApplicativeRuleInterface
+interface RuleApplicativeInterface
 {
     public function getActionsFormClass():string;
     public function getInjuriesFormClass():string;

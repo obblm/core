@@ -10,7 +10,7 @@ use Obblm\Core\Entity\Team;
 /*********************
  * INDUCEMENT METHODS
  ********************/
-interface InducementRuleInterface
+interface RuleInducementInterface
 {
     public function getInducements():ArrayCollection;
     public function getStarPlayers():ArrayCollection;

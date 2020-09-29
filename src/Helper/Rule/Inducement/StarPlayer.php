@@ -3,6 +3,7 @@
 namespace Obblm\Core\Helper\Rule\Inducement;
 
 use Obblm\Core\Contracts\InducementInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StarPlayer extends AbstractInducement implements InducementInterface
 {
@@ -11,15 +12,11 @@ class StarPlayer extends AbstractInducement implements InducementInterface
     /** @var array $skills */
     protected $skills;
 
-    public function __construct(array $options = [])
+    protected function hydrateWithOptions()
     {
-        parent::__construct($options);
-        if (isset($options['characteristics']) && $options['characteristics']) {
-            $this->setCharacteristics($options['characteristics']);
-        }
-        if (isset($options['skills']) && $options['skills']) {
-            $this->setSkills($options['skills']);
-        }
+        parent::hydrateWithOptions();
+        $this->characteristics = $this->options['characteristics'] ?? [];
+        $this->skills = $this->options['skills'] ?? [];
     }
 
     /**
@@ -56,5 +53,18 @@ class StarPlayer extends AbstractInducement implements InducementInterface
     {
         $this->skills = $skills;
         return $this;
+    }
+
+    public function configureOptions(OptionsResolver $resolver):void
+    {
+        parent::configureOptions($resolver);
+        $resolver->setDefaults([
+            'characteristics' => null,
+            'skills'          => null,
+        ])
+            ->setRequired(['characteristics'])
+            ->setAllowedTypes('characteristics', ['array', 'null'])
+            ->setAllowedTypes('skills', ['array', 'null'])
+        ;
     }
 }

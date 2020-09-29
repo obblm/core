@@ -2,28 +2,26 @@
 
 namespace Obblm\Core\Helper\Rule\Inducement;
 
-class InducementType
+use Obblm\Core\Helper\Optionable;
+use Obblm\Core\Helper\Rule\Translatable;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class InducementType extends Optionable implements Translatable
 {
     /** @var string */
     public $key;
-
     /** @var string */
-    private $translationKey;
-
+    private $name;
     /** @var string */
     private $translationDomain;
 
-    public function __construct(array $options = [])
+    protected function hydrateWithOptions()
     {
-        $this->hydrateWithOptions($options);
+        $this->key = $this->options['key'] ?? false;
+        $this->name = $this->options['name'] ?? false;
+        $this->translationDomain = $this->options['translation_domain'] ?? false;
     }
 
-    private function hydrateWithOptions($options)
-    {
-        $this->key = $options['key'] ?? false;
-        $this->translationKey = $options['translation_key'] ?? false;
-        $this->translationDomain = $options['translation_domain'] ?? false;
-    }
     /**
      * @return string
      */
@@ -35,9 +33,9 @@ class InducementType
     /**
      * @return string
      */
-    public function getTranslationKey(): string
+    public function getName(): string
     {
-        return $this->translationKey;
+        return $this->name;
     }
 
     /**
@@ -50,6 +48,20 @@ class InducementType
 
     public function __toString(): string
     {
-        return $this->translationKey;
+        return $this->name;
+    }
+
+    public function configureOptions(OptionsResolver $resolver):void
+    {
+        $resolver->setDefaults([
+            'key'                => null,
+            'name'               => null,
+            'translation_domain' => null,
+        ])
+            ->setRequired(['key', 'name', 'translation_domain'])
+            ->setAllowedTypes('key', ['string'])
+            ->setAllowedTypes('name', ['string'])
+            ->setAllowedTypes('translation_domain', ['string'])
+        ;
     }
 }

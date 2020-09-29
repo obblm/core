@@ -3,13 +3,9 @@
 namespace Obblm\Core\Helper\Rule;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Obblm\Core\Contracts\InducementInterface;
 use Obblm\Core\Contracts\RosterInterface;
 use Obblm\Core\Contracts\Rule\RuleBuilderInterface;
-use Obblm\Core\Entity\Team;
-use Obblm\Core\Exception\NotFoundRuleKeyExcepion;
 use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\Rule\Config\ConfigResolver;
 use Obblm\Core\Helper\Rule\Config\RuleConfigResolver;
@@ -42,7 +38,7 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
         $this->prepareInjuriesTable($ruleKey, $rule);
         $this->prepareSppTable($ruleKey, $rule);
         $this->prepareSkillsTable($ruleKey, $rule);
-        $this->prepareInducementTypes($ruleKey, $rule);
+        $this->prepareInducementTypes($ruleKey);
         $this->prepareInducementTable($ruleKey, $rule);
         $this->prepareRosterTable($ruleKey, $rule);
     }
@@ -140,22 +136,22 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
         }
     }
 
-    private function prepareInducementTypes(string $ruleKey, array $rule)
+    private function prepareInducementTypes(string $ruleKey)
     {
         $this->inducementTypes = new ArrayCollection();
         $this->inducementTypes->set('star_players', new InducementType([
             'key' => 'star_players',
-            'translation_key' => CoreTranslation::getStarPlayerTitle($ruleKey),
+            'name' => CoreTranslation::getStarPlayerTitle($ruleKey),
             'translation_domain' => $ruleKey,
         ]));
         $this->inducementTypes->set('inducements', new InducementType([
             'key' => 'inducements',
-            'translation_key' => CoreTranslation::getInducementTitle($ruleKey),
+            'name' => CoreTranslation::getInducementTitle($ruleKey),
             'translation_domain' => $ruleKey,
         ]));
         $this->inducementTypes->set('mercenary', new InducementType([
             'key' => 'mercenary',
-            'translation_key' => CoreTranslation::getMercenaryTitle($ruleKey),
+            'name' => CoreTranslation::getMercenaryTitle($ruleKey),
             'translation_domain' => $ruleKey,
         ]));
     }
@@ -192,7 +188,7 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
                         'name'        => CoreTranslation::getSkillNameKey($ruleKey, $skill),
                         'description' => CoreTranslation::getSkillDescription($ruleKey, $skill),
                         'type_name'   => CoreTranslation::getSkillType($ruleKey, $type),
-                        'domain'      => $ruleKey,
+                        'translation_domain'      => $ruleKey,
                     ])
                 );
             }
@@ -209,11 +205,11 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
                     'type' => $this->inducementTypes['inducements'],
                     'key' => join(CoreTranslation::TRANSLATION_GLUE, [$ruleKey, 'inducements', $key]),
                     'translation_domain' => $ruleKey,
-                    'translation_key' => CoreTranslation::getInducementName($ruleKey, $key),
+                    'name' => CoreTranslation::getInducementName($ruleKey, $key),
                     'max' => $value['max'] ?? 0,
                     'rosters' => $value['rosters'] ?? null,
                     'value' => $value['cost'],
-                    'discount_cost' => $value['discount_cost'] ?? null,
+                    'discount_value' => $value['discount_cost'] ?? null,
                 ]);
                 if (!$this->inducements->contains($inducement)) {
                     $this->inducements->add($inducement);
@@ -236,7 +232,7 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
                 $key,
                 new Roster([
                     'key' => $key,
-                    'translation_key' => CoreTranslation::getRosterKey($ruleKey, $key),
+                    'name' => CoreTranslation::getRosterKey($ruleKey, $key),
                     'translation_domain' => $ruleKey,
                     'player_types' => $roster['players'],
                     'reroll_cost' => $roster['reroll_cost'] ?? 0,
@@ -253,13 +249,13 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
             'type' => $this->inducementTypes['star_players'],
             'key' => join(CoreTranslation::TRANSLATION_GLUE, [$ruleKey, 'star_players', $key]),
             'value' => $starPlayer['cost'],
-            'discount_cost' => $starPlayer['discount_cost'] ?? null,
+            'discount_value' => $starPlayer['discount_cost'] ?? null,
+            'translation_domain' => $ruleKey,
+            'name' => CoreTranslation::getStarPlayerName($ruleKey, $key),
+            'max' => $starPlayer['max'] ?? 1,
             'characteristics' => $starPlayer['characteristics'] ?? null,
             'skills' => $starPlayer['skills'] ?? null,
             'rosters' => $starPlayer['rosters'] ?? null,
-            'translation_domain' => $ruleKey,
-            'translation_key' => CoreTranslation::getStarPlayerName($ruleKey, $key),
-            'max' => $starPlayer['max'] ?? 1,
         ];
         if (isset($starPlayer['multi_parts']) && $starPlayer['multi_parts']) {
             $options['parts'] = [];

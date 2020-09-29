@@ -2,10 +2,11 @@
 
 namespace Obblm\Core\Helper\Rule\Roster;
 
+use Obblm\Core\Contracts\RosterInterface;
 use Obblm\Core\Helper\Optionable;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-abstract class AbstractRoster extends Optionable
+abstract class AbstractRoster extends Optionable implements RosterInterface
 {
     const DEFAULT_INDUCEMENT_OPTIONS = [
         'discount_bribe' => false,
@@ -15,7 +16,7 @@ abstract class AbstractRoster extends Optionable
     ];
 
     protected $key;
-    protected $translationKey;
+    protected $name;
     protected $translationDomain;
     protected $playerTypes;
     protected $rerollCost;
@@ -25,7 +26,7 @@ abstract class AbstractRoster extends Optionable
     protected function hydrateWithOptions()
     {
         $this->setKey($this->options['key'])
-            ->setTranslationKey($this->options['translation_key'])
+            ->setName($this->options['name'])
             ->setTranslationDomain($this->options['translation_domain'])
             ->setPlayerTypes($this->options['player_types'])
             ->setInducementTypes($this->options['inducement_options'])
@@ -44,9 +45,9 @@ abstract class AbstractRoster extends Optionable
     /**
      * @return string
      */
-    public function getTranslationKey(): string
+    public function getName(): string
     {
-        return $this->translationKey;
+        return $this->name;
     }
 
     /**
@@ -108,12 +109,12 @@ abstract class AbstractRoster extends Optionable
     }
 
     /**
-     * @param string $translationKey
+     * @param string $name
      * @return $this
      */
-    public function setTranslationKey(string $translationKey): self
+    public function setName(string $name): self
     {
-        $this->translationKey = $translationKey;
+        $this->name = $name;
         return $this;
     }
 
@@ -182,7 +183,7 @@ abstract class AbstractRoster extends Optionable
     {
         $resolver->setDefaults([
             'key'                 => null,
-            'translation_key'     => null,
+            'name'                => null,
             'translation_domain'  => null,
             'player_types'        => [],
             'inducement_options'  => [],
@@ -190,10 +191,10 @@ abstract class AbstractRoster extends Optionable
             'can_have_apothecary' => true,
         ])
             ->setRequired('key')
-            ->setRequired('translation_key')
+            ->setRequired('name')
             ->setRequired('translation_domain')
             ->setAllowedTypes('key', ['string'])
-            ->setAllowedTypes('translation_key', ['string'])
+            ->setAllowedTypes('name', ['string'])
             ->setAllowedTypes('translation_domain', ['string'])
             ->setAllowedTypes('player_types', ['array'])
             ->setAllowedTypes('inducement_options', ['array'])

@@ -13,7 +13,7 @@ abstract class AbstractSkill extends Optionable implements SkillInterface
     /** @var string */
     private $name;
     /** @var string */
-    private $domain;
+    private $translationDomain;
     /** @var string */
     private $type;
     /** @var string */
@@ -25,7 +25,7 @@ abstract class AbstractSkill extends Optionable implements SkillInterface
     {
         $this->key = $this->options['key'] ?? false;
         $this->name = $this->options['name'] ?? false;
-        $this->domain = $this->options['domain'] ?? false;
+        $this->translationDomain = $this->options['translation_domain'] ?? false;
         $this->type = $this->options['type'] ?? false;
         $this->typeName = $this->options['type_name'] ?? false;
         $this->description = $this->options['description'] ?? false;
@@ -41,9 +41,9 @@ abstract class AbstractSkill extends Optionable implements SkillInterface
         return $this->name;
     }
 
-    public function getDomain(): string
+    public function getTranslationDomain(): string
     {
-        return $this->domain;
+        return $this->translationDomain;
     }
 
     public function getType(): string
@@ -73,9 +73,9 @@ abstract class AbstractSkill extends Optionable implements SkillInterface
         return $this;
     }
 
-    public function setDomain(string $domain): self
+    public function setTranslationDomain(string $translationDomain): self
     {
-        $this->domain = $domain;
+        $this->translationDomain = $translationDomain;
         return $this;
     }
 
@@ -96,25 +96,20 @@ abstract class AbstractSkill extends Optionable implements SkillInterface
         return $this->name;
     }
 
-    public function getTranslationDomain(): string
-    {
-        return $this->domain;
-    }
-
     public function configureOptions(OptionsResolver $resolver):void
     {
         $resolver->setDefaults([
-            'key'       => null,
-            'type'      => null,
-            'name'      => null,
-            'domain'    => null,
-            'type_name' => null,
-            'description' => null,
+            'key'                => null,
+            'type'               => null,
+            'name'               => null,
+            'translation_domain' => null,
+            'type_name'          => null,
+            'description'        => null,
         ])
-            ->setRequired(['key', 'type', 'name', 'domain', 'type_name'])
+            ->setRequired(['key', 'type', 'name', 'translation_domain', 'type_name'])
             ->setAllowedTypes('key', ['string'])
             ->setAllowedTypes('name', ['string'])
-            ->setAllowedTypes('domain', ['string'])
+            ->setAllowedTypes('translation_domain', ['string'])
             ->setAllowedTypes('type', ['string'])
             ->setAllowedTypes('type_name', ['string'])
             ->setAllowedTypes('description', ['string', 'null'])

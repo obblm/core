@@ -8,7 +8,7 @@ use Obblm\Core\Entity\PlayerVersion;
 /*****************
  * PLAYER METHODS
  ****************/
-interface PlayerRuleInterface
+interface RulePlayerInterface
 {
     public function setPlayerDefaultValues(PlayerVersion $version):?PlayerVersion;
     public function playerIsDisposable(PlayerVersion $playerVersion):bool;

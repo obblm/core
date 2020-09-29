@@ -2,14 +2,14 @@
 
 namespace Obblm\Core\Contracts;
 
-use Obblm\Core\Contracts\Rule\ApplicativeRuleInterface;
-use Obblm\Core\Contracts\Rule\InducementRuleInterface;
-use Obblm\Core\Contracts\Rule\PlayerRuleInterface;
+use Obblm\Core\Contracts\Rule\RuleApplicativeInterface;
+use Obblm\Core\Contracts\Rule\RuleInducementInterface;
+use Obblm\Core\Contracts\Rule\RulePlayerInterface;
 use Obblm\Core\Contracts\Rule\RuleBuilderInterface;
-use Obblm\Core\Contracts\Rule\TeamRuleInterface;
+use Obblm\Core\Contracts\Rule\RuleTeamInterface;
 use Obblm\Core\Entity\Rule;
 
-interface RuleHelperInterface extends ApplicativeRuleInterface, RuleBuilderInterface, TeamRuleInterface, PlayerRuleInterface, InducementRuleInterface
+interface RuleHelperInterface extends RuleApplicativeInterface, RuleBuilderInterface, RuleTeamInterface, RulePlayerInterface, RuleInducementInterface
 {
     /****************
      * COMPLIER PASS

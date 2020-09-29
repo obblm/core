@@ -12,8 +12,8 @@
         {% if player.type %}
             {% set skills = get_player_skills(rule, player) %}
             {% for skill in skills %}
-                <span title="{{ skill.description|trans({}, skill.domain) }}">
-                    {{ skill|trans({}, skill.domain) }}{% if loop.index != loop.last %}, {% endif %}
+                <span title="{{ skill.description|trans({}, skill.translationDomain) }}">
+                    {{ skill|trans({}, skill.translationDomain) }}{% if loop.index != loop.last %}, {% endif %}
                 </span>
             {% else %}
             {{ 'obblm.sheet.table.players.skill_none'|trans({}, 'obblm') }}

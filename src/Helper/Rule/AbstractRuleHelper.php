@@ -132,8 +132,8 @@ abstract class AbstractRuleHelper extends RuleConfigBuilder implements RuleHelpe
         }
         $player = (new Player())
             ->setNumber($number)
-            ->setType($inducement->getType()->getTranslationKey())
-            ->setName($inducement->getTranslationKey())
+            ->setType($inducement->getType()->getName())
+            ->setName($inducement->getName())
             ->addVersion($version);
         return $player;
     }

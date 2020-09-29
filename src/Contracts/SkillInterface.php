@@ -10,8 +10,6 @@ interface SkillInterface extends Translatable
 
     public function getName(): string;
 
-    public function getDomain(): string;
-
     public function getType(): string;
 
     public function getTypeName(): string;
