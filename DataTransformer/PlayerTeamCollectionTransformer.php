@@ -2,8 +2,6 @@
 
 namespace Obblm\Core\DataTransformer;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Criteria;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\Team;
 use Symfony\Component\Form\DataTransformerInterface;

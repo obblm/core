@@ -2,7 +2,6 @@
 
 namespace Obblm\Core\Controller;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
 use Obblm\Core\Entity\Coach;
 use Obblm\Core\Event\ActivateCoachEvent;
 use Obblm\Core\Event\RegisterCoachEvent;
@@ -34,22 +33,6 @@ class SecurityController extends AbstractController
         return $this->render('@ObblmCore/security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
-        ]);
-    }
-
-    /**
-     * @Route("/api/login", name="app_login_api")
-     */
-    public function apiLogin(IriConverterInterface $iriConverter): Response
-    {
-        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
-            return $this->json([
-                'error' => 'Invalid login request: check that the Content-Type header is "application/json".'
-            ], 400);
-        }
-
-        return new Response(null, 204, [
-            'Location' => $iriConverter->getIriFromItem($this->getUser())
         ]);
     }
 

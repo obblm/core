@@ -2,7 +2,6 @@
 
 namespace Obblm\Core\Form\Dices;
 
-use Obblm\Core\Validator\Constraints\Dices\D6;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

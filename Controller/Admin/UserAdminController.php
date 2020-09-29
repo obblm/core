@@ -3,8 +3,8 @@
 namespace Obblm\Core\Controller\Admin;
 
 use Obblm\Core\Entity\Coach;
-use Obblm\Core\Form\AdminUserForm;
 use Doctrine\ORM\EntityManagerInterface;
+use Obblm\Core\Form\Coach\AdminUserForm;
 use Obblm\Core\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

@@ -16,10 +16,6 @@ class AddSkillType extends ChoiceType
         $helper = $options['helper'];
         $version = $options['version'];
         $options['choices'] = $helper->getAvailableSkills($version, $options['context']);
-        //$options['group_by'] = 'type_translation_key';
-        //$options['choice_label'] = 'translation_key';
-        //$options['choice_value'] = 'key';
-        //$options['choice_translation_domain'] = $helper->getAttachedRule()->getRuleKey();
 
         parent::buildForm($builder, $options);
     }
