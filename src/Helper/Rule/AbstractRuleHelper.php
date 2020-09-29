@@ -7,7 +7,6 @@ use Obblm\Core\Contracts\RuleHelperInterface;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Rule;
-use Obblm\Core\Entity\Team;
 use Obblm\Core\Form\Player\ActionType;
 use Obblm\Core\Form\Player\InjuryType;
 use Obblm\Core\Helper\CoreTranslation;

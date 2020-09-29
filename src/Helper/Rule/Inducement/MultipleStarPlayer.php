@@ -12,7 +12,7 @@ class MultipleStarPlayer extends StarPlayer implements InducementInterface
     protected function hydrateWithOptions()
     {
         parent::hydrateWithOptions();
-        $this->parts = $this->options['parts'] ?? [];
+        $this->parts = $this->options['parts'];
     }
 
     public function isMultiple(): bool

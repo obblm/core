@@ -39,7 +39,7 @@ class InducementsQuantityValidator extends ConstraintValidator
             }
             $count[$inducement->getKey()]++;
             if ($count[$inducement->getKey()] > $inducement->getMax()) {
-                $type = $this->translator->trans($inducement->getTranslationKey(), [], $inducement->getTranslationDomain());
+                $type = $this->translator->trans((string) $inducement, [], $inducement->getTranslationDomain());
                 $this->context->buildViolation($constraint->limitMessage)
                     ->setParameter('{{ type }}', $type)
                     ->setParameter('{{ limit }}', $inducement->getMax())

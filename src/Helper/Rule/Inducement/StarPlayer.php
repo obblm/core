@@ -15,8 +15,8 @@ class StarPlayer extends AbstractInducement implements InducementInterface
     protected function hydrateWithOptions()
     {
         parent::hydrateWithOptions();
-        $this->characteristics = $this->options['characteristics'] ?? [];
-        $this->skills = $this->options['skills'] ?? [];
+        $this->characteristics = $this->options['characteristics'];
+        $this->skills = $this->options['skills'];
     }
 
     /**

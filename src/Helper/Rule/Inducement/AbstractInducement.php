@@ -29,14 +29,14 @@ abstract class AbstractInducement extends Optionable implements InducementInterf
 
     protected function hydrateWithOptions()
     {
-        $this->key = $this->options['key'] ?? false;
-        $this->type = $this->options['type'] ?? null;
-        $this->name = $this->options['name'] ?? false;
-        $this->translationDomain = $this->options['translation_domain'] ?? false;
-        $this->typeName = $this->options['type_name'] ?? false;
-        $this->value = $this->options['value'] ?? false;
+        $this->key = $this->options['key'];
+        $this->type = $this->options['type'];
+        $this->name = $this->options['name'];
+        $this->translationDomain = $this->options['translation_domain'];
+        $this->value = $this->options['value'];
+        $this->max = $this->options['max'];
+        $this->typeName = $this->options['type_name'] = '';
         $this->discountValue = $this->options['discount_value'] ?? $this->value;
-        $this->max = $this->options['max'] ?? false;
         $this->rosters = $this->options['rosters'] ?? [];
     }
 

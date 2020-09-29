@@ -17,9 +17,9 @@ class InducementType extends Optionable implements Translatable
 
     protected function hydrateWithOptions()
     {
-        $this->key = $this->options['key'] ?? false;
-        $this->name = $this->options['name'] ?? false;
-        $this->translationDomain = $this->options['translation_domain'] ?? false;
+        $this->key = $this->options['key'];
+        $this->name = $this->options['name'];
+        $this->translationDomain = $this->options['translation_domain'];
     }
 
     /**

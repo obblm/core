@@ -170,13 +170,7 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
 
     public function __toString(): string
     {
-        return $this->translationKey;
-    }
-
-    public function resolveOptions($options):void
-    {
-        parent::resolveOptions($options);
-        $this->hydrateWithOptions($options);
+        return $this->name;
     }
 
     public function configureOptions(OptionsResolver $resolver):void

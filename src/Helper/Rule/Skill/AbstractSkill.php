@@ -23,12 +23,12 @@ abstract class AbstractSkill extends Optionable implements SkillInterface
 
     protected function hydrateWithOptions()
     {
-        $this->key = $this->options['key'] ?? false;
-        $this->name = $this->options['name'] ?? false;
-        $this->translationDomain = $this->options['translation_domain'] ?? false;
-        $this->type = $this->options['type'] ?? false;
-        $this->typeName = $this->options['type_name'] ?? false;
-        $this->description = $this->options['description'] ?? false;
+        $this->key = $this->options['key'];
+        $this->name = $this->options['name'];
+        $this->translationDomain = $this->options['translation_domain'];
+        $this->type = $this->options['type'];
+        $this->typeName = $this->options['type_name'];
+        $this->description = $this->options['description'] ?? "";
     }
 
     public function getKey(): string
