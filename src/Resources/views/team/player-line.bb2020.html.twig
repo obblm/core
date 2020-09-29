@@ -1,0 +1,9 @@
+{% extends '@ObblmCore/team/player-line.base.html.twig' %}
+
+{% block characteristics %}
+    <td>{{ player|characteristics('ma') }}</td>
+    <td>{{ player|characteristics('st') }}</td>
+    <td>{{ player|characteristics('pa') }}+</td>
+    <td>{{ player|characteristics('ag') }}+</td>
+    <td>{{ player|characteristics('av') }}+</td>
+{% endblock %}

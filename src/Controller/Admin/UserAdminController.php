@@ -5,8 +5,10 @@ namespace Obblm\Core\Controller\Admin;
 use Obblm\Core\Entity\Coach;
 use Obblm\Core\Form\AdminUserForm;
 use Doctrine\ORM\EntityManagerInterface;
+use Obblm\Core\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -21,9 +23,9 @@ class UserAdminController extends AbstractController
     /**
      * @Route("/", name="admin_users")
      */
-    public function index(EntityManagerInterface $em)
+    public function index(EntityManagerInterface $em):Response
     {
-        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
+        $this->denyAccessUnlessGranted(Roles::ADMIN);
 
         $users = $em->getRepository(Coach::class)
                     ->findAll();
@@ -35,9 +37,9 @@ class UserAdminController extends AbstractController
     /**
      * @Route("/add", name="admin_users_add")
      */
-    public function add(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
+    public function add(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em):Response
     {
-        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
+        $this->denyAccessUnlessGranted(Roles::ADMIN);
 
         $user = new Coach();
         $form = $this->createForm(AdminUserForm::class, $user);
@@ -56,15 +58,15 @@ class UserAdminController extends AbstractController
     /**
      * @Route("/edit/{user}", name="admin_users_edit")
      */
-    public function edit(Coach $user, Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
+    public function edit(Coach $user, Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em):Response
     {
-        $this->denyAccessUnlessGranted('OBBLM_ADMIN');
+        $this->denyAccessUnlessGranted(Roles::ADMIN);
 
         $form = $this->createForm(AdminUserForm::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($user->getPlainPassword()) {
+            if ($user->getPlainPassword() !== null) {
                 $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
                 $user->setPassword($password)->setPlainPassword('');
             }

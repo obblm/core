@@ -8,24 +8,24 @@ class RouteAutoloader
 {
     const ROUTE_GLUE = '.';
 
-    private $routes_to_load = [];
+    private $routesToLoad = [];
 
     public function getObblmRoutes():array
     {
-        return $this->routes_to_load;
+        return $this->routesToLoad;
     }
     public function addObblmRoute(AutoloadedRouteInterface $route)
     {
-        $this->routes_to_load[] = [
+        $this->routesToLoad[] = [
             'resource' => $route->getFileToLoad(),
             'type' => $route->getFormat()
         ];
     }
     public function getObblmRoute($key):array
     {
-        if (!isset($this->routes_to_load[$key])) {
+        if (!isset($this->routesToLoad[$key])) {
             throw new Exception('No Service found for ' . $key);
         }
-        return $this->routes_to_load[$key];
+        return $this->routesToLoad[$key];
     }
 }

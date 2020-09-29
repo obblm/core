@@ -62,6 +62,26 @@ class Team
     private $players;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $logoFilename;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $logoMimeType;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $coverFilename;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $coverMimeType;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $ready = false;
@@ -69,7 +89,7 @@ class Team
     /**
      * @ORM\Column(type="boolean")
      */
-    private $locked_by_managment = false;
+    private $lockedByManagment = false;
 
     /**
      * @ORM\OneToMany(targetEntity=TeamVersion::class, fetch="EAGER", mappedBy="team", orphanRemoval=true, cascade={"persist", "remove"})
@@ -171,13 +191,32 @@ class Team
     /**
      * @return Collection|Player[]
      */
-    public function getNotDeadPlayers(): Collection
+    public function getAvailablePlayers(): Collection
     {
         $criteria = Criteria::create()
             ->andWhere(Criteria::expr()->eq('dead', false))
+            ->andWhere(Criteria::expr()->eq('fire', false))
             ->orderBy(['number' => 'ASC'])
         ;
         return $this->players->matching($criteria);
+    }
+
+    public function getAvailablePlayersSheet(): Collection
+    {
+        // In want to have 16 players in the list, no less, no more
+        $usedNumbers = [];
+        $newPlayerList = $this->getAvailablePlayers();
+        foreach ($newPlayerList as $player) {
+            $usedNumbers[$player->getNumber()] = $player;
+        }
+        for ($i=1; $i<=16; $i++) {
+            if (!isset($usedNumbers[$i])) {
+                $newPlayerList->add((new Player())->setNumber($i));
+            }
+        }
+        $criteria = Criteria::create();
+        $criteria->orderBy(['number' => 'ASC']);
+        return $newPlayerList->matching($criteria);
     }
 
     public function addPlayer(Player $player): self
@@ -203,19 +242,49 @@ class Team
         return $this;
     }
 
-    /*public static function loadValidatorMetadata(ClassMetadata $metadata)
+    public function getLogoFilename(): ?string
     {
-        $metadata->addConstraint(new Assert\Callback('validateRule'));
+        return $this->logoFilename;
     }
 
-    public function validateRule(ExecutionContextInterface $context, $payload)
+    public function setLogoFilename(?string $logoFilename): self
     {
-        if (!($context->getValue()->getRule() || $context->getValue()->getChampionship()) ||
-            $context->getValue()->getRule() && $context->getValue()->getChampionship()) {
-            $context->buildViolation('obblm.constraints.team.rule_or_championship.violation')
-                ->addViolation();
-        }
-    }*/
+        $this->logoFilename = $logoFilename;
+        return $this;
+    }
+
+    public function getLogoMimeType(): ?string
+    {
+        return $this->logoMimeType;
+    }
+
+    public function setLogoMimeType(?string $logoMimeType): self
+    {
+        $this->logoMimeType = $logoMimeType;
+        return $this;
+    }
+
+    public function getCoverFilename(): ?string
+    {
+        return $this->coverFilename;
+    }
+
+    public function setCoverFilename(?string $coverFilename): self
+    {
+        $this->coverFilename = $coverFilename;
+        return $this;
+    }
+
+    public function getCoverMimeType(): ?string
+    {
+        return $this->coverMimeType;
+    }
+
+    public function setCoverMimeType(?string $coverMimeType): self
+    {
+        $this->coverMimeType = $coverMimeType;
+        return $this;
+    }
 
     public function getReady(): ?bool
     {
@@ -236,7 +305,7 @@ class Team
 
     public function getLockedByManagment(): ?bool
     {
-        return $this->locked_by_managment;
+        return $this->lockedByManagment;
     }
 
     public function isLockedByManagment(): ?bool
@@ -244,9 +313,9 @@ class Team
         return $this->getLockedByManagment();
     }
 
-    public function setLockedByManagment(bool $locked_by_managment): self
+    public function setLockedByManagment(bool $lockedByManagment): self
     {
-        $this->locked_by_managment = $locked_by_managment;
+        $this->lockedByManagment = $lockedByManagment;
 
         return $this;
     }

@@ -66,37 +66,37 @@ class TeamVersion
     /**
      * @ORM\Column(type="integer")
      */
-    private $td_give = 0;
+    private $tdGive = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $td_take = 0;
+    private $tdTake = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $injury_give = 0;
+    private $injuryGive = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $injury_take = 0;
+    private $injuryTake = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $game_win = 0;
+    private $gameWin = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $game_draw = 0;
+    private $gameDraw = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $game_loss = 0;
+    private $gameLoss = 0;
 
     /**
      * @ORM\Column(type="integer")
@@ -142,10 +142,22 @@ class TeamVersion
     {
         return $this->playerVersions;
     }
+
     /**
      * @return Collection|PlayerVersion[]
      */
     public function getNotDeadPlayerVersions(): Collection
+    {
+        $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('dead', false))
+        ;
+        return $this->playerVersions->matching($criteria);
+    }
+
+    /**
+     * @return Collection|PlayerVersion[]
+     */
+    public function getAvailablePlayerVersions(): Collection
     {
         $criteria = Criteria::create()
             ->andWhere(Criteria::expr()->eq('dead', false))
@@ -238,84 +250,84 @@ class TeamVersion
 
     public function getTdGive(): ?int
     {
-        return $this->td_give;
+        return $this->tdGive;
     }
 
-    public function setTdGive(int $td_give): self
+    public function setTdGive(int $tdGive): self
     {
-        $this->td_give = $td_give;
+        $this->tdGive = $tdGive;
 
         return $this;
     }
 
     public function getTdTake(): ?int
     {
-        return $this->td_take;
+        return $this->tdTake;
     }
 
-    public function setTdTake(int $td_take): self
+    public function setTdTake(int $tdTake): self
     {
-        $this->td_take = $td_take;
+        $this->tdTake = $tdTake;
 
         return $this;
     }
 
     public function getInjuryGive(): ?int
     {
-        return $this->injury_give;
+        return $this->injuryGive;
     }
 
-    public function setInjuryGive(int $injury_give): self
+    public function setInjuryGive(int $injuryGive): self
     {
-        $this->injury_give = $injury_give;
+        $this->injuryGive = $injuryGive;
 
         return $this;
     }
 
     public function getInjuryTake(): ?int
     {
-        return $this->injury_take;
+        return $this->injuryTake;
     }
 
-    public function setInjuryTake(int $injury_take): self
+    public function setInjuryTake(int $injuryTake): self
     {
-        $this->injury_take = $injury_take;
+        $this->injuryTake = $injuryTake;
 
         return $this;
     }
 
     public function getGameWin(): ?int
     {
-        return $this->game_win;
+        return $this->gameWin;
     }
 
-    public function setGameWin(int $game_win): self
+    public function setGameWin(int $gameWin): self
     {
-        $this->game_win = $game_win;
+        $this->gameWin = $gameWin;
 
         return $this;
     }
 
     public function getGameDraw(): ?int
     {
-        return $this->game_draw;
+        return $this->gameDraw;
     }
 
-    public function setGameDraw(int $game_draw): self
+    public function setGameDraw(int $gameDraw): self
     {
-        $this->game_draw = $game_draw;
+        $this->gameDraw = $gameDraw;
 
         return $this;
     }
 
     public function getGameLoss(): ?int
     {
-        return $this->game_loss;
+        return $this->gameLoss;
     }
 
-    public function setGameLoss(int $game_loss): self
+    public function setGameLoss(int $gameLoss): self
     {
-        $this->game_loss = $game_loss;
+        $this->gameLoss = $gameLoss;
 
         return $this;
     }

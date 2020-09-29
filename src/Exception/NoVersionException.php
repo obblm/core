@@ -5,18 +5,20 @@ namespace Obblm\Core\Exception;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\Team;
 
-class NoVersionException extends \Exception
+class NoVersionException extends \Exception implements ExceptionInterface
 {
     public function __construct(object $on = null)
     {
-        if ($on instanceof Team) {
-            $message = "No version available for team : " . $on->getName();
-        } elseif ($on instanceof Player) {
-            $message = "No version available for player : " . $on->getName();
-        } else {
-            $message = "No version available";
-        }
+        parent::__construct($this->getVersionMessage($on));
+    }
 
-        parent::__construct($message);
+    private function getVersionMessage(object $on):?string
+    {
+        if ($on instanceof Team) {
+            return "No version available for team : " . $on->getName();
+        } elseif ($on instanceof Player) {
+            return "No version available for player : " . $on->getName();
+        }
+        return "No version available";
     }
 }

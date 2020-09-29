@@ -1,0 +1,32 @@
+{% extends '@ObblmCore/base.html.twig' %}
+
+{% block title 'obblm.rules.title'|trans({}, 'obblm') %}
+{% block body %}
+    <h1 class="title">{{ 'obblm.rules.title'|trans({}, 'obblm') }}</h1>
+    <div id="rules" class="four boxes">
+        {% for rule in rules %}
+        <div class="box rule">
+            <div class="content">
+                <a class="header" href="{{ path('obblm_rules_detail', {'rule': rule.id}) }}">
+                    <h2 class="title">{{ rule.name|trans({}, rule.ruleKey) }}</h2>
+                </a>
+                <div class="meta">
+                    <em>{{ rule.ruleKey }}</em>
+                </div>
+                <div class="description">
+                    #Rule desc
+                </div>
+            </div>
+            <div class="extra content">
+              <span class="right floated">
+                #Rule desc
+              </span>
+              <span>
+                <i class="user icon"></i>
+                #Rule desc
+              </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

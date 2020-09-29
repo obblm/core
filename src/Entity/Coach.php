@@ -15,8 +15,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CoachRepository::class)
- * @UniqueEntity("email")
  * @ORM\Table(name="obblm_coach")
+ * @UniqueEntity(fields="email", message="Email is already taken.")
+ * @UniqueEntity(fields="username", message="Username is already taken.")
  */
 class Coach implements UserInterface, EmailObjectInterface
 {
@@ -29,14 +30,18 @@ class Coach implements UserInterface, EmailObjectInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Email
      */
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $username;
+
+    /**
      * @ORM\Column(type="json")
      */
-    private $roles = ['OBBLM_USER'];
+    private $roles = [Roles::COACH];
 
     /**
      * @var string The hashed password
@@ -59,17 +64,17 @@ class Coach implements UserInterface, EmailObjectInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $first_name;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $last_name;
+    private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=4, nullable=true)
      */
-    private $username;
+    private $locale;
 
     /**
      * @ORM\Column(type="boolean")
@@ -215,25 +220,36 @@ class Coach implements UserInterface, EmailObjectInterface
 
     public function getFirstName(): ?string
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
-    public function setFirstName(?string $first_name): self
+    public function setFirstName(?string $firstName): self
     {
-        $this->first_name = $first_name;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(?string $last_name): self
+    public function setLastName(?string $lastName): self
     {
-        $this->last_name = $last_name;
+        $this->lastName = $lastName;
 
+        return $this;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): self
+    {
+        $this->locale = $locale;
         return $this;
     }
 

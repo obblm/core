@@ -2,8 +2,8 @@
 
 namespace Obblm\Core\Entity;
 
+use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Repository\PlayerVersionRepository;
-use Obblm\Core\Service\PlayerService;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,7 +43,12 @@ class PlayerVersion
     private $skills = [];
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $additionalSkills = [];
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
      */
     private $injuries = [];
 
@@ -55,12 +60,27 @@ class PlayerVersion
     /**
      * @ORM\Column(type="boolean")
      */
-    private $missing_next_game = false;
+    private $missingNextGame = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $dead = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $fire = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $hiredStarPlayer = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $mercenary = false;
 
     /**
      * @ORM\Column(type="integer")
@@ -70,7 +90,7 @@ class PlayerVersion
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $spp_level;
+    private $sppLevel;
 
     /**
      * @ORM\Column(type="integer")
@@ -118,6 +138,18 @@ class PlayerVersion
         return $this;
     }
 
+    public function getAdditionalSkills(): ?array
+    {
+        return $this->additionalSkills;
+    }
+
+    public function setAdditionalSkills(array $additionalSkills): self
+    {
+        $this->additionalSkills = $additionalSkills;
+
+        return $this;
+    }
+
     public function getInjuries(): ?array
     {
         return $this->injuries;
@@ -144,7 +176,7 @@ class PlayerVersion
 
     public function getMissingNextGame(): ?bool
     {
-        return $this->missing_next_game;
+        return $this->missingNextGame;
     }
 
     public function isMissingNextGame(): ?bool
@@ -152,9 +184,9 @@ class PlayerVersion
         return $this->getMissingNextGame();
     }
 
-    public function setMissingNextGame(bool $missing_next_game): self
+    public function setMissingNextGame(bool $missingNextGame): self
     {
-        $this->missing_next_game = $missing_next_game;
+        $this->missingNextGame = $missingNextGame;
         return $this;
     }
 
@@ -172,6 +204,55 @@ class PlayerVersion
     {
         $this->dead = $dead;
         $this->getPlayer()->setDead($this->dead);
+        return $this;
+    }
+
+    public function getFire(): ?bool
+    {
+        return $this->fire;
+    }
+
+    public function isFire(): ?bool
+    {
+        return $this->getFire();
+    }
+
+    public function setFire(bool $fire): self
+    {
+        $this->fire = $fire;
+        $this->getPlayer()->setFire($this->fire);
+        return $this;
+    }
+
+    public function getHiredStarPlayer(): ?bool
+    {
+        return $this->hiredStarPlayer;
+    }
+
+    public function isHiredStarPlayer(): ?bool
+    {
+        return $this->getHiredStarPlayer();
+    }
+
+    public function setHiredStarPlayer(bool $hiredStarPlayer): self
+    {
+        $this->hiredStarPlayer = $hiredStarPlayer;
+        return $this;
+    }
+
+    public function getMercenary(): ?bool
+    {
+        return $this->mercenary;
+    }
+
+    public function isMercenary(): ?bool
+    {
+        return $this->getMercenary();
+    }
+
+    public function setMercenary(bool $mercenary): self
+    {
+        $this->mercenary = $mercenary;
         return $this;
     }
 
@@ -223,23 +304,28 @@ class PlayerVersion
                 $this->getPlayer()->setTeam($this->getTeamVersion()->getTeam());
             }
             if (!$this->getCharacteristics()) {
-                $this->setCharacteristics(PlayerService::getPlayerCharacteristics($this->getPlayer()));
+                $this->setCharacteristics(PlayerHelper::getPlayerCharacteristics($this->getPlayer()));
             }
             if (!$this->getSkills()) {
-                $this->setSkills(PlayerService::getPlayerSkills($this->getPlayer()));
+                $this->setSkills(PlayerHelper::getPlayerSkills($this->getPlayer()));
             }
         }
     }
 
     public function getSppLevel(): ?string
     {
-        return $this->spp_level;
+        return $this->sppLevel;
     }
 
-    public function setSppLevel(string $spp_level): self
+    public function setSppLevel(string $sppLevel): self
     {
-        $this->spp_level = $spp_level;
+        $this->sppLevel = $sppLevel;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getPlayer()->getName() . "#" . $this->getId();
     }
 }

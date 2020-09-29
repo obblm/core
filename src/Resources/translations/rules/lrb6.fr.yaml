@@ -1,519 +1,519 @@
 # To extend it add app/Resources/BbLeagueBundle/translations/lrb6.fr.yml
-obblm:
-  lrb6:
-    kunit: kPo
-    trait:
-      pos:
-        abbr: N°
-        title: Numéro
-      name:
-        abbr: Nom
-        title: Nom
-      type:
-        abbr: Pos
-        title: Position
-      ma:
-        abbr: M
-        title: Mouvement
-      st:
-        abbr: F
-        title: Force
-      ag:
-        abbr: Ag
-        title: Agilité
-      av:
-        abbr: Ar
-        title: Armure
-      skill:
-        abbr: Comp
-        title: Compétences
-      injury:
-        abbr: Bl
-        title: Bléssures
-      com:
-        abbr: Réu
-        title: Réussites
-      td:
-        abbr: TD
-        title: Touchdowns
-      int:
-        abbr: Int
-        title: Interceptions
-      cas:
-        abbr: Sor
-        title: Sorties
-      mvp:
-        abbr: JPV
-        title: Joueur le Plus Valable
-      spp:
-        abbr: Exp
-        title: Expérience
-      value:
-        abbr: Valeur
-        title: Valeur
-    skill_types:
-      g: générale
-      s: force
-      a: agilité
-      p: passe
-      m: mutation
-      e: extraordinnaire
-    experience:
-      rookie: Débutant
-      experienced: Expérimenté
-      veteran: Vétéran
-      emerging_star: Futur Champion
-      star: Champion
-      super_star: Super Champion
-      legend: Légende
-    injuries:
-      badly_hurt:
-        name: Commotion
-        effect: Aucun effet à long terme
-      broken_ribs:
-        name: Côtes cassées
-        effect: Rate le prochain match
-      groin_strain:
-        name: Ligaments Arrachés
-        effect: Rate le prochain match
-      gouged_eye:
-        name: Œil Crevé
-        effect: Rate le prochain match
-      broken_jaw:
-        name: Mâchoire Fracassée
-        effect: Rate le prochain match
-      fractured_arm:
-        name: Bras Fracturé
-        effect: Rate le prochain match
-      fractured_leg:
-        name: Jambe Cassée
-        effect: Rate le prochain match
-      smashed_hand:
-        name: Main Écrasée
-        effect: Rate le prochain match
-      pinched_nerve:
-        name: Nerf Coincé
-        effect: Rate le prochain match
-      damaged_back:
-        name: Dos Abîmé
-        effect: Blessure Persistante
-      smashed_knee:
-        name: Genou Déboîté
-        effect: Blessure Persistante
-      smashed_hip:
-        name: Hanche Démise
-        effect: -1 M
-      smashed_ankle:
-        name: Cheville Détruite
-        effect: -1 M
-      smashed_concussion:
-        name: Commotion grave
-        effect: -1 AR
-      smashed_skull:
-        name: Traumatisme Crânien
-        effect: -1 AR
-      broken_neck:
-        name: Cou Brisé
-        effect: -1 AG
-      smashed_collar:
-        name: Clavicule Défoncée
-        effect: -1 F
-      dead:
-        name: MORT
-        effect: Mort !
-    injuries_abbr:
-      M: Rate le prochain match
-      P: Blessure Persistante
-    skills:
-      block:
-        title: Blocage
-        description: Un joueur ayant la compétence Blocage est très doué pour plaquer ses adversaires. La compétence Blocage, si utilisée, affecte les résultats obtenus avec les dés de Blocage, comme expliqué dans les règles de Blocage.
-      dauntless:
-        title: Intrépidité
-        description: Le joueur est capable de s’attaquer aux adversaires les plus coriaces. Cette compétence ne fonctionne que si le joueur tente de bloquer un adversaire plus fort que lui. Quand cette compétence est utilisée, le coach du joueur Intrépide lance 1D6 et l’ajoute à sa Force. Si le total est inférieur ou égal à la Force de l’adversaire, le joueur doit utiliser sa Force normale pour le blocage. Si le total est supérieur, alors le joueur est considéré comme ayant une Force égale à celle de son adversaire. La Force des deux joueurs est calculée avant l’ajout des éventuels soutiens offensifs ou défensifs mais après tous les autres modificateurs.
-      dirty_player:
-        title: Joueur Vicieux
-        description: Un joueur ayant cette compétence a longtemps étudié toutes les techniques pour faire souffrir ses adversaires. Ajoutez +1 à tout jet d’Armure ou de Blessure effectué par ce joueur lorsqu’il commet une Agression. Notez que vous ne pouvez modifier que l’un des deux dés lancés. Donc si vous décidez d’utiliser Joueur Vicieux pour modifier le jet d’Armure, vous ne pourrez pas modifier le jet de Blessure.
-      fend:
-        title: Parade
-        description: Le joueur est très doué pour tenir à l’écart ses adversaires. Les joueurs adverses ne peuvent pas poursuivre lors d’un blocage contre ce joueur, même s’il est Plaqué et s'il le décide. Le joueur adverse peut cependant continuer à bouger après le blocage s’il avait déclaré un <span class="action">Blitz</span>.
-      frenzy:
-        title: Frénésie
-        description: Un joueur avec cette compétence est un dangereux psychopathe qui attaque ses adversaires avec une rage incontrôlable. A moins que cela ne soit précisé, cette compétence doit toujours être utilisée. Lorsqu’il effectue un blocage, le joueur avec cette compétence <span class="important">doit</span> toujours poursuivre s’il le peut. Sur un résultat «Repoussé» ou «Défenseur Bousculé», le joueur doit immédiatement effectuer un second blocage sur son adversaire s’ils sont tous les deux debouts et adjacents. S’il en a la possibilité, le joueur doit aussi suivre ce second blocage. Si le joueur effectue un <span class="action">Blitz</span> alors il doit payer une case de mouvement supplémentaire et effectuer un second blocage à moins qu’il n’ait plus de Mouvement normal et ne puisse pas non plus Mettre le Paquet.
-      kick:
-        title: Frappe Précise
-        description: Ce joueur est un expert en coups de pied et peut frapper le ballon avec une grande précision. Pour pouvoir utiliser cette compétence, le joueur doit être placé sur le terrain au moment où son équipe donne le Coup d’Envoi. Le joueur ne peut pas être placé dans une zone latérale ni contre la ligne médiane. Si ces conditions sont respectées, le joueur peut donner le Coup d’Envoi. Comme sa frappe est très précise, vous pouvez choisir de diviser en 2 le nombre de cases parcourues par le ballon lorsqu’il rebondit, en arrondissant à la fraction inférieure (i.e., 1=0, 2-3=1, 4-5=2, 6=3).
-      kick_off_return:
-        title: Anticipation
-        description: Un joueur de l’équipe à la réception qui n’est pas le long de la ligne médiane ou dans une zone de tacle adverse peut utiliser cette compétence lorsque le ballon a été envoyé. Elle lui permet de se déplacer de 3 cases ou moins après que le ballon ait été dispersé mais avant d’avoir effectué le jet sur le tableau de Coup d’Envoi. Un seul joueur peut utiliser cette compétence à chaque Coup d’Envoi. Cette compétence ne peut pas être utilisée lors d’un Renvoi de Touche et ne peut pas permettre au joueur de traverser la ligne médiane pour aller dans la moitié de terrain adverse.
-      pass_block:
-        title: Blocage de passe
-        description: Un joueur avec cette compétence peut bouger jusqu'à 3 cases lorsque que le coach adverse annonce qu'un des joueurs de son équipe va tenter une passe avec la balle (mais pas une bombe). Le joueur adverse ne peut pas revenir sur sa décision d'utiliser son action de passe une fois que le blocage de passe est déclaré. Le mouvement est réalisé (hors séquence normale de jeux) après que la passe ait été mesurée mais avant toute tentative d'interception. Le joueur ne peut effectuer ce mouvement à moins d'atteindre une destination légale et il ne peut suivre un chemin qui ne l'autorise pas à atteindre une destination légale. Une destination légale met le joueur dans une position où il peut tenter une interception, dans une case vide qui est la cible de la passe ou qui se trouve dans la zone de tacle du passeur ou du joueur à la réception. Le joueur ne peut pas interrompre son mouvement tant qu'il n'a pas atteint une destination légale, qu'il n'a pas été arrêté par des tentacules ou bien qu'il n'a pas été Mis à Terre. Ce mouvement est gratuit et n'affecte aucunement la capacité du joueur à se déplacer lors de son tour. Ce mouvement est effectué en utilisant toutes les règles normales et compétences nécessaires (par exemple, en effectuant une esquive pour sortir des zones de tacles de joueurs adverses). Un joueur avec blocage de passe peut utiliser sa compétence contre une passe rapide. Si un joueur utilise Blocage de Passe durant son propre tour (sur une passe rapide adverse) et qu'il est Mis à terre cela provoque un turnover, aucun autre joueur ne peut effectuer de Blocage de Passe, et votre tour s'arrête dès que les résultats de la passe et du blocage ont été effectués.
-      pro:
-        title: Pro
-        description: Un joueur qui a cette compétence est un vétéran endurci. De tels joueurs sont appelés des Pros par les autres joueurs de Blood Bowl, car ils commettent rarement, voire jamais, d’erreurs. Une fois par tour d'équipe, un pro a le droit de relancer un de ses jets de dés (sauf un jet d’Armure, de Blessure ou de Sortie même s’il est à Terre ou Sonné). Cependant, avant de refaire le jet de dé, le coach doit lancer 1D6. Sur un résultat de 4 à 6, la relance peut être faite. Sur un résultat de 1 à 3, le résultat original est conservé et ne peut pas être relancé par une relance de compétence ou d'équipe. Néanmoins vous pouvez relancer le jet Pro avec une relance d’Équipe.
-      shadowing:
-        title: Poursuite
-        description: Le joueur peut utiliser cette compétence lorsqu’un joueur adverse entreprenant une Action quitte sa Zone de Tacle qu'elle qu'en soit la raison. Le coach adverse lance 2D6, ajoute le mouvement de son joueur au résultat et en soustrait celui du joueur utilisant la compétence Poursuite. Si le résultat final est inférieur ou égal à 7, le joueur utilisant la compétence Poursuite peut être déplacé dans la case laissée vacante par le joueur adverse. Il ne doit pas effectuer de jet d’Esquive lors de ce mouvement et cela n’ influencera pas son propre mouvement lors de son tour. Si le résultat final est supérieur ou égal à 8 , le joueur parvient à semer le joueur utilisant la compétence Poursuite et le laisse sur place. Un joueur peut faire un nombre quelconque de mouvements de poursuite par tour. Si un joueur quitte la Zone de Tacle de plusieurs joueurs possédant la compétence Poursuite, seul l’un de ces joueurs peut tenter la poursuite.
-      strip_ball:
-        title: Arracher le ballon
-        description: Un joueur ayant cette compétence peut forcer un adversaire qu’il repousse (résultats «Repoussé» ou «Défenseur Bousculé») à lâcher le ballon dans la case où il est repoussé, même si celui-ci n’a pas été Plaqué.
-      sure_hands:
-        title: Dextérité
-        description: Le joueur peut relancer le D6 s’il ne réussit pas à ramasser le ballon. De plus, un adversaire qui a la compétence Arracher le Ballon ne peut pas l’utiliser contre un joueur avec cette compétence.
-      tackle:
-        title: Tacle
-        description: Les adversaires qui se trouvent dans la Zone de Tacle de ce joueur ne peuvent pas utiliser leur compétence Esquive s'ils tentent d'en sortir. Ils ne peuvent pas non plus utiliser leur compétence Esquive si le joueur tente de les bloquer.
-      wrestle:
-        title: Lutte
-        description: Le joueur est spécialement entraîné aux techniques de lutte. Ce joueur peut utiliser cette compétence lorsqu’il effectue un blocage ou qu’il est bloqué. Si le résultat «Les Deux Â Terre» est choisit par l’un des coachs, alors au lieu d’appliquer le résultat, les deux joueurs sont jetés au sol. Les deux joueurs sont Mis à Terre dans leurs cases même si l’un ou les deux ont la compétence Blocage. N’effectuez pas de jet d’Armure pour les deux joueurs. L’utilisation de cette compétence ne provoque pas de turnover sauf si le joueur de l’équipe active était le porteur du ballon.
-      catch:
-        title: Récéption
-        description: ~
-      diving_catch:
-        title: Plongeon
-        description: ~
-      diving_tackle:
-        title: Tacle Plongeant
-        description: ~
-      dodge:
-        title: Esquive
-        description: ~
-      jump_up:
-        title: Bond
-        description: ~
-      leap:
-        title: Saut
-        description: ~
-      side_step:
-        title: Glissade contrôlée
-        description: ~
-      sneaky_git:
-        title: Sournois
-        description: ~
-      sprint:
-        title: Sprint
-        description: ~
-      sure_feet:
-        title: Equilibre
-        description: ~
-      accurate:
-        title: Précision
-        description: ~
-      dump_off:
-        title: Passe Rapide
-        description: ~
-      hail_mary_pass:
-        title: La Main de Dieu
-        description: ~
-      leader:
-        title: Chef
-        description: ~
-      nerves_of_steel:
-        title: Nerfs d’Acier
-        description: ~
-      pass:
-        title: Passe
-        description: ~
-      safe_throw:
-        title: Lancer Précis
-        description: ~
-      break_tackle:
-        title: Esquive en Force
-        description: ~
-      grab:
-        title: Projection
-        description: ~
-      guard:
-        title: Garde
-        description: ~
-      juggernaut:
-        title: Juggernaut
-        description: ~
-      mighty_blow:
-        title: Châtaigne
-        description: ~
-      multiple_block:
-        title: Blocage Multiple
-        description: ~
-      piling_on:
-        title: Écrasement
-        description: ~
-      stand_firm:
-        title: Stabilité
-        description: ~
-      strong_arm:
-        title: Costaud
-        description: ~
-      thick_skull:
-        title: Crâne Épais
-        description: ~
-      big_hand:
-        title: Main Démesurée
-        description: ~
-      claw_claws:
-        title: Pince / Griffes
-        description: ~
-      disturbing_presence:
-        title: Présence Perturbante
-        description: ~
-      extra_arms:
-        title: Bras Supplémentaires
-        description: ~
-      foul_appearance:
-        title: Répulsion
-        description: ~
-      horns:
-        title: Cornes
-        description: ~
-      prehensile_tail:
-        title: Queue Préhensile
-        description: ~
-      tentacles:
-        title: Tentacules
-        description: ~
-      two_heads:
-        title: Deux Têtes
-        description: ~
-      very_long_legs:
-        title: Très Longues Jambes
-        description: ~
-      always_hungry:
-        title: Toujours Affamé
-        description: ~
-      animosity:
-        title: Animosité
-        description: ~
-      ball_chain:
-        title: Chaîne & Boulet
-        description: ~
-      blood_lust:
-        title: Soif de Sang
-        description: ~
-      bombardier:
-        title: Bombardier
-        description: ~
-      bone_head:
-        title: Cerveau Lent
-        description: ~
-      chainsaw:
-        title: Tronçonneuse
-        description: ~
-      decay:
-        title: Décomposition
-        description: ~
-      fan_favourite:
-        title: Idole des Foules
-        description: ~
-      hypnotic_gaze:
-        title: Regard Hypnotique
-        description: ~
-      loner:
-        title: Solitaire
-        description: ~
-      no_hands:
-        title: Manchot
-        description: ~
-      nurgle_rot:
-        title: Pourriture de Nurgle
-        description: ~
-      really_stupid:
-        title: Gros Débile
-        description: ~
-      regeneration:
-        title: Régénération
-        description: ~
-      right_stuff:
-        title: Poids Plume
-        description: ~
-      secret_weapon:
-        title: Arme Secrète
-        description: ~
-      stab:
-        title: Poignard
-        description: ~
-      stakes:
-        title: Pieux
-        description: ~
-      stunty:
-        title: Minus
-        description: ~
-      take_root:
-        title: Prendre Racine
-        description: ~
-      throw_team_mate:
-        title: Lancer un Coéquipier
-        description: ~
-      titchy:
-        title: Microbe
-        description: ~
-      wild_animal:
-        title: Animal Sauvage
-        description: ~
-    rosters:
-      amazon:
-        title: Amazones
-        description: Il y a longtemps, guidées par un désir d’aventures, les Walkyries des colonies Nordiques de Lustrie naviguèrent loin de leurs congénères et fondèrent une colonie cachée profondément dans l’estuaire de la rivière Amazone. Maintenant, ces féroces guerrières ont envahi les terrains de Blood Bowl - et gare à ceux qui se mesurent à elles !
-        positions:
-          linewoman: Trois-quart
-          thrower: Lanceuse
-          blitzer: Blitzeuse
-          catcher: Receveuse
-      chaos:
-        title: Chaos
-        description: Les joueurs du chaos ne sont pas réputés pour la subtilité de leur jeu. Une simple course au centre du terrain en blessant et estropiant un maximum d’adversaire est à peu près leur seule stratégie. Ils s’inquiètent rarement, voire jamais, de considérations mineures comme ramasser le ballon ou marquer un touchdown, du moins pas tant qu’il reste un adversaire valide !
-      chaos_dwarf:
-        title: Nains du Chaos
-        description: Les Nains du Chaos sont les descendants dégénérés d’explorateurs Nains terriblement affectés par les forces du Chaos, transformés en créatures égoïstes et belliqueuses. Sur un point au moins, ils sont restés les mêmes, ils adorent toujours le Blood Bowl ! Les Nains du Chaos ne sont pas nombreux et font donc une grande consommation d’Hobgobelins pour toutes sortes de tâches, y compris jouer dans leurs équipes de Blood Bowl.
-      chaos_pact:
-        title: Pacte du Chaos
-        description: Les équipes de Pactes du Chaos résultent du mélange de races maléfiques ou chaotiques, voire les deux. Si les Maraudeurs sont enthousiastes, il faut les canaliser en vue des divers besoins de l'équipe ; les autres races apportent leur finesse ou leurs muscles, c'est selon. Néanmoins, du fait de l’arrogance, de la stupidité ou de la nature bestiale des membres de l’équipe, il est bien rare de voir une équipe du Pacte du chaos efficace et bien organisée. Les Chaos All-Stars sont le meilleur exemple du niveau que peut atteindre cette équipe avec le bon coach.
-      dark_elf:
-        title: Elfes Noirs
-        description: Mauvais au-delà de tout ce qui est imaginable, extrêmement talentueux, les Elfes Noirs entrent sur le terrain pour prouver au monde leur supériorité. Les équipes d’Elfes Noirs préfèrent un jeu rusé et sournois de course au jeu de passe de leurs cousins du côté du Bien. Assistés par les Furies sans pitié et de dangereux assassins, les Elfes Noirs ont toutes les cartes pour perforer les lignes adverses au lieu de les contourner.
-        positions:
-          lineman: Trois-quart
-          runner: Coureur
-          blitzer: Blitzeur
-          assassin: Assassin
-          witch: Furie
-      dwarf:
-        title: Nains
-        description: Les Nains semblent êtres les joueurs de Blood Bowl idéaux. Petits, costauds, bien protégés et têtus au point de refuser obstinément de mourir ! La plupart de leurs équipes obéissent au principe selon lequel si elles parviennent à massacrer les meilleurs joueurs adverses et à neutraliser les autres, rien ne saurait les empêcher d’effectuer leurs touchdowns en paix !
-        positions:
-          slayer: Tueur de Trolls
-          runner: Coureur
-          blitzer: Blitzeur
-          blocker: Bloqueur
-          death_roller: Roule-mort
-      elf_union:
-        title: Elfes
-        description: Lorsque la NAF s’effondra de nombreuses équipes Elfes se retrouvèrent ruinées. Les équipes qui ont survécu à cette période ne sont ni aussi riches ni aussi bien équipées que les équipes de Hauts Elfes, mais il est clair qu’elles savent jouer. Masque de protection sur le visage et crête dressée sur la tête, elles entrent sur le terrain pour retrouver leur gloire passée.
-      goblin:
-        title: Gobelins
-        description: La tactique des Gobelins doit plus à l’espoir qu’au potentiel. Les Gobelins font de très bons receveurs car ils sont petits et agiles. Par contre l’art de bloquer leur est étranger, quant à leurs chances de bloquer quelque chose de plus grand qu’un Halfling n’en parlons pas. Mais cela ne semble pas déranger les Gobelins outre mesure, car l’utilisation d’armes secrètes particulièrement retorses permet parfois à une équipe de Gobelins de gagner un match.
-        positions:
-          goblin: Goblin
-          looney: Barjot
-          fanatic: Fanatique
-          bombardier: Bombardier
-          pogoer: Bâton à ressort
-          troll: Troll
-      halfling:
-        title: Halflings
-        description: La déficience technique des équipes de Halflings est légendaire. Ils sont trop petits pour les passes et les réceptions, ils courent à demi vitesse et une équipe entière peut passer toute une après-midi à tenter de bloquer un Ogre sans y réussir. La plupart des coachs Halflings tentent de combler la qualité par la quantité. Après tout, si vous arrivez à placer une demi douzaine de joueurs dans la zone d’En-but adverse et que, par miracle, vous réussissiez à récupérer le ballon, il existe une infime chance qu’un ou deux d’entre eux n’aient pas encore été réduits à l’état de purée au moment où vous leur lancerez le ballon.
-      high_elf:
-        title: Hauts Elfes
-        description: Les Royaumes Elfiques sponsorisent les équipes de Hauts elfes, qui développent un jeu de passe très efficace et alignent les joueurs les plus arrogants que l’on puisse trouver. Riches au-delà des rêves les plus fous, les équipes de Hauts Elfes comprennent de nombreux princes et nobles dans leurs rangs et tous ceux qu’ils ne peuvent pas battre, eh bien ils les achètent.
-        positions:
-          lineman: Trois-quart
-          thrower: Lanceur
-          blitzer: Blitzeur
-          catcher: Receveur
-      human:
-        title: Humains
-        description: Bien que les Humains ne bénéficient pas des points forts ou des capacités spéciales des autres races, ils ne sont par contre pas pénalisés par les faiblesses inhérentes à ces dernières. Ceci rend les équipes humaines extrêmement flexibles, capables soit de courir avec le ballon, de le passer ou bien de l’ignorer pour jeter les adversaires dans la boue à la place !
-        positions:
-          lineman: Trois-quart
-          thrower: Lanceur
-          blitzer: Blitzeur
-          catcher: Receveur
-          ogre: Ogre
-      khemri:
-        title: Khemri
-        description: Il y a 8000 ans, les Khemri jouèrent leur premier match de Blood Bowl contre les Slanns. Mais, lorsque leurs royaumes moururent, le jeu disparut aussi jusqu’à ce qu’il soit redécouvert. Et comme le jeu refaisait surface il était inévitable que les anciens joueurs et les anciens champions reviennent sur les terrains qu’ils avaient foulé autrefois.
-      lizardman:
-        title: Hommes-Lézards
-        description: Les Prêtres-Mages enseignaient déjà le Blood Bowl des milliers d’années avant qu’il ne soit découvert par le Nain Roze-El. Ce n’est donc pas une surprise si les Hommes-Lézards jouent au Blood Bowl. Alignant un subtil mélange de dextérité et de force, les équipes de Lustrie peuvent tenir la distance contre une équipe puissante comme celle du Chaos mais sont tout aussi capables d’égaler le jeu de course des Skavens.
-      necromantic:
-        title: Nécromantique
-        description: "Les Égarés et Damnés ne rôdent pas toujours dans les forêts et les cimetières du Vieux Monde. Parfois ils se rassemblent pour chasser ceux dont l’âme n’est pas maudite. Trouvant le repos dans de terribles explosions de violence incontrôlée, ces groupes font de leur mieux pour apaiser leurs souffrances : ils arrivent pour jouer une bonne partie de Blowd Bowl."
-        positions:
-          golem: Golem de Chair
-          werewolf: Loup-garou nécromantique
-          ghoul: Goule
-          wight: Revenant
-          zombi: Zombie
-      norse:
-        title: Nordique
-        description: "Les équipes nordiques ont une réputation d’insatiable férocité aussi bien sur le terrain que dans la vie courante. Il faut dire que le Nordique moyen est un psychopathe dangereux qui, lorsqu’il ne passe pas sa vie dans les solitudes glacées et mélancoliques du grand nord, ne pense qu’à trois choses : la bière, les femmes, et un bon gros carnage pour parfaire le tout !"
-      nurgle:
-        title: Nurgle
-        description: Les équipes de Nurgle sont un type d’équipe du Chaos où les joueurs vénèrent le dieu Nurgle. Nurgle est le dieu du Chaos de la corruption et de la maladie et il récompense ses joueurs d’une maladie plutôt déplaisante connue sous le nom de Pourriture de Nurgle. Le fait que les équipes de Nurgle dégagent une odeur affreuse est plus reconnu que prouvé. La vérité est qu’ils sont faits de chair à demi décomposée surmontée d’un nuage de mouches, et que quiconque s’approche suffisamment près pour se faire vraiment une idée de l’odeur, est inévitablement frappé de l’une des pires maladies de Nurgle et généralement meurt avant d’avoir pu suggérer une nouvelle forme d’hygiène corporelle.
-      ogre:
-        title: Ogre
-        description: Les équipes d'ogres existent depuis la formation de la NAF et ont même eu certains succès comme gagner le Blood Bowl XV. Cependant, comme toute personne bien pensante vous le dira, avoir plus d'un Ogre au même endroit au même moment est un désastre par nature. La clé de la réussite pour une équipe d'Ogres se résume aux Snotlings. S'ils sont assez proches d'un Ogre pour lui rappeler qu'il joue un match en lui mordillant la jambe, alors vous pouvez avoir le début d’un semblant d’équipe.
-        positions:
-          snotling: Snotling
-          ogre: Ogre
-      orc:
-        title: Orque
-        description: Les Orques jouent au Blood Bowl depuis qu’il a été inventé et leurs équipes, comme les Yeux Crevés ou les Têtes Coupées, comptent parmi les plus fameuses du championnat. La technique des équipes Orques consiste à enfoncer les lignes adverses afin de créer des brèches que leurs coureurs sauront exploiter.
-      skaven:
-        title: Skaven
-        description: Les Skavens sont loin d’être les plus forts ou les plus endurants, mais mon garçon, qu’ils sont rapides ! Nombreux sont leurs adversaires qui ont été pris de vitesse par des Skavens se faufilant à travers de leurs lignes pour marquer un fulgurant touchdown.
-      slann:
-        title: Slann
-        description: L'équipe Slann vient d'une race antique de voyageurs spatiaux échoués sur notre planète il y a des lustres. Après avoir admis qu'ils ne seraient pas secourus, ils s'établirent comme dirigeants des Hommes-Lézards. Certes, la plupart des Slann préfèrent s'engraisser et paresser en donnant des ordres aux Hommes-Lézards, mais quelques-uns des plus jeunes et des plus énergiques se plaisent à parcourir les terres et à jouer au Blood Bowl. Si les Slann n'ont pas de jeu de passe à proprement parler, leurs capacités de sauts, de plongeons et d'interceptions sont sans égales.
-      undead:
-        title: Morts-Vivants
-        description: Dans le Vieux Monde les morts ne trouvent pas facilement le repos. Les Vampires hantent les châteaux, les Nécromanciens cherchent à échapper à la mort au moyen de connaissances immorales, les Liches commandent à des légions de cadavres et les joueurs de Blood Bowl morts depuis longtemps reviennent sur les terrains de leurs gloires passées...
-      underworld:
-        title: Bas-Fonds
-        description: Il peut arriver que les Skaven et les Gobelins qui vivent dans les profondeurs, au-dessous de toutes les races détestées qui marchent au soleil, se regroupent pour former des équipes de Blood Bowl. Les Vermines des Bas-Fonds sont à ce jour la plus connue de ces équipes des Bas-Fonds et celle qui a le mieux réussi. Cependant, ces équipes ont souvent des résultats très faibles, les joueurs passant leur temps à se bagarrer entre eux et à se rejeter la faute les uns sur les autres à chaque match pour les erreurs commises. Le trait distinctif de ces équipes qui attire de nombreux fans est que les joueurs dorment et baignent dans la Malepierre (il y en a même qui en mangent). Bien que la plupart des joueurs potentiels en meurent avant même de s'engager dans une équipe, ceux qui parviennent à rester en vie développent souvent des mutations fascinantes.
-      vampire:
-        title: Vampire
-        description: Bien que les équipes Vampires incluent un certain nombre de joueurs extrêmement performants, elles sont pénalisées justement par le manque de fiabilité des Vampires. Alors que ces derniers devraient se concentrer sur le jeu, leur attention se focalise souvent sur leur faim et en moins de temps qu'il ne faut pour le dire, ils en oublient le jeu pour une petite morsure rapide !
-      wood_elf:
-        title: Elfes Sylvains
-        description: Plus encore que leurs cousins Hauts Elfes, les Elfes Sylvains ne jurent que par la Longue Passe. Tous leurs efforts se tournent donc vers l’amélioration de leur talent dans le jeu de passe et de réception. Pas un Elfe Sylvain ne voit l’intérêt de s’encombrer d’une armure pour frapper l’adversaire. Ils préfèrent compter sur leurs aptitudes acrobatiques naturelles pour les éviter les ennuis, ce qui généralement suffit. Il faut un adversaire agile ou chanceux pour mettre la main sur un Elfe Sylvain !
-        positions:
-          lineman: Trois-quart
-          thrower: Lanceur
-          war_dancer: Danseurs de Guerre
-          catcher: Receveur
-    star_players:
-      bertha_bigfist:
-        name: Bertha GroPoing
-      helmut_wulf:
-        name: Helmut Wulf
-      morg_n_thorg:
-        name: Morg ‘n’ Thorg
-      prince_moranion:
-        name: Prince Moranion
-      puggy_baconbreath:
-        name: Puggy Haleinedebacon
-      quetzal_leap:
-        name: Quetzal le Bondissant
-      ramtut_iii:
-        name: Ramtut III
-      rashnak_rackstabber:
-        name: Rashnak Lamedansledos
-      ripper:
-        name: Bolgroth l’Écrabouilleur
-      roxanna_darknail:
-        name: Roxanna Onglenoir
-      scrappa_sorehead:
-        name: Scrappa Malocrâne
-      setekh:
-        name: Setekh
-      slibli:
-        name: Silibili
-      sinnedbad:
-        name: Sinnedbad
-      skitter_stab_stab:
-        name: Skitter Pic-Pic
-      soaren_hightower:
-        name: Soaren Hautetour
-      ugroth_bolgrot:
-        name: Ugroth Tranchegrots
-      varag_ghoul_chewer:
-        name: Varag Mâchegoule
-      wilhelm_chaney:
-        name: Wilhelm Chaney
-      willow_rosebark:
-        name: Willow Teinrose
-      zara_the_slayer:
-        name: Zara la Tueuse
-      zzharg_madeye:
-        name: Zzharg le Borgne
+lrb6:
+  kunit: kPo
+  trait:
+    pos:
+      abbr: N°
+      title: Numéro
+    name:
+      abbr: Nom
+      title: Nom
+    type:
+      abbr: Pos
+      title: Position
+    ma:
+      abbr: M
+      title: Mouvement
+    st:
+      abbr: F
+      title: Force
+    ag:
+      abbr: Ag
+      title: Agilité
+    av:
+      abbr: Ar
+      title: Armure
+    skill:
+      abbr: Comp
+      title: Compétences
+    injury:
+      abbr: Bl
+      title: Bléssures
+    com:
+      abbr: Réu
+      title: Réussites
+    td:
+      abbr: TD
+      title: Touchdowns
+    int:
+      abbr: Int
+      title: Interceptions
+    cas:
+      abbr: Sor
+      title: Sorties
+    mvp:
+      abbr: JPV
+      title: Joueur le Plus Valable
+    spp:
+      abbr: Exp
+      title: Expérience
+    value:
+      abbr: Valeur
+      title: Valeur
+  skill_types:
+    g: générale
+    s: force
+    a: agilité
+    p: passe
+    m: mutation
+    e: extraordinnaire
+  experience:
+    rookie: Débutant
+    experienced: Expérimenté
+    veteran: Vétéran
+    emerging_star: Futur Champion
+    star: Champion
+    super_star: Super Champion
+    legend: Légende
+  injuries:
+    badly_hurt:
+      name: Commotion
+      effet: Aucun effet à long terme
+    broken_ribs:
+      name: Côtes cassées
+      effet: Rate le prochain match
+    groin_strain:
+      name: Ligaments Arrachés
+      effet: Rate le prochain match
+    gouged_eye:
+      name: Œil Crevé
+      effet: Rate le prochain match
+    broken_jaw:
+      name: Mâchoire Fracassée
+      effet: Rate le prochain match
+    fractured_arm:
+      name: Bras Fracturé
+      effet: Rate le prochain match
+    fractured_leg:
+      name: Jambe Cassée
+      effet: Rate le prochain match
+    smashed_hand:
+      name: Main Écrasée
+      effet: Rate le prochain match
+    pinched_nerve:
+      name: Nerf Coincé
+      effet: Rate le prochain match
+    damaged_back:
+      name: Dos Abîmé
+      effet: Blessure Persistante
+    smashed_knee:
+      name: Genou Déboîté
+      effet: Blessure Persistante
+    smashed_hip:
+      name: Hanche Démise
+      effet: -1 M
+    smashed_ankle:
+      name: Cheville Détruite
+      effet: -1 M
+    smashed_concussion:
+      name: Commotion grave
+      effet: -1 AR
+    smashed_skull:
+      name: Traumatisme Crânien
+      effet: -1 AR
+    broken_neck:
+      name: Cou Brisé
+      effet: -1 AG
+    smashed_collar:
+      name: Clavicule Défoncée
+      effet: -1 F
+    dead:
+      name: MORT
+      effet: Mort !
+  injuries_abbr:
+    M: Rate le prochain match
+    P: Blessure Persistante
+  skills:
+    block:
+      title: Blocage
+      description: Un joueur ayant la compétence Blocage est très doué pour plaquer ses adversaires. La compétence Blocage, si utilisée, affecte les résultats obtenus avec les dés de Blocage, comme expliqué dans les règles de Blocage.
+    dauntless:
+      title: Intrépidité
+      description: Le joueur est capable de s’attaquer aux adversaires les plus coriaces. Cette compétence ne fonctionne que si le joueur tente de bloquer un adversaire plus fort que lui. Quand cette compétence est utilisée, le coach du joueur Intrépide lance 1D6 et l’ajoute à sa Force. Si le total est inférieur ou égal à la Force de l’adversaire, le joueur doit utiliser sa Force normale pour le blocage. Si le total est supérieur, alors le joueur est considéré comme ayant une Force égale à celle de son adversaire. La Force des deux joueurs est calculée avant l’ajout des éventuels soutiens offensifs ou défensifs mais après tous les autres modificateurs.
+    dirty_player:
+      title: Joueur Vicieux
+      description: Un joueur ayant cette compétence a longtemps étudié toutes les techniques pour faire souffrir ses adversaires. Ajoutez +1 à tout jet d’Armure ou de Blessure effectué par ce joueur lorsqu’il commet une Agression. Notez que vous ne pouvez modifier que l’un des deux dés lancés. Donc si vous décidez d’utiliser Joueur Vicieux pour modifier le jet d’Armure, vous ne pourrez pas modifier le jet de Blessure.
+    fend:
+      title: Parade
+      description: Le joueur est très doué pour tenir à l’écart ses adversaires. Les joueurs adverses ne peuvent pas poursuivre lors d’un blocage contre ce joueur, même s’il est Plaqué et s'il le décide. Le joueur adverse peut cependant continuer à bouger après le blocage s’il avait déclaré un <span class="action">Blitz</span>.
+    frenzy:
+      title: Frénésie
+      description: Un joueur avec cette compétence est un dangereux psychopathe qui attaque ses adversaires avec une rage incontrôlable. A moins que cela ne soit précisé, cette compétence doit toujours être utilisée. Lorsqu’il effectue un blocage, le joueur avec cette compétence <span class="important">doit</span> toujours poursuivre s’il le peut. Sur un résultat «Repoussé» ou «Défenseur Bousculé», le joueur doit immédiatement effectuer un second blocage sur son adversaire s’ils sont tous les deux debouts et adjacents. S’il en a la possibilité, le joueur doit aussi suivre ce second blocage. Si le joueur effectue un <span class="action">Blitz</span> alors il doit payer une case de mouvement supplémentaire et effectuer un second blocage à moins qu’il n’ait plus de Mouvement normal et ne puisse pas non plus Mettre le Paquet.
+    kick:
+      title: Frappe Précise
+      description: Ce joueur est un expert en coups de pied et peut frapper le ballon avec une grande précision. Pour pouvoir utiliser cette compétence, le joueur doit être placé sur le terrain au moment où son équipe donne le Coup d’Envoi. Le joueur ne peut pas être placé dans une zone latérale ni contre la ligne médiane. Si ces conditions sont respectées, le joueur peut donner le Coup d’Envoi. Comme sa frappe est très précise, vous pouvez choisir de diviser en 2 le nombre de cases parcourues par le ballon lorsqu’il rebondit, en arrondissant à la fraction inférieure (i.e., 1=0, 2-3=1, 4-5=2, 6=3).
+    kick_off_return:
+      title: Anticipation
+      description: Un joueur de l’équipe à la réception qui n’est pas le long de la ligne médiane ou dans une zone de tacle adverse peut utiliser cette compétence lorsque le ballon a été envoyé. Elle lui permet de se déplacer de 3 cases ou moins après que le ballon ait été dispersé mais avant d’avoir effectué le jet sur le tableau de Coup d’Envoi. Un seul joueur peut utiliser cette compétence à chaque Coup d’Envoi. Cette compétence ne peut pas être utilisée lors d’un Renvoi de Touche et ne peut pas permettre au joueur de traverser la ligne médiane pour aller dans la moitié de terrain adverse.
+    pass_block:
+      title: Blocage de passe
+      description: Un joueur avec cette compétence peut bouger jusqu'à 3 cases lorsque que le coach adverse annonce qu'un des joueurs de son équipe va tenter une passe avec la balle (mais pas une bombe). Le joueur adverse ne peut pas revenir sur sa décision d'utiliser son action de passe une fois que le blocage de passe est déclaré. Le mouvement est réalisé (hors séquence normale de jeux) après que la passe ait été mesurée mais avant toute tentative d'interception. Le joueur ne peut effectuer ce mouvement à moins d'atteindre une destination légale et il ne peut suivre un chemin qui ne l'autorise pas à atteindre une destination légale. Une destination légale met le joueur dans une position où il peut tenter une interception, dans une case vide qui est la cible de la passe ou qui se trouve dans la zone de tacle du passeur ou du joueur à la réception. Le joueur ne peut pas interrompre son mouvement tant qu'il n'a pas atteint une destination légale, qu'il n'a pas été arrêté par des tentacules ou bien qu'il n'a pas été Mis à Terre. Ce mouvement est gratuit et n'affecte aucunement la capacité du joueur à se déplacer lors de son tour. Ce mouvement est effectué en utilisant toutes les règles normales et compétences nécessaires (par exemple, en effectuant une esquive pour sortir des zones de tacles de joueurs adverses). Un joueur avec blocage de passe peut utiliser sa compétence contre une passe rapide. Si un joueur utilise Blocage de Passe durant son propre tour (sur une passe rapide adverse) et qu'il est Mis à terre cela provoque un turnover, aucun autre joueur ne peut effectuer de Blocage de Passe, et votre tour s'arrête dès que les résultats de la passe et du blocage ont été effectués.
+    pro:
+      title: Pro
+      description: Un joueur qui a cette compétence est un vétéran endurci. De tels joueurs sont appelés des Pros par les autres joueurs de Blood Bowl, car ils commettent rarement, voire jamais, d’erreurs. Une fois par tour d'équipe, un pro a le droit de relancer un de ses jets de dés (sauf un jet d’Armure, de Blessure ou de Sortie même s’il est à Terre ou Sonné). Cependant, avant de refaire le jet de dé, le coach doit lancer 1D6. Sur un résultat de 4 à 6, la relance peut être faite. Sur un résultat de 1 à 3, le résultat original est conservé et ne peut pas être relancé par une relance de compétence ou d'équipe. Néanmoins vous pouvez relancer le jet Pro avec une relance d’Équipe.
+    shadowing:
+      title: Poursuite
+      description: Le joueur peut utiliser cette compétence lorsqu’un joueur adverse entreprenant une Action quitte sa Zone de Tacle qu'elle qu'en soit la raison. Le coach adverse lance 2D6, ajoute le mouvement de son joueur au résultat et en soustrait celui du joueur utilisant la compétence Poursuite. Si le résultat final est inférieur ou égal à 7, le joueur utilisant la compétence Poursuite peut être déplacé dans la case laissée vacante par le joueur adverse. Il ne doit pas effectuer de jet d’Esquive lors de ce mouvement et cela n’ influencera pas son propre mouvement lors de son tour. Si le résultat final est supérieur ou égal à 8 , le joueur parvient à semer le joueur utilisant la compétence Poursuite et le laisse sur place. Un joueur peut faire un nombre quelconque de mouvements de poursuite par tour. Si un joueur quitte la Zone de Tacle de plusieurs joueurs possédant la compétence Poursuite, seul l’un de ces joueurs peut tenter la poursuite.
+    strip_ball:
+      title: Arracher le ballon
+      description: Un joueur ayant cette compétence peut forcer un adversaire qu’il repousse (résultats «Repoussé» ou «Défenseur Bousculé») à lâcher le ballon dans la case où il est repoussé, même si celui-ci n’a pas été Plaqué.
+    sure_hands:
+      title: Dextérité
+      description: Le joueur peut relancer le D6 s’il ne réussit pas à ramasser le ballon. De plus, un adversaire qui a la compétence Arracher le Ballon ne peut pas l’utiliser contre un joueur avec cette compétence.
+    tackle:
+      title: Tacle
+      description: Les adversaires qui se trouvent dans la Zone de Tacle de ce joueur ne peuvent pas utiliser leur compétence Esquive s'ils tentent d'en sortir. Ils ne peuvent pas non plus utiliser leur compétence Esquive si le joueur tente de les bloquer.
+    wrestle:
+      title: Lutte
+      description: Le joueur est spécialement entraîné aux techniques de lutte. Ce joueur peut utiliser cette compétence lorsqu’il effectue un blocage ou qu’il est bloqué. Si le résultat «Les Deux Â Terre» est choisit par l’un des coachs, alors au lieu d’appliquer le résultat, les deux joueurs sont jetés au sol. Les deux joueurs sont Mis à Terre dans leurs cases même si l’un ou les deux ont la compétence Blocage. N’effectuez pas de jet d’Armure pour les deux joueurs. L’utilisation de cette compétence ne provoque pas de turnover sauf si le joueur de l’équipe active était le porteur du ballon.
+    catch:
+      title: Récéption
+      description: ~
+    diving_catch:
+      title: Plongeon
+      description: ~
+    diving_tackle:
+      title: Tacle Plongeant
+      description: ~
+    dodge:
+      title: Esquive
+      description: ~
+    jump_up:
+      title: Bond
+      description: ~
+    leap:
+      title: Saut
+      description: ~
+    side_step:
+      title: Glissade contrôlée
+      description: ~
+    sneaky_git:
+      title: Sournois
+      description: ~
+    sprint:
+      title: Sprint
+      description: ~
+    sure_feet:
+      title: Equilibre
+      description: ~
+    accurate:
+      title: Précision
+      description: ~
+    dump_off:
+      title: Passe Rapide
+      description: ~
+    hail_mary_pass:
+      title: La Main de Dieu
+      description: ~
+    leader:
+      title: Chef
+      description: ~
+    nerves_of_steel:
+      title: Nerfs d’Acier
+      description: ~
+    pass:
+      title: Passe
+      description: ~
+    safe_throw:
+      title: Lancer Précis
+      description: ~
+    break_tackle:
+      title: Esquive en Force
+      description: ~
+    grab:
+      title: Projection
+      description: ~
+    guard:
+      title: Garde
+      description: ~
+    juggernaut:
+      title: Juggernaut
+      description: ~
+    mighty_blow:
+      title: Châtaigne
+      description: ~
+    multiple_block:
+      title: Blocage Multiple
+      description: ~
+    piling_on:
+      title: Écrasement
+      description: ~
+    stand_firm:
+      title: Stabilité
+      description: ~
+    strong_arm:
+      title: Costaud
+      description: ~
+    thick_skull:
+      title: Crâne Épais
+      description: ~
+    big_hand:
+      title: Main Démesurée
+      description: ~
+    claw_claws:
+      title: Pince / Griffes
+      description: ~
+    disturbing_presence:
+      title: Présence Perturbante
+      description: ~
+    extra_arms:
+      title: Bras Supplémentaires
+      description: ~
+    foul_appearance:
+      title: Répulsion
+      description: ~
+    horns:
+      title: Cornes
+      description: ~
+    prehensile_tail:
+      title: Queue Préhensile
+      description: ~
+    tentacles:
+      title: Tentacules
+      description: ~
+    two_heads:
+      title: Deux Têtes
+      description: ~
+    very_long_legs:
+      title: Très Longues Jambes
+      description: ~
+    always_hungry:
+      title: Toujours Affamé
+      description: ~
+    animosity:
+      title: Animosité
+      description: ~
+    ball_chain:
+      title: Chaîne & Boulet
+      description: ~
+    blood_lust:
+      title: Soif de Sang
+      description: ~
+    bombardier:
+      title: Bombardier
+      description: ~
+    bone_head:
+      title: Cerveau Lent
+      description: ~
+    chainsaw:
+      title: Tronçonneuse
+      description: ~
+    decay:
+      title: Décomposition
+      description: ~
+    fan_favourite:
+      title: Idole des Foules
+      description: ~
+    hypnotic_gaze:
+      title: Regard Hypnotique
+      description: ~
+    loner:
+      title: Solitaire
+      description: ~
+    no_hands:
+      title: Manchot
+      description: ~
+    nurgle_rot:
+      title: Pourriture de Nurgle
+      description: ~
+    really_stupid:
+      title: Gros Débile
+      description: ~
+    regeneration:
+      title: Régénération
+      description: ~
+    right_stuff:
+      title: Poids Plume
+      description: ~
+    secret_weapon:
+      title: Arme Secrète
+      description: ~
+    stab:
+      title: Poignard
+      description: ~
+    stakes:
+      title: Pieux
+      description: ~
+    stunty:
+      title: Minus
+      description: ~
+    take_root:
+      title: Prendre Racine
+      description: ~
+    throw_team_mate:
+      title: Lancer un Coéquipier
+      description: ~
+    titchy:
+      title: Microbe
+      description: ~
+    wild_animal:
+      title: Animal Sauvage
+      description: ~
+  rosters:
+    amazon:
+      title: Amazones
+      description: Il y a longtemps, guidées par un désir d’aventures, les Walkyries des colonies Nordiques de Lustrie naviguèrent loin de leurs congénères et fondèrent une colonie cachée profondément dans l’estuaire de la rivière Amazone. Maintenant, ces féroces guerrières ont envahi les terrains de Blood Bowl - et gare à ceux qui se mesurent à elles !
+      positions:
+        linewoman: Trois-quart
+        thrower: Lanceuse
+        blitzer: Blitzeuse
+        catcher: Receveuse
+    chaos:
+      title: Chaos
+      description: Les joueurs du chaos ne sont pas réputés pour la subtilité de leur jeu. Une simple course au centre du terrain en blessant et estropiant un maximum d’adversaire est à peu près leur seule stratégie. Ils s’inquiètent rarement, voire jamais, de considérations mineures comme ramasser le ballon ou marquer un touchdown, du moins pas tant qu’il reste un adversaire valide !
+    chaos_dwarf:
+      title: Nains du Chaos
+      description: Les Nains du Chaos sont les descendants dégénérés d’explorateurs Nains terriblement affectés par les forces du Chaos, transformés en créatures égoïstes et belliqueuses. Sur un point au moins, ils sont restés les mêmes, ils adorent toujours le Blood Bowl ! Les Nains du Chaos ne sont pas nombreux et font donc une grande consommation d’Hobgobelins pour toutes sortes de tâches, y compris jouer dans leurs équipes de Blood Bowl.
+    chaos_pact:
+      title: Pacte du Chaos
+      description: Les équipes de Pactes du Chaos résultent du mélange de races maléfiques ou chaotiques, voire les deux. Si les Maraudeurs sont enthousiastes, il faut les canaliser en vue des divers besoins de l'équipe ; les autres races apportent leur finesse ou leurs muscles, c'est selon. Néanmoins, du fait de l’arrogance, de la stupidité ou de la nature bestiale des membres de l’équipe, il est bien rare de voir une équipe du Pacte du chaos efficace et bien organisée. Les Chaos All-Stars sont le meilleur exemple du niveau que peut atteindre cette équipe avec le bon coach.
+    dark_elf:
+      title: Elfes Noirs
+      description: Mauvais au-delà de tout ce qui est imaginable, extrêmement talentueux, les Elfes Noirs entrent sur le terrain pour prouver au monde leur supériorité. Les équipes d’Elfes Noirs préfèrent un jeu rusé et sournois de course au jeu de passe de leurs cousins du côté du Bien. Assistés par les Furies sans pitié et de dangereux assassins, les Elfes Noirs ont toutes les cartes pour perforer les lignes adverses au lieu de les contourner.
+      positions:
+        lineman: Trois-quart
+        runner: Coureur
+        blitzer: Blitzeur
+        assassin: Assassin
+        witch: Furie
+    dwarf:
+      title: Nains
+      description: Les Nains semblent êtres les joueurs de Blood Bowl idéaux. Petits, costauds, bien protégés et têtus au point de refuser obstinément de mourir ! La plupart de leurs équipes obéissent au principe selon lequel si elles parviennent à massacrer les meilleurs joueurs adverses et à neutraliser les autres, rien ne saurait les empêcher d’effectuer leurs touchdowns en paix !
+      positions:
+        slayer: Tueur de Trolls
+        runner: Coureur
+        blitzer: Blitzeur
+        blocker: Bloqueur
+        death_roller: Roule-mort
+    elf:
+      title: Elfes
+      description: Lorsque la NAF s’effondra de nombreuses équipes Elfes se retrouvèrent ruinées. Les équipes qui ont survécu à cette période ne sont ni aussi riches ni aussi bien équipées que les équipes de Hauts Elfes, mais il est clair qu’elles savent jouer. Masque de protection sur le visage et crête dressée sur la tête, elles entrent sur le terrain pour retrouver leur gloire passée.
+    goblin:
+      title: Gobelins
+      description: La tactique des Gobelins doit plus à l’espoir qu’au potentiel. Les Gobelins font de très bons receveurs car ils sont petits et agiles. Par contre l’art de bloquer leur est étranger, quant à leurs chances de bloquer quelque chose de plus grand qu’un Halfling n’en parlons pas. Mais cela ne semble pas déranger les Gobelins outre mesure, car l’utilisation d’armes secrètes particulièrement retorses permet parfois à une équipe de Gobelins de gagner un match.
+      positions:
+        goblin: Goblin
+        looney: Barjot
+        fanatic: Fanatique
+        bombardier: Bombardier
+        pogoer: Bâton à ressort
+        troll: Troll
+    halfling:
+      title: Halflings
+      description: La déficience technique des équipes de Halflings est légendaire. Ils sont trop petits pour les passes et les réceptions, ils courent à demi vitesse et une équipe entière peut passer toute une après-midi à tenter de bloquer un Ogre sans y réussir. La plupart des coachs Halflings tentent de combler la qualité par la quantité. Après tout, si vous arrivez à placer une demi douzaine de joueurs dans la zone d’En-but adverse et que, par miracle, vous réussissiez à récupérer le ballon, il existe une infime chance qu’un ou deux d’entre eux n’aient pas encore été réduits à l’état de purée au moment où vous leur lancerez le ballon.
+    high_elf:
+      title: Hauts Elfes
+      description: Les Royaumes Elfiques sponsorisent les équipes de Hauts elfes, qui développent un jeu de passe très efficace et alignent les joueurs les plus arrogants que l’on puisse trouver. Riches au-delà des rêves les plus fous, les équipes de Hauts Elfes comprennent de nombreux princes et nobles dans leurs rangs et tous ceux qu’ils ne peuvent pas battre, eh bien ils les achètent.
+      positions:
+        lineman: Trois-quart
+        thrower: Lanceur
+        blitzer: Blitzeur
+        catcher: Receveur
+    human:
+      title: Humains
+      description: Bien que les Humains ne bénéficient pas des points forts ou des capacités spéciales des autres races, ils ne sont par contre pas pénalisés par les faiblesses inhérentes à ces dernières. Ceci rend les équipes humaines extrêmement flexibles, capables soit de courir avec le ballon, de le passer ou bien de l’ignorer pour jeter les adversaires dans la boue à la place !
+      positions:
+        lineman: Trois-quart
+        thrower: Lanceur
+        blitzer: Blitzeur
+        catcher: Receveur
+        ogre: Ogre
+    khemri:
+      title: Khemri
+      description: Il y a 8000 ans, les Khemri jouèrent leur premier match de Blood Bowl contre les Slanns. Mais, lorsque leurs royaumes moururent, le jeu disparut aussi jusqu’à ce qu’il soit redécouvert. Et comme le jeu refaisait surface il était inévitable que les anciens joueurs et les anciens champions reviennent sur les terrains qu’ils avaient foulé autrefois.
+    lizardman:
+      title: Hommes-Lézards
+      description: Les Prêtres-Mages enseignaient déjà le Blood Bowl des milliers d’années avant qu’il ne soit découvert par le Nain Roze-El. Ce n’est donc pas une surprise si les Hommes-Lézards jouent au Blood Bowl. Alignant un subtil mélange de dextérité et de force, les équipes de Lustrie peuvent tenir la distance contre une équipe puissante comme celle du Chaos mais sont tout aussi capables d’égaler le jeu de course des Skavens.
+    necromantic:
+      title: Nécromantique
+      description: "Les Égarés et Damnés ne rôdent pas toujours dans les forêts et les cimetières du Vieux Monde. Parfois ils se rassemblent pour chasser ceux dont l’âme n’est pas maudite. Trouvant le repos dans de terribles explosions de violence incontrôlée, ces groupes font de leur mieux pour apaiser leurs souffrances : ils arrivent pour jouer une bonne partie de Blowd Bowl."
+      positions:
+        golem: Golem de Chair
+        werewolf: Loup-garou nécromantique
+        ghoul: Goule
+        wight: Revenant
+        zombi: Zombie
+    norse:
+      title: Nordique
+      description: "Les équipes nordiques ont une réputation d’insatiable férocité aussi bien sur le terrain que dans la vie courante. Il faut dire que le Nordique moyen est un psychopathe dangereux qui, lorsqu’il ne passe pas sa vie dans les solitudes glacées et mélancoliques du grand nord, ne pense qu’à trois choses : la bière, les femmes, et un bon gros carnage pour parfaire le tout !"
+    nurgle:
+      title: Nurgle
+      description: Les équipes de Nurgle sont un type d’équipe du Chaos où les joueurs vénèrent le dieu Nurgle. Nurgle est le dieu du Chaos de la corruption et de la maladie et il récompense ses joueurs d’une maladie plutôt déplaisante connue sous le nom de Pourriture de Nurgle. Le fait que les équipes de Nurgle dégagent une odeur affreuse est plus reconnu que prouvé. La vérité est qu’ils sont faits de chair à demi décomposée surmontée d’un nuage de mouches, et que quiconque s’approche suffisamment près pour se faire vraiment une idée de l’odeur, est inévitablement frappé de l’une des pires maladies de Nurgle et généralement meurt avant d’avoir pu suggérer une nouvelle forme d’hygiène corporelle.
+    ogre:
+      title: Ogre
+      description: Les équipes d'ogres existent depuis la formation de la NAF et ont même eu certains succès comme gagner le Blood Bowl XV. Cependant, comme toute personne bien pensante vous le dira, avoir plus d'un Ogre au même endroit au même moment est un désastre par nature. La clé de la réussite pour une équipe d'Ogres se résume aux Snotlings. S'ils sont assez proches d'un Ogre pour lui rappeler qu'il joue un match en lui mordillant la jambe, alors vous pouvez avoir le début d’un semblant d’équipe.
+      positions:
+        snotling: Snotling
+        ogre: Ogre
+    orc:
+      title: Orque
+      description: Les Orques jouent au Blood Bowl depuis qu’il a été inventé et leurs équipes, comme les Yeux Crevés ou les Têtes Coupées, comptent parmi les plus fameuses du championnat. La technique des équipes Orques consiste à enfoncer les lignes adverses afin de créer des brèches que leurs coureurs sauront exploiter.
+    skaven:
+      title: Skaven
+      description: Les Skavens sont loin d’être les plus forts ou les plus endurants, mais mon garçon, qu’ils sont rapides ! Nombreux sont leurs adversaires qui ont été pris de vitesse par des Skavens se faufilant à travers de leurs lignes pour marquer un fulgurant touchdown.
+    slann:
+      title: Slann
+      description: L'équipe Slann vient d'une race antique de voyageurs spatiaux échoués sur notre planète il y a des lustres. Après avoir admis qu'ils ne seraient pas secourus, ils s'établirent comme dirigeants des Hommes-Lézards. Certes, la plupart des Slann préfèrent s'engraisser et paresser en donnant des ordres aux Hommes-Lézards, mais quelques-uns des plus jeunes et des plus énergiques se plaisent à parcourir les terres et à jouer au Blood Bowl. Si les Slann n'ont pas de jeu de passe à proprement parler, leurs capacités de sauts, de plongeons et d'interceptions sont sans égales.
+    undead:
+      title: Morts-Vivants
+      description: Dans le Vieux Monde les morts ne trouvent pas facilement le repos. Les Vampires hantent les châteaux, les Nécromanciens cherchent à échapper à la mort au moyen de connaissances immorales, les Liches commandent à des légions de cadavres et les joueurs de Blood Bowl morts depuis longtemps reviennent sur les terrains de leurs gloires passées...
+    underworld:
+      title: Bas-Fonds
+      description: Il peut arriver que les Skaven et les Gobelins qui vivent dans les profondeurs, au-dessous de toutes les races détestées qui marchent au soleil, se regroupent pour former des équipes de Blood Bowl. Les Vermines des Bas-Fonds sont à ce jour la plus connue de ces équipes des Bas-Fonds et celle qui a le mieux réussi. Cependant, ces équipes ont souvent des résultats très faibles, les joueurs passant leur temps à se bagarrer entre eux et à se rejeter la faute les uns sur les autres à chaque match pour les erreurs commises. Le trait distinctif de ces équipes qui attire de nombreux fans est que les joueurs dorment et baignent dans la Malepierre (il y en a même qui en mangent). Bien que la plupart des joueurs potentiels en meurent avant même de s'engager dans une équipe, ceux qui parviennent à rester en vie développent souvent des mutations fascinantes.
+    vampire:
+      title: Vampire
+      description: Bien que les équipes Vampires incluent un certain nombre de joueurs extrêmement performants, elles sont pénalisées justement par le manque de fiabilité des Vampires. Alors que ces derniers devraient se concentrer sur le jeu, leur attention se focalise souvent sur leur faim et en moins de temps qu'il ne faut pour le dire, ils en oublient le jeu pour une petite morsure rapide !
+    wood_elf:
+      title: Elfes Sylvains
+      description: Plus encore que leurs cousins Hauts Elfes, les Elfes Sylvains ne jurent que par la Longue Passe. Tous leurs efforts se tournent donc vers l’amélioration de leur talent dans le jeu de passe et de réception. Pas un Elfe Sylvain ne voit l’intérêt de s’encombrer d’une armure pour frapper l’adversaire. Ils préfèrent compter sur leurs aptitudes acrobatiques naturelles pour les éviter les ennuis, ce qui généralement suffit. Il faut un adversaire agile ou chanceux pour mettre la main sur un Elfe Sylvain !
+      positions:
+        lineman: Trois-quart
+        thrower: Lanceur
+        war_dancer: Danseurs de Guerre
+        catcher: Receveur
+  star_players:
+    bertha_bigfist:
+      name: Bertha GroPoing
+    helmut_wulf:
+      name: Helmut Wulf
+    morg_n_thorg:
+      name: Morg ‘n’ Thorg
+
+    prince_moranion:
+      name: Prince Moranion
+    puggy_baconbreath:
+      name: Puggy Haleinedebacon
+    quetzal_leap:
+      name: Quetzal le Bondissant
+    ramtut_iii:
+      name: Ramtut III
+    rashnak_rackstabber:
+      name: Rashnak Lamedansledos
+    ripper:
+      name: Bolgroth l’Écrabouilleur
+    roxanna_darknail:
+      name: Roxanna Onglenoir
+    scrappa_sorehead:
+      name: Scrappa Malocrâne
+    setekh:
+      name: Setekh
+    slibli:
+      name: Silibili
+    sinnedbad:
+      name: Sinnedbad
+    skitter_stab_stab:
+      name: Skitter Pic-Pic
+    soaren_hightower:
+      name: Soaren Hautetour
+    ugroth_bolgrot:
+      name: Ugroth Tranchegrots
+    varag_ghoul_chewer:
+      name: Varag Mâchegoule
+    wilhelm_chaney:
+      name: Wilhelm Chaney
+    willow_rosebark:
+      name: Willow Teinrose
+    zara_the_slayer:
+      name: Zara la Tueuse
+    zzharg_madeye:
+      name: Zzharg le Borgne

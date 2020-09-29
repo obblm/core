@@ -3,7 +3,7 @@
 namespace Obblm\Core\Form\Player;
 
 use Obblm\Core\Entity\PlayerVersion;
-use Obblm\Core\Helper\Rule\RuleHelperInterface;
+use Obblm\Core\Contracts\RuleHelperInterface;
 use Obblm\Core\Listener\PlayerVersionEntitySubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,6 +27,7 @@ class PlayerVersionType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => PlayerVersion::class,
             'roster' => null,
+            'translation_domain' => 'obblm',
             'rule_helper' => null,
         ));
 

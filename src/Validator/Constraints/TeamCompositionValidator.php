@@ -4,8 +4,8 @@ namespace Obblm\Core\Validator\Constraints;
 
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
+use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\TeamHelper;
-use Obblm\Core\Service\PlayerService;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -34,16 +34,18 @@ class TeamCompositionValidator extends ConstraintValidator
 
         /** @var TeamVersion $value */
 
-        $max_positions = $this->getMaxPlayersByTypes($value->getTeam());
+        $maxPositions = $this->getMaxPlayersByTypes($value->getTeam());
         foreach ($value->getNotDeadPlayerVersions() as $version) {
-            $limit = $max_positions[$version->getPlayer()->getType()];
-            $type = $version->getPlayer()->getType();
-            isset($count[$type]) ? $count[$type]++ : $count[$type] = 1;
-            if ($count[$type] > $limit) {
-                $this->context->buildViolation($constraint->limitMessage)
-                    ->setParameter('{{ limit }}', $limit)
-                    ->setParameter('{{ player_type }}', $type)
-                    ->addViolation();
+            if ($version->getPlayer()->getType()) {
+                $limit = $maxPositions[$version->getPlayer()->getType()];
+                $type = $version->getPlayer()->getType();
+                isset($count[$type]) ? $count[$type]++ : $count[$type] = 1;
+                if ($count[$type] > $limit) {
+                    $this->context->buildViolation($constraint->limitMessage)
+                        ->setParameter('{{ limit }}', $limit)
+                        ->setParameter('{{ player_type }}', $type)
+                        ->addViolation();
+                }
             }
         }
     }
@@ -51,15 +53,16 @@ class TeamCompositionValidator extends ConstraintValidator
     protected function getMaxPlayersByTypes(Team $team):array
     {
         $helper = $this->teamHelper->getRuleHelper($team);
-        $max_positions = [];
+        $maxPositions = [];
 
-        if ($types = $helper->getTeamAvailablePlayerTypes($team)) {
+        if ($helper->getAvailablePlayerTypes($team->getRoster())) {
+            $types = $helper->getAvailablePlayerTypes($team->getRoster());
             foreach ($types as $key => $type) {
-                $key = PlayerService::composePlayerKey($helper->getAttachedRule()->getRuleKey(), $team->getRoster(), $key);
-                $max_positions[$key] = $type['max'];
+                $key = PlayerHelper::composePlayerKey($helper->getAttachedRule()->getRuleKey(), $team->getRoster(), $key);
+                $maxPositions[$key] = $type['max'];
             }
         }
 
-        return $max_positions;
+        return $maxPositions;
     }
 }

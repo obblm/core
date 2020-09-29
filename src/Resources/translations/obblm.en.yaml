@@ -1,0 +1,216 @@
+obblm:
+  title: OBBLM
+  full_title: Open Blood Bowl league manager
+  layout:
+    header:
+      my_account: Edit my profile
+      logout: Log out
+    navigation:
+      dashboard: Dashboard
+      my_teams: My teams
+      rules: Rules
+      admin:
+        title: Admin
+        rules: Rules
+        users: Users
+    tools:
+      yes: Yes
+      no: No
+      actions:
+        add: Add
+        create: Create
+        edit: Edit
+        delete: Delete
+        pdf: Print as PDF
+    hi: Hello
+  trait:
+    number:
+      abbr: '#'
+      title: Number
+    name:
+      abbr: Name
+      title: Name
+    type:
+      abbr: Pos
+      title: Position
+    ma:
+      abbr: M
+      title: Move
+    st:
+      abbr: ST
+      title: Strength
+    ag:
+      abbr: AG
+      title: Agility
+    av:
+      abbr: AV
+      title: Armor
+    skill:
+      abbr: Sk
+      title: Skills
+    injury:
+      abbr: In
+      title: Injuries
+    com:
+      abbr: Réu
+      title: Réussites
+    td:
+      abbr: TD
+      title: Touchdowns
+    int:
+      abbr: Int
+      title: Interceptions
+    cas:
+      abbr: Sor
+      title: Sorties
+    mvp:
+      abbr: MVP
+      title: Joueur le Plus Valable
+    spp:
+      abbr: SPP
+      title: Star Player Points
+    tr:
+      abbr: TR
+      title: Team Ranking
+    value:
+      abbr: Value
+      title: Value
+    roster: Roster
+    team_ready: Team is ready
+    coach: Coach
+    rule: Rule
+    rerolls: Rerolls
+    assistants: Assistants
+    cheerleaders: Cheerleaders
+    popularity: Popularity
+    apothecary: Apothecary
+    star_players: Star Players
+    inducements: Inducements
+    options: Options
+  dashboard:
+    title: Your dashbaord
+    last_teams: My last teams (%count%)
+  account:
+    title: Edit my OBBLM Account
+
+  rules:
+    title: Rules
+    available_star_players: Available star players
+
+  team:
+    title: Teams
+    none: Create some teams and see them here :)
+    not_finished: This team is not finished
+    actions:
+      add: Create a team
+      edit: Edit this team
+      delete: Delete this team
+    mine:
+      title: My teams
+
+  sheet:
+    header:
+      team_value: Team value
+    table:
+      header:
+      players:
+        skill_none: None
+
+  forms:
+    register:
+      question: You don't an account ?
+      title: Create your OBBLM account
+      register: Create my account
+    login:
+      title: Login to OBBML
+      login: Login
+      password: Password
+      button: Login
+    submission:
+      button: Submit
+      error: There were some errors with your submission
+    team:
+      create:
+        title: Create a team for ?
+        rule-selector: "Create a team for : %what%"
+        select:
+          rules: "Available rules :"
+        buttons:
+          submit: Create this team and add players & sidelines
+      edit:
+        title: "Edit the team : %name%"
+        buttons:
+          add_player: Add another player
+          submit: Save and ready to go
+          save: Save and come back later
+          cencel: Cancel
+      delete:
+        title: Delete %name%
+        warning: You are going to delete this team !
+        question: Are you sure you want to use delete this team ?
+      fields:
+        rule:
+          label: ~
+          question: Want you to create a team by rule ?
+        championship:
+          label: ~
+          question: Or want you to create a team for a championship ?
+        parts:
+          story: Your team story
+          players: Team composition
+          sidelines: Sidelines
+        name: Your team name
+        logo: Your team logo (will be seen everywhere)
+        cover: Your team name (will be seen on your sheet)
+        roster: Pick up a roster
+        anthem: Your team anthem
+        fluff: Your team fluff
+        rerolls: Rerolls
+        cheerleaders: Cheerleaders
+        assistants: Assistants
+        apothecary: Get an apothecary ?
+        popularity: Popularity
+        treasury: Available treasury
+    player:
+      fields:
+        number: Number
+        type: Player position
+        name: Player name
+
+  emails:
+    championship_invitation:
+      title: 'Invitation to join "%name%" championship'
+      text: 'Dear %receiver% you have been invited to the "%championship%" championship'
+      link_to_join: Join the championship
+    championship_start:
+      title: 'The "%name%" championship as been started'
+      text: 'Dear %receiver% the "%championship%" championship has been started. You can now play!'
+      link_to_detail: View the championship
+    encounter:
+      validated:
+        title: 'Encounter against "%against%" as been validated'
+        text: 'Dear %receiver% the encounter against "%against%" as been validated by %validator%. You can now play!'
+        link_to_detail: View the encounter sheet
+        link_to_team: View your team now
+    coach:
+      registration:
+        welcome: 'Hello %receiver%, welcome to OBBLM.'
+        text:
+          hello: 'Hello %receiver%,'
+          success: 'You have successfully register to OBBML.'
+          activate: 'You have to activate your account by clicking on link below.'
+        click_link_below: 'To do it click on the link below :'
+        link_to_activate: 'Activate my account'
+      activation:
+        title: '%login%, you have successfully activated your account!'
+        welldone: 'Well done %login%'
+        success: 'You have successfully activated your OBBLM account!'
+        resume:
+          title: 'Your informations you provided are :'
+          login: 'Your login : '
+          email: 'Your email : '
+          password: 'Your password : '
+          password_joke: Shhh... It's a secret between us!
+        text: 'You can now login and create your first team!'
+        click_link_below: 'To log in click on the link below :'
+        link_to_login: 'Log me in'

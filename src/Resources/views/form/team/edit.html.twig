@@ -1,97 +1,80 @@
 {% extends '@ObblmCore/base.html.twig' %}
-{% macro printPlayerFieldsRow( playerFields ) %}
-    <div class="item">
-        {{ form_errors( playerFields ) }}
-        <div class="inline fields">
-            <div class="field">
-                <a href="#" data-item-selector=".item" class="remove-collection-widget pull-right">
-                    <i class="ui icon close red"></i>
-                </a>
-            </div>
-            <div class="field">
-                {{ form_label( playerFields.number, 'obblm.forms.player.fields.number' ) }}
-                {{ form_widget( playerFields.number ) }}
-            </div>
-            <div class="field">
-                {{ form_label( playerFields.type, 'obblm.forms.player.fields.type', {'translation_domain': 'messages'} ) }}
-                {{ form_widget( playerFields.type, {'attr': {'class': 'ui dropdown'}} ) }}
-            </div>
-            <div class="field">
-                {{ form_label( playerFields.name, 'obblm.forms.player.fields.name' ) }}
-                {{ form_widget( playerFields.name ) }}
-            </div>
-        </div>
-        {{ form_rest( playerFields ) }}
-    </div>
-{% endmacro %}
+{% set title = 'obblm.forms.team.edit.title'|trans({'%name%': team.name}, 'obblm') %}
+{% block title 'obblm.team.title'|trans({}, 'obblm')
+~ ' > ' ~ title %}
 {% import _self as formMacros %}
 {% block body %}
-    <h1 class="ui title">{{ 'obblm.forms.team.edit.title'|trans({'%name%': team.name}) }}</h1>
-    <h2>{{ team|roster_name|trans({}, team|rule_key) }}</h2>
     {% form_theme form '@ObblmCore/form/ui-form.html.twig'%}
-    {{ form_start( form, {'attr': {'class': 'ui form'}} ) }}
+    {{ form_start( form, {'attr': {'class': 'form container fixed-actions'}} ) }}
+    <h1 class="title">{{ title }}</h1>
+    <h2 class="title">{{ team|roster_name|trans({}, team|rule_key) }}</h2>
     {{ form_errors( form ) }}
     <div class="field">
         {{ form_label( form.team.name, 'obblm.forms.team.fields.name') }}
         {{ form_widget( form.team.name ) }}
         {{ form_errors( form.team.name ) }}
     </div>
-    <div class="two fields">
-        <div class="field">
+    <h2 class="title">{{ 'obblm.forms.team.fields.parts.story'|trans({}, 'obblm') }}</h2>
+    <div class="two boxes">
+        <div class="box field">
+            {{ form_label( form.logo, 'obblm.forms.team.fields.logo') }}
+            {{ form_widget( form.logo ) }}
+            {{ form_errors( form.logo ) }}
+        </div>
+        <div class="box field">
+            {{ form_label( form.cover, 'obblm.forms.team.fields.cover') }}
+            {{ form_widget( form.cover ) }}
+            {{ form_errors( form.cover ) }}
+        </div>
+    </div>
+    <div class="field">
+        <label>{{ 'obblm.forms.team.fields.treasury'|trans({}, 'obblm') }}</label>
+        <span class="like-input">{{ form.vars.value.treasure }}</span>
+    </div>
+    <div class="two boxes">
+        <div class="box field">
             {{ form_label( form.team.anthem, 'obblm.forms.team.fields.anthem') }}
             {{ form_widget( form.team.anthem ) }}
             {{ form_errors( form.team.anthem ) }}
         </div>
-        <div class="field">
+        <div class="box field">
             {{ form_label( form.team.fluff, 'obblm.forms.team.fields.fluff') }}
             {{ form_widget( form.team.fluff ) }}
             {{ form_errors( form.team.fluff ) }}
         </div>
     </div>
-    <div class="field">
-        <label>{{ 'obblm.forms.team.fields.treasury'|trans }}</label>
-        {{ form.vars.value.treasure }}
+    <div class="many-collection">
+        <h2 class="title">{{ form_label(form.team.players, 'obblm.forms.team.fields.parts.players') }}</h2>
+        {% for playerFields in form.team.children.players %}
+            {{ formMacros.printPlayerFieldsRow( playerFields ) }}
+        {% else %}
+            {{ form_widget(form.team.players) }}
+        {% endfor %}
     </div>
-    <div class="field attach-collection-actions">
-        <div class="field">
-            <button type="button"
-                    class="add-another-collection-widget ui button primary"
-                    data-list-selector="#players-fields-list">
-                {{ 'obblm.forms.team.edit.buttons.add_player'|trans }}
-            </button>
-        </div>
-        <div id="players-fields-list"
-            data-prototype="{{ formMacros.printPlayerFieldsRow(form.team.children.players.vars.prototype)|e('html_attr') }}"
-            data-widget-counter="{{ form.team.children.players|length }}">
-            {% for playerFields in form.team.children.players %}
-                {{ formMacros.printPlayerFieldsRow( playerFields ) }}
-            {% else %}
-                {{ form_widget(form.team.players) }}
-            {% endfor %}
-        </div>
-    </div>
-    <div class="four fields">
-        <div class="field">
+    <h2 class="title">{{ 'obblm.forms.team.fields.parts.sidelines'|trans({}, 'obblm') }}</h2>
+    <div class="four boxes fields">
+        <div class="box field">
             {{ form_label( form.rerolls, 'obblm.forms.team.fields.rerolls') }}
             {{ form_widget( form.rerolls ) }}
             {{ form_errors( form.rerolls ) }}
         </div>
-        <div class="field">
+        <div class="box field">
             {{ form_label( form.popularity, 'obblm.forms.team.fields.popularity') }}
             {{ form_widget( form.popularity ) }}
             {{ form_errors( form.popularity ) }}
         </div>
-        <div class="field">
+        <div class="box field">
             {{ form_label( form.cheerleaders, 'obblm.forms.team.fields.cheerleaders') }}
             {{ form_widget( form.cheerleaders ) }}
             {{ form_errors( form.cheerleaders ) }}
         </div>
-        <div class="field">
+        <div class="box field">
             {{ form_label( form.assistants, 'obblm.forms.team.fields.assistants') }}
             {{ form_widget( form.assistants ) }}
             {{ form_errors( form.assistants ) }}
         </div>
     </div>
+    {% if form.apothecary is defined %}
     <div class="field">
         <div class="ui checkbox">
             {{ form_widget( form.apothecary ) }}
@@ -99,15 +82,36 @@
         </div>
         {{ form_errors( form.apothecary ) }}
     </div>
-    <div class="ui fields aligned center">
+    {% endif %}
+    <div class="actions aligned center">
         <a class="ui button red" href="{{ path('obblm_team_detail', {'team': team.id}) }}">
-            {{ 'obblm.forms.team.edit.buttons.cencel'|trans }}
+            {{ 'obblm.forms.team.edit.buttons.cencel'|trans({}, 'obblm') }}
         </a>
         <button class="ui button orange" type="submit">
-            {{ 'obblm.forms.team.edit.buttons.save'|trans }}
+            {{ 'obblm.forms.team.edit.buttons.save'|trans({}, 'obblm') }}
         </button>
         {{ form_widget( form.team.ready ) }}
     </div>
     {{ form_rest( form ) }}
     {{ form_end( form ) }}
 {% endblock %}
+{% macro printPlayerFieldsRow( playerFields ) %}
+    <div class="item">
+        {{ form_errors( playerFields ) }}
+        <div class="three boxes fields">
+            <div class="box inline">
+                {{ playerFields.vars.value.number }}
+                {{ form_widget( playerFields.number ) }}
+            </div>
+            <div class="box field inline">
+                {{ form_label( playerFields.name, 'obblm.forms.player.fields.name' ) }}
+                {{ form_widget( playerFields.name ) }}
+            </div>
+            <div class="box field inline selector">
+                {{ form_label( playerFields.type, 'obblm.forms.player.fields.type', {'translation_domain': 'messages'} ) }}
+                {{ form_widget( playerFields.type, {'attr': {'class': 'ui dropdown'}} ) }}
+            </div>
+        </div>
+        {{ form_rest( playerFields ) }}
+    </div>
+{% endmacro %}

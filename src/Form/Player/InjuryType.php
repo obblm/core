@@ -2,7 +2,7 @@
 
 namespace Obblm\Core\Form\Player;
 
-use Obblm\Core\Helper\Rule\RuleHelperInterface;
+use Obblm\Core\Contracts\RuleHelperInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,6 +27,7 @@ class InjuryType extends ChoiceType
         parent::configureOptions($resolver);
         $resolver->setDefaults(array(
             'rule_helper' => null,
+            'translation_domain' => 'obblm',
         ));
         $resolver->setAllowedTypes('rule_helper', [RuleHelperInterface::class]);
     }

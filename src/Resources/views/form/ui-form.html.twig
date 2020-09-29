@@ -2,23 +2,105 @@
 
 {% block _edit_team_team_ready_widget %}
     <button class="ui button green" id="{{ id }}" name="{{ full_name }}" type="submit" value="1">
-        {{ 'obblm.forms.team.edit.buttons.submit'|trans }}
+        {{ 'obblm.forms.team.edit.buttons.submit'|trans({}, 'obblm') }}
     </button>
 {% endblock %}
-
-{%- block form_errors -%}
-    {%- if errors|length > 0 -%}
-        <div class="ui negative message">
-            {%- if not form.parent  -%}
+{% block form_row %}
+    <div class="field">
+        {{ form_label( form ) }}
+        {{ form_widget( form ) }}
+        {{ form_errors( form ) }}
+    </div>
+{% endblock %}
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        <div class="errors">
+            {% if not form.parent  %}
                 <div class="header">
-                    {{ 'obblm.forms.submission.error'|trans }}
+                    {{ 'obblm.forms.submission.error'|trans({}, 'obblm') }}
                 </div>
-            {%- endif -%}
-            <ul class="list">
-                {%- for error in errors -%}
-                    <li>{{ error.message }}</li>
-                {%- endfor -%}
+            {% endif %}
+            <ul>
+                {% for error in errors %}
+                    <li class="error">{{ error.message }}</li>
+                {% endfor %}
             </ul>
         </div>
+    {% endif %}
+{% endblock form_errors %}
+{% macro multipleItems( form, itemFields ) %}
+    {% import _self as formMacros %}
+    <div class="item">
+        <div class="inline fields">
+            <div class="field">
+                <a href="#" data-item-selector=".item" class="remove-collection-widget pull-right">
+                    <i class="ui icon close red"></i>
+                </a>
+            </div>
+            {{ form_label( form ) }}
+            {{ form_widget( form ) }}
+        </div>
+    </div>
+{% endmacro %}
+{% block obblm_inducement_choice_widget %}
+    {% if expanded %}
+        {{- block('choice_widget_expanded') -}}
+    {% else %}
+        {{ block('obblm_inducement_choice_widget_collapsed') }}
+    {% endif %}
+{% endblock %}
+{% block obblm_inducement_choice_widget_collapsed %}
+    {%- if required and placeholder is none and not placeholder_in_choices and not multiple and (attr.size is not defined or attr.size <= 1) -%}
+        {% set required = false %}
     {%- endif -%}
-{%- endblock form_errors -%}
+    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+        {%- if placeholder is not none -%}
+            <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) }}</option>
+        {%- endif -%}
+        {%- if preferred_choices|length > 0 -%}
+            {% set options = preferred_choices %}
+            {% set render_preferred_choices = true %}
+            {{ block('obblm_inducement_choice_widget_options') }}
+            {%- if choices|length > 0 and separator is not none -%}
+                <option disabled="disabled">{{ separator }}</option>
+            {%- endif -%}
+        {%- endif -%}
+        {%- set options = choices -%}
+        {%- set render_preferred_choices = false -%}
+        {{ block('obblm_inducement_choice_widget_options') }}
+    </select>
+{% endblock %}
+{% block obblm_inducement_choice_widget_options %}
+    {% for group_label, choice in options %}
+        {%- if choice is iterable -%}
+            <optgroup label="{{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }}">
+                {% set options = choice %}
+                {{- block('obblm_inducement_choice_widget_options') -}}
+            </optgroup>
+        {%- else -%}
+            <option value="{{ choice.value }}"{% if choice.attr %}{% with { attr: choice.attr } %}{{ block('attributes') }}{% endwith %}{% endif %}{% if not render_preferred_choices|default(false) and choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }} ({{ choice.data.value|price }})</option>
+        {%- endif -%}
+    {% endfor %}
+{% endblock %}
+{% block obblm_inducement_collection_widget %}
+    {% import _self as formMacros %}
+    {{ form_help( form ) }}
+    <div class="field attach-collection-actions">
+        <div class="field">
+            <button type="button"
+                    class="add-another-collection-widget ui button primary"
+                    data-list-selector="#{{ form.vars.id }}">
+                {{ 'obblm.forms.team.edit.buttons.add_player'|trans({}, 'obblm') }}
+            </button>
+        </div>
+        <div id="{{ form.vars.id }}"
+             data-prototype="{{ formMacros.multipleItems(form.vars.prototype)|e('html_attr') }}"
+             data-widget-counter="{{ form.children|length }}">
+            {% for item in form.children %}
+                {{ formMacros.multipleItems( item ) }}
+            {% else %}
+                {{ form_widget(form) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -3,7 +3,7 @@
 namespace Obblm\Core\Service;
 
 use Obblm\Core\Entity\Team;
-use Obblm\Core\Helper\Rule\RuleHelperInterface;
+use Obblm\Core\Contracts\RuleHelperInterface;
 
 class ObblmContextualizer
 {

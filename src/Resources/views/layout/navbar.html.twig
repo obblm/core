@@ -24,34 +24,37 @@
     {% endfor %}
 {% endmacro %}
 {% import _self as macros %}
-<nav id="navigation" class="ui vertical inverted sidebar menu left">
-    <div class="item"><b>{{ 'obblm.layout.navigation.title'|trans }}</b></div>
+<nav id="navigation" class="menu">
     <a class="item" href="{{ path('obblm_dashboard') }}">
         <i aria-hidden="true" class="icon notranslate mdi mdi-view-dashboard"></i>
-        {{ 'obblm.layout.navigation.dashboard'|trans }}
+        {{ 'obblm.layout.navigation.dashboard'|trans({}, 'obblm') }}
     </a>
     <a class="item" href="{{ path('obblm_team_mine') }}">
         <i aria-hidden="true" class="icon notranslate mdi mdi-football"></i>
-        {{ 'obblm.layout.navigation.my_teams'|trans }}
+        {{ 'obblm.layout.navigation.my_teams'|trans({}, 'obblm') }}
     </a>
     {{ macros.navigationCollectionToHtml(get_navigation_links()) }}
     {# <a class="item" href="{{ path('my_championships') }}">
         <i aria-hidden="true" class="icon notranslate mdi mdi-trophy-variant"></i>
         My Championships
     </a> #}
+    <a class="item" href="{{ path('obblm_rules') }}">
+        <i aria-hidden="true" class="icon notranslate mdi mdi-ruler-square"></i>
+        {{ 'obblm.layout.navigation.rules'|trans({}, 'obblm') }}
+    </a>
     {% if(is_granted('ROLE_OBBLM_ADMIN')) %}
     <div class="item">
         <i class="options icon"></i>
         <i aria-hidden="true" class="v-icon notranslate mdi mdi-options"></i>
-        {{ 'obblm.layout.navigation.admin.title'|trans }}
+        {{ 'obblm.layout.navigation.admin.title'|trans({}, 'obblm') }}
         <div class="menu">
             {# <a class="item" href="{{ path('admin_leagues') }}">Leagues</a> #}
             <a class="item" href="{{ path('admin_rules') }}">
-                {{ 'obblm.layout.navigation.admin.rules'|trans }}
+                {{ 'obblm.layout.navigation.admin.rules'|trans({}, 'obblm') }}
             </a>
             <a class="item" href="{{ path('admin_users') }}">
                 <i aria-hidden="true" class="icon notranslate user"></i>
-                {{ 'obblm.layout.navigation.admin.users'|trans }}
+                {{ 'obblm.layout.navigation.admin.users'|trans({}, 'obblm') }}
             </a>
             {{ macros.navigationCollectionToHtml(get_admin_links()) }}
         </div>

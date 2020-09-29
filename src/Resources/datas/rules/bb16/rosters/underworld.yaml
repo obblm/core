@@ -1,0 +1,83 @@
+rules:
+  bb16:
+    rosters:
+      underworld: # Spike #9
+        players:
+          goblin:
+            min: 0
+            max: 16
+            characteristics:
+              ma: 6
+              st: 2
+              ag: 3
+              av: 7
+            skills: [ dodge, right_stuff, stunty ]
+            cost: 40000
+            available_skills: [ a, m ]
+            available_skills_on_double: [ g, s, p ]
+            is_journeyman: true
+          lineman:
+            min: 0
+            max: 3
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 3
+              av: 7
+            cost: 50000
+            skills: [ animosity ]
+            available_skills: [ g, m ]
+            available_skills_on_double: [ s, p, a ]
+          thrower:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 3
+              av: 7
+            skills: [ animosity, pass, sure_hands ]
+            cost: 70000
+            available_skills: [ g, p, m ]
+            available_skills_on_double: [ s, a ]
+          gutter_runner:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 9
+              st: 2
+              ag: 4
+              av: 7
+            skills: [ animosity, dodge, weeping_dagger ]
+            cost: 80000
+            available_skills: [ g, a ]
+            available_skills_on_double: [ s, p, m ]
+          blitzer:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 3
+              av: 8
+            skills: [ animosity, block ]
+            cost: 90000
+            available_skills: [ g, s, m ]
+            available_skills_on_double: [ a, p ]
+          troll:
+            min: 0
+            max: 2
+            characteristics:
+              ma: 4
+              st: 5
+              ag: 1
+              av: 9
+            skills: [ loner, always_hungry, mighty_blow, really_stupid, regeneration, throw_team_mate ]
+            cost: 110000
+            available_skills: [ s, m ]
+            available_skills_on_double: [ g, a, p ]
+        reroll_cost: 70000
+        options:
+
+          can_have_apothecary: true
+

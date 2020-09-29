@@ -1,0 +1,57 @@
+{% extends '@ObblmCore/base.html.twig'%}
+
+{% block title 'obblm.account.title'|trans({}, 'obblm') %}
+{% block body %}
+    {{ form_start( form, {'attr': {'class': 'form container'}} ) }}
+    <h1 class="title">{{ 'obblm.account.title'|trans({}, 'obblm') }}</h1>
+    <div class="field">
+        {{ form_label( form.username ) }}
+        {{ form_widget( form.username ) }}
+        <div class="like-input">{{ form.username.vars.value }}</div>
+        {{ form_errors( form.username ) }}
+    </div>
+    <div class="two boxes">
+        <div class="box field">
+            {{ form_label( form.firstName ) }}
+            {{ form_widget( form.firstName ) }}
+            {{ form_errors( form.firstName ) }}
+        </div>
+        <div class="box field">
+            {{ form_label( form.lastName ) }}
+            {{ form_widget( form.lastName ) }}
+            {{ form_errors( form.lastName ) }}
+        </div>
+    </div>
+    <div class="field">
+        {{ form_label( form.email ) }}
+        {{ form_widget( form.email ) }}
+        {{ form_errors( form.email ) }}
+    </div>
+    <div class="field selector">
+        {{ form_label( form.locale ) }}
+        {{ form_widget( form.locale ) }}
+        {{ form_errors( form.locale ) }}
+    </div>
+    <div>
+        <span>{{ form_label( form.plainPassword ) }}</span>
+        <div class="two boxes">
+            <div class="box field">
+                {{ form_label( form.plainPassword.first ) }}
+                {{ form_widget( form.plainPassword.first ) }}
+                {{ form_errors( form.plainPassword.first ) }}
+            </div>
+            <div class="box field">
+                {{ form_label( form.plainPassword.second ) }}
+                {{ form_widget( form.plainPassword.second ) }}
+                {{ form_errors( form.plainPassword.second ) }}
+            </div>
+        </div>
+    </div>
+    {{ form_rest( form ) }}
+    <div class="actions aligned center">
+        <button type="submit">
+            Submit
+        </button>
+    </div>
+    {{ form_end( form ) }}
+{% endblock %}

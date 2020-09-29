@@ -1,4 +1,4 @@
-{{ 'obblm.emails.coach.registration.welcome'|raw|trans({'%receiver%': coach.username}) }}
-{{ 'obblm.emails.coach.registration.text'|raw|trans }}
-{{ 'obblm.emails.coach.registration.click_link_below'|raw|trans }}
+{{ 'obblm.emails.coach.registration.welcome'|raw|trans({'%receiver%': coach.username}, 'obblm') }}
+{{ 'obblm.emails.coach.registration.text'|raw|trans({}, 'obblm') }}
+{{ 'obblm.emails.coach.registration.click_link_below'|raw|trans({}, 'obblm') }}
 {{ absolute_url(path('activate_account', {'hash': coach.hash})) }}

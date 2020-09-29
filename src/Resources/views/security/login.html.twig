@@ -1,67 +1,57 @@
 {% extends '@ObblmCore/base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
-{% block stylesheets %}
-   {{ parent() }}
-    <style>
-        .column {
-            max-width: 450px;
-        }
-    </style>
-{% endblock %}
+{% block title 'obblm.forms.login.title'|trans({}, 'obblm') %}
+
 {% block body %}
-<div class="ui middle aligned center aligned grid">
-    <div class="column">
-        <h2 class="ui teal image header">
-            <img src="assets/images/logo.png" class="image">
-            <div class="content">
-                {{ 'Log-in to your account'|trans }}
-            </div>
-        </h2>
-        <form method="post" class="ui large form">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-            {% if app.user %}
-                <div class="mb-3">
-                    {{ 'You are logged in as'|trans }} {{ app.user.username }}, <a href="{{ path('app_logout') }}">{{ 'Logout'|trans }}</a>
-                </div>
-            {% endif %}
-            <div class="ui stacked segment">
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="user icon"></i>
-                        <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control" required autofocus placeholder="Login or E-mail address">
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="lock icon"></i>
-                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                    </div>
-                </div>
-                <button type="submit" class="ui fluid large teal submit button">Login</button>
-            </div>
-            <div class="ui error message"></div>
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}"
-            >
-            <input type="hidden" name="_target_path" value="{{ path('obblm_dashboard') }}"/>
-            {#
-                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                See https://symfony.com/doc/current/security/remember_me.html
-
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me"> Remember me
-                    </label>
-                </div>
-            #}
-        </form>
-
-        <div class="ui message">
-            New to us? <a href="#">Sign Up</a>
+<div class="container">
+    <form method="post" class="form login container">
+        <h1 class="title">
+            <i class="icon mdi mdi-football"></i>
+            {{ 'obblm.forms.login.title'|trans({}, 'obblm') }}
+        </h1>
+        {% if error %}
+            <div class="error message closable clearfix">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <div class="field">
+            <label for="inputLogin">
+                <i class="mdi mdi-account icon"></i>
+                {{ 'obblm.forms.login.login'|trans({}, 'obblm') }}
+            </label>
+            <input class="like-input" type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control" required autofocus>
         </div>
+        <div class="field">
+            <label for="inputPassword">
+                <i class="mdi mdi-lock icon"></i>
+                {{ 'obblm.forms.login.password'|trans({}, 'obblm') }}
+            </label>
+            <input type="password" name="password" id="inputPassword" class="form-control" required>
+        </div>
+        <div class="buttons center aligned">
+            <button type="submit" class="ui fluid large teal submit button">
+                {{ 'obblm.forms.login.button'|trans({}, 'obblm') }}
+            </button>
+        </div>
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+        <input type="hidden" name="_target_path" value="{{ path('obblm_dashboard') }}"/>
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
+            </div>
+        #}
+    </form>
+    <div class="center aligned register">
+        {{ 'obblm.forms.register.question'|trans({}, 'obblm') }}
+        <a href="{{ path('register') }}">
+            <i class="mdi mdi-account icon"></i>
+            {{ 'obblm.forms.register.title'|trans({}, 'obblm') }}
+        </a>
     </div>
 </div>
 {% endblock %}

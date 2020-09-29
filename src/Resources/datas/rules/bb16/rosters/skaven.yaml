@@ -1,0 +1,69 @@
+rules:
+  bb16:
+    rosters:
+      skaven: # RuleBook
+        players:
+          lineman:
+            min: 0
+            max: 16
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 3
+              av: 7
+            cost: 50000
+            available_skills: [ g ]
+            available_skills_on_double: [ s, p, a, m ]
+            is_journeyman: true
+          thrower:
+            min: 0
+            max: 2
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 3
+              av: 7
+            skills: [ pass, sure_hands ]
+            cost: 70000
+            available_skills: [ g, p ]
+            available_skills_on_double: [ s, a, m ]
+          gutter_runner:
+            min: 0
+            max: 4
+            characteristics:
+              ma: 9
+              st: 2
+              ag: 4
+              av: 7
+            skills: [ dodge ]
+            cost: 80000
+            available_skills: [ g, a ]
+            available_skills_on_double: [ s, p, m ]
+          blitzer:
+            min: 0
+            max: 2
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 3
+              av: 8
+            skills: [ block ]
+            cost: 90000
+            available_skills: [ g, s ]
+            available_skills_on_double: [ a, p, m ]
+          rat_ogre:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 6
+              st: 5
+              ag: 2
+              av: 8
+            skills: [ loner, wild_animal, mighty_blow, frenzy, prehensile_tail ]
+            cost: 150000
+            available_skills: [ a ]
+            available_skills_on_double: [ g, a, p, m ]
+        reroll_cost: 60000
+        options:
+          can_have_apothecary: true
+

@@ -1,4 +1,16 @@
 {% extends '@ObblmCore/base.html.twig'%}
+{% set title = 'obblm.forms.team.create.title'|trans({}, 'obblm') %}
+{% block title 'obblm.team.title'|trans({}, 'obblm')
+~ ' > ' ~ title %}
+{% import _self as macros %}
+{% block body %}
+    <div class="form container">
+        <h1 class="title">
+            {{ title }}
+        </h1>
+        {{ macros.navigationCollectionToHtml(rules_navigation()) }}
+    </div>
+{% endblock %}
 
 {% macro navigationCollectionToHtml(collection) %}
     {% for item in collection %}
@@ -8,33 +20,26 @@
                     {% if item.icon %}
                         <i aria-hidden="true" class="icon notranslate {{ item.icon }}"></i>
                     {% endif %}
-                    {{ item.name }}
+                    <h2 class="title">{{ item.name|trans({}, 'obblm') }}</h2>
                 {% endif %}
-                <div class="menu">
+                <div class="selector">
                     {{ _self.navigationCollectionToHtml(item.collection) }}
                 </div>
             </div>
         {% else %}
             <div class="item">
-            {% set context = item.parameters ?? {} %}
+                {% set context = item.parameters ?? {} %}
                 <a href="{{ path(item.route, context) }}">
                     {% if item.icon %}
                         <i aria-hidden="true" class="icon notranslate {{ item.icon }}"></i>
                     {% endif %}
-                    {{ item.link }}
+                    {% if(item.translationDomain) %}
+                        {{ item.link|trans({}, item.translationDomain) }}
+                    {% else %}
+                        {{ item.link }}
+                    {% endif %}
                 </a>
             </div>
         {% endif %}
     {% endfor %}
 {% endmacro %}
-{% import _self as macros %}
-{% block body %}
-    <div class="">
-        <h1 class="ui">
-            {{ 'obblm.forms.team.create.rule-selector'|trans }}
-        </h1>
-        <div class="">
-            {{ macros.navigationCollectionToHtml(rules_navigation()) }}
-        </div>
-    </div>
-{% endblock %}

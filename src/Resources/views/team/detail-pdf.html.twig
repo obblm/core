@@ -1,0 +1,117 @@
+{% extends '@ObblmCore/pdf.html.twig' %}
+
+{% block title 'obblm.team.title'|trans({}, 'obblm')
+~ ' > ' ~ version.team.name %}
+{% block body %}
+    <section id="team-sheet" class="container page-jump">
+        {% include '@ObblmCore/partials/flash.html.twig' %}
+        <header {% if(version.team.coverFilename) %}class="header has-background" style="background-image: url({{ 'http://web/' ~ team_cover(version.team) }});"{% else %}class="header"{% endif %}>
+            <div class="logo">
+                <img alt="{{ version.team.name }}" class="image" src="{{ 'http://web/' ~ team_logo(version.team) }}">
+            </div>
+            <div class="content">
+                <h1 class="title">{{ version.team.name }}</h1>
+                <div class="informations">
+                    <ul class="four boxes">
+                        <li class="box vertical aligned">
+                            <ul>
+                                <li class="box information">
+                                    <span class="label">
+                                        <i class="icon mdi mdi-label"></i>
+                                        {{ 'obblm.trait.roster'|trans({}, 'obblm') }} :
+                                    </span>
+                                    {{ version.team|roster_name|trans({}, version.team.rule.ruleKey) }}
+                                </li>
+                                <li class="box information">
+                                    <span class="label">
+                                        <i class="icon mdi mdi-account"></i>
+                                        {{ 'obblm.trait.coach'|trans({}, 'obblm') }} :
+                                    </span>
+                                    {{ version.team.coach.username }}
+                                </li>
+                                <li class="box information">
+                                    <span class="label">
+                                        <i class="icon mdi mdi-account"></i>
+                                        {{ 'obblm.trait.rule'|trans({}, 'obblm') }} :
+                                    </span>
+                                    {{ version.team.rule|rule_name|trans({}, version.team.rule.ruleKey) }}
+                                </li>
+                                <!-- <li class="box information">
+                                    <span class="label">{{ 'League'|trans({}, 'obblm') }} :</span>
+                                    Toto
+                                </li> -->
+                            </ul>
+                        </li>
+                        <li class="box vertical aligned">
+                            <ul>
+                                <li class="box information">
+                                    <span class="label">
+                                        <i class="icon mdi mdi-view-dashboard"></i>
+                                        {{ 'obblm.trait.tr.abbr'|trans({}, 'obblm') }} :
+                                    </span>
+                                    {{ version.tr }}
+                                </li>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.sheet.header.team_value'|trans({}, 'obblm') }} :</span>
+                                    {{ version.team|calculate_value|price }}
+                                </li>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.forms.team.fields.treasury'|trans({}, 'obblm') }} :</span>
+                                    {{ version.treasure|price }}
+                                </li>
+                                <!-- <li class="box information">
+                                    <span class="label">{{ 'Stadium'|trans({}, 'obblm') }} :</span>
+                                    toto
+                                </li> -->
+                            </ul>
+                        </li>
+                        <li class="box vertical aligned">
+                            <ul>
+                                <li class="box information">
+                                    <span class="label">
+                                        <i class="icon mdi mdi-dice-4"></i>
+                                        {{ 'obblm.trait.rerolls'|trans({}, 'obblm') }} :
+                                    </span>
+                                    {{ version.rerolls }} (x{{ version.team|reroll_cost|price }})
+                                </li>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.trait.apothecary'|trans({}, 'obblm') }} :</span>
+                                    {{ version.apothecary|yesno }}
+                                </li>
+                                <!-- <li class="box information">
+                                    <span class="label">{{ 'Sponsor'|trans({}, 'obblm') }} :</span>
+                                    toto
+                                </li> -->
+                            </ul>
+                        </li>
+                        <li class="box vertical aligned">
+                            <ul>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.trait.popularity'|trans({}, 'obblm') }} :</span>
+                                    {{ version.popularity }}
+                                </li>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.trait.assistants'|trans({}, 'obblm') }} :</span>
+                                    {{ version.assistants }}
+                                </li>
+                                <li class="box information">
+                                    <span class="label">{{ 'obblm.trait.cheerleaders'|trans({}, 'obblm') }} :</span>
+                                    {{ version.cheerleaders }}
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <section class="row">
+            {% include '@ObblmCore/team/sheet.html.twig' with { 'team': version.team } %}
+        </section>
+    </section>
+    <aside class="container">
+        {% set title = (version.team.rule.ruleKey ~ '.trait.skill.title')|trans({}, version.team.rule.ruleKey) %}
+        <h3 class="title">{{ title }}</h3>
+        {% set skills = get_skills_for_sheet(version.team.rule, version) %}
+        {% include '@ObblmCore/rules/skills-table.html.twig' with {'skills': skills} %}
+    </aside>
+{% endblock %}

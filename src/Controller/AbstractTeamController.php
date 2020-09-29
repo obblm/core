@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractTeamController extends AbstractController
 {
+    /** @var TeamHelper */
     protected $teamHelper;
 
     public function __construct(TeamHelper $teamHelper)
@@ -34,6 +35,7 @@ abstract class AbstractTeamController extends AbstractController
 
         return $this->render('@ObblmCore/form/team/create.rules-choice.html.twig', [
             'form' => $form->createView(),
+            'rule' => $team->getRule(),
         ]);
     }
 }

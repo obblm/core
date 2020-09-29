@@ -18,7 +18,8 @@ class PlayerVersionEntitySubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            TeamVersionEvent::PRE_SAVE => 'prePersist'
+            TeamVersionEvent::PRE_SAVE => 'prePersist',
+            TeamVersionEvent::TREASURE_BASE => 'calculateTeamBaseTreasure'
         ];
     }
 
@@ -26,6 +27,16 @@ class PlayerVersionEntitySubscriber implements EventSubscriberInterface
     {
         $version = $event->getTeamVersion();
         $helper = $this->ruleHelper->getHelper($version->getTeam()->getRule());
+
         $version->setTr($helper->calculateTeamRate($version));
+    }
+
+    public function calculateTeamBaseTreasure(TeamVersionEvent $event)
+    {
+        $version = $event->getTeamVersion();
+        $helper = $this->ruleHelper->getHelper($version->getTeam()->getRule());
+        $maxTeamCost = $helper->getMaxTeamCost();
+        $treasure = $maxTeamCost - $helper->calculateTeamValue($version);
+        $version->setTreasure($treasure);
     }
 }

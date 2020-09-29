@@ -1,0 +1,77 @@
+.table {
+  width: 100%;
+  &:not(.has-background) {
+    background: none !important;
+  }
+  &.has-background {
+    background-position: center center;
+    background-size: cover;
+  }
+  &.aligned {
+    &.left td,
+    &.left th {
+      text-align: left;
+    }
+    &.center td,
+    &.center th {
+      text-align: center;
+    }
+    &.right td,
+    &.right th {
+      text-align: right;
+    }
+    &.top td,
+    &.top th {
+      vertical-align: top;
+    }
+    &.middle td,
+    &.middle th {
+      vertical-align: center;
+    }
+    &.bottom td,
+    &.bottom th {
+      vertical-align: bottom;
+    }
+  }
+
+  &.aligned,
+  td.aligned,
+  th.aligned {
+    &.left {
+      text-align: left;
+    }
+    &.center {
+      text-align: center;
+    }
+    &.right {
+      text-align: right;
+    }
+    &.top {
+      vertical-align: top;
+    }
+    &.middle {
+      vertical-align: center;
+    }
+    &.bottom {
+      vertical-align: bottom;
+    }
+  }
+
+  &.lined,
+  &.lined td,
+  &.lined th {
+    border: @border;
+    padding: 0.3rem;
+  }
+  &.lined thead tr {
+      background: rgba(255,255,255,.08);
+      th {
+        font-weight: @h2FontWeight;
+      }
+  }
+  &.lined tbody tr {
+    &:nth-child(2n) {
+      background: @overlayBackground;
+    }
+  }
+}

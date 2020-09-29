@@ -4,9 +4,11 @@ namespace Obblm\Core\Twig;
 
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\Team;
+use Obblm\Core\Helper\CoreTranslation;
+use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Helper\TeamHelper;
-use Obblm\Core\Service\PlayerService;
+use Obblm\Core\Service\ObblmPackage;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -16,11 +18,13 @@ class TeamExtension extends AbstractExtension
 {
     protected $ruleHelper;
     protected $teamHelper;
+    protected $package;
 
-    public function __construct(RuleHelper $ruleHelper, TeamHelper $teamHelper)
+    public function __construct(RuleHelper $ruleHelper, TeamHelper $teamHelper, ObblmPackage $package)
     {
         $this->ruleHelper = $ruleHelper;
         $this->teamHelper = $teamHelper;
+        $this->package = $package;
     }
 
     public function getFilters()
@@ -45,13 +49,26 @@ class TeamExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('area', [$this, 'calculateArea']),
+            new TwigFunction('get_team_logo', [$this, 'getLogo']),
+            new TwigFunction('get_team_cover', [$this, 'getCover']),
         ];
     }
 
-    public function calculateArea(int $width, int $length)
+    public function getLogo(Team $team):string
     {
-        return $width * $length;
+        if ($team->getLogoFilename()) {
+            return $this->package->getUrl($team->getId() . '/' . $team->getLogoFilename());
+        }
+        return "https://placekitten.com/800/800";
+        //return "@ObblmCore/Resources/public/images/default.png";
+    }
+
+    public function getCover(Team $team)
+    {
+        if ($team->getCoverFilename()) {
+            return $this->package->getUrl($team->getId() . '/' . $team->getCoverFilename());
+        }
+        return "";
     }
 
     public function getTeamRate(Team $team)
@@ -66,7 +83,7 @@ class TeamExtension extends AbstractExtension
 
     public function getRosterName(Team $team)
     {
-        return TeamHelper::getRosterNameForTranslation($team);
+        return CoreTranslation::getRosterNameFor($team);
     }
 
     public function getRerollCost(Team $team)
@@ -76,12 +93,15 @@ class TeamExtension extends AbstractExtension
 
     public function getTeamValue(Team $team)
     {
-        return $this->teamHelper->calculateTeamValue(TeamHelper::getLastVersion($team));
+        return $this->teamHelper->calculateTeamValue(TeamHelper::getLastVersion($team), true);
     }
 
     public function getCharacteristics(Player $player, $characteristic)
     {
-        $characteristics = PlayerService::getPlayerCharacteristics($player);
+        if (!$player->getType()) {
+            return '';
+        }
+        $characteristics = PlayerHelper::getPlayerCharacteristics($player);
         if (!isset($characteristics[$characteristic])) {
             throw new InvalidParameterException("The characteristic " . $characteristic . " does not exists");
         }
@@ -91,22 +111,34 @@ class TeamExtension extends AbstractExtension
 
     public function getSkills(Player $player)
     {
-        return PlayerService::getPlayerSkills($player);
+        if (!$player->getType()) {
+            return null;
+        }
+        return PlayerHelper::getPlayerSkills($player);
     }
 
     public function getType(Player $player)
     {
-        return PlayerService::getPlayerTranslationKey($player);
+        if (!$player->getType()) {
+            return '';
+        }
+        return CoreTranslation::getPlayerTranslationKey($player);
     }
 
     public function getSpp(Player $player)
     {
-        return PlayerService::getPlayerSpp($player);
+        if (!$player->getType()) {
+            return '';
+        }
+        return PlayerHelper::getPlayerSpp($player);
     }
 
     public function getPlayerValue(Player $player)
     {
-        return PlayerService::getPlayerValue($player);
+        if (!$player->getType()) {
+            return '';
+        }
+        return PlayerHelper::getPlayerValue($player);
     }
 
     public function getInjuryEffects(Team $team, $injuries)
@@ -121,7 +153,7 @@ class TeamExtension extends AbstractExtension
             $arr['injuries'][] = [
                 'value' => $ruleInjury->value,
                 'label' => $ruleInjury->label,
-                'effect' => $ruleInjury->effect_label
+                'effect' => $ruleInjury->effectLabel
             ];
         }
         return $arr;

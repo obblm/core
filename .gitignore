@@ -2,3 +2,6 @@
 /.idea
 /vendor
 /composer.lock
+/node_modules
+/src/Resources/public/build
+/.php_cs.cache

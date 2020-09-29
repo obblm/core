@@ -1,0 +1,59 @@
+rules:
+  bb16:
+    rosters:
+      halfling: # Spike #5
+        players:
+          halfling:
+            min: 0
+            max: 16
+            characteristics:
+              ma: 5
+              st: 2
+              ag: 3
+              av: 6
+            cost: 30000
+            skills: [ dodge, right_stuff, stunty ]
+            available_skills: [ a ]
+            available_skills_on_double: [ g, s, p ]
+            is_journeyman: true
+          halfling_catcher:
+            min: 0
+            max: 2
+            characteristics:
+              ma: 5
+              st: 2
+              ag: 3
+              av: 6
+            cost: 50000
+            skills: [ catch, dodge, right_stuff, stunty, sprint ]
+            available_skills: [ a ]
+            available_skills_on_double: [ g, s, p ]
+          halfling_hefty:
+            min: 0
+            max: 2
+            characteristics:
+              ma: 5
+              st: 2
+              ag: 3
+              av: 7
+            cost: 50000
+            skills: [ dodge, fend, stunty ]
+            available_skills: [ a, p ]
+            available_skills_on_double: [ g, s ]
+          treeman:
+            min: 0
+            max: 2
+            characteristics:
+              ma: 2
+              st: 6
+              ag: 1
+              av: 10
+            cost: 120000
+            skills: [ mighty_blow, strong_arm, thick_skull, throw_team_mate, take_root, stand_firm, timber ]
+            available_skills: [ s ]
+            available_skills_on_double: [ g, a, p ]
+        reroll_cost: 60000
+        options:
+          can_have_apothecary: true
+          inducements:
+            halfing_master_chef: discount

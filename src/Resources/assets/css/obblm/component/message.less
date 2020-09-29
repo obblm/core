@@ -1,0 +1,50 @@
+.message {
+  padding: 1rem 2rem;
+  color: @message-base-color;
+  background: @message-base-bg;
+  border: 2px solid @message-base-color;
+  border-radius: @borderRadius;
+  transition: opacity @transitionDefault @transitionDefaultDelay,
+              height @transitionDefault @transitionDefaultDelay;
+  a {
+    color: inherit;
+  }
+  .content {
+    > * {
+      margin-top: @baseMargin / 2;
+    }
+    > *:first-child {
+      margin-top: 0;
+    }
+    a {
+      text-decoration: underline;
+      &:hover { text-decoration: none; }
+    }
+  }
+  .closer {
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+    &:before {
+      display: inline;
+      font-family: @iconFont;
+      content: 'close';
+    }
+  }
+  &.error {
+    background: @message-error-bg;
+    color: @message-error-color;
+    border-color: @message-error-color;
+  }
+  &.warning,
+  &.info {
+    background: @message-info-bg;
+    color: @message-info-color;
+    border-color: @message-info-color;
+  }
+  &.success {
+    background: @message-success-bg;
+    color: @message-success-color;
+    border-color: @message-success-color;
+  }
+}

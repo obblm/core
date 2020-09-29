@@ -5,6 +5,7 @@ services:
     autowire: true      # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
     resource: '../../*'
+    public: false
     exclude: '../../{DependencyInjection,Entity,Migrations,Ressources,Tests,ObblmCoreBundle.php}'
 
   # controllers are imported separately to make sure services can be injected
@@ -13,17 +14,48 @@ services:
     autowire: true      # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
     resource: '../../Controller'
+    public: false
     tags: ['controller.service_arguments']
 
-  Obblm\Core\Routing\RouteAutoloader:
+  obblm.cache:
+    class: Symfony\Component\Cache\Adapter\FilesystemAdapter
+    public: true
+    arguments:
+      - ''
+      - 3600
+      - '%kernel.cache_dir%/obblm/rules'
+
+  Obblm\Core\Helper\RuleHelper:
     autowire: true
+    arguments:
+      $adapter: "@obblm.cache"
+
+  Obblm\Core\Helper\ImageHelper:
+    autowire: true
+    arguments:
+      $kernetProjectDir: '%kernel.project_dir%/public'
+      $cacheDirectory: "%obblm.config.directory.public.cache%"
 
   Obblm\Core\Helper\Rule\RuleHelperInterface:
     alias: Obblm\Core\Helper\Rule\BaseRule
+
+  Obblm\Core\Service\FileTeamUploader:
+    autowire: true
+    arguments:
+      $targetDirectory: '%obblm.config.directory.upload%/team'
+
+  Obblm\Core\Service\ObblmPackage:
+    autowire: true
+    arguments:
+      $kernetProjectDir: '%kernel.project_dir%/public'
+      $uploadDirectory: '%obblm.config.directory.upload%/team'
+
+  Obblm\Core\Routing\RouteAutoloader:
+    autowire: true
+    public: false
 
   Obblm\Core\Routing\ObblmExtraLoader:
     arguments: [ '@Obblm\Core\Routing\RouteAutoloader' ]
     tags: [ routing.loader ]
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
-

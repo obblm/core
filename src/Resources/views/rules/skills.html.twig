@@ -1,0 +1,10 @@
+{% extends '@ObblmCore/base.html.twig' %}
+{% set title = (rule.ruleKey ~ '.trait.skill.title')|trans({}, rule.ruleKey) %}
+{% block title 'obblm.rules.title'|trans({}, 'obblm')
+~ ' > ' ~ rule.name|trans({}, rule.ruleKey)
+    ~ ' > ' ~ title %}
+{% block body %}
+    {% set skills = get_all_skills(rule) %}
+    <h1 class="title">{{ title }} ({{ skills|length }})</h1>
+    {% include '@ObblmCore/rules/skills-table.html.twig' with {'skills': skills} %}
+{% endblock %}

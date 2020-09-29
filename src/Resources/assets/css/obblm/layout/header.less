@@ -1,0 +1,89 @@
+#header {
+  height: @headerHeight;
+  background: @headerBackground;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  top: 0;
+  > .container {
+    > .item {
+      display: inline-block;
+      padding: 0.8rem 0;
+    }
+    > .right {
+      float: right;
+    }
+    .title {
+      font-size: 190%;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+    > .launch,
+    > .menu {
+      background: @itemBackground;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      box-sizing: border-box;
+      height: @headerHeight;
+      &.launch {
+        cursor: pointer;
+        border-right: 1px solid @separatorColor;
+        transition: background @transitionDefault @transitionDefaultDelay;
+        margin-right: 1rem;
+        line-height: 2.5rem;
+        > .icon {
+          font-size: 1.5rem;
+        }
+        .pushable.open & {
+          background: @navBackground;
+        }
+      }
+      &.menu {
+        border-left: 1px solid @separatorColor;
+        right: 0;
+      }
+    }
+    > .menu {
+      position: relative;
+      > span {
+        line-height: 2.5rem;
+        &:after {
+          content: '';
+          border-bottom: @border;
+          display: block;
+          visibility: hidden;
+        }
+      }
+      > ul {
+        position: absolute;
+        top: @headerHeight;
+        right: 0;
+        display: none;
+        @menuPadding: @baseMargin / 2;
+        background: @itemHover;
+        > li {
+          white-space: nowrap;
+          .link {
+            display: block;
+            padding: @baseMargin / 2;
+            border-top: @border;
+          }
+          &:first-child .link {
+            border-top: 0 none;
+          }
+        }
+      }
+      &:hover {
+        background: @itemHover;
+        > span {
+          &:after {
+            visibility: visible;
+          }
+        }
+        > ul {
+          display: block;
+        }
+      }
+    }
+  }
+}

@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('obblm_dashboard');
         }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -64,7 +64,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EventDispatcherInterface $dispatcher)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EventDispatcherInterface $dispatcher):Response
     {
         $coach = new Coach();
         $form = $this->createForm(RegistrationForm::class, $coach);
@@ -82,7 +82,7 @@ class SecurityController extends AbstractController
             $dispatcher->dispatch($event, RegisterCoachEvent::NAME);
 
             $entityManager->flush();
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('obblm_dashboard');
         }
 
         return $this->render('@ObblmCore/security/register.html.twig', [
@@ -93,7 +93,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/activate/{hash}", name="activate_account")
      */
-    public function activate(string $hash, EventDispatcherInterface $dispatcher)
+    public function activate(string $hash, EventDispatcherInterface $dispatcher):Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 

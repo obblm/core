@@ -1,11 +1,22 @@
 {
   "name": "obblm/core",
-  "license": "proprietary",
   "type": "symfony-bundle",
+  "license": "MIT",
+  "description": "Bundle to have Fantasy Bowl team management",
+  "keywords": [],
+  "homepage": "https://github.com/obblm/core",
+  "authors": [
+    {
+      "name": "Benjamin Lanet",
+      "homepage": "https://github.com/kumulo"
+    }
+  ],
   "require": {
     "php": "^7.2.5",
+    "dompdf/dompdf": "^0.8.6",
     "ext-ctype": "*",
     "ext-iconv": "*",
+    "knplabs/knp-snappy-bundle": "^1.7",
     "sensio/framework-extra-bundle": "^5.5",
     "symfony/asset": "*",
     "symfony/console": "*",
@@ -20,6 +31,7 @@
     "symfony/messenger": "5.1.*",
     "symfony/monolog-bundle": "^3.1",
     "symfony/notifier": "*",
+    "symfony/options-resolver": "*",
     "symfony/orm-pack": "*",
     "symfony/process": "*",
     "symfony/security-bundle": "*",
@@ -29,7 +41,8 @@
     "symfony/twig-pack": "*",
     "symfony/validator": "*",
     "symfony/web-link": "*",
-    "symfony/yaml": "*"
+    "symfony/yaml": "*",
+    "twig/cssinliner-extra": "^3.0"
   },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^3.3"

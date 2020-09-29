@@ -7,7 +7,7 @@ security:
     obblm_user_provider:
       entity:
         class: Obblm\Core\Entity\Coach
-  OBBLM_hierarchy:
+  role_hierarchy:
     OBBLM_MANAGER: OBBLM_USER
     OBBLM_ADMIN: OBBLM_MANAGER
   firewalls:

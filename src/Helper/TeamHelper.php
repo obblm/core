@@ -4,7 +4,7 @@ namespace Obblm\Core\Helper;
 
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
-use Obblm\Core\Helper\Rule\RuleHelperInterface;
+use Obblm\Core\Contracts\RuleHelperInterface;
 
 /**
  * Class TeamHelper
@@ -12,7 +12,6 @@ use Obblm\Core\Helper\Rule\RuleHelperInterface;
  */
 class TeamHelper
 {
-    const TRANSLATION_GLUE = '.';
     private $ruleHelper;
 
     public function __construct(RuleHelper $ruleHelper)
@@ -55,10 +54,10 @@ class TeamHelper
      * @return int
      * @throws \Exception
      */
-    public function calculateTeamValue(TeamVersion $version):int
+    public function calculateTeamValue(TeamVersion $version, $excludeDisposable = false):int
     {
         return $this->getRuleHelper($version->getTeam())
-            ->calculateTeamValue($version);
+            ->calculateTeamValue($version, $excludeDisposable);
     }
 
     /**
@@ -151,18 +150,5 @@ class TeamHelper
             throw new \Exception('This team does not have a rule');
         }
         return (bool) $this->getRuleHelper($team)->couldHaveApothecary($team);
-    }
-
-    /**********************
-     * TRANSLATION METHODS
-     *********************/
-
-    /**
-     * @param Team $team
-     * @return string
-     */
-    public static function getRosterNameForTranslation(Team $team):string
-    {
-        return join(self::TRANSLATION_GLUE, ['obblm', $team->getRule()->getRuleKey(), 'rosters', $team->getRoster(), 'title']);
     }
 }

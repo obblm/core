@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block base_title %}{{ 'obblm.title'|trans({}, 'obblm')  }} | {% block title %}{% endblock%}{% endblock%}</title>
+    <base href="http://localhost/">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css">
+        {% for style in encore_entry_css_files('obblm-core-light', 'obblm') %}
+            <link type="text/css" rel="stylesheet" href="{{ 'http://web/' ~ asset(style) }}">
+        {% endfor %}
+    {% endblock %}
+</head>
+<body class="light">
+<div class="ui main container">{% block body %}{% endblock %}</div>
+</body>
+</html>

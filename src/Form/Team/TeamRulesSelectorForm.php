@@ -3,6 +3,7 @@
 namespace Obblm\Core\Form\Team;
 
 use Obblm\Core\Entity\Team;
+use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\RuleHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -23,28 +24,30 @@ class TeamRulesSelectorForm extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($team = $builder->getData()) {
-            if ($rule = $team->getRule()) {
-                $rosters = $this->ruleHelper->getAvailableRosters($rule);
-                $choices = [];
-                foreach ($rosters as $roster) {
-                    $translation_key = $this->ruleHelper->composeTranslationRosterKey($rule->getRuleKey(), $roster);
-                    $choices[$translation_key] = $roster;
-                }
-                ksort($choices);
-                $builder
-                    ->add('name')
-                    ->add('roster', ChoiceType::class, [
-                    'choices' => $choices,
-                    'choice_translation_domain' => $rule->getRuleKey() ?? false
-                ]);
+        if ($builder->getData()) {
+            $team = $builder->getData();
+            $rule = $team->getRule();
+            $rosters = $this->ruleHelper->getAvailableRosters($rule);
+            $choices = [];
+            foreach ($rosters as $roster) {
+                $translationKey = CoreTranslation::getRosterKey($rule->getRuleKey(), $roster);
+                $choices[$translationKey] = $roster;
             }
+            ksort($choices);
+            $builder
+                ->add('name', null, ['required' => true])
+                ->add('roster', ChoiceType::class, [
+                'choices' => $choices,
+                'required' => true,
+                'choice_translation_domain' => $rule->getRuleKey() ?? false
+            ]);
         }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+            'translation_domain' => 'obblm',
             'data_class' => Team::class,
         ));
     }

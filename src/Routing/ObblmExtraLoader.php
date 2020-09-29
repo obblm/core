@@ -25,8 +25,8 @@ class ObblmExtraLoader extends Loader
 
         $routes = new RouteCollection();
 
-        foreach ($this->routeAutoloader->getObblmRoutes() as $obblm_routes) {
-            $importedRoutes = $this->import($obblm_routes['resource'], $obblm_routes['type']);
+        foreach ($this->routeAutoloader->getObblmRoutes() as $route) {
+            $importedRoutes = $this->import($route['resource'], $route['type']);
             $routes->addCollection($importedRoutes);
         }
 

@@ -1,5 +1,20 @@
 {% extends '@ObblmCore/base.html.twig' %}
 
+{% block title 'obblm.dashboard.title'|trans({}, 'obblm') %}
+
 {% block body %}
-    {{ 'obblm.layout.hi'|trans }} {{ app.user.email }}
+    <h1 class="title">{{ 'obblm.dashboard.title'|trans({}, 'obblm') }}</h1>
+    <div id="dashboard" class="two boxes">
+        <div class="box main">
+            {% block main_dashboard %}
+            {% endblock %}
+        </div>
+        <div class="box right">
+            {% block right_dashboard %}
+                {{ render(controller(
+                    'Obblm\\Core\\Controller\\FrontendController::lastTeams', {max: 3}
+                )) }}
+            {% endblock %}
+        </div>
+    </div>
 {% endblock %}
