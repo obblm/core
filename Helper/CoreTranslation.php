@@ -5,10 +5,8 @@ namespace Obblm\Core\Helper;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\Team;
 
-class CoreTranslation
+class CoreTranslation implements ObblmTranslationInterface
 {
-    const TRANSLATION_GLUE = '.';
-
     /***************
      * RULE METHODS
      **************/

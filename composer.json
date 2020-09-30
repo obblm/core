@@ -45,7 +45,8 @@
     "twig/cssinliner-extra": "^3.0"
   },
   "require-dev": {
-    "doctrine/doctrine-fixtures-bundle": "^3.3"
+    "doctrine/doctrine-fixtures-bundle": "^3.3",
+    "symfony/phpunit-bridge": "^5.1"
   },
   "config": {
     "preferred-install": {

@@ -3,3 +3,11 @@
 @import (multiple) './@{theme}/vars';
 @import '../layout/fonts';
 & { @import (multiple) '../global'; }
+
+.ui-tooltip {
+  box-sizing: border-box;
+  padding: @baseMargin / 2;
+  background: @white;
+  color: @black;
+  max-width: 450px;
+}

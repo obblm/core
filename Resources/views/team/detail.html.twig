@@ -120,11 +120,5 @@
         <section class="row">
             {% include '@ObblmCore/team/sheet.html.twig' with { 'team': version.team } %}
         </section>
-        <aside class="container">
-            {% set title = (version.team.rule.ruleKey ~ '.trait.skill.title')|trans({}, version.team.rule.ruleKey) %}
-            <h2 class="title">{{ title }}</h2>
-            {% set skills = get_skills_for_sheet(version.team.rule, version) %}
-            {% include '@ObblmCore/rules/skills-table.html.twig' with {'skills': skills} %}
-        </aside>
     </section>
 {% endblock %}
