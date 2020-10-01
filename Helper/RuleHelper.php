@@ -70,14 +70,11 @@ class RuleHelper
     }
 
     /**
-     * @param RuleHelperInterface $rule
+     * @param RuleHelperInterface $helper
      */
-    public function addHelper(RuleHelperInterface $rule)
+    public function addHelper(RuleHelperInterface $helper)
     {
-        if (!$rule instanceof RuleHelperInterface) {
-            throw new UnexpectedTypeException($rule, RuleHelperInterface::class);
-        }
-        $this->helpers->offsetSet($rule->getKey(), $rule);
+        $this->helpers->offsetSet($helper->getKey(), $helper);
     }
 
     /**

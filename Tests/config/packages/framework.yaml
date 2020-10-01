@@ -1,0 +1,5 @@
+framework:
+  secret:          ThisIsNotReallyASecretSoPleaseChangeIt
+  csrf_protection: true
+  validation:      { enabled: true, enable_annotations: true }
+  session:         ~

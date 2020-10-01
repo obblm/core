@@ -9,7 +9,7 @@ function includeIfExists($file)
 
 if (
     (!$loader = includeIfExists(__DIR__.'/vendor/autoload.php')) && // Standalone like CI
-    (!$loader = includeIfExists(__DIR__.'/../../../autoload.php')) && // As vendor
+    (!$loader = includeIfExists(__DIR__.'/../../../../tests/bootstrap.php')) && // As vendor
     (!$loader = includeIfExists(__DIR__.'/../../../vendor/autoload.php')) // Dev mode
 ) {
     die('You must set up the project dependencies, run the following commands:'.PHP_EOL.

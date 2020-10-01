@@ -3,5 +3,6 @@
 /vendor
 /composer.lock
 /node_modules
+/var
 /Resources/public/build
 /.php_cs.cache

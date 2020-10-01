@@ -1,0 +1,18 @@
+filter:
+  excluded_paths:
+    - Resources/*
+    - Tests/*
+build:
+  environment:
+    php:
+      version: 7.3
+  dependencies:
+    before:
+      - composer require phpunit/phpunit:^7.0 --dev
+  tests:
+    override:
+      -
+        command: vendor/bin/phpunit --coverage-clover=clover.xml
+        coverage:
+          file: clover.xml
+          format: php-clover
