@@ -37,4 +37,7 @@
             </exclude>
         </whitelist>
     </filter>
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    </listeners>
 </phpunit>
