@@ -13,6 +13,6 @@ doctrine:
       App:
         is_bundle: false
         type: annotation
-        dir: '%kernel.project_dir%/Entity'
+        dir: '%kernel.project_dir%/src/Entity'
         prefix: 'Obblm\Core\Entity'
         alias: Obblm\Core

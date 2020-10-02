@@ -1,7 +1,0 @@
-services:
-  Obblm\Core\:
-    autowire: true      # Automatically injects dependencies in your services.
-    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-    resource: '../../*'
-    public: true
-    exclude: '../../{DependencyInjection,Entity,Migrations,Ressources,Tests,ObblmCoreBundle.php}'

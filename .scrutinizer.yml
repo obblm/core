@@ -1,18 +1,34 @@
-filter:
-  excluded_paths:
-    - Resources/*
-    - Tests/*
 build:
   environment:
     php:
       version: 7.3
-  dependencies:
-    before:
-      - composer require phpunit/phpunit:^7.0 --dev
-  tests:
-    override:
-      -
-        command: vendor/bin/phpunit --coverage-clover=clover.xml
-        coverage:
-          file: clover.xml
-          format: php-clover
+  nodes:
+    analysis:
+      project_setup:
+        override:
+          - 'true'
+      dependencies:
+        before:
+          - composer require phpunit/phpunit:^7.0 --dev
+      tests:
+        override:
+          - php-scrutinizer-run
+          -
+            command: phpcs-run
+            use_website_config: true
+          -
+            command: vendor/bin/phpunit --coverage-clover=clover.xml
+            coverage:
+              file: clover.xml
+              format: php-clover
+checks:
+  php: true
+coding_style:
+  php:
+    spaces:
+      around_operators:
+        concatenation: true
+filter:
+  excluded_paths:
+    - Resources/*
+    - Tests/*

@@ -45,6 +45,7 @@
   },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^3.3",
+    "phpunit/phpunit": "^8.5",
     "symfony/phpunit-bridge": "^4.4 || ^5.0"
   },
   "config": {
@@ -54,19 +55,25 @@
     "sort-packages": true
   },
   "autoload": {
-    "psr-4": { "Obblm\\Core\\": "" },
+    "psr-4": { "Obblm\\Core\\": "src/" },
     "exclude-from-classmap": [
-      "Tests/"
+      "src/Tests/"
     ]
   },
   "autoload-dev": {
     "psr-4": {
-      "Obblm\\Core\\Tests\\": "Tests/"
+      "Obblm\\Core\\Tests\\": "src/Tests/"
     }
   },
   "extra": {
     "branch-alias": {
       "dev-master": "v1.x-dev"
+    }
+  },
+  "scripts": {
+    "auto-scripts": {
+      "cache:clear": "symfony-cmd",
+      "assets:install %PUBLIC_DIR%": "symfony-cmd"
     }
   }
 }

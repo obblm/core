@@ -38,12 +38,12 @@ class UploaderSubscriber implements EventSubscriberInterface
             $this->uploader->uploadIfExists(
                 $data,
                 $form->get('logo')->getData(),
-                'logo',
+                'logo'
             );
             $this->uploader->uploadIfExists(
                 $data,
                 $form->get('cover')->getData(),
-                'cover',
+                'cover'
             );
         }
     }

@@ -5,12 +5,12 @@
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.5/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="Tests/bootsrap.php"
+         bootstrap="vendor/autoload.php"
 >
     <php>
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
-        <server name="KERNEL_CLASS" value="App\Kernel" />
+        <server name="KERNEL_CLASS" value="Obblm\Core\Tests\Kernel" />
         <server name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/var/test.db" force="true" />
 
         <server name="SHELL_VERBOSITY" value="-1" />
@@ -20,25 +20,21 @@
 
     <testsuites>
         <testsuite name="Obblm Core Tests">
-            <directory>Tests/Command</directory>
-            <directory>Tests/Helper</directory>
+            <directory>src/Tests/Command</directory>
+            <directory>src/Tests/Helper</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory>.</directory>
+            <directory>src/</directory>
             <exclude>
-                <directory>.idea</directory>
-                <directory>node_modules</directory>
-                <directory>DataFixtures</directory>
-                <directory>Resources</directory>
-                <directory>Tests</directory>
-                <directory>vendor</directory>
+                <directory>src/.idea</directory>
+                <directory>src/node_modules</directory>
+                <directory>src/DataFixtures</directory>
+                <directory>src/Resources</directory>
+                <directory>src/Tests</directory>
             </exclude>
         </whitelist>
     </filter>
-    <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
-    </listeners>
 </phpunit>

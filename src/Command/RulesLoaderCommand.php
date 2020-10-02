@@ -30,7 +30,7 @@ class RulesLoaderCommand extends Command
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
-        $this->rulesDirectory = dirname(__DIR__).'/Resources/datas/rules';
+        $this->rulesDirectory = dirname(__DIR__) . '/Resources/datas/rules';
         parent::__construct();
     }
 
