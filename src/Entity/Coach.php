@@ -213,9 +213,9 @@ class Coach implements UserInterface, EmailObjectInterface
         return $this;
     }
 
-    public function __toString()
+    public function __toString():string
     {
-        return $this->email;
+        return $this->username;
     }
 
     public function getFirstName(): ?string

@@ -12,7 +12,7 @@ class NoVersionException extends \Exception implements ExceptionInterface
         parent::__construct($this->getVersionMessage($on));
     }
 
-    private function getVersionMessage(object $on):?string
+    private function getVersionMessage(object $on = null):string
     {
         if ($on instanceof Team) {
             return "No version available for team : " . $on->getName();

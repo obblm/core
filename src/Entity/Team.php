@@ -2,20 +2,22 @@
 
 namespace Obblm\Core\Entity;
 
+use Obblm\Core\Entity\Traits\CoverTrait;
+use Obblm\Core\Entity\Traits\LogoTrait;
+use Obblm\Core\Entity\Traits\NameTrait;
+use Obblm\Core\Entity\Traits\RuleTrait;
+use Obblm\Core\Helper\Rule\CanHaveRuleInterface;
 use Obblm\Core\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
  * @ORM\Entity(repositoryClass=TeamRepository::class)
  * @ORM\Table(name="obblm_team")
  */
-class Team
+class Team implements CanHaveRuleInterface
 {
     /**
      * @ORM\Id()
@@ -24,10 +26,7 @@ class Team
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    use NameTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity=Coach::class, inversedBy="teams")
@@ -35,10 +34,7 @@ class Team
      */
     private $coach;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Rule::class, inversedBy="teams")
-     */
-    private $rule;
+    use RuleTrait;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -61,25 +57,9 @@ class Team
      */
     private $players;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $logoFilename;
+    use LogoTrait;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $logoMimeType;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $coverFilename;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $coverMimeType;
+    use CoverTrait;
 
     /**
      * @ORM\Column(type="boolean")
@@ -108,18 +88,6 @@ class Team
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getCoach(): ?Coach
     {
         return $this->coach;
@@ -128,18 +96,6 @@ class Team
     public function setCoach(?Coach $coach): self
     {
         $this->coach = $coach;
-
-        return $this;
-    }
-
-    public function getRule(): ?Rule
-    {
-        return $this->rule;
-    }
-
-    public function setRule(?Rule $rule): self
-    {
-        $this->rule = $rule;
 
         return $this;
     }
@@ -239,50 +195,6 @@ class Team
             }
         }
 
-        return $this;
-    }
-
-    public function getLogoFilename(): ?string
-    {
-        return $this->logoFilename;
-    }
-
-    public function setLogoFilename(?string $logoFilename): self
-    {
-        $this->logoFilename = $logoFilename;
-        return $this;
-    }
-
-    public function getLogoMimeType(): ?string
-    {
-        return $this->logoMimeType;
-    }
-
-    public function setLogoMimeType(?string $logoMimeType): self
-    {
-        $this->logoMimeType = $logoMimeType;
-        return $this;
-    }
-
-    public function getCoverFilename(): ?string
-    {
-        return $this->coverFilename;
-    }
-
-    public function setCoverFilename(?string $coverFilename): self
-    {
-        $this->coverFilename = $coverFilename;
-        return $this;
-    }
-
-    public function getCoverMimeType(): ?string
-    {
-        return $this->coverMimeType;
-    }
-
-    public function setCoverMimeType(?string $coverMimeType): self
-    {
-        $this->coverMimeType = $coverMimeType;
         return $this;
     }
 

@@ -33,12 +33,12 @@ class AbstractFileUploader
         }
     }
 
-    public function getTargetDirectory(): ?string
+    public function getTargetDirectory(): string
     {
         return $this->targetDirectory;
     }
 
-    public function getObjectDirectory(): ?string
+    public function getObjectDirectory(): string
     {
         return $this->uploadDirectory;
     }

@@ -7,7 +7,8 @@ use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
 use Obblm\Core\Exception\InvalidArgumentException;
-use Obblm\Core\Exception\NotFoundRuleKeyExcepion;
+use Obblm\Core\Exception\NotFoundKeyException;
+use Obblm\Core\Exception\NotFoundRuleKeyException;
 use Obblm\Core\Exception\NoVersionException;
 use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\Rule\Roster\Roster;
@@ -18,11 +19,6 @@ use Obblm\Core\Validator\Constraints\TeamValue;
  ***************************/
 trait AbstractTeamRuleTrait
 {
-    public function getAvailableRosters(): ArrayCollection
-    {
-        return $this->getRosters();
-    }
-
     /**
      * @return int
      */
@@ -33,17 +29,7 @@ trait AbstractTeamRuleTrait
 
     /**
      * @param Team $team
-     * @return array
-     */
-    public function getTeamAvailablePlayerTypes(Team $team)
-    {
-        return $this->getAvailablePlayerTypes($team->getRoster());
-    }
-
-    /**
-     * @param Team $team
      * @return int
-     * @throws \Exception
      */
     public function getRerollCost(Team $team):int
     {
@@ -140,22 +126,24 @@ trait AbstractTeamRuleTrait
 
     abstract public function setPlayerDefaultValues(PlayerVersion $version): ?PlayerVersion;
     abstract public function playerIsDisposable(PlayerVersion $version):bool;
+    abstract public function getRosters():ArrayCollection;
 
     /**
      * @return array
      */
     public function getInjuriesTable():array
     {
-        return $this->getInjuries();
+        return (array) $this->getInjuries();
     }
 
     public function getMaxPlayersByType($rosterKey, $typeKey): int
     {
         /** @var Roster $roster */
         $roster = $this->getRosters()->get($rosterKey);
-        if (!$type = $roster->getPlayerTypes()[$typeKey]) {
-            throw new NotFoundRuleKeyExcepion($typeKey, 'toto');
+        if (!isset($roster->getPlayerTypes()[$typeKey])) {
+            throw new NotFoundKeyException($typeKey, "getRosters()->get('$rosterKey')->getPlayerTypes()", self::class);
         }
+        $type = $roster->getPlayerTypes()[$typeKey];
         return (int) $type['max'];
     }
 }

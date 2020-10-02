@@ -20,8 +20,7 @@
 
     <testsuites>
         <testsuite name="Obblm Core Tests">
-            <directory>src/Tests/Command</directory>
-            <directory>src/Tests/Helper</directory>
+            <directory>src/Tests</directory>
         </testsuite>
     </testsuites>
 

@@ -132,17 +132,18 @@ class RuleHelper
      ***************/
 
     /**
-     * @param $item
+     * @param Rule|CanHaveRuleInterface $item
      * @return RuleHelperInterface
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws UnexpectedTypeException
      */
     public function getHelper($item):RuleHelperInterface
     {
-        if ($item instanceof CanHaveRuleInterface) {
-            $rule = $item->getRule();
-        } else {
-            $rule = $item;
+        $rule = ($item instanceof CanHaveRuleInterface) ? $item->getRule() : $item;
+
+        if (!($rule instanceof Rule)) {
+            throw new UnexpectedTypeException(get_class($rule), Rule::class);
         }
+
         $key = $this->getCacheKey($rule);
         return $this->getCacheOrCreate($key, $rule);
     }
@@ -151,7 +152,7 @@ class RuleHelper
      * @param $key
      * @param Rule $rule
      * @return RuleHelperInterface
-     * @throws InvalidArgumentException
+     * @throws
      */
     public function getCacheOrCreate($key, Rule $rule):RuleHelperInterface
     {

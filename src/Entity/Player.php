@@ -2,6 +2,7 @@
 
 namespace Obblm\Core\Entity;
 
+use Obblm\Core\Entity\Traits\NameTrait;
 use Obblm\Core\Repository\PlayerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,10 +21,7 @@ class Player
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    use NameTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="players")
@@ -65,18 +63,6 @@ class Player
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getTeam(): ?Team

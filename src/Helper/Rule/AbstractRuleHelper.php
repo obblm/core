@@ -91,7 +91,7 @@ abstract class AbstractRuleHelper extends RuleConfigBuilder implements RuleHelpe
      */
     public function getTemplateKey():string
     {
-        return $this->getKey();
+        return $this->getAttachedRule()->getTemplate();
     }
 
     use AbstractTeamRuleTrait;

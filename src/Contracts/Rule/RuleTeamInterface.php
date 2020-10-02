@@ -11,7 +11,6 @@ use Obblm\Core\Entity\TeamVersion;
  ***************************/
 interface RuleTeamInterface
 {
-    public function getAvailableRosters():ArrayCollection;
     public function getInjuriesTable():array;
     public function calculateTeamValue(TeamVersion $version, bool $excludeDisposable = false):int;
     public function calculateTeamRate(TeamVersion $version):?int;
@@ -22,4 +21,5 @@ interface RuleTeamInterface
     public function getAssistantsCost(Team $team):int;
     public function getPopularityCost(Team $team):int;
     public function couldHaveApothecary(Team $team):bool;
+    public function getMaxPlayersByType($rosterKey, $typeKey): int;
 }

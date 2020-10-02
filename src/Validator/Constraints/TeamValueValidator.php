@@ -4,6 +4,7 @@ namespace Obblm\Core\Validator\Constraints;
 
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
+use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Helper\TeamHelper;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
@@ -11,11 +12,11 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class TeamValueValidator extends ConstraintValidator
 {
-    protected $teamHelper;
+    protected $ruleHelper;
 
-    public function __construct(TeamHelper $teamHelper)
+    public function __construct(RuleHelper $ruleHelper)
     {
-        $this->teamHelper = $teamHelper;
+        $this->ruleHelper = $ruleHelper;
     }
 
     public function validate($value, Constraint $constraint)
@@ -30,8 +31,9 @@ class TeamValueValidator extends ConstraintValidator
             $value = TeamHelper::getLastVersion($value);
         }
 
-        $teamCost = $this->teamHelper->calculateTeamValue($value);
-        $limit = $this->teamHelper->getRuleHelper($value->getTeam())->getMaxTeamCost();
+        $helper = $this->ruleHelper->getHelper($value->getTeam());
+        $teamCost = $helper->calculateTeamValue($value);
+        $limit = $helper->getMaxTeamCost();
 
         if ($teamCost > $limit) {
             $this->context->buildViolation($constraint->limitMessage)

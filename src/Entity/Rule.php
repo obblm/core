@@ -2,6 +2,7 @@
 
 namespace Obblm\Core\Entity;
 
+use Obblm\Core\Entity\Traits\NameTrait;
 use Symfony\Component\Serializer\Annotation\Ignore;
 use Obblm\Core\Repository\RuleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -36,10 +37,7 @@ class Rule
      */
     private $template;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    use NameTrait;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -113,18 +111,6 @@ class Rule
     public function setTemplate(string $template): self
     {
         $this->template = $template;
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
 
         return $this;
     }

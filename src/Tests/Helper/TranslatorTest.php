@@ -2,6 +2,9 @@
 
 namespace Obblm\Core\Tests\Helper;
 
+use Obblm\Core\Entity\Player;
+use Obblm\Core\Entity\Rule;
+use Obblm\Core\Entity\Team;
 use Obblm\Core\Helper\CoreTranslation;
 use PHPUnit\Framework\TestCase;
 
@@ -11,6 +14,7 @@ class TranslatorTest extends TestCase
     const FIELD = 'fieldKey';
     const WEATHER = 'weatherKey';
     const ROSTER = 'rosterKey';
+    const PLAYER_TYPE = 'playerType';
     const SKILL = 'skillKey';
     const SKILL_TYPE = 'skillTypeKey';
     public function testTranslations()
@@ -18,6 +22,8 @@ class TranslatorTest extends TestCase
         $this->getRule();
         $this->getRoster();
         $this->getSkill();
+        $this->getTeam();
+        $this->getPlayer();
     }
     private function getRule()
     {
@@ -55,13 +61,33 @@ class TranslatorTest extends TestCase
     private function getTeam()
     {
         $expected = self::RULE . '.rosters.' . self::ROSTER .'.title';
-        $result = CoreTranslation::getRosterKey(self::RULE, self::ROSTER);
+        $dummyTeam = (new Team())
+            ->setRule(
+                (new Rule())
+                    ->setRuleKey(self::RULE)
+            )
+            ->setRoster(self::ROSTER);
+
+        $result = CoreTranslation::getRosterNameFor($dummyTeam);
         $this->assertSame($expected, $result);
     }
     private function getPlayer()
     {
-        $expected = self::RULE . '.rosters.' . self::ROSTER .'.title';
-        $result = CoreTranslation::getRosterKey(self::RULE, self::ROSTER);
+        $expected = self::RULE . '.rosters.' . self::ROSTER . '.positions.' . self::PLAYER_TYPE;
+        $result = CoreTranslation::getPlayerKeyType(self::RULE, self::ROSTER, self::PLAYER_TYPE);
+        $this->assertSame($expected, $result);
+
+        $dummyPlayer = (new Player())
+            ->setType(join(CoreTranslation::TRANSLATION_GLUE, [self::RULE, self::ROSTER, self::PLAYER_TYPE]))
+            ->setTeam(
+                (new Team())
+                    ->setRule(
+                        (new Rule())
+                            ->setRuleKey(self::RULE)
+                    )
+                    ->setRoster(self::ROSTER)
+            );
+        $result = CoreTranslation::getPlayerTranslationKey($dummyPlayer);
         $this->assertSame($expected, $result);
     }
 }
