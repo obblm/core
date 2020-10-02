@@ -50,28 +50,6 @@ class TeamHelper
      **********************/
 
     /**
-     * @param TeamVersion $version
-     * @return int
-     * @throws \Exception
-     */
-    public function calculateTeamValue(TeamVersion $version, $excludeDisposable = false):int
-    {
-        return $this->getRuleHelper($version->getTeam())
-            ->calculateTeamValue($version, $excludeDisposable);
-    }
-
-    /**
-     * @param TeamVersion $version
-     * @return int
-     * @throws \Exception
-     */
-    public function calculateTeamRate(TeamVersion $version):int
-    {
-        return $this->getRuleHelper($version->getTeam())
-            ->calculateTeamRate($version);
-    }
-
-    /**
      * @param Team $team
      * @return TeamVersion
      * @throws \Psr\Cache\InvalidArgumentException
@@ -83,60 +61,6 @@ class TeamHelper
     }
     public function destructTeamVersion(Team $team):TeamVersion
     {
-    }
-
-    /****************************
-     * TEAM INFORMATION METHODS
-     ***************************/
-
-    /**
-     * @param Team $team
-     * @return int
-     * @throws \Exception
-     */
-    public function getRerollCost(Team $team):int
-    {
-        return (int) $this->getRuleHelper($team)->getRerollCost($team);
-    }
-
-    /**
-     * @param Team $team
-     * @return int
-     * @throws \Exception
-     */
-    public function getApothecaryCost(Team $team):int
-    {
-        return (int) $this->getRuleHelper($team)->getApothecaryCost($team);
-    }
-
-    /**
-     * @param Team $team
-     * @return int
-     * @throws \Exception
-     */
-    public function getCheerleadersCost(Team $team):int
-    {
-        return (int) $this->getRuleHelper($team)->getCheerleadersCost($team);
-    }
-
-    /**
-     * @param Team $team
-     * @return int
-     * @throws \Exception
-     */
-    public function getAssistantsCost(Team $team):int
-    {
-        return (int) $this->getRuleHelper($team)->getAssistantsCost($team);
-    }
-
-    /**
-     * @param Team $team
-     * @return int
-     * @throws \Exception
-     */
-    public function getPopularityCost(Team $team):int
-    {
-        return (int) $this->getRuleHelper($team)->getPopularityCost($team);
     }
 
     /**

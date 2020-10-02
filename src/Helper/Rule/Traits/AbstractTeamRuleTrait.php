@@ -7,6 +7,7 @@ use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
 use Obblm\Core\Exception\InvalidArgumentException;
+use Obblm\Core\Exception\NotFoundKeyException;
 use Obblm\Core\Exception\NotFoundRuleKeyException;
 use Obblm\Core\Exception\NoVersionException;
 use Obblm\Core\Helper\PlayerHelper;
@@ -29,7 +30,6 @@ trait AbstractTeamRuleTrait
     /**
      * @param Team $team
      * @return int
-     * @throws \Exception
      */
     public function getRerollCost(Team $team):int
     {
@@ -126,6 +126,7 @@ trait AbstractTeamRuleTrait
 
     abstract public function setPlayerDefaultValues(PlayerVersion $version): ?PlayerVersion;
     abstract public function playerIsDisposable(PlayerVersion $version):bool;
+    abstract public function getRosters():ArrayCollection;
 
     /**
      * @return array
@@ -139,9 +140,10 @@ trait AbstractTeamRuleTrait
     {
         /** @var Roster $roster */
         $roster = $this->getRosters()->get($rosterKey);
-        if (!$type = $roster->getPlayerTypes()[$typeKey]) {
-            throw new NotFoundRuleKeyException($typeKey, 'toto');
+        if (!isset($roster->getPlayerTypes()[$typeKey])) {
+            throw new NotFoundKeyException($typeKey, "getRosters()->get('$rosterKey')->getPlayerTypes()", self::class);
         }
+        $type = $roster->getPlayerTypes()[$typeKey];
         return (int) $type['max'];
     }
 }

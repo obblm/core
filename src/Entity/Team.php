@@ -2,6 +2,10 @@
 
 namespace Obblm\Core\Entity;
 
+use Obblm\Core\Entity\Traits\CoverTrait;
+use Obblm\Core\Entity\Traits\LogoTrait;
+use Obblm\Core\Entity\Traits\NameTrait;
+use Obblm\Core\Entity\Traits\RuleTrait;
 use Obblm\Core\Helper\Rule\CanHaveRuleInterface;
 use Obblm\Core\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,10 +26,7 @@ class Team implements CanHaveRuleInterface
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    use NameTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity=Coach::class, inversedBy="teams")
@@ -33,10 +34,7 @@ class Team implements CanHaveRuleInterface
      */
     private $coach;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Rule::class, inversedBy="teams")
-     */
-    private $rule;
+    use RuleTrait;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -59,25 +57,9 @@ class Team implements CanHaveRuleInterface
      */
     private $players;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $logoFilename;
+    use LogoTrait;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $logoMimeType;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $coverFilename;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $coverMimeType;
+    use CoverTrait;
 
     /**
      * @ORM\Column(type="boolean")
@@ -106,18 +88,6 @@ class Team implements CanHaveRuleInterface
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getCoach(): ?Coach
     {
         return $this->coach;
@@ -126,18 +96,6 @@ class Team implements CanHaveRuleInterface
     public function setCoach(?Coach $coach): self
     {
         $this->coach = $coach;
-
-        return $this;
-    }
-
-    public function getRule(): ?Rule
-    {
-        return $this->rule;
-    }
-
-    public function setRule(?Rule $rule): self
-    {
-        $this->rule = $rule;
 
         return $this;
     }
@@ -237,50 +195,6 @@ class Team implements CanHaveRuleInterface
             }
         }
 
-        return $this;
-    }
-
-    public function getLogoFilename(): ?string
-    {
-        return $this->logoFilename;
-    }
-
-    public function setLogoFilename(?string $logoFilename): self
-    {
-        $this->logoFilename = $logoFilename;
-        return $this;
-    }
-
-    public function getLogoMimeType(): ?string
-    {
-        return $this->logoMimeType;
-    }
-
-    public function setLogoMimeType(?string $logoMimeType): self
-    {
-        $this->logoMimeType = $logoMimeType;
-        return $this;
-    }
-
-    public function getCoverFilename(): ?string
-    {
-        return $this->coverFilename;
-    }
-
-    public function setCoverFilename(?string $coverFilename): self
-    {
-        $this->coverFilename = $coverFilename;
-        return $this;
-    }
-
-    public function getCoverMimeType(): ?string
-    {
-        return $this->coverMimeType;
-    }
-
-    public function setCoverMimeType(?string $coverMimeType): self
-    {
-        $this->coverMimeType = $coverMimeType;
         return $this;
     }
 

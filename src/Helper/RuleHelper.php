@@ -140,7 +140,7 @@ class RuleHelper
     {
         $rule = ($item instanceof CanHaveRuleInterface) ? $item->getRule() : $item;
 
-        if(!($rule instanceof Rule)) {
+        if (!($rule instanceof Rule)) {
             throw new UnexpectedTypeException(get_class($rule), Rule::class);
         }
 

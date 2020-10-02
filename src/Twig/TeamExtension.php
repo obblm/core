@@ -17,13 +17,11 @@ use Twig\TwigFunction;
 class TeamExtension extends AbstractExtension
 {
     protected $ruleHelper;
-    protected $teamHelper;
     protected $package;
 
-    public function __construct(RuleHelper $ruleHelper, TeamHelper $teamHelper, ObblmPackage $package)
+    public function __construct(RuleHelper $ruleHelper, ObblmPackage $package)
     {
         $this->ruleHelper = $ruleHelper;
-        $this->teamHelper = $teamHelper;
         $this->package = $package;
     }
 
@@ -73,7 +71,7 @@ class TeamExtension extends AbstractExtension
 
     public function getTeamRate(Team $team)
     {
-        return $this->teamHelper->calculateTeamRate(TeamHelper::getLastVersion($team));
+        return $this->ruleHelper->getHelper($team)->calculateTeamRate(TeamHelper::getLastVersion($team));
     }
 
     public function getRuleKey(Team $team)
@@ -88,12 +86,12 @@ class TeamExtension extends AbstractExtension
 
     public function getRerollCost(Team $team)
     {
-        return $this->teamHelper->getRerollCost($team);
+        return $this->ruleHelper->getHelper($team)->getRerollCost($team);
     }
 
     public function getTeamValue(Team $team)
     {
-        return $this->teamHelper->calculateTeamValue(TeamHelper::getLastVersion($team), true);
+        return $this->ruleHelper->getHelper($team)->calculateTeamValue(TeamHelper::getLastVersion($team), true);
     }
 
     public function getCharacteristics(Player $player, $characteristic)

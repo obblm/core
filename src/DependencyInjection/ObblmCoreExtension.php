@@ -16,11 +16,6 @@ class ObblmCoreExtension extends Extension
         return 'obblm';
     }
 
-    public function getContainerExtension()
-    {
-        return $this->extension;
-    }
-
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();

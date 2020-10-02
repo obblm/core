@@ -44,10 +44,8 @@ class Configuration implements ConfigurationInterface
                                     ->cannotBeEmpty()
                                     ->defaultValue('app.cache')
                                 ->end()
-                            ->end()
                         ->end()
                     ->end()
-                ->end()
             ->end();
     }
 }

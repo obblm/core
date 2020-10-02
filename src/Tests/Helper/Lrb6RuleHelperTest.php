@@ -5,14 +5,21 @@ namespace Obblm\Core\Tests\Helper;
 use Obblm\Core\Contracts\Rule\RuleApplicativeInterface;
 use Obblm\Core\Contracts\Rule\RuleTeamInterface;
 use Obblm\Core\Contracts\RuleHelperInterface;
+use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\Rule;
 use Obblm\Core\Entity\Team;
+use Obblm\Core\Entity\TeamVersion;
+use Obblm\Core\Exception\InvalidArgumentException;
+use Obblm\Core\Exception\NotFoundKeyException;
+use Obblm\Core\Exception\UnexpectedTypeException;
 use Obblm\Core\Form\Player\ActionType;
 use Obblm\Core\Form\Player\InjuryType;
 use Obblm\Core\Helper\CoreTranslation;
+use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\Rule\Config\ConfigResolver;
 use Obblm\Core\Helper\Rule\Config\RuleConfigResolver;
 use Obblm\Core\Helper\RuleHelper;
+use Obblm\Core\Helper\TeamHelper;
 use Obblm\Core\Tests\Kernel;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -80,9 +87,62 @@ class Lrb6RuleHelperTest extends TestCase
         $this->assertEquals(10000, $this->helper->getPopularityCost($dwarves), "Popularity cost is 10k");
         $types = ['blocker', 'blitzer', 'runner', 'slayer', 'death_roller'];
         // Dwarf positions are $types
+        $version = TeamHelper::getLastVersion($dwarves);
+        // Start Team value must be 0
+        $this->assertEquals(0, $this->helper->calculateTeamValue($version));
         foreach ($this->helper->getAvailablePlayerTypes($dwarves->getRoster()) as $key => $type)
         {
             $this->assertContains($key, $types, "Dwarf team has type $key");
+            // For team value test
+            $dwarves->addPlayer(
+                (new Player())
+                    ->setType(PlayerHelper::composePlayerKey($dwarves->getRule()->getRuleKey(), $dwarves->getRoster(), $key))
+            );
+        }
+        $this->assertEquals(16, $this->helper->getMaxPlayersByType($dwarves->getRoster(), 'blocker'), "Dwarf have max 16 blocker");
+        $this->assertEquals(2, $this->helper->getMaxPlayersByType($dwarves->getRoster(), 'blitzer'), "Dwarf have max 2 blitzer");
+        $this->assertEquals(2, $this->helper->getMaxPlayersByType($dwarves->getRoster(), 'runner'), "Dwarf have max 2 runner");
+        $this->assertEquals(2, $this->helper->getMaxPlayersByType($dwarves->getRoster(), 'slayer'), "Dwarf have max 2 slayer");
+        $this->assertEquals(1, $this->helper->getMaxPlayersByType($dwarves->getRoster(), 'death_roller'), "Dwarf have max 1 death_roller");
+        /*
+         * 1 blocker + 1 blitzer + 1 runner + 1 slayer + 1 death_roller = 480k
+         */
+        $this->assertEquals(480000, $this->helper->calculateTeamValue($version), "calculateTeamValue must return 480k");
+        $this->assertEquals(48, $this->helper->calculateTeamRate($version), "calculateTeamRate must return 48");
+
+        /*
+         * 480k + 2 RR (2x50k) = 580k
+         */
+        // For team value test
+        $version->setRerolls(2);
+        $this->assertEquals(580000, $this->helper->calculateTeamValue($version), "calculateTeamValue must return 580k");
+
+        /*
+         * 580k + Apo (50k) = 630k
+         */
+        // For team value test
+        $version->setApothecary(true);
+        $this->assertEquals(630000, $this->helper->calculateTeamValue($version), "calculateTeamValue must return 630k");
+    }
+
+    public function testException() {
+        try {
+            $this->helper->calculateTeamValue((new TeamVersion()));
+        } catch (InvalidArgumentException $e) {
+            if ($e) {
+                $this->assertInstanceOf(InvalidArgumentException::class, $e);
+            } else {
+                $this->fail('exception not expected : ' . get_class($e));
+            }
+        }
+        try {
+            $this->helper->getMaxPlayersByType('dwarf', 'dummyType');
+        } catch (NotFoundKeyException $e) {
+            if ($e) {
+                $this->assertInstanceOf(NotFoundKeyException::class, $e);
+            } else {
+                $this->fail('exception not expected : ' . get_class($e));
+            }
         }
     }
 

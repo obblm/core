@@ -21,4 +21,5 @@ interface RuleTeamInterface
     public function getAssistantsCost(Team $team):int;
     public function getPopularityCost(Team $team):int;
     public function couldHaveApothecary(Team $team):bool;
+    public function getMaxPlayersByType($rosterKey, $typeKey): int;
 }
