@@ -30,5 +30,6 @@ coding_style:
         concatenation: true
 filter:
   excluded_paths:
-    - Resources/*
-    - Tests/*
+    - src/Resources/*
+    - src/Tests/*
+    - src/DataFixtures/*
