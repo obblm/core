@@ -1,6 +1,7 @@
 obblm:
   title: OBBLM
   full_title: Open Blood Bowl league manager
+
   layout:
     header:
       my_account: Editer mon profil
@@ -21,29 +22,86 @@ obblm:
         create: Créer
         edit: Modifier
         delete: Supprimer
-    hi: Coucou
-    words:
-      roster: Roster
-      coach: Coach
-      rule: Règle
-      name: Nom
-      type: Position
-      skills: Compétences
-      injuries: Bléssures
-      value: Valeur
-      rerolls: Relances
-      assistants: Assistants
-      cheerleaders: Pom-pom girls
-      popularity: Popularité
-      apothecary: Apothicaire
-      star_players: Star Players
-      inducements: Inducements
-      options: Options
+        pdf: Exporter en PDF
+
+  trait:
+    number:
+      abbr: '#'
+      title: Numéro
+    name:
+      abbr: Nom
+      title: Nom
+    type:
+      abbr: Pos
+      title: Position
+    ma:
+      abbr: M
+      title: Mouvement
+    st:
+      abbr: F
+      title: Force
+    ag:
+      abbr: Ag
+      title: Agilité
+    av:
+      abbr: Ar
+      title: Armure
+    skill:
+      abbr: Comp.
+      title: Compétences
+    injury:
+      abbr: Bl.
+      title: Blessures
+    com:
+      abbr: Réu
+      title: Réussites
+    td:
+      abbr: TD
+      title: Touchdowns
+    int:
+      abbr: Int
+      title: Intercéptions
+    cas:
+      abbr: Sor
+      title: Sorties
+    mvp:
+      abbr: JPV
+      title: Joueur le Plus Valable
+    spp:
+      abbr: XP
+      title: Points d'expérience
+    tr:
+      abbr: TR
+      title: Team Rating
+    value:
+      abbr: Value
+      title: Valeur
+    roster: Roster
+    team_ready: L'équipre est prête
+    coach: Coach
+    rule: Règle
+    rerolls: Relances
+    assistants: Assistants
+    cheerleaders: Pom-pom girls
+    popularity: Popularité
+    apothecary: Apothicaire
+    star_players: Star Players
+    inducements: Inducements
+    options: Options
+
+  dashboard:
+    title: Mon tableau de board
+    last_teams: Mes dernières équipes (%count%)
+
+  account:
+    title: Modifier mon compte OBBLM
 
   rules:
     title: Règles
+    available_star_players: Star players disponibles
 
   team:
+    title: Equipes
     none: Créez une nouvelle équipe, elle apparaitra ici :)
     not_finished: L'équipe n'est pas encore terminée
     actions:
@@ -60,11 +118,14 @@ obblm:
       header:
       players:
         skill_none: Aucune
+    fluff: Fluff de l'équipe
+    anthem: Hymne de l'équipe
 
   forms:
     register:
-      title: Créer mon compte OBBLM
-      register: Créer mon account
+      question: Vous n'avez pas de compte ?
+      title: Créez votre compte OBBLM
+      register: Créer mon compte
     login:
       title: Se connecter à OBBML
       login: Identifiant
@@ -89,6 +150,8 @@ obblm:
           save: Sauvegarder et revenir plus tard
           cencel: Annuler
       delete:
+        title: Supprimer %name%
+        warning: Vous êtes sur le point de supprimer cette équipe !
         question: Etes vous sur de vouloir supprimer cette équipe ?
       fields:
         parts:
@@ -112,3 +175,27 @@ obblm:
         number: Numéro
         type: Position du joueur
         name: Nom du joueur
+
+  emails:
+    coach:
+      registration:
+        welcome: 'Bonjour %receiver%, bienvenue sur OBBLM.'
+        text:
+          hello: 'Bonjour %receiver%,'
+          success: 'Vous vous êtes enregistré sur OBBML.'
+          activate: "Avant d'accéder à votre comptre, vous devez l'activer en cliquant sur le lien ci-dessous."
+        click_link_below: 'Pour ce faire cliquez sur le lien ci dessous :'
+        link_to_activate: 'Activer mon compte'
+      activation:
+        title: '%login%, vous avez activé votre compte!'
+        welldone: 'Bien joué %login%'
+        success: 'Vous avez activé votre compte OBBLM!'
+        resume:
+          title: 'Les informations que vous vous avez transmis :'
+          login: 'Votre login : '
+          email: 'Votre email : '
+          password: 'Votre password : '
+          password_joke: Shhh... C'est un secret entre nous!
+        text: 'Vous pouvez maintenant vous connecter!'
+        click_link_below: 'Pour vous connecter cliquez ci-dessous :'
+        link_to_login: 'Me connecter'

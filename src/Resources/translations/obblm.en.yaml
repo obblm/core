@@ -1,6 +1,7 @@
 obblm:
   title: OBBLM
   full_title: Open Blood Bowl league manager
+
   layout:
     header:
       my_account: Edit my profile
@@ -21,8 +22,8 @@ obblm:
         create: Create
         edit: Edit
         delete: Delete
-        pdf: Print as PDF
-    hi: Hello
+        pdf: Export as PDF
+
   trait:
     number:
       abbr: '#'
@@ -51,27 +52,9 @@ obblm:
     injury:
       abbr: In
       title: Injuries
-    com:
-      abbr: Réu
-      title: Réussites
-    td:
-      abbr: TD
-      title: Touchdowns
-    int:
-      abbr: Int
-      title: Interceptions
-    cas:
-      abbr: Sor
-      title: Sorties
-    mvp:
-      abbr: MVP
-      title: Joueur le Plus Valable
-    spp:
-      abbr: SPP
-      title: Star Player Points
     tr:
       abbr: TR
-      title: Team Ranking
+      title: Team Rating
     value:
       abbr: Value
       title: Value
@@ -87,9 +70,11 @@ obblm:
     star_players: Star Players
     inducements: Inducements
     options: Options
+
   dashboard:
-    title: Your dashbaord
+    title: My dashbaord
     last_teams: My last teams (%count%)
+
   account:
     title: Edit my OBBLM Account
 
@@ -115,6 +100,8 @@ obblm:
       header:
       players:
         skill_none: None
+    fluff: Team fluff
+    anthem: Team Anthem
 
   forms:
     register:
@@ -149,12 +136,6 @@ obblm:
         warning: You are going to delete this team !
         question: Are you sure you want to use delete this team ?
       fields:
-        rule:
-          label: ~
-          question: Want you to create a team by rule ?
-        championship:
-          label: ~
-          question: Or want you to create a team for a championship ?
         parts:
           story: Your team story
           players: Team composition
@@ -178,27 +159,13 @@ obblm:
         name: Player name
 
   emails:
-    championship_invitation:
-      title: 'Invitation to join "%name%" championship'
-      text: 'Dear %receiver% you have been invited to the "%championship%" championship'
-      link_to_join: Join the championship
-    championship_start:
-      title: 'The "%name%" championship as been started'
-      text: 'Dear %receiver% the "%championship%" championship has been started. You can now play!'
-      link_to_detail: View the championship
-    encounter:
-      validated:
-        title: 'Encounter against "%against%" as been validated'
-        text: 'Dear %receiver% the encounter against "%against%" as been validated by %validator%. You can now play!'
-        link_to_detail: View the encounter sheet
-        link_to_team: View your team now
     coach:
       registration:
         welcome: 'Hello %receiver%, welcome to OBBLM.'
         text:
           hello: 'Hello %receiver%,'
           success: 'You have successfully register to OBBML.'
-          activate: 'You have to activate your account by clicking on link below.'
+          activate: 'Before login in, you have to activate your account by clicking on link below.'
         click_link_below: 'To do it click on the link below :'
         link_to_activate: 'Activate my account'
       activation:
