@@ -31,7 +31,7 @@
         {% block player_line %}
             {% embed '@ObblmCore/team/player-line.' ~ rule.template ~ '.html.twig' with { 'player': player } %}
                 {% block number %}{% endblock %}
-                {% block name %}<td class="left aligned editable">{{ player.name|trans({}, rule.ruleKey) }}</td>{% endblock %}
+                {% block name %}<td class="left aligned editable">{{ player.name }}</td>{% endblock %}
                 {% block type %}{% endblock %}
                 {% block injuries %}{% endblock %}
                 {% block spp %}{% endblock %}

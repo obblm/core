@@ -14,6 +14,7 @@ use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\Rule\Inducement\MultipleStarPlayer;
 use Obblm\Core\Helper\Rule\Skill\Skill;
 use Obblm\Core\Helper\RuleHelper;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -21,10 +22,12 @@ use Twig\TwigFunction;
 class RulesExtension extends AbstractExtension
 {
     protected $ruleHelper;
+    protected $translator;
 
-    public function __construct(RuleHelper $ruleHelper)
+    public function __construct(RuleHelper $ruleHelper, TranslatorInterface $translator)
     {
         $this->ruleHelper = $ruleHelper;
+        $this->translator = $translator;
     }
 
     public function getFilters()
@@ -89,26 +92,19 @@ class RulesExtension extends AbstractExtension
     {
         $helper = $this->ruleHelper->getHelper($team->getRule());
         $sps = $helper->getAvailableStarPlayers($team);
-        $starPlayers = new ArrayCollection();
-        foreach ($sps as $sp) {
-            if ($sp instanceof MultipleStarPlayer) {
-                $players = [];
-                foreach ($sp->getParts() as $starPart) {
-                    $players[] = $helper->createInducementAsPlayer($starPart);
-                    $starPlayers->add($helper->createInducementAsPlayer($starPart));
-                }
-                $sp->setParts($players);
-            } else {
-                $starPlayers->add($helper->createInducementAsPlayer($sp));
-            }
-        }
-        return $starPlayers;
+        return $this->translateAndOrderStarPlayers($team->getRule(), $sps);
     }
 
     public function getAllStarPlayers(Rule $rule)
     {
         $helper = $this->ruleHelper->getHelper($rule);
         $sps = $helper->getStarPlayers();
+        return $this->translateAndOrderStarPlayers($rule, $sps->toArray());
+    }
+
+    private function translateAndOrderStarPlayers(Rule $rule, array $sps)
+    {
+        $helper = $this->ruleHelper->getHelper($rule);
         $starPlayers = new ArrayCollection();
         foreach ($sps as $sp) {
             if ($sp instanceof MultipleStarPlayer) {
@@ -122,28 +118,26 @@ class RulesExtension extends AbstractExtension
                 $starPlayers->add($helper->createInducementAsPlayer($sp));
             }
         }
-        return $starPlayers;
+        $translator = $this->translator;
+        $closure = function(Player $starPlayer) use ($translator, $rule) {
+            $starPlayer->setName($translator->trans($starPlayer->getName(), [], $rule->getRuleKey()));
+            return $starPlayer;
+        };
+        $order = Criteria::create()->orderBy(['name' => 'ASC']);
+        return $starPlayers->map($closure)->matching($order);
     }
 
     public function getAllSkills(Rule $rule)
     {
         $helper = $this->ruleHelper->getHelper($rule);
         /* Aplha ordering */
-        $alpha = Criteria::create()
-            ->orderBy(['key' => 'ASC']);
-        return $helper->getSkills()->matching($alpha);
+        return $this->translateAndOrderSkills($rule);
     }
 
     public function getPlayerSkills(Rule $rule, Player $player)
     {
-        $helper = $this->ruleHelper->getHelper($rule);
         $version = PlayerHelper::getLastVersion($player);
-        $c = Criteria::create()
-            ->where(
-                Criteria::expr()->in('key', $version->getSkills())
-            )
-            ->orderBy(['key' => 'ASC']);
-        return $helper->getSkills()->matching($c);
+        return $this->translateAndOrderSkills($rule, $version->getSkills());
     }
 
     /**
@@ -158,12 +152,27 @@ class RulesExtension extends AbstractExtension
             $skills = array_merge($skills, $player->getSkills());
             $skills = array_merge($skills, $player->getAdditionalSkills());
         }
+        return $this->translateAndOrderSkills($rule, $skills);
+    }
+
+    private function translateAndOrderSkills(Rule $rule, array $skills = null)
+    {
         $helper = $this->ruleHelper->getHelper($rule);
-        $c = Criteria::create()
-            ->where(
-                Criteria::expr()->in('key', $skills)
-            )
-            ->orderBy(['key' => 'ASC']);
-        return $helper->getSkills()->matching($c);
+
+        $returnSkills = $helper->getSkills();
+
+        if($skills !== null) {
+            $filter = Criteria::create()->where(Criteria::expr()->in('key', $skills));
+            $returnSkills = $returnSkills->matching($filter);
+        }
+        $order = Criteria::create()->orderBy(['name' => 'ASC']);
+
+        $translator = $this->translator;
+        $closure = function(Skill $skill) use ($translator, $rule) {
+            $skill->setName($translator->trans($skill->getName(), [], $rule->getRuleKey()));
+            return $skill;
+        };
+
+        return $returnSkills->map($closure)->matching($order);
     }
 }

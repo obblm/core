@@ -2,7 +2,7 @@
         <tbody>
             {% for skill in skills %}
                 <tr>
-                    <td class="top aligned">{{ skill.name|trans({}, skill.translationDomain) }}</td>
+                    <td class="top aligned">{{ skill.name }}</td>
                     <td class="top aligned">{{ skill.typeName|trans({}, skill.translationDomain) }}</td>
                     <td class="top aligned">{{ skill.description|trans({}, skill.translationDomain) }}</td>
                 </tr>
