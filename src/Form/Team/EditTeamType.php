@@ -71,10 +71,18 @@ class EditTeamType extends AbstractType
                             ])
                         ],
                     ])
-                    ->add('rerolls')
-                    ->add('cheerleaders')
-                    ->add('assistants')
-                    ->add('popularity');
+                    ->add('rerolls', null, [
+                        'attr' => ['min' => 0, 'max' => 8]
+                    ])
+                    ->add('cheerleaders', null, [
+                        'attr' => ['min' => 0]
+                    ])
+                    ->add('assistants', null, [
+                        'attr' => ['min' => 0]
+                    ])
+                    ->add('popularity', null, [
+                        'attr' => ['min' => 0, 'max' => 9]
+                    ]);
                 $builder->addEventSubscriber(new UploaderSubscriber($this->uploader));
                 if ($this->teamHelper->couldHaveApothecary($team)) {
                     $builder->add('apothecary');
