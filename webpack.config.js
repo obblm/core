@@ -8,7 +8,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
     // directory where compiled assets will be stored
-    .setOutputPath('Resources/public/build/')
+    .setOutputPath('src/Resources/public/build/')
     // public path used by the web server to access the output path
     .setPublicPath('/bundles/obblmcore/build')
     .setManifestKeyPrefix('/bundles/obblmcore/build')
@@ -24,12 +24,12 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('obblm-core', './Resources/assets/js/app')
-    .addStyleEntry('obblm-core-light', './Resources/assets/css/obblm/themes/light.less')
-    .addStyleEntry('obblm-core-dark',  './Resources/assets/css/obblm/themes/dark.less')
-    .addStyleEntry('reset', './Resources/assets/css/obblm/vendor/reset.css')
-    .addStyleEntry('email', './Resources/assets/css/email.less')
-    .addStyleEntry('print', './Resources/assets/css/print.less')
+    .addEntry('obblm-core', './src/Resources/assets/js/app')
+    .addStyleEntry('obblm-core-light', './src/Resources/assets/css/obblm/themes/light.less')
+    .addStyleEntry('obblm-core-dark',  './src/Resources/assets/css/obblm/themes/dark.less')
+    .addStyleEntry('reset', './src/Resources/assets/css/obblm/vendor/reset.css')
+    .addStyleEntry('email', './src/Resources/assets/css/email.less')
+    .addStyleEntry('print', './src/Resources/assets/css/print.less')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
