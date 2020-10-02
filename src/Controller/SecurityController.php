@@ -18,7 +18,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/login", name="obblm_login")
      */
     public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
@@ -37,7 +37,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/logout", name="obblm_logout")
      */
     public function logout()
     {
@@ -96,6 +96,6 @@ class SecurityController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('obblm_login');
     }
 }

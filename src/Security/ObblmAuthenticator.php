@@ -25,7 +25,7 @@ class ObblmAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_login';
+    public const LOGIN_ROUTE = 'obblm_login';
 
     private $entityManager;
     private $urlGenerator;
