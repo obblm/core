@@ -65,3 +65,51 @@
     }
   }
 }
+
+#editTeamForm {
+  .ui-accordion-header {
+    cursor: pointer;
+    padding: 0;
+    > * {
+      cursor: pointer;
+    }
+    .icon:before {
+      transition: rotate @transitionDefault @transitionDefaultDelay;
+    }
+    &.ui-state-active {
+      .icon:before {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  .ui-accordion-content {
+    padding: 0;
+  }
+  .many-collection {
+    .sortable {
+      .item {
+        .player {
+          box-sizing: border-box;
+          .boxes {
+            align-items: center;
+            .number {
+              > span {
+                font-size: 1.4rem;
+              }
+              width: 2rem;
+            }
+            .name {
+              width: calc(55% - 2rem);
+            }
+            .position {
+              width: calc(36% - 2rem);
+            }
+            .move {
+              width: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}
