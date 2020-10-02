@@ -3,3 +3,5 @@ framework:
   csrf_protection: true
   validation:      { enabled: true, enable_annotations: true }
   session:         ~
+  router:
+    utf8: true
