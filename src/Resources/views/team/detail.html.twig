@@ -120,5 +120,15 @@
         <section class="row">
             {% include '@ObblmCore/team/sheet.html.twig' with { 'team': version.team } %}
         </section>
+        <aside class="fluff two boxes">
+            <div class="fluff box container">
+                <h2 class="title">{{ 'obblm.sheet.fluff'|trans({}, 'obblm') }}</h2>
+                <div>{{ version.team.fluff }}</div>
+            </div>
+            <div class="anthem box container">
+                <h2 class="title">{{ 'obblm.sheet.anthem'|trans({}, 'obblm') }}</h2>
+                <div>{{ version.team.anthem|nl2br }}</div>
+            </div>
+        </aside>
     </section>
 {% endblock %}
