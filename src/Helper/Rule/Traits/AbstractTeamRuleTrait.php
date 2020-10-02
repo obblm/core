@@ -7,7 +7,7 @@ use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
 use Obblm\Core\Exception\InvalidArgumentException;
-use Obblm\Core\Exception\NotFoundRuleKeyExcepion;
+use Obblm\Core\Exception\NotFoundRuleKeyException;
 use Obblm\Core\Exception\NoVersionException;
 use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\Rule\Roster\Roster;
@@ -18,26 +18,12 @@ use Obblm\Core\Validator\Constraints\TeamValue;
  ***************************/
 trait AbstractTeamRuleTrait
 {
-    public function getAvailableRosters(): ArrayCollection
-    {
-        return $this->getRosters();
-    }
-
     /**
      * @return int
      */
     public function getMaxTeamCost():int
     {
         return ($this->rule['max_team_cost']) ? $this->rule['max_team_cost'] : TeamValue::LIMIT;
-    }
-
-    /**
-     * @param Team $team
-     * @return array
-     */
-    public function getTeamAvailablePlayerTypes(Team $team)
-    {
-        return $this->getAvailablePlayerTypes($team->getRoster());
     }
 
     /**
@@ -146,7 +132,7 @@ trait AbstractTeamRuleTrait
      */
     public function getInjuriesTable():array
     {
-        return $this->getInjuries();
+        return (array) $this->getInjuries();
     }
 
     public function getMaxPlayersByType($rosterKey, $typeKey): int
@@ -154,7 +140,7 @@ trait AbstractTeamRuleTrait
         /** @var Roster $roster */
         $roster = $this->getRosters()->get($rosterKey);
         if (!$type = $roster->getPlayerTypes()[$typeKey]) {
-            throw new NotFoundRuleKeyExcepion($typeKey, 'toto');
+            throw new NotFoundRuleKeyException($typeKey, 'toto');
         }
         return (int) $type['max'];
     }

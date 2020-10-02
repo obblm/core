@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\Expr\Expression;
 use Obblm\Core\Contracts\InducementInterface;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Exception\InvalidArgumentException;
-use Obblm\Core\Exception\NotFoundRuleKeyExcepion;
+use Obblm\Core\Exception\NotFoundRuleKeyException;
 use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\Rule\Inducement\Inducement;
 
@@ -147,7 +147,7 @@ trait AbstractInducementRuleTrait
     public function getStarPlayer(string $key):InducementInterface
     {
         if (!$this->getStarPlayers()->containsKey($key)) {
-            throw new NotFoundRuleKeyExcepion($key);
+            throw new NotFoundRuleKeyException($key);
         }
         return $this->getStarPlayers()->get($key);
     }

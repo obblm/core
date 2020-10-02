@@ -2,20 +2,18 @@
 
 namespace Obblm\Core\Entity;
 
+use Obblm\Core\Helper\Rule\CanHaveRuleInterface;
 use Obblm\Core\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
  * @ORM\Entity(repositoryClass=TeamRepository::class)
  * @ORM\Table(name="obblm_team")
  */
-class Team
+class Team implements CanHaveRuleInterface
 {
     /**
      * @ORM\Id()

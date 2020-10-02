@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Exception\InvalidArgumentException;
+use Obblm\Core\Exception\NotFoundKeyException;
 use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\Rule\Roster\Roster;
 
@@ -89,7 +90,7 @@ trait AbstractPlayerRuleTrait
     public function getInjury($key):?object
     {
         if (!$this->getInjuries()->containsKey($key)) {
-            throw new \Exception('No Injury found for ' . $key);
+            throw new NotFoundKeyException($key, 'getInjuries', self::class);
         }
         return $this->getInjuries()->get($key);
     }
