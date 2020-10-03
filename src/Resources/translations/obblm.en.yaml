@@ -17,6 +17,7 @@ obblm:
     tools:
       yes: Yes
       no: No
+      didyouknow: Did you know...
       actions:
         add: Add
         create: Create

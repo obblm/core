@@ -127,7 +127,7 @@ class TeamController extends AbstractTeamController
      */
     public function delete(Team $team, Request $request, FileTeamUploader $uploader): Response
     {
-        $this->denyAccessUnlessGranted(TeamVoter::EDIT, $team);
+        $this->denyAccessUnlessGranted(TeamVoter::DELETE, $team);
 
         $confirm = $request->get('confirm');
         if ($confirm !== null) {

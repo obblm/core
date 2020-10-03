@@ -35,7 +35,7 @@ rules:
               st: 2
               ag: 4
               av: 7
-            skills: [ dodge ]
+            skills: [ dodge, weeping_dagger ]
             cost: 80000
             available_skills: [ g, a ]
             available_skills_on_double: [ s, p, m ]

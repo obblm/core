@@ -14,6 +14,7 @@ use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\Rule\Inducement\MultipleStarPlayer;
 use Obblm\Core\Helper\Rule\Skill\Skill;
 use Obblm\Core\Helper\RuleHelper;
+use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -43,6 +44,7 @@ class RulesExtension extends AbstractExtension
             new TwigFunction('available_rosters', [$this, 'getAvailableRosters']),
             new TwigFunction('create_rule_team', [$this, 'createTeamFor']),
             new TwigFunction('max_position_type', [$this, 'getMaxPositionType']),
+            new TwigFunction('get_star_player_rosters', [$this, 'getStarPlayerRosters']),
             new TwigFunction('get_star_players', [$this, 'getAvailableStarPlayers']),
             new TwigFunction('get_all_star_players', [$this, 'getAllStarPlayers']),
             new TwigFunction('get_all_skills', [$this, 'getAllSkills']),
@@ -93,6 +95,12 @@ class RulesExtension extends AbstractExtension
         $helper = $this->ruleHelper->getHelper($team->getRule());
         $sps = $helper->getAvailableStarPlayers($team);
         return $this->translateAndOrderStarPlayers($team->getRule(), $sps);
+    }
+
+    public function getStarPlayerRosters(Player $starPlayer)
+    {
+        VarDumper::dump($starPlayer);
+        //$inducement
     }
 
     public function getAllStarPlayers(Rule $rule)

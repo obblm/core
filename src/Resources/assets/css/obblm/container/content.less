@@ -45,4 +45,32 @@
       vertical-align: bottom;
     }
   }
+  .text.fluff,
+  .didyouknow {
+    font-size: 1rem;
+    padding: @baseMargin;
+    border: @border;
+    color: @black;
+    background: @white;
+    box-sizing: border-box;
+  }
+  .didyouknow {
+    display: flex;
+    flex-flow: row wrap;
+    .image {
+      flex-basis: auto;
+      width: 150px;
+      margin-right: @baseMargin;
+      text-align: center;
+      > img {
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+      }
+    }
+    .image + .container {
+      flex-basis: auto;
+      width: calc(100% - 150px - @baseMargin);
+    }
+  }
 }

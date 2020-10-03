@@ -31,6 +31,7 @@ class TeamExtension extends AbstractExtension
             // Team filters
             new TwigFilter('rule_key', [$this, 'getRuleKey']),
             new TwigFilter('roster_name', [$this, 'getRosterName']),
+            new TwigFilter('roster_description', [$this, 'getRosterDescription']),
             new TwigFilter('tr', [$this, 'getTeamRate']),
             new TwigFilter('calculate_value', [$this, 'getTeamValue']),
             new TwigFilter('reroll_cost', [$this, 'getRerollCost']),
@@ -82,6 +83,11 @@ class TeamExtension extends AbstractExtension
     public function getRosterName(Team $team)
     {
         return CoreTranslation::getRosterNameFor($team);
+    }
+
+    public function getRosterDescription(Team $team)
+    {
+        return CoreTranslation::getRosterDescription($team->getRule()->getRuleKey(), $team->getRoster());
     }
 
     public function getRerollCost(Team $team)

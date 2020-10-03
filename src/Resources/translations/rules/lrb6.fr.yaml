@@ -1,16 +1,25 @@
-# To extend it add app/Resources/BbLeagueBundle/translations/lrb6.fr.yml
 lrb6:
+  title: Livre de règles (LRB6)
   kunit: kPo
+  fields:
+    default:
+      title: Terrain Normal
+      weather:
+        blizzard: Blizzard
+        rain: Pluie
+        normal: Normal
+        sunny: Très ensoleillé
+        hot: Canicule
+  inducements:
+    title: Inducements
+    babe: Serveuses de Bloodweiser
+    bribe: Pot de vin
+    extra_apothecary: Apothicaire local
+    extra_training: Entrainement complémentaire
+    igor: Igor
+    wizard: Sorcier
+    halfing_master_chef: Chef Cuistot Halfling
   trait:
-    pos:
-      abbr: N°
-      title: Numéro
-    name:
-      abbr: Nom
-      title: Nom
-    type:
-      abbr: Pos
-      title: Position
     ma:
       abbr: M
       title: Mouvement
@@ -23,12 +32,6 @@ lrb6:
     av:
       abbr: Ar
       title: Armure
-    skill:
-      abbr: Comp
-      title: Compétences
-    injury:
-      abbr: Bl
-      title: Bléssures
     com:
       abbr: Réu
       title: Réussites
@@ -37,7 +40,7 @@ lrb6:
       title: Touchdowns
     int:
       abbr: Int
-      title: Interceptions
+      title: Intercéptions
     cas:
       abbr: Sor
       title: Sorties
@@ -45,18 +48,19 @@ lrb6:
       abbr: JPV
       title: Joueur le Plus Valable
     spp:
-      abbr: Exp
-      title: Expérience
-    value:
-      abbr: Valeur
-      title: Valeur
+      abbr: XP
+      title: Points d'expérience
+    skill:
+      abbr: Comp.
+      title: Compétences
   skill_types:
-    g: générale
-    s: force
-    a: agilité
-    p: passe
-    m: mutation
-    e: extraordinnaire
+    g: Compétence générale
+    s: Compétence de Force
+    a: Compétence d'Agilité
+    p: Compétence de Passe
+    m: Mutation
+    e: Compétence extraordinnaire
+    c: Augmentation de caractéristique
   experience:
     rookie: Débutant
     experienced: Expérimenté
@@ -361,12 +365,29 @@ lrb6:
     chaos:
       title: Chaos
       description: Les joueurs du chaos ne sont pas réputés pour la subtilité de leur jeu. Une simple course au centre du terrain en blessant et estropiant un maximum d’adversaire est à peu près leur seule stratégie. Ils s’inquiètent rarement, voire jamais, de considérations mineures comme ramasser le ballon ou marquer un touchdown, du moins pas tant qu’il reste un adversaire valide !
+      positions:
+        minotaur: Minotaure
+        warrior: Guerrier du Chaos
+        beastman: Homme-bête
     chaos_dwarf:
       title: Nains du Chaos
       description: Les Nains du Chaos sont les descendants dégénérés d’explorateurs Nains terriblement affectés par les forces du Chaos, transformés en créatures égoïstes et belliqueuses. Sur un point au moins, ils sont restés les mêmes, ils adorent toujours le Blood Bowl ! Les Nains du Chaos ne sont pas nombreux et font donc une grande consommation d’Hobgobelins pour toutes sortes de tâches, y compris jouer dans leurs équipes de Blood Bowl.
+      positions:
+        minotaur: Minotaure
+        centaur: Centaure Taureau
+        blocker: Bloqueur
+        hobgoblin: Hobgoblin
     chaos_pact:
       title: Pacte du Chaos
       description: Les équipes de Pactes du Chaos résultent du mélange de races maléfiques ou chaotiques, voire les deux. Si les Maraudeurs sont enthousiastes, il faut les canaliser en vue des divers besoins de l'équipe ; les autres races apportent leur finesse ou leurs muscles, c'est selon. Néanmoins, du fait de l’arrogance, de la stupidité ou de la nature bestiale des membres de l’équipe, il est bien rare de voir une équipe du Pacte du chaos efficace et bien organisée. Les Chaos All-Stars sont le meilleur exemple du niveau que peut atteindre cette équipe avec le bon coach.
+      positions:
+        marauder: Maraudeur
+        goblin: Renégat Goblin
+        skaven: Renégat Skaven
+        dark_elf: Renégat Elfe noir
+        ogre: Ogre
+        troll: Troll
+        minotaur: Minotaure
     dark_elf:
       title: Elfes Noirs
       description: Mauvais au-delà de tout ce qui est imaginable, extrêmement talentueux, les Elfes Noirs entrent sur le terrain pour prouver au monde leur supériorité. Les équipes d’Elfes Noirs préfèrent un jeu rusé et sournois de course au jeu de passe de leurs cousins du côté du Bien. Assistés par les Furies sans pitié et de dangereux assassins, les Elfes Noirs ont toutes les cartes pour perforer les lignes adverses au lieu de les contourner.
@@ -388,6 +409,11 @@ lrb6:
     elf:
       title: Elfes
       description: Lorsque la NAF s’effondra de nombreuses équipes Elfes se retrouvèrent ruinées. Les équipes qui ont survécu à cette période ne sont ni aussi riches ni aussi bien équipées que les équipes de Hauts Elfes, mais il est clair qu’elles savent jouer. Masque de protection sur le visage et crête dressée sur la tête, elles entrent sur le terrain pour retrouver leur gloire passée.
+      positions:
+        blitzer: Blitzeur
+        lineman: Trois-quart
+        catcher: Receveur
+        thrower: Lanceur
     goblin:
       title: Gobelins
       description: La tactique des Gobelins doit plus à l’espoir qu’au potentiel. Les Gobelins font de très bons receveurs car ils sont petits et agiles. Par contre l’art de bloquer leur est étranger, quant à leurs chances de bloquer quelque chose de plus grand qu’un Halfling n’en parlons pas. Mais cela ne semble pas déranger les Gobelins outre mesure, car l’utilisation d’armes secrètes particulièrement retorses permet parfois à une équipe de Gobelins de gagner un match.
@@ -401,6 +427,9 @@ lrb6:
     halfling:
       title: Halflings
       description: La déficience technique des équipes de Halflings est légendaire. Ils sont trop petits pour les passes et les réceptions, ils courent à demi vitesse et une équipe entière peut passer toute une après-midi à tenter de bloquer un Ogre sans y réussir. La plupart des coachs Halflings tentent de combler la qualité par la quantité. Après tout, si vous arrivez à placer une demi douzaine de joueurs dans la zone d’En-but adverse et que, par miracle, vous réussissiez à récupérer le ballon, il existe une infime chance qu’un ou deux d’entre eux n’aient pas encore été réduits à l’état de purée au moment où vous leur lancerez le ballon.
+      positions:
+        treeman: Homme-arbre
+        halfling: Halfling
     high_elf:
       title: Hauts Elfes
       description: Les Royaumes Elfiques sponsorisent les équipes de Hauts elfes, qui développent un jeu de passe très efficace et alignent les joueurs les plus arrogants que l’on puisse trouver. Riches au-delà des rêves les plus fous, les équipes de Hauts Elfes comprennent de nombreux princes et nobles dans leurs rangs et tous ceux qu’ils ne peuvent pas battre, eh bien ils les achètent.
@@ -421,9 +450,18 @@ lrb6:
     khemri:
       title: Khemri
       description: Il y a 8000 ans, les Khemri jouèrent leur premier match de Blood Bowl contre les Slanns. Mais, lorsque leurs royaumes moururent, le jeu disparut aussi jusqu’à ce qu’il soit redécouvert. Et comme le jeu refaisait surface il était inévitable que les anciens joueurs et les anciens champions reviennent sur les terrains qu’ils avaient foulé autrefois.
-    lizardman:
+      positions:
+        skeleton: Squelette
+        thro_ras: Thro Ras
+        blitz_ras: Blitz Ras
+        tomb_guardian: Gardien des Tombes
+    lizardmen:
       title: Hommes-Lézards
       description: Les Prêtres-Mages enseignaient déjà le Blood Bowl des milliers d’années avant qu’il ne soit découvert par le Nain Roze-El. Ce n’est donc pas une surprise si les Hommes-Lézards jouent au Blood Bowl. Alignant un subtil mélange de dextérité et de force, les équipes de Lustrie peuvent tenir la distance contre une équipe puissante comme celle du Chaos mais sont tout aussi capables d’égaler le jeu de course des Skavens.
+      positions:
+        skink: Skink
+        saurus: Saurus
+        kroxigor: Kroxigor
     necromantic:
       title: Nécromantique
       description: "Les Égarés et Damnés ne rôdent pas toujours dans les forêts et les cimetières du Vieux Monde. Parfois ils se rassemblent pour chasser ceux dont l’âme n’est pas maudite. Trouvant le repos dans de terribles explosions de violence incontrôlée, ces groupes font de leur mieux pour apaiser leurs souffrances : ils arrivent pour jouer une bonne partie de Blowd Bowl."
@@ -436,9 +474,21 @@ lrb6:
     norse:
       title: Nordique
       description: "Les équipes nordiques ont une réputation d’insatiable férocité aussi bien sur le terrain que dans la vie courante. Il faut dire que le Nordique moyen est un psychopathe dangereux qui, lorsqu’il ne passe pas sa vie dans les solitudes glacées et mélancoliques du grand nord, ne pense qu’à trois choses : la bière, les femmes, et un bon gros carnage pour parfaire le tout !"
+      positions:
+        lineman: Trois-quart
+        thrower: Lanceur
+        blitzer: Blitzeur
+        catcher: Receveur
+        ulfwerener: Loup-garou nordique
+        yhetee: Yéti
     nurgle:
       title: Nurgle
       description: Les équipes de Nurgle sont un type d’équipe du Chaos où les joueurs vénèrent le dieu Nurgle. Nurgle est le dieu du Chaos de la corruption et de la maladie et il récompense ses joueurs d’une maladie plutôt déplaisante connue sous le nom de Pourriture de Nurgle. Le fait que les équipes de Nurgle dégagent une odeur affreuse est plus reconnu que prouvé. La vérité est qu’ils sont faits de chair à demi décomposée surmontée d’un nuage de mouches, et que quiconque s’approche suffisamment près pour se faire vraiment une idée de l’odeur, est inévitablement frappé de l’une des pires maladies de Nurgle et généralement meurt avant d’avoir pu suggérer une nouvelle forme d’hygiène corporelle.
+      positions:
+        rotter: Pourri
+        pestigor: Pestigor
+        warrior: Guerrier de Nurgle
+        beast: Bête Nurgle
     ogre:
       title: Ogre
       description: Les équipes d'ogres existent depuis la formation de la NAF et ont même eu certains succès comme gagner le Blood Bowl XV. Cependant, comme toute personne bien pensante vous le dira, avoir plus d'un Ogre au même endroit au même moment est un désastre par nature. La clé de la réussite pour une équipe d'Ogres se résume aux Snotlings. S'ils sont assez proches d'un Ogre pour lui rappeler qu'il joue un match en lui mordillant la jambe, alors vous pouvez avoir le début d’un semblant d’équipe.
@@ -448,21 +498,54 @@ lrb6:
     orc:
       title: Orque
       description: Les Orques jouent au Blood Bowl depuis qu’il a été inventé et leurs équipes, comme les Yeux Crevés ou les Têtes Coupées, comptent parmi les plus fameuses du championnat. La technique des équipes Orques consiste à enfoncer les lignes adverses afin de créer des brèches que leurs coureurs sauront exploiter.
+      positions:
+        lineman: Trois-quart
+        thrower: Lanceur
+        blitzer: Blitzeur
+        black_ork: Bloqueur Orque Noir
+        troll: Troll
+        goblin: Goblin
     skaven:
       title: Skaven
       description: Les Skavens sont loin d’être les plus forts ou les plus endurants, mais mon garçon, qu’ils sont rapides ! Nombreux sont leurs adversaires qui ont été pris de vitesse par des Skavens se faufilant à travers de leurs lignes pour marquer un fulgurant touchdown.
+      positions:
+        lineman: Trois-quart
+        thrower: Lanceur
+        gutter_runner: Coureur d'égout
+        blitzer: Blitzeur
+        rat_ogre: Rat Ogre
     slann:
       title: Slann
       description: L'équipe Slann vient d'une race antique de voyageurs spatiaux échoués sur notre planète il y a des lustres. Après avoir admis qu'ils ne seraient pas secourus, ils s'établirent comme dirigeants des Hommes-Lézards. Certes, la plupart des Slann préfèrent s'engraisser et paresser en donnant des ordres aux Hommes-Lézards, mais quelques-uns des plus jeunes et des plus énergiques se plaisent à parcourir les terres et à jouer au Blood Bowl. Si les Slann n'ont pas de jeu de passe à proprement parler, leurs capacités de sauts, de plongeons et d'interceptions sont sans égales.
+      positions:
+        lineman: Trois-quart
+        thrower: Lanceur
+        blitzer: Blitzeur
+        kroxigor: Kroxigor
     undead:
       title: Morts-Vivants
       description: Dans le Vieux Monde les morts ne trouvent pas facilement le repos. Les Vampires hantent les châteaux, les Nécromanciens cherchent à échapper à la mort au moyen de connaissances immorales, les Liches commandent à des légions de cadavres et les joueurs de Blood Bowl morts depuis longtemps reviennent sur les terrains de leurs gloires passées...
+      positions:
+        skeleton: Squelette
+        zombi: Zombie
+        ghoul: Goule
+        wight: Revenant
+        mummy: Momie
     underworld:
       title: Bas-Fonds
       description: Il peut arriver que les Skaven et les Gobelins qui vivent dans les profondeurs, au-dessous de toutes les races détestées qui marchent au soleil, se regroupent pour former des équipes de Blood Bowl. Les Vermines des Bas-Fonds sont à ce jour la plus connue de ces équipes des Bas-Fonds et celle qui a le mieux réussi. Cependant, ces équipes ont souvent des résultats très faibles, les joueurs passant leur temps à se bagarrer entre eux et à se rejeter la faute les uns sur les autres à chaque match pour les erreurs commises. Le trait distinctif de ces équipes qui attire de nombreux fans est que les joueurs dorment et baignent dans la Malepierre (il y en a même qui en mangent). Bien que la plupart des joueurs potentiels en meurent avant même de s'engager dans une équipe, ceux qui parviennent à rester en vie développent souvent des mutations fascinantes.
+      positions:
+        goblin: Goblin
+        lineman: Trois-quart Skaven
+        thrower: Lanceur Skaven
+        blitzer: Blitzeur Skaven
+        troll: Troll
     vampire:
       title: Vampire
       description: Bien que les équipes Vampires incluent un certain nombre de joueurs extrêmement performants, elles sont pénalisées justement par le manque de fiabilité des Vampires. Alors que ces derniers devraient se concentrer sur le jeu, leur attention se focalise souvent sur leur faim et en moins de temps qu'il ne faut pour le dire, ils en oublient le jeu pour une petite morsure rapide !
+      position:
+        thrall: Serviteur
+        vampire: Vampire
     wood_elf:
       title: Elfes Sylvains
       description: Plus encore que leurs cousins Hauts Elfes, les Elfes Sylvains ne jurent que par la Longue Passe. Tous leurs efforts se tournent donc vers l’amélioration de leur talent dans le jeu de passe et de réception. Pas un Elfe Sylvain ne voit l’intérêt de s’encombrer d’une armure pour frapper l’adversaire. Ils préfèrent compter sur leurs aptitudes acrobatiques naturelles pour les éviter les ennuis, ce qui généralement suffit. Il faut un adversaire agile ou chanceux pour mettre la main sur un Elfe Sylvain !
@@ -472,13 +555,86 @@ lrb6:
         war_dancer: Danseurs de Guerre
         catcher: Receveur
   star_players:
+    title: Star Players
+    barik_farblast:
+      name: Barik Tirloin
     bertha_bigfist:
       name: Bertha GroPoing
+    brick_farth_grotty:
+      name: Pèt'Brick & Minab'
+    brick_farth:
+      name: Pèt'Brick
+    grotty:
+      name: Minab'
+    boomer_dribblesnot:
+      name: Boomer Morvonez
+    boomer_eziasson:
+      name: Blam' Eziasson
+    count_luthor_von_drakenborg:
+      name: Compte Luthor Von Drakenhoff
+    crazy_igor:
+      name: Igor LeFou
+    deeproot_strongbranch:
+      name: Racine Dutronc
+    dolfar_longstride:
+      name: Dolfar Long'jambes
+    eldril_sidewinder:
+      name: Eldril Fendlabise
+    fezglitch:
+      name: Fezglitch
+    flint_churnblade:
+      name: Tronçonneuse Flint
+    fungus_the_loon:
+      name: Fungus le Cinglé
+    glart_smashrip_jr:
+      name: Glart Lavollée Jr.
+    grashnak_blackhoof:
+      name: Grashnak Noirsabots
+    griff_oberwald:
+      name: Griff Oberwald
+    grim_ironjaw:
+      name: Grim Cros d'1cier
+    hack_enslash:
+      name: Hack l'Etripeur
+    #P2
+    hakflem_skuttlespike:
+      name: Hakflem Pointu
+    headsplitter:
+      name: Cass-Crâne
     helmut_wulf:
       name: Helmut Wulf
+    hemlock:
+      name: Hemlock
+    horkon_heartripper:
+      name: Horkon l'Ecorcheur
+    hthark_the_unstoppable:
+      name: Hthark le Défonceur
+    hubris_rakarth:
+      name: Hubris Rakarth
+    humerus_carpal:
+      name: Humerus Carpal
+    icepelt_hammerblow:
+      name: Icepelt Hammerblow
+    ithaca_benoin:
+      name: Ithaca Benoin
+    j_earlice:
+      name: J Oreillefine
+    jordell_freshbreeze:
+      name: Jordell Flèche Vive
+    lewdgrip_whiparm:
+      name: Lewdgrip Fouet'bras
+    lord_borak:
+      name: Lord Borak le Destructeur
+    lottabottol:
+      name: Boutaïdo
+    max_spleenripper:
+      name: Max Ecarlate
+    mighty_zug:
+      name: Zug la Bête
     morg_n_thorg:
       name: Morg ‘n’ Thorg
-
+    nobbla_blackwart:
+      name: Nobbla le Teigne
     prince_moranion:
       name: Prince Moranion
     puggy_baconbreath:

@@ -21,8 +21,8 @@ lrb6:
     halfing_master_chef: Halfling Master Chef
   trait:
     ma:
-      abbr: M
-      title: Move
+      abbr: MA
+      title: Move Allowance
     st:
       abbr: ST
       title: Strength
@@ -31,10 +31,10 @@ lrb6:
       title: Agility
     av:
       abbr: AV
-      title: Armor
+      title: Armor Value
     com:
       abbr: Com
-      title: Com...
+      title: Completions
     td:
       abbr: TD
       title: Touchdowns
@@ -43,7 +43,7 @@ lrb6:
       title: Interceptions
     cas:
       abbr: Cas
-      title: Casualities
+      title: Casualties
     mvp:
       abbr: MVP
       title: Most Valuable Player
@@ -51,19 +51,16 @@ lrb6:
       abbr: SPP
       title: Star Player Points
     skill:
-      abbr: Sk
+      abbr: Sk.
       title: Skills
-    injury:
-      abbr: In
-      title: Injuries
   skill_types:
-    g: General skills
-    s: Strength skills
-    a: Agility skills
-    p: Passing skills
-    m: Mutation skills
-    e: Extraordinary skills
-    c: Characteristic increasements
+    g: General skill
+    s: Strength skill
+    a: Agility skill
+    p: Passing skill
+    m: Mutation skill
+    e: Extraordinary skill
+    c: Characteristic increasement
   experience:
     rookie: Rookie
     experienced: Experienced
@@ -127,6 +124,9 @@ lrb6:
     dead:
       name: DEAD
       effect: Dead!
+  injuries_abbr:
+    M: Miss next game
+    P: Niggling Injury
   skills:
     move_increase:
       title: +1M
@@ -376,14 +376,14 @@ lrb6:
         thrower: Thrower
     chaos:
       title: Chaos
-      description: ~
+      description: Chaos teams are not noted for the subtlety or originality of their game play. A simple drive up the centre of the pitch, maiming and injuring as many opposing players as possible, is about the limit of their game plan. They rarely, if ever, worry about such minor considerations like picking up the ball and scoring touchdowns – not while there are any players left alive on the opposing team, anyway.
       positions:
         minotaur: Minotaur
         warrior: Chaos Warrior
         beastman: Beastman
     chaos_dwarf:
       title: Chaos Dwarfs
-      description: ~
+      description: Chaos Dwarfs are the twisted descendants of Dwarf explorers who have been terribly affected by the forces of Chaos, turning them into evil, self-centred creatures. In one way, however, they haven’tchanged at all – they still love playing Blood Bowl! Chaos Dwarfs are not very numerous and make great use of sneaky Hobgoblin slaves to perform all kinds of tasks, including playing on their Blood Bowl teams.
       positions:
         minotaur: Minotaur
         centaur: Bull Centaurs
@@ -391,7 +391,7 @@ lrb6:
         hobgoblin: Hobgoblins
     chaos_pact:
       title: Chaos Pact
-      description: ~
+      description: Chaos Pact teams are a mix of evil and chaotic races. The Marauders while enthusiastic have to be coached  to fill  the  different needs of  the  team  while  other races  provide  the muscle  and fineness  to support  the  Marauders.  However  due  to  the  arrogance,  stupidity,  or  animalistic  nature  of  the  team members, it is rare to see a well organized and effective Chaos Pact team. The Chaos All-Stars are the best example of how great this team can be with the right coach.
       positions:
         marauder: Marauder
         goblin: Goblin renegade
@@ -402,7 +402,7 @@ lrb6:
         minotaur: Minotaur
     dark_elf:
       title: Dark Elf
-      description: ~
+      description: Evil beyond belief, skilled without doubt, the Dark Elves take to the pitch to show the world their superiority. Dark Elf teams prefer a malevolent and spiteful running game over the passing of their goodly cousins. Backed up by the ruthless Witch Elves and dangerous Assassins, a Dark Elf team has all the tools to power through, rather than around, any opposition line.
       positions:
         witch: Witch
         runner: Runner
@@ -411,7 +411,7 @@ lrb6:
         assassin: Assassin
     dwarf:
       title: Dwarfs
-      description: ~
+      description: Dwarfs seem to be ideal Blood Bowl players, being compact, tough, well-armoured and having a stubborn knack of refusing to die! Most successful Dwarf teams work to the principle that if they can take out all the other team’s potential scorers, and wear down the rest, then there won’t be anybody left to stop them scoring the winning touchdowns!
       positions:
         slayer: Troll slayer
         runner: Runner
@@ -419,8 +419,8 @@ lrb6:
         blocker: Blocker
         death_roller: Death roller
     elf:
-      title: Pro Elves
-      description: ~
+      title: Elf
+      description: When the NAF collapsed, many Elven teams were left penniless. Those teams that have survived the fallout are not as rich as the High Elf teams nor as well equipped, but they sure know how to play thegame. Sporting facemasks and mohawks, they take to the pitch to relive the glory days they once played in.
       positions:
         blitzer: Blitzer
         lineman: Lineman
@@ -428,7 +428,7 @@ lrb6:
         thrower: Thrower
     goblin:
       title: Goblins
-      description: ~
+      description: A Goblin team’s game plan owes much more to hope than potential. Goblins can make quite good catchers because they are small and agile, but the art of throwing is sadly lost to them, while the chances of their blocking anything larger than a Halfling are remote to say the least. Still, this never seems to bother Goblin players, and occasionally the use of a particularly devious secret weapon will even allow a Goblin team to win a match.
       positions:
         troll: Troll
         pogoer: Pogoer
@@ -438,13 +438,13 @@ lrb6:
         goblin: Goblin
     halfling:
       title: Halflings
-      description: ~
+      description: The technical deficiency of Halfling teams is legendary. They’re too short to throw or catch, they run at half pace, and the whole team can spend all afternoon trying to block an Ogre without any chance of success. Most Halfling coaches try to make up for quality with quantity. After all, if you can get half a dozen players in the opposing team’s End Zone and, by some miracle, manage to end up with the ball, then there is a small chance that one or two of them won’t be jelly by the time you throw the thing.
       positions:
         treeman: Treeman
         halfling: Halfling
     high_elf:
       title: High elf
-      description: ~
+      description: The Elven Kingdom sponsored High Elf teams, feature a dangerous passing game and some of the most arrogant players you will find. Rich beyond the dreams of most teams, the High Elves often feature many Princes and noble-born Elves on the team and what they cannot beat, they'll buy.
       positions:
         blitzer: Blitzer
         lineman: Lineman
@@ -452,16 +452,16 @@ lrb6:
         thrower: Thrower
     human:
       title: Human
-      description: ~
+      description: Although Human teams do not have the individual strengths or outstanding abilities available to other races, they do not suffer from any outstanding weakness either. This makes Human teams extremely flexible, equally at home running the ball, passing it, or ignoring it and pounding the opposition into the turf instead!
       positions:
-        ogre: Ogre
-        blitzer: Blitzer
         lineman: Lineman
-        catcher: Catcher
         thrower: Thrower
+        catcher: Catcher
+        blitzer: Blitzer
+        ogre: Ogre
     khemri:
       title: Khemri Tomb Kings
-      description: ~
+      description: Over 8,000 years ago, the Khemri played the first games of Blood Bowl against the Slann. But, as the Kingdom died off, so did the game, until its rediscovery. And as the game returned, it was inevitable that the ancient players and stars of the Khemri would return to the pitch they once played on.
       positions:
         skeleton: Skeleton
         thro_ras: Thro Ras
@@ -469,14 +469,14 @@ lrb6:
         tomb_guardian: Tomb Guardian
     lizardmen:
       title: Lizardmen
-      description: ~
+      description: The Mage-Priests foretold the game of Blood Bowl thousands of years before it was discovered by the Dwarf Roze-El, so it is no surprise that the Lizardmen play Blood Bowl. Providing an odd blend of dexterity and strength, the Lustrian team can almost last the distance against a power team such as Chaos, while remaining able to pull off the running plays of the Skaven.
       positions:
         skink: Skink
         saurus: Saurus
         kroxigor: Kroxigor
     necromantic:
       title: Necromantic
-      description: ~
+      description: The damned and the cursed do not always lurk in the forests or in the graveyards of the Old World. Sometimes they come together, forming a group to hunt those more fortunate of souls. Finding relief incrazed outbursts of terrible violence, these groups do the best they can to ease their suffering - they pop off for a nice game of Blood Bowl.
       positions:
         zombi: Zombi
         ghoul: Ghoul
@@ -485,7 +485,7 @@ lrb6:
         golem: Golem
     norse:
       title: Norse
-      description: ~
+      description: Norse teams have a well deserved reputation for ferocity both on and off the playing pitch. The Norse that takes up Blood Bowl is a truly unedifying specimen, interested only in beer, women and song off the playing pitch, and beer, women and bloody carnage while on it!
       positions:
         lineman: Lineman
         thrower: Thrower
@@ -495,7 +495,7 @@ lrb6:
         yhetee: Yhetee
     nurgle:
       title: Nurgle
-      description: ~
+      description: Nurgle teams are a form of Chaos team whose players worship the god Nurgle. Nurgle is the Chaos god of corruption and disease, and he rewards his players by granting them a rather unpleasant disease known as Nurgle’s Rot. The fact that Nurgle teams smell awful is assumed rather than proven. True, they are all made up of semi decomposed flesh surrounded by swarms of flies, but by the time anyone gets close enough to get a really accurate whiff, he has inevitably caught one of Nurgle’s nasty diseases, and he usually dies before he can suggest a new personal hygiene regime.
       positions:
         rotter: Rotter
         pestigor: Pestigor
@@ -503,23 +503,23 @@ lrb6:
         beast: Nurgle Beast
     ogre:
       title: Ogre
-      description: ~
+      description: Ogre teams have existed since the forming of the NAF and have even had some success such as winning the XV Blood Bowl. However, as any right-minded person will tell you, having more than one Ogre in the same place at the same time is a disaster in the making. The key to an Ogre team is the Snotlings. If they are close enough to jab an Ogre in the leg to remind him that they are playing in amatch then you may have the makings of a team.
       positions:
-        ogre: Ogre
         snotling: Snotling
+        ogre: Ogre
     orc:
       title: Orc
-      description: ~
+      description: Orcs have been playing Blood Bowl since the game was invented, and Orc teams such as the Gouged Eye and Severed Heads are amongst the best in the league. Orc teams are tough and hard-hitting, grinding down the opposition’s line to create gaps for their excellent Orc Blitzers to exploit.
       positions:
-        troll: Troll
-        goblin: Goblin
-        blitzer: Blitzer
         lineman: Lineman
-        black_ork: Black Ork Blocker
+        goblin: Goblin
         thrower: Thrower
+        blitzer: Blitzer
+        black_ork: Black Ork Blocker
+        troll: Troll
     skaven:
       title: Skaven
-      description: ~
+      description: They may not be all that strong, they certainly aren’t tough, but boy oh boy are Skaven fast! Many an opponent has been left in the starting blocks as fast-moving Skaven players scamper through a gap in the line and run in for a lightning fast touchdown.
       positions:
         lineman: Lineman
         thrower: Thrower
@@ -528,7 +528,7 @@ lrb6:
         rat_ogre: Rat Ogre
     slann:
       title: Slann
-      description: ~
+      description: The Slann team is an ancient race of space travellers stranded on our planets many ages ago. After realizing that rescue was never coming they settled down and began ordering the Lizardmen around as their leaders. While most Slann prefer to become fat and lazy lording over the Lizardmen, a few of younger and more energetic members enjoy travelling the realm and playing Blood Bowl. While the Slann have no passing game to speak of, their ability to leap, dive, and intercept are second to none.
       positions:
         lineman: Lineman
         catcher: Catcher
@@ -536,7 +536,7 @@ lrb6:
         Kroxigor: Kroxigor
     undead:
       title: Undead
-      description: ~
+      description: In the Old World the dead do not rest easy. Vampires lurk in haunted castles, Necromancers seek to escape death by searching for forbidden knowledge, the Liche-lords rule over legions of corpses, and on the Blood Bowl field, players who died long ago return to the scenes of their former glory and playBlood Bowl once again...
       positions:
         skeleton: Skeleton
         zombi: Zombi
@@ -545,7 +545,7 @@ lrb6:
         mummy: Mummy
     underworld:
       title: Underworld
-      description: ~
+      description: On occasion the Skaven and Goblins living below all the hated races walking above in the sun team together to form Blood Bowl teams. The Underworld Creepers are the best known and most successful of these Underworld teams to date. However these teams often have very poor records as they spend most of their time infighting and blaming each other for the errors for each play. The one feature of this team that makes many fans attend is that the players sleep and bathe in Warpstone (and some eat it). While this kills off most of the potential players before they ever join a team, the ones that do survive often develop fascinating mutations.
       positions:
         goblin: Goblin
         lineman: Skaven Lineman
@@ -554,13 +554,13 @@ lrb6:
         troll: Troll
     vampire:
       title: Vampire
-      description: ~
+      description: Although Vampire teams include a number of extremely capable players, they are let down by the unreliability of the Vampires. While they should be concentrating on the game, their attention often wanders to their hunger and before you know it they are off for a quick bite!
       positions:
         thrall: Thrall
         vampire: Vampire
     wood_elf:
       title: Wood elf
-      description: ~
+      description: For Wood Elves the Long pass is everything, even more so than their High Elf cousins, and all of theireffort goes into being an expert at throwing or receiving. No Wood Elf worth his salt is going to be weighed down by extra Armour and be forced to lurk about, attempting to knock opposing players over. Instead they rely on their natural athletic ability to keep them out of trouble, which is normally enough – it takes a very agile or lucky opponent to lay a hand on a Wood Elf!
       positions:
         war_dancer: War Dancer
         lineman: Lineman

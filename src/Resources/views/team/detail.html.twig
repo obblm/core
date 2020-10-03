@@ -5,15 +5,17 @@
 {% block body %}
     <section id="team-sheet" class="container">
         <nav class="action">
-        {% if(is_granted('team.edit', version.team)) %}
-            <a href="{{ path('obblm_team_edit', {'team': version.team.id}) }}">
-                {{ 'obblm.layout.tools.actions.edit'|trans({}, 'obblm') }}
-            </a> -
-            <a href="{{ path('obblm_team_delete', {'team': version.team.id}) }}">
-                {{ 'obblm.layout.tools.actions.delete'|trans({}, 'obblm') }}
-            </a> -
-            <a target="_blank" href="{{ path('obblm_team_pdf', {'team': version.team.id}) }}">
+            <a class="button" target="_blank" href="{{ path('obblm_team_pdf', {'team': version.team.id}) }}">
                 {{ 'obblm.layout.tools.actions.pdf'|trans({}, 'obblm') }}
+            </a>
+        {% if(is_granted('team.edit', version.team)) %}
+            <a class="button orange" href="{{ path('obblm_team_edit', {'team': version.team.id}) }}">
+                {{ 'obblm.layout.tools.actions.edit'|trans({}, 'obblm') }}
+            </a>
+        {% endif %}
+        {% if(is_granted('team.delete', version.team)) %}
+            <a class="button red" href="{{ path('obblm_team_delete', {'team': version.team.id}) }}">
+                {{ 'obblm.layout.tools.actions.delete'|trans({}, 'obblm') }}
             </a>
         {% endif %}
         </nav>
@@ -121,14 +123,17 @@
             {% include '@ObblmCore/team/sheet.html.twig' with { 'team': version.team } %}
         </section>
         <aside class="fluff two boxes">
-            <div class="fluff box container">
-                <h2 class="title">{{ 'obblm.sheet.fluff'|trans({}, 'obblm') }}</h2>
+            {% if version.team.fluff %}
+            <div class="box text fluff container">
+                <h3>{{ 'obblm.layout.tools.didyouknow'|trans({}, 'obblm') }}</h3>
                 <div>{{ version.team.fluff }}</div>
             </div>
+            {% endif %}
+            {% if version.team.anthem %}
             <div class="anthem box container">
-                <h2 class="title">{{ 'obblm.sheet.anthem'|trans({}, 'obblm') }}</h2>
                 <div>{{ version.team.anthem|nl2br }}</div>
             </div>
+            {% endif %}
         </aside>
     </section>
 {% endblock %}

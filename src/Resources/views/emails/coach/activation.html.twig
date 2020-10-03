@@ -14,7 +14,7 @@
             <p>{{ 'obblm.emails.coach.activation.text'|trans({}, 'obblm', coach.locale) }}</p>
         </div>
         <div class="aligned center">
-            <a class="button" href="{{ absolute_url(path('app_login')) }}">{{ 'obblm.emails.coach.activation.link_to_login'|trans({}, 'obblm', coach.locale) }}</a>
+            <a class="button" href="{{ absolute_url(path('obblm_login')) }}">{{ 'obblm.emails.coach.activation.link_to_login'|trans({}, 'obblm', coach.locale) }}</a>
         </div>
     </div>
 {% endblock%}

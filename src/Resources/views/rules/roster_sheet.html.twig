@@ -7,6 +7,17 @@
     ~ ' > ' ~ title %}
 {% block body %}
     <h1 class="title">{{ title }}</h1>
+    <div class="didyouknow">
+        {% if roster_image(rule, team.roster) %}
+        <div class="image">
+            <img src="{{ roster_image(rule, team.roster) }}">
+        </div>
+        {% endif %}
+        <div class="text container">
+            <h3>{{ 'obblm.layout.tools.didyouknow'|trans({}, 'obblm') }}</h3>
+            <p>{{ team|roster_description|trans({}, rule.ruleKey) }}</p>
+        </div>
+    </div>
     {% embed '@ObblmCore/team/table.' ~ rule.template ~ '.html.twig' with { 'team': team,  'players': team.availablePlayers } %}
         {% block player_head_number %}<th>Max</th>{% endblock %}
         {% block player_head_name %}{% endblock %}
