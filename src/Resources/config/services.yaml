@@ -25,6 +25,13 @@ services:
       - 3600
       - '%kernel.cache_dir%/obblm/rules'
 
+  Obblm\Core\Listener\EmailSubscriber:
+    autowire: true
+    arguments:
+      $senderMail: "%obblm.email_sender.email%"
+      $senderName: "%obblm.email_sender.name%"
+    tags: ['kernel.event_subscriber']
+
   Obblm\Core\Helper\RuleHelper:
     autowire: true
     public: true

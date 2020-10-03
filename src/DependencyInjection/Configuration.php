@@ -17,6 +17,11 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->getRootNode();
         $treeBuilder->getRootNode()
                 ->children()
+                    ->arrayNode('email_sender')
+                    ->isRequired()
+                    ->children()
+                        ->scalarNode('email')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('name')->isRequired()->cannotBeEmpty()->end()
                     ->scalarNode('upload_directory')
                     ->end()
                     ->scalarNode('public_cache_directory')

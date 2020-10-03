@@ -13,13 +13,15 @@ use Symfony\Component\Mime\Address;
 class EmailSubscriber implements EventSubscriberInterface
 {
     protected $bus;
-    protected $senderMail = "noreply@obblm.com"; // TODO: change with env var
-    protected $senderName = "BBLM"; // TODO: change with env var
+    protected $senderMail;
+    protected $senderName;
     protected $defaultSender;
 
-    public function __construct(MessageBusInterface $bus)
+    public function __construct(MessageBusInterface $bus, $senderMail, $senderName)
     {
         $this->bus = $bus;
+        $this->senderMail = $senderMail;
+        $this->senderName = $senderName;
         $this->defaultSender = new Address($this->senderMail, $this->senderName);
     }
 
