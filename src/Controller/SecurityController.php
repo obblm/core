@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\VarDumper\VarDumper;
 
 class SecurityController extends AbstractController
 {
@@ -25,6 +26,7 @@ class SecurityController extends AbstractController
         if ($this->getUser()) {
             return $this->redirectToRoute('obblm_dashboard');
         }
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -34,6 +36,14 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
+    }
+
+    /**
+     * @Route("/{_locale}", name="obblm_locale_switch")
+     */
+    public function localeSwitch()
+    {
+        return $this->redirectToRoute('obblm_dashboard');
     }
 
     /**
@@ -65,7 +75,12 @@ class SecurityController extends AbstractController
             $dispatcher->dispatch($event, RegisterCoachEvent::NAME);
 
             $entityManager->flush();
-            return $this->redirectToRoute('obblm_dashboard');
+
+            $this->addFlash(
+                'success',
+                'obblm.flash.account.created'
+            );
+            return $this->redirectToRoute('obblm_login');
         }
 
         return $this->render('@ObblmCore/security/register.html.twig', [
@@ -84,7 +99,12 @@ class SecurityController extends AbstractController
         $coach = $entityManager->getRepository(Coach::class)->findOneByHash($hash);
 
         if (!$coach) {
-            throw $this->createNotFoundException('The coach does not exist');
+            $this->addFlash(
+                'error',
+                'obblm.flash.account.not_found_by_hash'
+            );
+
+            return $this->redirectToRoute('obblm_login');
         }
 
         if (!$coach->isActive()) {
@@ -94,7 +114,19 @@ class SecurityController extends AbstractController
             $event = new ActivateCoachEvent($coach);
             $dispatcher->dispatch($event, ActivateCoachEvent::NAME);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'obblm.flash.account.activated'
+            );
+
+            return $this->redirectToRoute('obblm_login');
         }
+
+        $this->addFlash(
+            'success',
+            'obblm.flash.account.already_activated'
+        );
 
         return $this->redirectToRoute('obblm_login');
     }

@@ -1,7 +1,7 @@
 {% for label, messages in app.flashes(['success', 'info', 'warning', 'error']) %}
     {% for message in messages %}
         <div class="flash message closable {{ label }}">
-            {{ message }}
+            {{ message|trans({}, 'obblm') }}
         </div>
     {% endfor %}
 {% endfor %}

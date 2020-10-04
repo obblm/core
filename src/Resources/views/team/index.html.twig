@@ -7,8 +7,8 @@
             {{ 'obblm.team.actions.add'|trans({}, 'obblm') }}
         </a>
     </div>
-    <h1 class="title">{{ 'obblm.team.mine.title'|trans({}, 'obblm') }}</h1>
     {% include '@ObblmCore/partials/flash.html.twig' %}
+    <h1 class="title">{{ 'obblm.team.mine.title'|trans({}, 'obblm') }}</h1>
     <div class="boxes three teams">
     {% for team in teams %}
         {% include '@ObblmCore/team/team-list-item.html.twig' with { 'team': team } %}

@@ -1,6 +1,7 @@
 {% extends '@ObblmCore/base.html.twig'%}
 
 {% block body %}
+    {% include '@ObblmCore/partials/flash.html.twig' %}
     <h1 class="title">{{ 'obblm.users.title'|trans({}, 'obblm') }}</h1>
     <ul class="five boxes">
         {% for item in users %}

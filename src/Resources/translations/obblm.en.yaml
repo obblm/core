@@ -185,3 +185,15 @@ obblm:
 
   users:
     title: Users
+
+  flash:
+    team:
+      created: Your team was successfully created!
+      saved: Your team was successfully saved!
+      deleted: Your team was successfully deleted!
+    account:
+      created: Your team was successfully created! However, we have sent you an email to verify your address and activate your account, take a look before login!
+      activated: Your account was successfully activated, you can now login!
+      already_activated: Your account is already activated, you can login.
+      not_found_by_hash: No user found. Verify your email or contact your administrator.
+      updated: Your account was successfully updated!

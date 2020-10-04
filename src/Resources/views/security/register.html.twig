@@ -5,6 +5,7 @@
 {% block body %}
     {% form_theme form '@ObblmCore/form/ui-form.html.twig'%}
     {{ form_start( form, {'attr': {'class': 'form register container'}} ) }}
+    {% include '@ObblmCore/partials/flash.html.twig' %}
     <h1 class="title">
         <i class="icon mdi mdi-football"></i>
         {{ 'obblm.forms.register.title'|trans({}, 'obblm') }}

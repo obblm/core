@@ -9,6 +9,7 @@
             <i class="icon mdi mdi-football"></i>
             {{ 'obblm.forms.login.title'|trans({}, 'obblm') }}
         </h1>
+        {% include '@ObblmCore/partials/flash.html.twig' %}
         {% if error %}
             <div class="error message closable clearfix">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}

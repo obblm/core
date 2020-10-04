@@ -3,6 +3,7 @@
 {% block title 'obblm.account.title'|trans({}, 'obblm') %}
 {% block body %}
     {{ form_start( form, {'attr': {'class': 'form container'}} ) }}
+    {% include '@ObblmCore/partials/flash.html.twig' %}
     <h1 class="title">{{ 'obblm.account.title'|trans({}, 'obblm') }}</h1>
     <div class="field">
         {{ form_label( form.username ) }}

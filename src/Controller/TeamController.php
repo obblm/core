@@ -112,7 +112,7 @@ class TeamController extends AbstractTeamController
             $em->flush();
             $this->addFlash(
                 'success',
-                'Your changes were saved!'
+                'obblm.flash.team.saved'
             );
             return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);
         }
@@ -137,6 +137,10 @@ class TeamController extends AbstractTeamController
                 $uploader->removeOldFile();
                 $em->remove($team);
                 $em->flush();
+                $this->addFlash(
+                    'success',
+                    'obblm.flash.team.deleted'
+                );
                 return $this->redirectToRoute('obblm_team_mine');
             }
             return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);
