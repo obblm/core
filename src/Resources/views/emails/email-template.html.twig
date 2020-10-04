@@ -1,9 +1,11 @@
-{% apply inline_css(source('@obblm_css/reset.css'), source('@obblm_css/email.css')) %}
+{% apply inline_css %}
 <html>
-<style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
-    @import url('https://fonts.googleapis.com/css?family=Lato:300,400,500');
-</style>
+    {% for css in obblm_css('reset', 'core') %}
+    <link rel="stylesheet" href="{{ absolute_url( asset( css ) ) }}">
+    {% endfor %}
+    {% for css in obblm_css('email', 'core') %}
+        <link rel="stylesheet" href="{{ absolute_url( asset( css ) ) }}">
+    {% endfor %}
 <body>
 <div class="main container">
     <table class="table email">

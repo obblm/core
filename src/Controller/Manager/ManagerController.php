@@ -2,6 +2,7 @@
 
 namespace Obblm\Core\Controller\Manager;
 
+use Obblm\Core\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +20,7 @@ class ManagerController extends AbstractController
      */
     public function index():Response
     {
-        $this->denyAccessUnlessGranted('OBBLM_USER');
+        $this->denyAccessUnlessGranted(Roles::MANAGER);
         return $this->render('@ObblmCore/todo.html.twig', []);
     }
 }

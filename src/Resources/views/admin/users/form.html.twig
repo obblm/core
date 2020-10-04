@@ -2,11 +2,22 @@
 
 {% block body %}
     <div>
-        {% form_theme form with ["form/form-vuetify.html.twig"] %}
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <div class="submit">
-            <input type="submit" value="Save" />
+        {% form_theme form with ["@ObblmCore/form/ui-form.html.twig"] %}
+        {{ form_start(form, {'attr': {'class': 'form container'}}) }}
+        <h1 class="title">{{ form.vars.value.username }}</h1>
+        <div class="field">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+        </div>
+        <div class="field">
+            {{ form_label(form.plainPassword) }}
+            {{ form_widget(form.plainPassword) }}
+            {{ form_errors(form.plainPassword) }}
+        </div>
+        {{ form_rest(form) }}
+        <div class="submit center aligned">
+            <input class="button" type="submit" value="Save" />
         </div>
         {{ form_end(form) }}
     </div>

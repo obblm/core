@@ -4,9 +4,10 @@
     <ul>
         {% for item in rules %}
             <li>
-                {{ item.name }} ({{ item.ruleKey }})
-                - <a href="#edit-{{ item.id }}">Edit</a>
-                - <a href="#delete-{{ item.id }}">Delete</a>
+                {% if item.isReadonly %}
+                    <i class="icon mdi mdi-lock"></i>
+                {% endif %}
+                {{ item|rule_name|trans({}, item.ruleKey) }} ({{ item.ruleKey }})
             </li>
         {% endfor %}
     </ul>

@@ -182,3 +182,6 @@ obblm:
         text: 'You can now login and create your first team!'
         click_link_below: 'To log in click on the link below :'
         link_to_login: 'Log me in'
+
+  users:
+    title: Users
