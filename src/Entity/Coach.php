@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="obblm_coach")
  * @UniqueEntity(fields="email", message="Email is already taken.")
  * @UniqueEntity(fields="username", message="Username is already taken.")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Coach implements UserInterface, EmailObjectInterface
 {
@@ -85,6 +86,21 @@ class Coach implements UserInterface, EmailObjectInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $hash;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $resetPasswordAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $resetPasswordHash;
 
     public function __construct()
     {
@@ -170,7 +186,7 @@ class Coach implements UserInterface, EmailObjectInterface
      */
     public function getSalt()
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+
     }
 
     /**
@@ -178,8 +194,7 @@ class Coach implements UserInterface, EmailObjectInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+
     }
 
     /**
@@ -211,11 +226,6 @@ class Coach implements UserInterface, EmailObjectInterface
         }
 
         return $this;
-    }
-
-    public function __toString():string
-    {
-        return $this->username;
     }
 
     public function getFirstName(): ?string
@@ -287,5 +297,54 @@ class Coach implements UserInterface, EmailObjectInterface
         $this->hash = $hash;
 
         return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getResetPasswordAt(): ?\DateTimeInterface
+    {
+        return $this->resetPasswordAt;
+    }
+
+    public function setResetPasswordAt(?\DateTimeInterface $resetPasswordAt): self
+    {
+        $this->resetPasswordAt = $resetPasswordAt;
+
+        return $this;
+    }
+
+    public function getResetPasswordHash(): ?string
+    {
+        return $this->resetPasswordHash;
+    }
+
+    public function setResetPasswordHash(?string $resetPasswordHash): self
+    {
+        $this->resetPasswordHash = $resetPasswordHash;
+
+        return $this;
+    }
+
+    public function __toString():string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTime();
     }
 }

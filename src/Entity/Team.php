@@ -6,6 +6,7 @@ use Obblm\Core\Entity\Traits\CoverTrait;
 use Obblm\Core\Entity\Traits\LogoTrait;
 use Obblm\Core\Entity\Traits\NameTrait;
 use Obblm\Core\Entity\Traits\RuleTrait;
+use Obblm\Core\Entity\Traits\TimeStampableTrait;
 use Obblm\Core\Helper\Rule\CanHaveRuleInterface;
 use Obblm\Core\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=TeamRepository::class)
  * @ORM\Table(name="obblm_team")
+ * @ORM\HasLifecycleCallbacks
  */
 class Team implements CanHaveRuleInterface
 {
@@ -26,15 +28,13 @@ class Team implements CanHaveRuleInterface
      */
     private $id;
 
-    use NameTrait;
+    use NameTrait, RuleTrait, LogoTrait, CoverTrait, TimeStampableTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity=Coach::class, inversedBy="teams")
      * @ORM\JoinColumn(nullable=false)
      */
     private $coach;
-
-    use RuleTrait;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -56,10 +56,6 @@ class Team implements CanHaveRuleInterface
      * @ORM\OrderBy({"number"="ASC"})
      */
     private $players;
-
-    use LogoTrait;
-
-    use CoverTrait;
 
     /**
      * @ORM\Column(type="boolean")

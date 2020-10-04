@@ -2,6 +2,7 @@
 
 namespace Obblm\Core\Entity;
 
+use Obblm\Core\Entity\Traits\TimeStampableTrait;
 use Obblm\Core\Repository\TeamVersionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,10 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=TeamVersionRepository::class)
  * @ORM\Table(name="obblm_team_version")
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\HasLifecycleCallbacks
  */
 class TeamVersion
 {
+    use TimeStampableTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -366,5 +369,11 @@ class TeamVersion
         $this->points = $points;
 
         return $this;
+    }
+
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTime();
+        $this->getTeam()->setUpdatedAt(new \DateTime());
     }
 }
