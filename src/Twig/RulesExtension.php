@@ -14,7 +14,6 @@ use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\Rule\Inducement\MultipleStarPlayer;
 use Obblm\Core\Helper\Rule\Skill\Skill;
 use Obblm\Core\Helper\RuleHelper;
-use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -99,7 +98,6 @@ class RulesExtension extends AbstractExtension
 
     public function getStarPlayerRosters(Player $starPlayer)
     {
-        VarDumper::dump($starPlayer);
         //$inducement
     }
 
