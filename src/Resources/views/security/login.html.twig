@@ -4,6 +4,17 @@
 
 {% block body %}
 <div class="container">
+    <div class="locale-switcher aligned right">
+        {{ 'obblm.layout.locale_switch'|trans({}, 'obblm') }} :
+        <ul>
+        {% for locale_route in get_available_locales() %}
+            {% if locale_route._locale != app.request.locale %}
+            <li><a href="{{ locale_route.route }}">{{ locale_route._locale }}</a></li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+
+    </div>
     <form method="post" class="form login container">
         <h1 class="title">
             <i class="icon mdi mdi-football"></i>

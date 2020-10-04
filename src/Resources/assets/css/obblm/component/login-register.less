@@ -12,3 +12,25 @@
     max-width: 35rem;
   }
 }
+
+.locale-switcher {
+  box-sizing: border-box;
+  max-width: 30rem;
+  margin-left: auto;
+  margin-right: auto;
+  > ul {
+    display: inline;
+    > li {
+      text-transform: uppercase;
+      display: inline;
+      &:before {
+        content: ' | ';
+      }
+      &:first-child {
+        &:before {
+          content: '';
+        }
+      }
+    }
+  }
+}

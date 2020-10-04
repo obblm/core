@@ -3,6 +3,7 @@ obblm:
   full_title: Open Blood Bowl league manager
 
   layout:
+    locale_switch: Switch language to
     header:
       my_account: Edit my profile
       logout: Log out
