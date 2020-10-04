@@ -5,9 +5,9 @@
 {% block body %}
     <section id="team-sheet" class="container page-jump">
         {% include '@ObblmCore/partials/flash.html.twig' %}
-        <header {% if(version.team.coverFilename) %}class="header has-background" style="background-image: url({{ 'http://web/' ~ team_cover(version.team) }});"{% else %}class="header"{% endif %}>
+        <header {% if(version.team.coverFilename) %}class="header has-background" style="background-image: url({{ absolute_url( team_cover(version.team) ) }});"{% else %}class="header"{% endif %}>
             <div class="logo">
-                <img alt="{{ version.team.name }}" class="image" src="{{ 'http://web/' ~ team_logo(version.team) }}">
+                <img alt="{{ version.team.name }}" class="image" src="{{ absolute_url( team_logo(version.team) ) }}">
             </div>
             <div class="content">
                 <h1 class="title">{{ version.team.name }}</h1>

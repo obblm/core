@@ -73,7 +73,7 @@ class TeamVoter extends Voter
             return true;
         }
         // this assumes that the Team object has a `getCoach()` method
-        if($coach === $team->getCoach() &&
+        if ($coach === $team->getCoach() &&
             !$team->isLockedByManagment()) {
             return true;
         }
@@ -87,7 +87,7 @@ class TeamVoter extends Voter
             return true;
         }
         // this assumes that the Team object has a `getCoach()` method
-        if($coach === $team->getCoach() &&
+        if ($coach === $team->getCoach() &&
             !$team->isReady() &&
             !$team->isLockedByManagment()) {
             return true;

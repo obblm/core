@@ -127,7 +127,7 @@ class RulesExtension extends AbstractExtension
             }
         }
         $translator = $this->translator;
-        $closure = function(Player $starPlayer) use ($translator, $rule) {
+        $closure = function (Player $starPlayer) use ($translator, $rule) {
             $starPlayer->setName($translator->trans($starPlayer->getName(), [], $rule->getRuleKey()));
             return $starPlayer;
         };
@@ -169,14 +169,14 @@ class RulesExtension extends AbstractExtension
 
         $returnSkills = $helper->getSkills();
 
-        if($skills !== null) {
+        if ($skills !== null) {
             $filter = Criteria::create()->where(Criteria::expr()->in('key', $skills));
             $returnSkills = $returnSkills->matching($filter);
         }
         $order = Criteria::create()->orderBy(['name' => 'ASC']);
 
         $translator = $this->translator;
-        $closure = function(Skill $skill) use ($translator, $rule) {
+        $closure = function (Skill $skill) use ($translator, $rule) {
             $skill->setName($translator->trans($skill->getName(), [], $rule->getRuleKey()));
             return $skill;
         };
