@@ -6,43 +6,43 @@
     {% include '@ObblmCore/partials/flash.html.twig' %}
     <h1 class="title">{{ 'obblm.account.title'|trans({}, 'obblm') }}</h1>
     <div class="field">
-        {{ form_label( form.username ) }}
+        {{ form_label( form.username, 'obblm.forms.coach.fields.username'|trans({}, 'obblm') ) }}
         {{ form_widget( form.username ) }}
         <div class="like-input">{{ form.username.vars.value }}</div>
         {{ form_errors( form.username ) }}
     </div>
     <div class="two boxes">
         <div class="box field">
-            {{ form_label( form.firstName ) }}
+            {{ form_label( form.firstName, 'obblm.forms.coach.fields.first_name'|trans({}, 'obblm') ) }}
             {{ form_widget( form.firstName ) }}
             {{ form_errors( form.firstName ) }}
         </div>
         <div class="box field">
-            {{ form_label( form.lastName ) }}
+            {{ form_label( form.lastName, 'obblm.forms.coach.fields.last_name'|trans({}, 'obblm') ) }}
             {{ form_widget( form.lastName ) }}
             {{ form_errors( form.lastName ) }}
         </div>
     </div>
     <div class="field">
-        {{ form_label( form.email ) }}
+        {{ form_label( form.email, 'obblm.forms.coach.fields.email'|trans({}, 'obblm') ) }}
         {{ form_widget( form.email ) }}
         {{ form_errors( form.email ) }}
     </div>
     <div class="field selector">
-        {{ form_label( form.locale ) }}
+        {{ form_label( form.locale, 'obblm.forms.coach.fields.locale'|trans({}, 'obblm') ) }}
         {{ form_widget( form.locale ) }}
         {{ form_errors( form.locale ) }}
     </div>
     <div>
-        <span>{{ form_label( form.plainPassword ) }}</span>
+        <span>{{ form_label( form.plainPassword, 'obblm.forms.coach.fields.password'|trans({}, 'obblm') ) }}</span>
         <div class="two boxes">
             <div class="box field">
-                {{ form_label( form.plainPassword.first ) }}
+                {{ form_label( form.plainPassword.first, 'obblm.forms.coach.fields.password'|trans({}, 'obblm') ) }}
                 {{ form_widget( form.plainPassword.first ) }}
                 {{ form_errors( form.plainPassword.first ) }}
             </div>
             <div class="box field">
-                {{ form_label( form.plainPassword.second ) }}
+                {{ form_label( form.plainPassword.second, 'obblm.forms.coach.fields.repeat_password'|trans({}, 'obblm') ) }}
                 {{ form_widget( form.plainPassword.second ) }}
                 {{ form_errors( form.plainPassword.second ) }}
             </div>
@@ -50,8 +50,8 @@
     </div>
     {{ form_rest( form ) }}
     <div class="actions aligned center">
-        <button type="submit">
-            Submit
+        <button class="button" type="submit">
+            {{ 'obblm.layout.tools.actions.save'|trans({}, 'obblm') }}
         </button>
     </div>
     {{ form_end( form ) }}

@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\Criteria;
 use Obblm\Core\Entity\Coach;
 use Obblm\Core\Security\Roles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,6 +23,18 @@ class FrontendController extends AbstractController
         $this->denyAccessUnlessGranted(Roles::COACH);
 
         return $this->render('@ObblmCore/dashboard/index.html.twig');
+    }
+
+    /**
+     * @Route("/{_locale}", name="locale_switch")
+     */
+    public function localeSwitch(Request $request)
+    {
+        if($request->headers->get('referer'))
+        {
+            return $this->redirect($request->headers->get('referer'));
+        }
+        return $this->redirectToRoute('obblm_dashboard');
     }
 
     public function lastTeams($max = 5):Response

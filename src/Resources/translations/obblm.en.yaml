@@ -1,7 +1,9 @@
 obblm:
   title: OBBLM
   full_title: Open Blood Bowl league manager
-
+  locales:
+    fr: French
+    en: English
   layout:
     locale_switch: Switch language to
     header:
@@ -24,6 +26,8 @@ obblm:
         create: Create
         edit: Edit
         delete: Delete
+        save: Save
+        submit: Submit
         pdf: Export as PDF
 
   trait:
@@ -112,12 +116,27 @@ obblm:
       register: Create my account
     login:
       title: Login to OBBML
-      login: Login
-      password: Password
       button: Login
+    forgot_password:
+      title: Forgot your password ?
+      button: Send me an email to change it
+    reset_password:
+      title: Reset your password
+      button: Save and change it
     submission:
       button: Submit
       error: There were some errors with your submission
+    coach:
+      fields:
+        username: Login
+        username_or_email: Login or Email
+        email: Email
+        first_name: First name
+        last_name: Last name
+        locale: Language
+        password: Password
+        repeat_password: Password confirmation
+
     team:
       create:
         title: Create a team for ?
@@ -162,6 +181,13 @@ obblm:
 
   emails:
     coach:
+      reset_password:
+        title: 'Hello %receiver%, reset your password'
+        text:
+          hello: 'Hello %receiver%, you have requested to reset your password.'
+          reset: 'Click on the link bellow to change it.'
+          warning: "Be careful : This link is active only 24H."
+        link_to_reset: 'Reset my password'
       registration:
         welcome: 'Hello %receiver%, welcome to OBBLM.'
         text:
@@ -193,8 +219,12 @@ obblm:
       saved: Your team was successfully saved!
       deleted: Your team was successfully deleted!
     account:
-      created: Your team was successfully created! However, we have sent you an email to verify your address and activate your account, take a look before login!
+      created: Your account was successfully created! However, we have sent you an email to verify your address and activate your account, take a look before login!
       activated: Your account was successfully activated, you can now login!
       already_activated: Your account is already activated, you can login.
       not_found_by_hash: No user found. Verify your email or contact your administrator.
       updated: Your account was successfully updated!
+      forgot_password:
+        sent: An email to change your password have been sent!
+        not_found: No account has been founded for this key, please check your emails or contact an administrator.
+        changed: Your password has been updated, you can now login.

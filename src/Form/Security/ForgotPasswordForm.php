@@ -3,26 +3,28 @@
 namespace Obblm\Core\Form\Security;
 
 use Obblm\Core\Entity\Coach;
-use Obblm\Core\Form\Coach\BaseUserConfirmType;
+use Obblm\Core\Validator\Constraints\EntityExists;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RegistrationForm extends BaseUserConfirmType
+class ForgotPasswordForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
         $builder
-            ->add('username')
+            ->add('email', null, [
+                'constraints' => [
+                    new EntityExists()
+                ]
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        parent::configureOptions($resolver);
         $resolver->setDefaults(array(
             'translation_domain' => 'obblm',
-            'data_class' => Coach::class,
         ));
     }
 }

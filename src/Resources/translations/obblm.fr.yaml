@@ -1,8 +1,12 @@
 obblm:
   title: OBBLM
   full_title: Open Blood Bowl league manager
+  locales:
+    fr: French
+    en: English
 
   layout:
+    locale_switch: Changer la langue pour
     header:
       my_account: Editer mon profil
       logout: Se déconnecter
@@ -23,6 +27,8 @@ obblm:
         create: Créer
         edit: Modifier
         delete: Supprimer
+        save: Sauver
+        submit: Soumettre
         pdf: Exporter en PDF
 
   trait:
@@ -129,12 +135,25 @@ obblm:
       register: Créer mon compte
     login:
       title: Se connecter à OBBML
-      login: Identifiant
-      password: Mot de passe
       button: Me connecter
+    forgot_password:
+      title: Mot de passe oublié ?
+      button: M'envoyer un email pour le changer
+    reset_password:
+      title: Modifiez votre mot de passe
+      button: Enregistrer
     submission:
       button: Envoyer
       error: Il y a des erreurs dans votre formulaire
+    coach:
+      fields:
+        username: Identifiant
+        email: Email
+        first_name: Prénom
+        last_name: Nom
+        locale: Langue
+        password: Mot de passe
+        repeat_password: Confirmation du mot de passe
     team:
       create:
         title: Créer une équipe pour ?
@@ -179,6 +198,13 @@ obblm:
 
   emails:
     coach:
+      reset_password:
+        title: 'Bonjour %receiver%, demande de mot de passe'
+        text:
+          hello: 'Bonjour %receiver%, vous venez de demander à modifier votre mot de passe.'
+          reset: 'Cliquez sur le lien ci-dessous pour le changer.'
+          warning: "Attention : Ce lien n'est actif que 24H."
+        link_to_reset: 'Modifier mon mot de passe'
       registration:
         welcome: 'Bonjour %receiver%, bienvenue sur OBBLM.'
         text:
@@ -200,3 +226,23 @@ obblm:
         text: 'Vous pouvez maintenant vous connecter!'
         click_link_below: 'Pour vous connecter cliquez ci-dessous :'
         link_to_login: 'Me connecter'
+
+  users:
+    title: Utilisateurs
+
+  flash:
+    team:
+      created: Votre équipe a été créée avec succès!
+      saved: Votre équipe a été sauvegardée avec succès!
+      deleted: Votre équipe a été effacée avec succès!
+    account:
+      created: Votre compte a été crée avec succès! Cependant, nous vous avons envoyé un email pour vérifier votre adresse et activer votre compte, merci de vérifier avant de vous connecter!
+      activated: Votre compte a été activé, vous pouvez maintenant vous connecter!
+      already_activated: Votre compte est déjà actif, vous pouvez déjà vous connecter.
+      not_found_by_hash: Aucun compte trouvé. Vérifiez votre email ou contactez l'administrateur.
+      updated: Votre compte a été mis à jour avec succès!
+      forgot_password:
+        sent: Un email pour changer votre mot de passe vient de vous être envoyé!
+        not_found: Aucun compte trouvé pour cette clé, merci de vérifier votre email ou de contacter un administarteur.
+        changed: Votre mot de passe a été modifié, vous pouvez vous connecter.
+

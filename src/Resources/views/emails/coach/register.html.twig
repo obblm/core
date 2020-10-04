@@ -9,7 +9,7 @@
             <p>{{ 'obblm.emails.coach.registration.text.activate'|trans({}, 'obblm', coach.locale) }}</p>
         </div>
         <div class="center aligned">
-            <a class="button" href="{{ absolute_url(path('activate_account', {'hash': coach.hash})) }}">{{ 'obblm.emails.coach.registration.link_to_activate'|trans({}, 'obblm', coach.locale) }}</a>
+            <a class="button" href="{{ absolute_url(path('obblm_activate_account', {'hash': coach.hash})) }}">{{ 'obblm.emails.coach.registration.link_to_activate'|trans({}, 'obblm', coach.locale) }}</a>
         </div>
     </div>
 {% endblock%}

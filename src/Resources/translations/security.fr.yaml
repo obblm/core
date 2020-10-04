@@ -1,0 +1,4 @@
+obblm:
+  login:
+    invalid_credentials: L'identifiant et/ou le mot de passe sont incorrects, vérifiez et réessayez.
+    not_active: Votre compte n'est pas encore activé. Vérifiez vos emails et activez votre compte.

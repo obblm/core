@@ -4,6 +4,7 @@ namespace Obblm\Core\Listener;
 
 use Obblm\Core\Event\ActivateCoachEvent;
 use Obblm\Core\Event\RegisterCoachEvent;
+use Obblm\Core\Event\ResetPasswordCoachEvent;
 use Obblm\Core\Message\EmailMessage;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -30,6 +31,7 @@ class EmailSubscriber implements EventSubscriberInterface
         return [
             RegisterCoachEvent::NAME => 'onCoachRegistred',
             ActivateCoachEvent::NAME => 'onCoachActivated',
+            ResetPasswordCoachEvent::NAME => 'onResetPassword',
         ];
     }
 
@@ -59,6 +61,22 @@ class EmailSubscriber implements EventSubscriberInterface
             ->subject('Activation complete')
             ->htmlTemplate('@ObblmCore/emails/coach/activation.html.twig')
             ->textTemplate('@ObblmCore/emails/coach/activation.text.twig')
+            ->context([
+                'coach' => $coach,
+            ]);
+        $this->bus->dispatch(new EmailMessage($email));
+    }
+
+    public function onResetPassword(ResetPasswordCoachEvent $event)
+    {
+        $coach = $event->getCoach();
+        $address = new Address($coach->getEmail(), $coach->getUsername());
+        $email = (new TemplatedEmail())
+            ->from($this->defaultSender)
+            ->to($address)
+            ->subject('Reset your password')
+            ->htmlTemplate('@ObblmCore/emails/coach/reset.html.twig')
+            ->textTemplate('@ObblmCore/emails/coach/reset.text.twig')
             ->context([
                 'coach' => $coach,
             ]);

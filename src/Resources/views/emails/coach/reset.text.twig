@@ -1,0 +1,5 @@
+{{ 'obblm.emails.coach.reset_password.title'|raw|trans({'%receiver%': coach.username}, 'obblm', coach.locale) }}
+{{ 'obblm.emails.coach.reset_password.text.hello'|raw|trans({'%receiver%': coach.username}, 'obblm', coach.locale) }}
+{{ 'obblm.emails.coach.reset_password.text.reset'|raw|trans({}, 'obblm', coach.locale) }}
+{{ 'obblm.emails.coach.reset_password.text.warning'|raw|trans({}, 'obblm', coach.locale) }}
+{{ absolute_url(path('obblm_reset_password', {'hash': coach.resetPasswordHash})) }}

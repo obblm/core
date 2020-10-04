@@ -68,11 +68,17 @@ class ObblmAuthenticator extends AbstractFormLoginAuthenticator implements Passw
             throw new InvalidCsrfTokenException();
         }
 
+        /** @var Coach $user */
         $user = $this->entityManager->getRepository(Coach::class)->loadUserByUsername($credentials['login']);
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Invalid credentials.');
+            throw new CustomUserMessageAuthenticationException('obblm.login.invalid_credentials');
+        }
+
+        if (!$user->isActive()) {
+            // fail authentication with a custom error
+            throw new CustomUserMessageAuthenticationException('obblm.login.not_active');
         }
 
         return $user;

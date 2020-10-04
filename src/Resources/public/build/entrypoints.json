@@ -14,7 +14,7 @@
       ],
       "css": [
         "/bundles/obblmcore/build/0.82707249.css",
-        "/bundles/obblmcore/build/obblm-core-light.259ab41e.css"
+        "/bundles/obblmcore/build/obblm-core-light.3e327f4d.css"
       ]
     },
     "obblm-core-dark": {
@@ -24,7 +24,7 @@
       ],
       "css": [
         "/bundles/obblmcore/build/0.82707249.css",
-        "/bundles/obblmcore/build/obblm-core-dark.979368ec.css"
+        "/bundles/obblmcore/build/obblm-core-dark.d8c866fd.css"
       ]
     },
     "reset": {

@@ -27,40 +27,31 @@
         <div class="field">
             <label for="inputLogin">
                 <i class="mdi mdi-account icon"></i>
-                {{ 'obblm.forms.login.login'|trans({}, 'obblm') }}
+                {{ 'obblm.forms.coach.fields.username_or_email'|trans({}, 'obblm') }}
             </label>
             <input class="like-input" type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control" required autofocus>
         </div>
         <div class="field">
             <label for="inputPassword">
                 <i class="mdi mdi-lock icon"></i>
-                {{ 'obblm.forms.login.password'|trans({}, 'obblm') }}
+                {{ 'obblm.forms.coach.fields.password'|trans({}, 'obblm') }}
             </label>
             <input type="password" name="password" id="inputPassword" class="form-control" required>
         </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+        <input type="hidden" name="_target_path" value="{{ path('obblm_dashboard') }}" />
         <div class="buttons center aligned">
             <button type="submit" class="ui fluid large teal submit button">
                 {{ 'obblm.forms.login.button'|trans({}, 'obblm') }}
             </button>
         </div>
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
-        <input type="hidden" name="_target_path" value="{{ path('obblm_dashboard') }}"/>
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
-
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
-                </label>
-            </div>
-        #}
+        <div class="aligned center">
+            <a href="{{ path('obblm_forgot_password') }}">{{ 'obblm.forms.forgot_password.title'|trans({}, 'obblm') }}</a>
+        </div>
     </form>
     <div class="center aligned register">
         {{ 'obblm.forms.register.question'|trans({}, 'obblm') }}
-        <a href="{{ path('register') }}">
+        <a href="{{ path('obblm_register') }}">
             <i class="mdi mdi-account icon"></i>
             {{ 'obblm.forms.register.title'|trans({}, 'obblm') }}
         </a>
