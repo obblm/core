@@ -28,7 +28,7 @@ Have a look at the require section in the [composer.json](composer.json) of the 
 
 👩‍⚖️️ License
 ----------------------------------
-**OBBLM** is released under the under terms of the [MIT License](LICENSE).
+**OBBLM** is released under the terms of the [MIT License](LICENSE).
 
 Ressources
 ----------------------------------
