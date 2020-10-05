@@ -18,7 +18,8 @@ class KernelTest extends TestCase
         $this->bundle = $this->kernel->getBundle((new ObblmCoreBundle())->getName());
     }
 
-    public function testBundle() {
+    public function testBundle()
+    {
         // The bundle is correctly registred
         $this->assertInstanceOf(ObblmCoreBundle::class, $this->bundle);
     }

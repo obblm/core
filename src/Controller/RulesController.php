@@ -37,7 +37,7 @@ class RulesController extends AbstractController
 
         return $this->render('@ObblmCore/rules/detail.html.twig', [
             'rule' => $rule,
-            'rosters' => $helper->getAvailableRosters(),
+            'rosters' => $helper->getRosters(),
         ]);
     }
 

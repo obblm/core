@@ -39,6 +39,7 @@ class TeamController extends AbstractTeamController
             'teams' => $teams
         ]);
     }
+
     /**
      * @Route("/create", name="_create")
      */
@@ -49,6 +50,7 @@ class TeamController extends AbstractTeamController
         return $this->render('@ObblmCore/form/team/rules-selector.html.twig', [
         ]);
     }
+
     /**
      * @Route("/create/from-rule/{rule}", name="_create_rule")
      */
@@ -112,7 +114,7 @@ class TeamController extends AbstractTeamController
             $em->flush();
             $this->addFlash(
                 'success',
-                'Your changes were saved!'
+                'obblm.flash.team.saved'
             );
             return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);
         }
@@ -122,12 +124,13 @@ class TeamController extends AbstractTeamController
             'team' => $team
         ]);
     }
+
     /**
      * @Route("/{team}/delete", name="_delete")
      */
     public function delete(Team $team, Request $request, FileTeamUploader $uploader): Response
     {
-        $this->denyAccessUnlessGranted(TeamVoter::EDIT, $team);
+        $this->denyAccessUnlessGranted(TeamVoter::DELETE, $team);
 
         $confirm = $request->get('confirm');
         if ($confirm !== null) {
@@ -137,6 +140,10 @@ class TeamController extends AbstractTeamController
                 $uploader->removeOldFile();
                 $em->remove($team);
                 $em->flush();
+                $this->addFlash(
+                    'success',
+                    'obblm.flash.team.deleted'
+                );
                 return $this->redirectToRoute('obblm_team_mine');
             }
             return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);

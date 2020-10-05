@@ -1,0 +1,4 @@
+obblm:
+  login:
+    invalid_credentials: Login and/or password are incorrect, please check and try again.
+    not_active: Your account is not active yet. Please check your emails and activate your account.

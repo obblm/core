@@ -17,7 +17,7 @@ class TeamEvent extends Event
         $this->team = $team;
     }
 
-    public function getTeam()
+    public function getTeam():Team
     {
         return $this->team;
     }

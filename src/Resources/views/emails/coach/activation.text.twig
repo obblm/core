@@ -1,9 +1,9 @@
-{{ 'obblm.emails.coach.activation.welldone'|trans({'%login%': coach.username}, 'obblm') }}
-{{ 'obblm.emails.coach.activation.success'|trans({}, 'obblm') }}
-{{ 'obblm.emails.coach.activation.resume.title'|trans({}, 'obblm') }}
-- {{ 'obblm.emails.coach.activation.resume.email'|trans({'%email%': coach.email}, 'obblm') }}
-- {{ 'obblm.emails.coach.activation.resume.login'|trans({'%login%': coach.username}, 'obblm') }}
-- {{ 'obblm.emails.coach.activation.resume.password'|trans({'%password%': 'obblm.emails.coach.registration.resume.password_joke'|raw|trans({}, 'obblm')}, 'obblm') }}
-{{ 'obblm.emails.coach.activation.text'|trans({}, 'obblm') }}
-{{ 'obblm.emails.coach.activation.click_link_below'|trans({}, 'obblm') }}
-{{ absolute_url(path('app_login')) }}
+{{ 'obblm.emails.coach.activation.welldone'|trans({'%login%': coach.username}, 'obblm', coach.locale) }}
+{{ 'obblm.emails.coach.activation.success'|trans({}, 'obblm', coach.locale) }}
+{{ 'obblm.emails.coach.activation.resume.title'|trans({}, 'obblm', coach.locale) }}
+- {{ 'obblm.emails.coach.activation.resume.email'|trans({'%email%': coach.email}, 'obblm', coach.locale) }}
+- {{ 'obblm.emails.coach.activation.resume.login'|trans({'%login%': coach.username}, 'obblm', coach.locale) }}
+- {{ 'obblm.emails.coach.activation.resume.password'|trans({'%password%': 'obblm.emails.coach.registration.resume.password_joke'|raw|trans({}, 'obblm', coach.locale)}, 'obblm', coach.locale) }}
+{{ 'obblm.emails.coach.activation.text'|trans({}, 'obblm', coach.locale) }}
+{{ 'obblm.emails.coach.activation.click_link_below'|trans({}, 'obblm', coach.locale) }}
+{{ absolute_url(path('obblm_login')) }}

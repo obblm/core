@@ -1,0 +1,55 @@
+{
+  "entrypoints": {
+    "obblm-core": {
+      "js": [
+        "/bundles/obblmcore/build/runtime.cdb745f2.js",
+        "/bundles/obblmcore/build/1.dda457da.js",
+        "/bundles/obblmcore/build/obblm-core.ffb4e6a5.js"
+      ]
+    },
+    "obblm-core-light": {
+      "js": [
+        "/bundles/obblmcore/build/runtime.cdb745f2.js",
+        "/bundles/obblmcore/build/0.8a88924a.js"
+      ],
+      "css": [
+        "/bundles/obblmcore/build/0.82707249.css",
+        "/bundles/obblmcore/build/obblm-core-light.3e327f4d.css"
+      ]
+    },
+    "obblm-core-dark": {
+      "js": [
+        "/bundles/obblmcore/build/runtime.cdb745f2.js",
+        "/bundles/obblmcore/build/0.8a88924a.js"
+      ],
+      "css": [
+        "/bundles/obblmcore/build/0.82707249.css",
+        "/bundles/obblmcore/build/obblm-core-dark.d8c866fd.css"
+      ]
+    },
+    "reset": {
+      "js": [
+        "/bundles/obblmcore/build/runtime.cdb745f2.js"
+      ],
+      "css": [
+        "/bundles/obblmcore/build/reset.9337f05f.css"
+      ]
+    },
+    "email": {
+      "js": [
+        "/bundles/obblmcore/build/runtime.cdb745f2.js"
+      ],
+      "css": [
+        "/bundles/obblmcore/build/email.44b48c0b.css"
+      ]
+    },
+    "print": {
+      "js": [
+        "/bundles/obblmcore/build/runtime.cdb745f2.js"
+      ],
+      "css": [
+        "/bundles/obblmcore/build/print.3635d175.css"
+      ]
+    }
+  }
+}

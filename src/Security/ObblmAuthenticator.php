@@ -25,7 +25,7 @@ class ObblmAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_login';
+    public const LOGIN_ROUTE = 'obblm_login';
 
     private $entityManager;
     private $urlGenerator;
@@ -68,11 +68,17 @@ class ObblmAuthenticator extends AbstractFormLoginAuthenticator implements Passw
             throw new InvalidCsrfTokenException();
         }
 
+        /** @var Coach $user */
         $user = $this->entityManager->getRepository(Coach::class)->loadUserByUsername($credentials['login']);
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Invalid credentials.');
+            throw new CustomUserMessageAuthenticationException('obblm.login.invalid_credentials');
+        }
+
+        if (!$user->isActive()) {
+            // fail authentication with a custom error
+            throw new CustomUserMessageAuthenticationException('obblm.login.not_active');
         }
 
         return $user;
@@ -99,8 +105,7 @@ class ObblmAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         if ($request->request->get('_target_path')) {
             return new RedirectResponse($request->request->get('_target_path'));
         }
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($request->request->get('obblm_dashboard'));
     }
 
     protected function getLoginUrl()

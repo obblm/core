@@ -1,7 +1,11 @@
 obblm:
   title: OBBLM
   full_title: Open Blood Bowl league manager
+  locales:
+    fr: French
+    en: English
   layout:
+    locale_switch: Switch language to
     header:
       my_account: Edit my profile
       logout: Log out
@@ -16,13 +20,17 @@ obblm:
     tools:
       yes: Yes
       no: No
+      didyouknow: Did you know...
       actions:
         add: Add
         create: Create
         edit: Edit
+        manage: Manage
         delete: Delete
-        pdf: Print as PDF
-    hi: Hello
+        save: Save
+        submit: Submit
+        pdf: Export as PDF
+
   trait:
     number:
       abbr: '#'
@@ -51,27 +59,9 @@ obblm:
     injury:
       abbr: In
       title: Injuries
-    com:
-      abbr: Réu
-      title: Réussites
-    td:
-      abbr: TD
-      title: Touchdowns
-    int:
-      abbr: Int
-      title: Interceptions
-    cas:
-      abbr: Sor
-      title: Sorties
-    mvp:
-      abbr: MVP
-      title: Joueur le Plus Valable
-    spp:
-      abbr: SPP
-      title: Star Player Points
     tr:
       abbr: TR
-      title: Team Ranking
+      title: Team Rating
     value:
       abbr: Value
       title: Value
@@ -87,9 +77,11 @@ obblm:
     star_players: Star Players
     inducements: Inducements
     options: Options
+
   dashboard:
-    title: Your dashbaord
+    title: My dashbaord
     last_teams: My last teams (%count%)
+
   account:
     title: Edit my OBBLM Account
 
@@ -115,6 +107,8 @@ obblm:
       header:
       players:
         skill_none: None
+    fluff: Team fluff
+    anthem: Team Anthem
 
   forms:
     register:
@@ -123,12 +117,27 @@ obblm:
       register: Create my account
     login:
       title: Login to OBBML
-      login: Login
-      password: Password
       button: Login
+    forgot_password:
+      title: Forgot your password ?
+      button: Send me an email to change it
+    reset_password:
+      title: Reset your password
+      button: Save and change it
     submission:
       button: Submit
       error: There were some errors with your submission
+    coach:
+      fields:
+        username: Login
+        username_or_email: Login or Email
+        email: Email
+        first_name: First name
+        last_name: Last name
+        locale: Language
+        password: Password
+        repeat_password: Password confirmation
+
     team:
       create:
         title: Create a team for ?
@@ -149,12 +158,6 @@ obblm:
         warning: You are going to delete this team !
         question: Are you sure you want to use delete this team ?
       fields:
-        rule:
-          label: ~
-          question: Want you to create a team by rule ?
-        championship:
-          label: ~
-          question: Or want you to create a team for a championship ?
         parts:
           story: Your team story
           players: Team composition
@@ -178,27 +181,20 @@ obblm:
         name: Player name
 
   emails:
-    championship_invitation:
-      title: 'Invitation to join "%name%" championship'
-      text: 'Dear %receiver% you have been invited to the "%championship%" championship'
-      link_to_join: Join the championship
-    championship_start:
-      title: 'The "%name%" championship as been started'
-      text: 'Dear %receiver% the "%championship%" championship has been started. You can now play!'
-      link_to_detail: View the championship
-    encounter:
-      validated:
-        title: 'Encounter against "%against%" as been validated'
-        text: 'Dear %receiver% the encounter against "%against%" as been validated by %validator%. You can now play!'
-        link_to_detail: View the encounter sheet
-        link_to_team: View your team now
     coach:
+      reset_password:
+        title: 'Hello %receiver%, reset your password'
+        text:
+          hello: 'Hello %receiver%, you have requested to reset your password.'
+          reset: 'Click on the link bellow to change it.'
+          warning: "Be careful : This link is active only 24H."
+        link_to_reset: 'Reset my password'
       registration:
         welcome: 'Hello %receiver%, welcome to OBBLM.'
         text:
           hello: 'Hello %receiver%,'
           success: 'You have successfully register to OBBML.'
-          activate: 'You have to activate your account by clicking on link below.'
+          activate: 'Before login in, you have to activate your account by clicking on link below.'
         click_link_below: 'To do it click on the link below :'
         link_to_activate: 'Activate my account'
       activation:
@@ -214,3 +210,22 @@ obblm:
         text: 'You can now login and create your first team!'
         click_link_below: 'To log in click on the link below :'
         link_to_login: 'Log me in'
+
+  users:
+    title: Users
+
+  flash:
+    team:
+      created: Your team was successfully created!
+      saved: Your team was successfully saved!
+      deleted: Your team was successfully deleted!
+    account:
+      created: Your account was successfully created! However, we have sent you an email to verify your address and activate your account, take a look before login!
+      activated: Your account was successfully activated, you can now login!
+      already_activated: Your account is already activated, you can login.
+      not_found_by_hash: No user found. Verify your email or contact your administrator.
+      updated: Your account was successfully updated!
+      forgot_password:
+        sent: An email to change your password have been sent!
+        not_found: No account has been founded for this key, please check your emails or contact an administrator.
+        changed: Your password has been updated, you can now login.

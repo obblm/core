@@ -16,8 +16,8 @@
                 <p>{{ 'obblm.team.not_finished'|trans({}, 'obblm') }}</p>
             {% endif %}
         </div>
-        {% if(is_granted('team.edit', team)) %}
             <div class="links">
+                {% if(is_granted('team.edit', team)) %}
                 <div class="two boxes buttons center aligned">
                     <a class="box button" href="{{ path('obblm_team_edit', {'team': team.id}) }}" class="ui basic green button">
                         {{ 'obblm.layout.tools.actions.edit'|trans({}, 'obblm') }}
@@ -26,7 +26,13 @@
                         {{ 'obblm.layout.tools.actions.delete'|trans({}, 'obblm') }}
                     </a>
                 </div>
+                {% else %}
+                <div class="buttons center aligned">
+                    <a class="button" target="_blank" href="{{ path('obblm_team_pdf', {'team': team.id}) }}">
+                        {{ 'obblm.layout.tools.actions.pdf'|trans({}, 'obblm') }}
+                    </a>
+                </div>
+                {% endif %}
             </div>
-        {% endif %}
     </div>
 </div>

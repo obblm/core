@@ -47,4 +47,16 @@ class CoachRepository extends ServiceEntityRepository implements UserLoaderInter
             ->setParameter(':username_or_email', $usernameOrEmail)
             ->getOneOrNullResult();
     }
+
+    public function findOneForPasswordReset($hash)
+    {
+        $limitDateTime = new \DateTime('- 1 day');
+        return $this->createQueryBuilder('c')
+            ->where('c.resetPasswordHash = :hash')
+            ->andWhere('c.resetPasswordAt > :limit_datetime')
+            ->getQuery()
+            ->setParameter(':hash', $hash)
+            ->setParameter(':limit_datetime', $limitDateTime)
+            ->getOneOrNullResult();
+    }
 }

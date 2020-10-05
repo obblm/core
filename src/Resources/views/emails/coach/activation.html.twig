@@ -1,20 +1,20 @@
 {% extends '@ObblmCore/emails/email-template.html.twig'%}
-{% block header_title 'obblm.emails.coach.activation.welldone'|trans({'%login%': coach.username}, 'obblm') %}
+{% block header_title 'obblm.emails.coach.activation.welldone'|trans({'%login%': coach.username}, 'obblm', coach.locale) %}
 {% block content %}
-    {% do email.setSubject( 'obblm.emails.coach.activation.title'|trans({'%login%': coach.username }, 'obblm') ) %}
+    {% do email.setSubject( 'obblm.emails.coach.activation.title'|trans({'%login%': coach.username }, 'obblm', coach.locale) ) %}
     <div class="container">
         <div class="text">
-            <p>{{ 'obblm.emails.coach.activation.success'|trans({}, 'obblm') }}</p>
-            <p>{{ 'obblm.emails.coach.activation.resume.title'|trans({}, 'obblm') }}</p>
+            <p>{{ 'obblm.emails.coach.activation.success'|trans({}, 'obblm', coach.locale) }}</p>
+            <p>{{ 'obblm.emails.coach.activation.resume.title'|trans({}, 'obblm', coach.locale) }}</p>
             <ul>
-                <li>{{ 'obblm.emails.coach.activation.resume.login'|trans({}, 'obblm') }} <b>{{ coach.username }}</b></li>
-                <li>{{ 'obblm.emails.coach.activation.resume.email'|trans({}, 'obblm') }} <b>{{ coach.email }}</b></li>
-                <li>{{ 'obblm.emails.coach.activation.resume.password'|trans({}, 'obblm') }} <em>{{ 'obblm.emails.coach.activation.resume.password_joke'|trans({}, 'obblm') }}</em></li>
+                <li>{{ 'obblm.emails.coach.activation.resume.login'|trans({}, 'obblm', coach.locale) }} <b>{{ coach.username }}</b></li>
+                <li>{{ 'obblm.emails.coach.activation.resume.email'|trans({}, 'obblm', coach.locale) }} <b>{{ coach.email }}</b></li>
+                <li>{{ 'obblm.emails.coach.activation.resume.password'|trans({}, 'obblm', coach.locale) }} <em>{{ 'obblm.emails.coach.activation.resume.password_joke'|trans({}, 'obblm', coach.locale) }}</em></li>
             </ul>
-            <p>{{ 'obblm.emails.coach.activation.text'|trans({}, 'obblm') }}</p>
+            <p>{{ 'obblm.emails.coach.activation.text'|trans({}, 'obblm', coach.locale) }}</p>
         </div>
         <div class="aligned center">
-            <a class="button" href="{{ absolute_url(path('app_login')) }}">{{ 'obblm.emails.coach.activation.link_to_login'|trans({}, 'obblm') }}</a>
+            <a class="button" href="{{ absolute_url(path('obblm_login')) }}">{{ 'obblm.emails.coach.activation.link_to_login'|trans({}, 'obblm', coach.locale) }}</a>
         </div>
     </div>
 {% endblock%}

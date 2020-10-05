@@ -48,14 +48,16 @@ class Lrb6RuleHelperTest extends TestCase
         $this->helper = $ruleHelper->getHelper($this->realRule);
     }
 
-    public function testGetters() {
+    public function testGetters()
+    {
         $this->assertEquals(24, $this->helper->getRosters()->count(), "LRB6 got 24 rosters");
         $this->assertEquals(79, $this->helper->getSkills()->count(), "LRB6 got 79 skills");
         $this->assertEquals(56, $this->helper->getStarPlayers()->count(), "LRB6 got 56 star players");
         $this->assertEquals(7, $this->helper->getInducements()->count(), "LRB6 got 7 inducements (8 - star player line)");
     }
 
-    public function testTeamHelper() {
+    public function testTeamHelper()
+    {
         $team = $this->createFakeDwarfTeam();
         /** @var RuleHelper $ruleHelper */
         $ruleHelper = $this->kernel->getContainer()->get(RuleHelper::class);
@@ -63,7 +65,8 @@ class Lrb6RuleHelperTest extends TestCase
         $this->assertEquals($this->helper, $helper);
     }
 
-    public function testRuleApplicativeInterfaceMethods() {
+    public function testRuleApplicativeInterfaceMethods()
+    {
         /** Tests for @var RuleApplicativeInterface */
         // LRB6 got ActionType & Injury Type
         $this->assertEquals(ActionType::class, $this->helper->getActionsFormClass());
@@ -71,7 +74,8 @@ class Lrb6RuleHelperTest extends TestCase
         $this->assertEquals($this->realRule->getTemplate(), $this->helper->getTemplateKey());
     }
 
-    public function testRuleTeamInterfaceMethods() {
+    public function testRuleTeamInterfaceMethods()
+    {
         /** Tests for @var RuleTeamInterface */
         $rule = $this->realRule->getRule();
         $this->assertEquals(1000000, $this->helper->getMaxTeamCost(), "Team max cost is 1000k");
@@ -90,8 +94,7 @@ class Lrb6RuleHelperTest extends TestCase
         $version = TeamHelper::getLastVersion($dwarves);
         // Start Team value must be 0
         $this->assertEquals(0, $this->helper->calculateTeamValue($version));
-        foreach ($this->helper->getAvailablePlayerTypes($dwarves->getRoster()) as $key => $type)
-        {
+        foreach ($this->helper->getAvailablePlayerTypes($dwarves->getRoster()) as $key => $type) {
             $this->assertContains($key, $types, "Dwarf team has type $key");
             // For team value test
             $dwarves->addPlayer(
@@ -125,7 +128,8 @@ class Lrb6RuleHelperTest extends TestCase
         $this->assertEquals(630000, $this->helper->calculateTeamValue($version), "calculateTeamValue must return 630k");
     }
 
-    public function testException() {
+    public function testException()
+    {
         try {
             $this->helper->calculateTeamValue((new TeamVersion()));
         } catch (InvalidArgumentException $e) {

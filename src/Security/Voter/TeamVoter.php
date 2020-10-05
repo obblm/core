@@ -13,12 +13,13 @@ class TeamVoter extends Voter
     // these strings are just invented: you can use anything
     const VIEW = 'team.view';
     const EDIT = 'team.edit';
+    const DELETE = 'team.delete';
     const MANAGE = 'team.manage';
 
     protected function supports(string $attribute, $subject)
     {
         // if the attribute isn't one we support, return false
-        if (!in_array($attribute, [self::VIEW, self::EDIT, self::MANAGE])) {
+        if (!in_array($attribute, [self::VIEW, self::EDIT, self::DELETE, self::MANAGE])) {
             return false;
         }
 
@@ -48,6 +49,8 @@ class TeamVoter extends Voter
                 return $this->canView($team, $coach);
             case self::EDIT:
                 return $this->canEdit($team, $coach);
+            case self::DELETE:
+                return $this->canDelete($team, $coach);
             case self::MANAGE:
                 return $this->canManage($team, $coach);
         }
@@ -64,13 +67,33 @@ class TeamVoter extends Voter
         return true;
     }
 
+    private function canDelete(Team $team, Coach $coach)
+    {
+        if ($this->canEdit($team, $coach)) {
+            return true;
+        }
+        // this assumes that the Team object has a `getCoach()` method
+        if ($coach === $team->getCoach() &&
+            !$team->isLockedByManagment()) {
+            return true;
+        }
+
+        return false;
+    }
+
     private function canEdit(Team $team, Coach $coach)
     {
         if ($this->canManage($team, $coach)) {
             return true;
         }
-        // this assumes that the Team object has a `getOwner()` method
-        return $coach === $team->getCoach();
+        // this assumes that the Team object has a `getCoach()` method
+        if ($coach === $team->getCoach() &&
+            !$team->isReady() &&
+            !$team->isLockedByManagment()) {
+            return true;
+        }
+
+        return false;
     }
 
     private function canManage(Team $team, Coach $coach)

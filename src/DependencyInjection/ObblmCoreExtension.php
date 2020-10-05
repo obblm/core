@@ -27,6 +27,9 @@ class ObblmCoreExtension extends Extension
             }
         }
 
+        $container->setParameter('obblm.email_sender.email', $config['email_sender']['email']);
+        $container->setParameter('obblm.email_sender.name', $config['email_sender']['name']);
+
         $this->createAssetsDirectoriesConfiguration($container, $config);
 
         $locator = new FileLocator(dirname(__DIR__) . '/Resources/config');

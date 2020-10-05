@@ -13,7 +13,7 @@
             {% set skills = get_player_skills(rule, player) %}
             {% for skill in skills %}
                 <span class="skill-tooltip" title="{{ skill.description|trans({}, skill.translationDomain) }}">
-                    {{ skill|trans({}, skill.translationDomain) }}{% if loop.index != loop.last %}, {% endif %}
+                    {{ skill }}{% if loop.index != loop.last %}, {% endif %}
                 </span>
             {% else %}
             {{ 'obblm.sheet.table.players.skill_none'|trans({}, 'obblm') }}
