@@ -24,13 +24,12 @@ class RevokeCoachCommand extends AbstractAdminCommand
 
         $this->io->title('Revoke an OBBLM Administrator');
         $this->io->caution('Be carefull, this new user will not have anymore the highest right on the application');
-        if($this->confirmContinue()) {
-
+        if ($this->confirmContinue()) {
             $coach = $this->getCoachByLoginOrEmail();
 
             $continue = $this->io->confirm("Are you sure you want to revoke {$coach->getUsername()} ?", true);
-            if($continue) {
-                if(in_array(Roles::ADMIN, $coach->getRoles())) {
+            if ($continue) {
+                if (in_array(Roles::ADMIN, $coach->getRoles())) {
                     $coach
                         ->setRoles([Roles::COACH]);
                     $this->saveCoach($coach);

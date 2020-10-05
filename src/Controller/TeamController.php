@@ -39,6 +39,7 @@ class TeamController extends AbstractTeamController
             'teams' => $teams
         ]);
     }
+
     /**
      * @Route("/create", name="_create")
      */
@@ -49,6 +50,7 @@ class TeamController extends AbstractTeamController
         return $this->render('@ObblmCore/form/team/rules-selector.html.twig', [
         ]);
     }
+
     /**
      * @Route("/create/from-rule/{rule}", name="_create_rule")
      */
@@ -122,6 +124,7 @@ class TeamController extends AbstractTeamController
             'team' => $team
         ]);
     }
+
     /**
      * @Route("/{team}/delete", name="_delete")
      */

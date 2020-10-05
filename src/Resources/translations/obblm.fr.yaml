@@ -26,8 +26,9 @@ obblm:
         add: Ajouter
         create: Créer
         edit: Modifier
+        manage: Gérer
         delete: Supprimer
-        save: Sauver
+        save: Enregistrer
         submit: Soumettre
         pdf: Exporter en PDF
 

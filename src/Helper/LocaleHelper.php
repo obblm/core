@@ -16,7 +16,7 @@ class LocaleHelper
 
         $locales = $router->getRouteCollection()->get('obblm_locale_switch')->getRequirement('_locale');
 
-        if($locales) {
+        if ($locales) {
             $this->available_locales = explode('|', $locales);
         }
     }
@@ -35,8 +35,7 @@ class LocaleHelper
     public function getLocalizedRoutes()
     {
         $routes = [];
-        foreach ($this->available_locales as $locale)
-        {
+        foreach ($this->available_locales as $locale) {
             $routes[] = [
                 'route' => $this->router->generate('obblm_locale_switch', ['_locale' => $locale]),
                 '_locale' => $locale,

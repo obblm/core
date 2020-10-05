@@ -102,7 +102,7 @@ abstract class AbstractAdminCommand extends Command
     {
         $choice = $this->io->choice('Search him by login or email ', ['login', 'email']);
 
-        if($choice !== 'login' && $choice !== 'email') {
+        if ($choice !== 'login' && $choice !== 'email') {
             throw new \RuntimeException("Something went wrong.");
             return 0;
         }
@@ -115,7 +115,7 @@ abstract class AbstractAdminCommand extends Command
         $choice = $this->getChoice();
 
         $coachRepository = $this->em->getRepository(Coach::class);
-        if($choice === 'login') {
+        if ($choice === 'login') {
             return $this->io->ask('User login', null, function ($username) use ($coachRepository) {
                 if (empty($username)) {
                     throw new \RuntimeException('The login cannot be empty.');
@@ -139,4 +139,3 @@ abstract class AbstractAdminCommand extends Command
         });
     }
 }
-

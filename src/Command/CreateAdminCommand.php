@@ -22,8 +22,7 @@ class CreateAdminCommand extends AbstractAdminCommand
         $this->io->title('Create a new OBBLM Administrator');
         $this->io->caution('Be carefull, this new user will have the highest right on the application');
 
-        if($this->confirmContinue()) {
-
+        if ($this->confirmContinue()) {
             $this->io->section('User informations');
             $username = $this->askUsername();
             $email = $this->askEmail();
@@ -38,7 +37,7 @@ class CreateAdminCommand extends AbstractAdminCommand
                 ->setLocale('en')
                 ->setRoles([Roles::ADMIN])
                 ;
-            if(!$active) {
+            if (!$active) {
                 $coach
                     ->setHash(hash('sha256', $coach->getEmail()));
                 $registration = new RegisterCoachEvent($coach);

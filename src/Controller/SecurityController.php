@@ -138,13 +138,12 @@ class SecurityController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $em = $this->getDoctrine()->getManager();
             /** @var Coach $coach */
             $coach = $em->getRepository(Coach::class)->findOneByEmail($data['email']);
-            if($coach) {
+            if ($coach) {
                 $coach
                     ->setResetPasswordAt(new \DateTime())
                     ->setResetPasswordHash($this->getHashFor(random_bytes(10)));
@@ -176,13 +175,12 @@ class SecurityController extends AbstractController
         /** @var Coach $coach */
         $coach = $em->getRepository(Coach::class)->findOneForPasswordReset($hash);
 
-        if($coach) {
+        if ($coach) {
             $form = $this->createForm(PasswordConfirmType::class);
 
             $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid())
-            {
+            if ($form->isSubmitted() && $form->isValid()) {
                 $data = $form->getData();
                 $password = $passwordEncoder->encodePassword($coach, $data['plainPassword']);
                 $coach->setPassword($password)

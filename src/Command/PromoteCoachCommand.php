@@ -23,10 +23,10 @@ class PromoteCoachCommand extends AbstractAdminCommand
         parent::execute($input, $output);
         $this->io->title('Promote a new OBBLM Administrator');
         $this->io->caution('Be carefull, this new user will have the highest right on the application');
-        if($this->confirmContinue()) {
+        if ($this->confirmContinue()) {
             $coach = $this->getCoachByLoginOrEmail();
             $continue = $this->io->confirm("Are you sure you want to promote {$coach->getUsername()} ?", true);
-            if($continue) {
+            if ($continue) {
                 $coach
                     ->setRoles([Roles::ADMIN]);
                 $this->saveCoach($coach);

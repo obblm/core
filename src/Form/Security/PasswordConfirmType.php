@@ -29,4 +29,3 @@ class PasswordConfirmType extends AbstractType
         $resolver->setAllowedTypes('is_password_required', ['bool']);
     }
 }
-

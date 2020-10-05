@@ -30,8 +30,7 @@ class FrontendController extends AbstractController
      */
     public function localeSwitch(Request $request)
     {
-        if($request->headers->get('referer'))
-        {
+        if ($request->headers->get('referer')) {
             return $this->redirect($request->headers->get('referer'));
         }
         return $this->redirectToRoute('obblm_dashboard');

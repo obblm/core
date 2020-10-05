@@ -25,6 +25,7 @@ obblm:
         add: Add
         create: Create
         edit: Edit
+        manage: Manage
         delete: Delete
         save: Save
         submit: Submit

@@ -186,7 +186,6 @@ class Coach implements UserInterface, EmailObjectInterface
      */
     public function getSalt()
     {
-
     }
 
     /**
@@ -194,7 +193,6 @@ class Coach implements UserInterface, EmailObjectInterface
      */
     public function eraseCredentials()
     {
-
     }
 
     /**

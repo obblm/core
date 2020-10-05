@@ -58,4 +58,3 @@ trait TimeStampableTrait
         $this->updatedAt = new \DateTime();
     }
 }
-

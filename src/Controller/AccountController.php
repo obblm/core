@@ -38,7 +38,8 @@ class AccountController extends AbstractController
             $entityManager->flush();
             $this->addFlash(
                 'success',
-                'obblm.flash.account.updated');
+                'obblm.flash.account.updated'
+            );
         }
 
         return $this->render('@ObblmCore/account/edit.html.twig', [

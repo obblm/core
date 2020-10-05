@@ -23,7 +23,7 @@ class BaseUserConfirmType extends PasswordConfirmType
             ->add('email')
             ->add('locale', ChoiceType::class, [
                 'choices' => $this->availableLocales,
-                'choice_label' => function($choice, $key, $value) {
+                'choice_label' => function ($choice, $key, $value) {
                     return 'obblm.locales.' . $value;
                 },
                 'choice_translation_domain' => 'obblm'
