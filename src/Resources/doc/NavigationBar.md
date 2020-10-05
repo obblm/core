@@ -41,7 +41,7 @@ class TestCollectorSubscriber implements EventSubscriberInterface
          */
         $collection = $event->getCollection();
         $collection->addToCollection(new NavigationLink());
-        $sub = new NavigationCollection("My admin  collection");
+        $sub = new NavigationCollection("My admin collection");
         $sub->addToCollection(new NavigationLink("my_admin_link_route", "Link to my admin page", ['parameter' => "value"], "icon"));
         $collection->addToCollection($sub);
     }
