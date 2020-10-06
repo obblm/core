@@ -1,11 +1,7 @@
 .form {
   @formSpacing: 0.5rem;
   @fieldFontSize: 1.2rem;
-  max-width: 50%;
-  margin: 0 auto;
   .field {
-    box-sizing: border-box;
-    display: inline;
     background: @fieldBackground;
     border: @border;
     border-radius: @borderRadius;
@@ -13,11 +9,7 @@
     &.focused {
       background-color: @focusedBackground;
     }
-    &:not(.inline) {
-      display: block;
-    }
     > * {
-      box-sizing: border-box;
       padding: 0 @formSpacing 0 @formSpacing;
     }
     > *:first-child {
@@ -27,29 +19,20 @@
       padding-bottom: @formSpacing;
     }
     > label {
-      display: block;
       color: @threeQuaterAlphaWhite;
-      &.required:after {
-        content: ' *';
-      }
     }
     > input,
     > .like-input,
     > textarea,
     > select {
-      display: block;
-      width: 100%;
-      border: 0 none;
-      outline: 0 none;
-      background: none;
       font-size: @fieldFontSize;
       color: @fontColor;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
+      > option {
+        background: @threeQuaterAlphaBlack;
+        color: @white;
+      }
     }
     &.selector {
-      position: relative;
       > select {
         padding-left: 2rem;
       }
@@ -68,14 +51,6 @@
         transition: rotate @transitionDefault @transitionDefaultDelay;
       }
     }
-    > input[type=number] {
-
-    }
-    > textarea {
-      min-height: 10rem;
-      height: calc(100% - 1.1rem - 0.5rem);
-      resize: vertical;
-    }
     .errors {
       color: @negative-color;
     }
@@ -89,20 +64,13 @@
     }
   }
   &.fixed-actions {
-    position: relative;
     margin-bottom: @baseMargin;
     .actions {
-      width: 100%;
-      position: fixed;
-      left: 0;
-      bottom: 0;
       background: @black;
       border-top: @border;
     }
   }
   .actions {
-    width: 100%;
-    box-sizing: border-box;
     padding: @formSpacing;
     > * {
       margin-right: @formSpacing;

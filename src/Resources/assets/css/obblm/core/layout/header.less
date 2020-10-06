@@ -6,17 +6,42 @@
   width: 100%;
   top: 0;
   > .container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
     > .item {
+      flex-basis: auto;
       display: inline-block;
       padding: 0.8rem 0;
     }
     > .right {
-      float: right;
+      white-space: nowrap;
+      @media @tablets-v, @smartphones {
+        .label {
+          display: none;
+        }
+        .icon {
+          font-size: 180%;
+        }
+      }
+    }
+    > .center {
+      width: 100%;
+      @media @tablets-v, @smartphones {
+        padding: 0;
+      }
     }
     .title {
       font-size: 190%;
       text-transform: uppercase;
       font-weight: 300;
+      @media @tablets {
+        font-size: 150%;
+      }
+      @media @tablets-v, @smartphones {
+        font-size: 120%;
+        overflow: hidden;
+      }
     }
     > .launch,
     > .menu {
@@ -28,14 +53,20 @@
       &.launch {
         cursor: pointer;
         border-right: 1px solid @separatorColor;
-        transition: background @transitionDefault @transitionDefaultDelay;
+        transition: background @transitionDefault @transitionDefaultDelay
+                    color @transitionDefault @transitionDefaultDelay;
         margin-right: 1rem;
         line-height: 2.5rem;
         > .icon {
           font-size: 1.5rem;
+          transition: background @transitionDefault @transitionDefaultDelay
+          color @transitionDefault @transitionDefaultDelay;
         }
         .pushable.open & {
           background: @navBackground;
+          > .icon {
+            color: @white;
+          }
         }
       }
       &.menu {
@@ -45,7 +76,7 @@
     }
     > .menu {
       position: relative;
-      > span {
+      > div {
         line-height: 2.5rem;
         &:after {
           content: '';
@@ -66,7 +97,7 @@
           .link {
             display: block;
             padding: @baseMargin / 2;
-            border-top: @border;
+            border-top: @borderWidth @borderStyle @white;
           }
           &:first-child .link {
             border-top: 0 none;
@@ -75,13 +106,17 @@
       }
       &:hover {
         background: @itemHover;
-        > span {
+        color: @white;
+        > div {
           &:after {
             visibility: visible;
           }
         }
         > ul {
           display: block;
+          .link {
+            color: @white;
+          }
         }
       }
     }

@@ -1,0 +1,39 @@
+#header {
+  background: @headerBackground;
+  > .container {
+    > .launch,
+    > .menu {
+      background: @itemBackground;
+      &.launch {
+        border-right: 1px solid @separatorColor;
+        transition: background @transitionDefault @transitionDefaultDelay;
+        .pushable.open & {
+          background: @navBackground;
+        }
+      }
+      &.menu {
+        border-left: 1px solid @separatorColor;
+      }
+    }
+    > .menu {
+      > div {
+        &:after {
+          border-bottom: @border;
+        }
+      }
+      > ul {
+        @menuPadding: @baseMargin / 2;
+        background: @itemHover;
+        > li {
+          .link {
+            padding: @baseMargin / 2;
+            border-top: @border;
+          }
+        }
+      }
+      &:hover {
+        background: @itemHover;
+      }
+    }
+  }
+}

@@ -27,7 +27,7 @@
 
 @borderWidth: 1px;
 @borderStyle: solid;
-@borderColor: @white;
+@borderColor: @black;
 @border: @borderWidth @borderStyle @borderColor;
 @borderRadius: 5px;
 
@@ -114,6 +114,6 @@
   border-top: 2px solid @separator-border-color;
 }
 
-.loadGoogleFont(@googleProtocol, @font, @fontSizes) when (@importGoogleFonts) {
+.loadGoogleFont(@googleProtocol, @font, @fontSizes) {
   @import (css) url('@{googleProtocol}fonts.googleapis.com/css?family=@{font}@{fontSizes}');
 }

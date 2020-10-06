@@ -1,0 +1,37 @@
+.button {
+  color: @white !important;
+  background: @primary-color;
+  border: 1px solid @primary-color;
+  transition: background-color @transitionDefault @transitionHoverDelay,
+              color @transitionDefault @transitionHoverDelay;
+  &:hover {
+    color: @primary-color !important;
+    background: @primary-bg-color;
+  }
+  &.orange {
+    background: @nul-color;
+    border-color: @nul-color;
+    &:hover {
+      background: @nul-bg-color;
+      color: @nul-color !important;
+    }
+  }
+  &.green,
+  &.success {
+    background: @positive-color;
+    border-color: @positive-color;
+    &:hover {
+      background: @positive-bg-color;
+      color: @positive-color !important;
+    }
+  }
+  &.red,
+  &.cancel {
+    background: @negative-color;
+    border-color: @negative-color;
+    &:hover {
+      background: @negative-bg-color;
+      color: @negative-color !important;
+    }
+  }
+}

@@ -4,6 +4,9 @@ import 'jquery-ui/ui/widgets/sortable';
 import 'jquery-ui/ui/widgets/accordion';
 import 'jquery-ui/ui/disable-selection';
 
+//Application Default Theme
+import '../css/obblm/core/global.less';
+
 //Application JS
 import './obblm/layout/navigation';
 import './obblm/component/collections';

@@ -1,0 +1,28 @@
+@logoSize: 150px;
+#team-sheet {
+  .header {
+    padding: @baseMargin;
+    box-sizing: border-box;
+    border: @border;
+    background-position: center center;
+    background-size: cover;
+    &.has-background {
+      color: @white;
+      .title {
+        border-color: @halfAlphaWhite;
+      }
+    }
+    .logo {
+      flex-basis: auto;
+      width: @logoSize;
+      img { width: 100%; height: auto;}
+    }
+    .content {
+      width: calc(100% - @logoSize - @baseMargin);
+      margin-left: @baseMargin;
+      .informations {
+        margin-top: @baseMargin;
+      }
+    }
+  }
+}
