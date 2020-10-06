@@ -1,0 +1,36 @@
+.teams {
+  .team {
+    background: @overlayBackground;
+    .content {
+      .header {
+        font-family: @h2Font, sans-serif;
+        font-size: @h2FontSize;
+        font-weight: @h2FontWeight;
+        text-transform: uppercase;
+        display: block;
+      }
+      .meta {
+        font-size: 90%;
+        font-style: italic;
+        &:before {
+          font-style: normal;
+          font-family: @iconFont;
+          content: 'label';
+          font-size: 0.9rem;
+          line-height: 0.8rem;
+          float: left;
+          margin-top: 0.1em;
+          margin-right: 0.4rem;
+        }
+      }
+    }
+  }
+}
+
+#editTeamForm {
+  .ui-accordion-header {
+    .icon:before {
+      transition: rotate @transitionDefault @transitionDefaultDelay;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.table {
+  &.lined,
+  &.lined td,
+  &.lined th {
+    border: @border;
+    padding: 0.3rem;
+  }
+  &.lined thead tr {
+      background: rgba(255,255,255,.08);
+      th {
+        font-weight: @h2FontWeight;
+      }
+  }
+  &.lined tbody tr {
+    &:nth-child(2n) {
+      background: @overlayBackground;
+    }
+  }
+}

@@ -1,4 +1,17 @@
 .teams {
+  &.boxes {
+    @media @tablets-v, @smartphones {
+      display: block;
+      .team {
+        margin-right: 0;
+        margin-top: @baseMargin !important;
+        width: 100%;
+        &:first-child {
+          margin-top: 0 !important;
+        }
+      }
+    }
+  }
   .team {
     -webkit-box-align: center;
     -ms-flex-align: center;

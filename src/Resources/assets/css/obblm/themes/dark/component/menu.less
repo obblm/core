@@ -1,0 +1,25 @@
+.menu {
+  a {
+    text-decoration: none;
+  }
+  .item {
+    transition: background-color @transitionDefault @transitionHoverDelay,
+                color @transitionDefault @transitionHoverDelay;
+    > .menu {
+      .item {
+        color: @mid-grey;
+        &:hover {
+          color: @white;
+        }
+      }
+    }
+  }
+  > .item {
+    &:before {
+      background: rgba(255,255,255,.08);
+    }
+  }
+  > a.item:hover {
+    background: rgba(255,255,255,.08);
+  }
+}
