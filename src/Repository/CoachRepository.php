@@ -9,7 +9,6 @@ use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use function get_class;
 
 /**
  * @method Coach|null find($id, $lockMode = null, $lockVersion = null)
@@ -50,7 +49,7 @@ class CoachRepository extends ServiceEntityRepository implements UserLoaderInter
 
     public function findOneForPasswordReset($hash)
     {
-        $limitDateTime = new \DateTime('- 1 day');
+        $limitDateTime = (new \DateTime('- 1 day'))->format("Y-m-d H:m:i");
         return $this->createQueryBuilder('c')
             ->where('c.resetPasswordHash = :hash')
             ->andWhere('c.resetPasswordAt > :limit_datetime')
