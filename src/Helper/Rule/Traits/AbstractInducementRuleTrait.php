@@ -7,11 +7,14 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Doctrine\Common\Collections\Expr\Expression;
 use Obblm\Core\Contracts\InducementInterface;
+use Obblm\Core\Entity\Player;
+use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Exception\InvalidArgumentException;
 use Obblm\Core\Exception\NotFoundKeyException;
 use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\Rule\Inducement\Inducement;
+use Obblm\Core\Helper\Rule\Inducement\StarPlayer;
 
 /*********************
  * INDUCEMENT METHODS
@@ -162,5 +165,58 @@ trait AbstractInducementRuleTrait
             ])
         ));
         return $this->getInducementTable()->matching($criteria)->toArray();
+    }
+
+    public function createInducementAsPlayer(InducementInterface $inducement, $number = 0):?Player
+    {
+        if (!$inducement instanceof StarPlayer) {
+            return null;
+        }
+        $version = (new PlayerVersion())
+            ->setCharacteristics($inducement->getCharacteristics())
+            ->setValue($inducement->getValue());
+        if ($inducement->getSkills()) {
+            $version->setSkills($inducement->getSkills());
+        }
+        $player = (new Player())
+            ->setNumber($number)
+            ->setType($inducement->getType()->getName())
+            ->setName($inducement->getName())
+            ->addVersion($version);
+        return $player;
+    }
+
+    public function createStarPlayerAsPlayer(string $key, int $number):Player
+    {
+        $ruleKey = $this->getAttachedRule()->getRuleKey();
+
+        $starPlayer = $this->getStarPlayer($key);
+        if (isset($starPlayer['multi_parts']) && $starPlayer['multi_parts']) {
+            throw new \Exception('You cannot create a player with a multiple parts InducementInterface');
+        }
+        $version = (new PlayerVersion())
+            ->setCharacteristics($starPlayer['characteristics'])
+            ->setValue($starPlayer['cost']);
+        if ($starPlayer['skills']) {
+            $version->setSkills($starPlayer['skills']);
+        }
+        $player = (new Player())
+            ->setNumber($number)
+            ->setType(CoreTranslation::getStarPlayerTitle($ruleKey))
+            ->setName(CoreTranslation::getStarPlayerName($ruleKey, $key))
+            ->addVersion($version);
+        return $player;
+    }
+
+    public function getTransformedInducementsFor(string $roster)
+    {
+        $table = $this->getInducementTable();
+        foreach ($table as $inducement) {
+            if ($roster == 'halfling') {
+                $inducement->setValue(10000);
+            }
+        }
+
+        return $table;
     }
 }

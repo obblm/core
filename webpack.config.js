@@ -25,8 +25,8 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('obblm-core', './src/Resources/assets/js/app')
-    .addStyleEntry('obblm-core-light', './src/Resources/assets/css/obblm/themes/light.less')
-    .addStyleEntry('obblm-core-dark',  './src/Resources/assets/css/obblm/themes/dark.less')
+    //.addStyleEntry('obblm-core-light', './src/Resources/assets/css/obblm/themes/light.less')
+    .addStyleEntry('obblm-core-dark',  './src/Resources/assets/css/obblm/themes/dark/dark.less')
     .addStyleEntry('reset', './src/Resources/assets/css/obblm/vendor/reset.css')
     .addStyleEntry('email', './src/Resources/assets/css/email.less')
     .addStyleEntry('print', './src/Resources/assets/css/print.less')

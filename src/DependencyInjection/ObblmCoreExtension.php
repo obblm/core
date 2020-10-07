@@ -2,6 +2,7 @@
 
 namespace Obblm\Core\DependencyInjection;
 
+use Obblm\Core\Contracts\BuildAssetsInterface;
 use Obblm\Core\Routing\AutoloadedRouteInterface;
 use Obblm\Core\Contracts\RuleHelperInterface;
 use Symfony\Component\Config\FileLocator;
@@ -39,6 +40,11 @@ class ObblmCoreExtension extends Extension
         $container->registerForAutoconfiguration(RuleHelperInterface::class)
             ->addTag('obblm.rule_helpers')
         ;
+
+        $container->registerForAutoconfiguration(BuildAssetsInterface::class)
+            ->addTag('obblm.asset_packager')
+        ;
+
         $container->registerForAutoconfiguration(AutoloadedRouteInterface::class)
             ->addTag('obblm.routes')
         ;

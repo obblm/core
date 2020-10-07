@@ -2,17 +2,20 @@
 
 namespace Obblm\Core\Helper;
 
+use Obblm\Core\Contracts\BuildAssetsInterface;
 use Obblm\Core\Exception\NotFoundEntrypointException;
 use Symfony\Component\Asset\Package;
 use Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy;
 
 class AssetPackager
 {
+    /** @var Package */
+    private $package;
     private $entrypoints = [];
 
-    public function __construct()
+    public function addBuildAsset(BuildAssetsInterface $buildAssets)
     {
-        $this->addDirectory(dirname(__DIR__) . '/Resources/public/build');
+        $this->load($buildAssets->getPath());
     }
 
     public function addDirectory($directory)
@@ -34,7 +37,7 @@ class AssetPackager
 
         $loadedEntrypoints = json_decode($json, true);
 
-        $this->entrypoints = array_merge($this->entrypoints, $loadedEntrypoints['entrypoints']);
+        $this->entrypoints = array_merge_recursive($this->entrypoints, $loadedEntrypoints['entrypoints']);
     }
 
     public function getCssEntry(string $entrypoint)

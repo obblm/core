@@ -19,10 +19,10 @@
             <div class="links">
                 {% if(is_granted('team.edit', team)) %}
                 <div class="two boxes buttons center aligned">
-                    <a class="box button" href="{{ path('obblm_team_edit', {'team': team.id}) }}" class="ui basic green button">
+                    <a class="box button" href="{{ path('obblm_team_edit', {'team': team.id}) }}">
                         {{ 'obblm.layout.tools.actions.edit'|trans({}, 'obblm') }}
                     </a>
-                    <a class="box button" href="{{ path('obblm_team_delete', {'team': team.id}) }}" class="ui basic red button">
+                    <a class="box button" href="{{ path('obblm_team_delete', {'team': team.id}) }}">
                         {{ 'obblm.layout.tools.actions.delete'|trans({}, 'obblm') }}
                     </a>
                 </div>
