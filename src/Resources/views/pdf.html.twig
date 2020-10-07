@@ -5,6 +5,9 @@
     <title>{% block base_title %}{{ 'obblm.title'|trans({}, 'obblm')  }} | {% block title %}{% endblock%}{% endblock%}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css">
+        {% for css in obblm_css('obblm-core', 'core') %}
+            <link rel="stylesheet" href="{{ absolute_url( asset( css ) ) }}">
+        {% endfor %}
         {% for css in obblm_css('obblm-core-light', 'core') %}
             <link rel="stylesheet" href="{{ absolute_url( asset( css ) ) }}">
         {% endfor %}
