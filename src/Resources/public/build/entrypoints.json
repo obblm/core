@@ -11,12 +11,20 @@
         "/bundles/obblmcore/build/obblm-core.4e644527.css"
       ]
     },
+    "obblm-core-light": {
+      "js": [
+        "/bundles/obblmcore/build/runtime.fefdd81b.js"
+      ],
+      "css": [
+        "/bundles/obblmcore/build/obblm-core-light.2bf29416.css"
+      ]
+    },
     "obblm-core-dark": {
       "js": [
         "/bundles/obblmcore/build/runtime.fefdd81b.js"
       ],
       "css": [
-        "/bundles/obblmcore/build/obblm-core-dark.7282d3c7.css"
+        "/bundles/obblmcore/build/obblm-core-dark.cbeca932.css"
       ]
     },
     "reset": {
@@ -24,7 +32,7 @@
         "/bundles/obblmcore/build/runtime.fefdd81b.js"
       ],
       "css": [
-        "/bundles/obblmcore/build/reset.17ffee64.css"
+        "/bundles/obblmcore/build/reset.a4c381ba.css"
       ]
     },
     "email": {
@@ -32,7 +40,7 @@
         "/bundles/obblmcore/build/runtime.fefdd81b.js"
       ],
       "css": [
-        "/bundles/obblmcore/build/email.b181cd9b.css"
+        "/bundles/obblmcore/build/email.3f4fd8b7.css"
       ]
     },
     "print": {
@@ -40,7 +48,7 @@
         "/bundles/obblmcore/build/runtime.fefdd81b.js"
       ],
       "css": [
-        "/bundles/obblmcore/build/print.03a9f2b2.css"
+        "/bundles/obblmcore/build/print.8ae4c468.css"
       ]
     }
   }

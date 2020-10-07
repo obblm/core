@@ -1,11 +1,12 @@
 {
   "/bundles/obblmcore/build/0.7d214775.css": "/bundles/obblmcore/build/0.7d214775.css",
   "/bundles/obblmcore/build/0.27c2a682.js": "/bundles/obblmcore/build/0.27c2a682.js",
-  "/bundles/obblmcore/build/email.css": "/bundles/obblmcore/build/email.b181cd9b.css",
+  "/bundles/obblmcore/build/email.css": "/bundles/obblmcore/build/email.3f4fd8b7.css",
   "/bundles/obblmcore/build/obblm-core.css": "/bundles/obblmcore/build/obblm-core.4e644527.css",
   "/bundles/obblmcore/build/obblm-core.js": "/bundles/obblmcore/build/obblm-core.0c8a4bc4.js",
-  "/bundles/obblmcore/build/obblm-core-dark.css": "/bundles/obblmcore/build/obblm-core-dark.7282d3c7.css",
-  "/bundles/obblmcore/build/print.css": "/bundles/obblmcore/build/print.03a9f2b2.css",
-  "/bundles/obblmcore/build/reset.css": "/bundles/obblmcore/build/reset.17ffee64.css",
+  "/bundles/obblmcore/build/obblm-core-dark.css": "/bundles/obblmcore/build/obblm-core-dark.cbeca932.css",
+  "/bundles/obblmcore/build/obblm-core-light.css": "/bundles/obblmcore/build/obblm-core-light.2bf29416.css",
+  "/bundles/obblmcore/build/print.css": "/bundles/obblmcore/build/print.8ae4c468.css",
+  "/bundles/obblmcore/build/reset.css": "/bundles/obblmcore/build/reset.a4c381ba.css",
   "/bundles/obblmcore/build/runtime.js": "/bundles/obblmcore/build/runtime.fefdd81b.js"
 }
