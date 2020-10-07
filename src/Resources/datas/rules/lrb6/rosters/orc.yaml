@@ -64,7 +64,7 @@ rules:
             available_skills_on_double: [ a, p ]
           troll:
             min: 0
-            max: 2
+            max: 1
             characteristics:
               ma: 4
               st: 5
