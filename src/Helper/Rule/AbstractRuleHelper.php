@@ -2,16 +2,11 @@
 
 namespace Obblm\Core\Helper\Rule;
 
-use Doctrine\Common\Collections\Criteria;
 use Obblm\Core\Contracts\RuleHelperInterface;
-use Obblm\Core\Entity\Player;
-use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Rule;
 use Obblm\Core\Form\Player\ActionType;
 use Obblm\Core\Form\Player\InjuryType;
 use Obblm\Core\Helper\CoreTranslation;
-use Obblm\Core\Contracts\InducementInterface;
-use Obblm\Core\Helper\Rule\Inducement\StarPlayer;
 use Obblm\Core\Helper\Rule\Traits\AbstractInducementRuleTrait;
 use Obblm\Core\Helper\Rule\Traits\AbstractPlayerRuleTrait;
 use Obblm\Core\Helper\Rule\Traits\AbstractTeamRuleTrait;
@@ -19,7 +14,10 @@ use Obblm\Core\Traits\ClassNameAsKeyTrait;
 
 abstract class AbstractRuleHelper extends RuleConfigBuilder implements RuleHelperInterface
 {
-    use ClassNameAsKeyTrait;
+    use ClassNameAsKeyTrait,
+        AbstractTeamRuleTrait,
+        AbstractPlayerRuleTrait,
+        AbstractInducementRuleTrait;
 
     protected $attachedRule;
     protected $rule = [];
@@ -36,18 +34,6 @@ abstract class AbstractRuleHelper extends RuleConfigBuilder implements RuleHelpe
         $this->setAttachedRule($rule);
         $this->build($rule->getRuleKey(), $rule->getRule());
         return $this;
-    }
-
-    public function getTransformedInducementsFor(string $roster)
-    {
-        $table = $this->getInducementTable();
-        foreach ($table as $inducement) {
-            if ($roster == 'halfling') {
-                $inducement->setValue(10000);
-            }
-        }
-
-        return $table;
     }
 
     /**********
@@ -94,10 +80,6 @@ abstract class AbstractRuleHelper extends RuleConfigBuilder implements RuleHelpe
         return $this->getAttachedRule()->getTemplate();
     }
 
-    use AbstractTeamRuleTrait;
-
-    use AbstractPlayerRuleTrait;
-
     /***************
      * MISC METHODS
      **************/
@@ -117,47 +99,4 @@ abstract class AbstractRuleHelper extends RuleConfigBuilder implements RuleHelpe
         }
         return $weather;
     }
-
-    public function createInducementAsPlayer(InducementInterface $inducement, $number = 0):?Player
-    {
-        if (!$inducement instanceof StarPlayer) {
-            return null;
-        }
-        $version = (new PlayerVersion())
-            ->setCharacteristics($inducement->getCharacteristics())
-            ->setValue($inducement->getValue());
-        if ($inducement->getSkills()) {
-            $version->setSkills($inducement->getSkills());
-        }
-        $player = (new Player())
-            ->setNumber($number)
-            ->setType($inducement->getType()->getName())
-            ->setName($inducement->getName())
-            ->addVersion($version);
-        return $player;
-    }
-
-    public function createStarPlayerAsPlayer(string $key, int $number):Player
-    {
-        $ruleKey = $this->getAttachedRule()->getRuleKey();
-
-        $starPlayer = $this->getStarPlayer($key);
-        if (isset($starPlayer['multi_parts']) && $starPlayer['multi_parts']) {
-            throw new \Exception('You cannot create a player with a multiple parts InducementInterface');
-        }
-        $version = (new PlayerVersion())
-            ->setCharacteristics($starPlayer['characteristics'])
-            ->setValue($starPlayer['cost']);
-        if ($starPlayer['skills']) {
-            $version->setSkills($starPlayer['skills']);
-        }
-        $player = (new Player())
-            ->setNumber($number)
-            ->setType(CoreTranslation::getStarPlayerTitle($ruleKey))
-            ->setName(CoreTranslation::getStarPlayerName($ruleKey, $key))
-            ->addVersion($version);
-        return $player;
-    }
-
-    use AbstractInducementRuleTrait;
 }

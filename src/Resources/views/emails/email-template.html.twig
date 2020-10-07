@@ -1,12 +1,9 @@
-{% apply inline_css %}
+{% set reset = obblm_css('reset', 'core')|map(css => source("@public_assets" ~ css))|join %}
+{% set email = obblm_css('email', 'core')|map(css => source("@public_assets" ~ css))|join %}
+
+{% apply inline_css(reset, email) %}
 <html>
-    {% for css in obblm_css('reset', 'core') %}
-    <link rel="stylesheet" href="{{ absolute_url( asset( css ) ) }}">
-    {% endfor %}
-    {% for css in obblm_css('email', 'core') %}
-        <link rel="stylesheet" href="{{ absolute_url( asset( css ) ) }}">
-    {% endfor %}
-<body>
+    <body>
 <div class="main container">
     <table class="table email">
         <tr>

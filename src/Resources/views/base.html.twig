@@ -2,23 +2,24 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block base_title %}{{ 'obblm.title'|trans({}, 'obblm')  }} | {% block title %}{% endblock%}{% endblock%}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css">
+        {% for css in obblm_css('obblm-core', 'core') %}
+        <link rel="stylesheet" href="{{ asset( css ) }}">
+        {% endfor %}
         {% for css in obblm_css('obblm-core-dark', 'core') %}
         <link rel="stylesheet" href="{{ asset( css ) }}">
         {% endfor %}
     {% endblock %}
-    <script>
-        window.user = {{ app.user|json_encode()|raw }};
-    </script>
 </head>
 <body class="dark pushable">
 {% if(is_granted('ROLE_OBBLM_COACH')) %}
     {% include '@ObblmCore/layout/navbar.html.twig' %}
     {% include '@ObblmCore/layout/header.html.twig' %}
 {% endif %}
-<div class="pusher"><div class="ui main container">{% block body %}{% endblock %}</div></div>
+<div class="pusher"><div class="main container">{% block body %}{% endblock %}</div></div>
 {% block javascripts %}
     {% for js in obblm_js('obblm-core', 'core') %}
         <script type="text/javascript" src="{{ asset( js ) }}"></script>

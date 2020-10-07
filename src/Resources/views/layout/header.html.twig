@@ -3,15 +3,15 @@
         <a class="launch item">
             <i class="icon mdi mdi-menu"></i>
         </a>
-        <div class="item">
+        <div class="item center">
             <h1 class="title">{{ 'obblm.full_title'|trans({}, 'obblm') }}</h1>
         </div>
         {% if(is_granted('ROLE_OBBLM_COACH')) %}
             <div class="right item menu">
-                <span>
-                    <i aria-hidden="true" class="icon notranslate mdi mdi-account"></i>
-                    {{ app.user.username }}
-                </span>
+                <div>
+                    <span aria-hidden="true" class="icon notranslate mdi mdi-account"></span>
+                    <span class="label">{{ app.user.username }}</span>
+                </div>
                 <ul>
                     <li>
                         <a class="link" href="{{ path('obblm_account')}}" title="{{ 'obblm.layout.header.my_account'|trans({}, 'obblm') }}">
