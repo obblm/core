@@ -180,7 +180,7 @@ trait AbstractInducementRuleTrait
         }
         $player = (new Player())
             ->setNumber($number)
-            ->setType($inducement->getType()->getName())
+            ->setPosition($inducement->getType()->getName())
             ->setName($inducement->getName())
             ->addVersion($version);
         return $player;
@@ -202,7 +202,7 @@ trait AbstractInducementRuleTrait
         }
         $player = (new Player())
             ->setNumber($number)
-            ->setType(CoreTranslation::getStarPlayerTitle($ruleKey))
+            ->setPosition(CoreTranslation::getStarPlayerTitle($ruleKey))
             ->setName(CoreTranslation::getStarPlayerName($ruleKey, $key))
             ->addVersion($version);
         return $player;

@@ -37,7 +37,7 @@ class Player
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $type;
+    private $position;
 
     /**
      * @ORM\OneToMany(targetEntity=PlayerVersion::class, mappedBy="player", orphanRemoval=true, cascade={"remove"})
@@ -89,14 +89,14 @@ class Player
         return $this;
     }
 
-    public function getType(): ?string
+    public function getPosition(): ?string
     {
-        return $this->type;
+        return $this->position;
     }
 
-    public function setType(?string $type): self
+    public function setPosition(?string $position): self
     {
-        $this->type = $type;
+        $this->position = $position;
 
         return $this;
     }

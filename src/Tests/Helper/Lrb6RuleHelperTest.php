@@ -99,7 +99,7 @@ class Lrb6RuleHelperTest extends TestCase
             // For team value test
             $dwarves->addPlayer(
                 (new Player())
-                    ->setType(PlayerHelper::composePlayerKey($dwarves->getRule()->getRuleKey(), $dwarves->getRoster(), $key))
+                    ->setPosition(PlayerHelper::composePlayerKey($dwarves->getRule()->getRuleKey(), $dwarves->getRoster(), $key))
             );
         }
         $this->assertEquals(16, $this->helper->getMaxPlayersByType($dwarves->getRoster(), 'blocker'), "Dwarf have max 16 blocker");

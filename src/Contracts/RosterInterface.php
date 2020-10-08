@@ -8,7 +8,10 @@ interface RosterInterface extends Translatable
 {
     public function getKey(): string;
     public function getName(): string;
-    public function getPlayerTypes(): ?array;
+    public function getPositionClass(): string;
+    /** @return PositionInterface[] */
+    public function getPositions(): ?array;
+    public function getPosition($key): ?PositionInterface;
     public function getRerollCost(): int;
     public function getInducementOptions(): ?array;
     public function canHaveApothecary(): bool;

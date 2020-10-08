@@ -10,6 +10,7 @@ use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\Rule\Traits\AbstractInducementRuleTrait;
 use Obblm\Core\Helper\Rule\Traits\AbstractPlayerRuleTrait;
 use Obblm\Core\Helper\Rule\Traits\AbstractTeamRuleTrait;
+use Obblm\Core\Helper\Rule\Traits\AbstractTeamCreationTrait;
 use Obblm\Core\Traits\ClassNameAsKeyTrait;
 
 abstract class AbstractRuleHelper extends RuleConfigBuilder implements RuleHelperInterface
@@ -17,7 +18,8 @@ abstract class AbstractRuleHelper extends RuleConfigBuilder implements RuleHelpe
     use ClassNameAsKeyTrait,
         AbstractTeamRuleTrait,
         AbstractPlayerRuleTrait,
-        AbstractInducementRuleTrait;
+        AbstractInducementRuleTrait,
+        AbstractTeamCreationTrait;
 
     protected $attachedRule;
     protected $rule = [];

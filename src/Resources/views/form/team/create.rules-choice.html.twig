@@ -22,6 +22,33 @@
                 {{ form_errors(form.roster) }}
                 {{ form_widget(form.roster, {'attr': {'class': 'ui dropdown'}}) }}
             </div>
+            <div class="three boxes">
+                {% for option in form.creationOptions %}
+                    {% if option.vars.checked is defined %}
+                    <div class="box field">
+                        <div class="ui checkbox">
+                        {{ form_widget(option) }}
+                        {{ form_label(option) }}
+                        {{ form_errors(option) }}
+                        </div>
+                    </div>
+                    {% elseif option.vars.choices is defined %}
+                    <div class="box selector field">
+                        <div class="ui checkbox">
+                            {{ form_widget(option) }}
+                            {{ form_label(option) }}
+                            {{ form_errors(option) }}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="box field">
+                        {{ form_label(option) }}
+                        {{ form_widget(option) }}
+                        {{ form_errors(option) }}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         {% endif %}
         <button class="ui button green" type="submit">
             {{ 'obblm.forms.team.create.buttons.submit'|trans({}, 'obblm') }}

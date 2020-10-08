@@ -3,6 +3,9 @@
 namespace Obblm\Core\Contracts\Rule;
 
 use Doctrine\Common\Collections\Collection;
+use Obblm\Core\Contracts\RosterInterface;
+use Obblm\Core\Contracts\SkillInterface;
+use Obblm\Core\Entity\Team;
 
 interface RuleBuilderInterface
 {
@@ -19,13 +22,17 @@ interface RuleBuilderInterface
      */
     public function getSppLevels();
     /**
-     * @return Collection
+     * @return SkillInterface[]|Collection
      */
     public function getSkills();
     /**
-     * @return Collection
+     * @return RosterInterface[]|Collection
      */
     public function getRosters();
+    /**
+     * @return RosterInterface[]|Collection
+     */
+    public function getRoster(Team $team):RosterInterface;
     /**
      * @return Collection
      */

@@ -56,8 +56,25 @@ class TeamHelper
      */
     public function createNewTeamVersion(Team $team):TeamVersion
     {
+        $treasure = $this->getNewTeamVersionTreasure($team);
+
         return (TeamHelper::getLastVersion($team))
-            ->setTreasure($this->ruleHelper->getHelper($team->getRule())->getMaxTeamCost());
+            ->setTreasure($treasure);
+    }
+    public function getNewTeamVersionTreasure(Team $team):int
+    {
+        if($team->getVersions()->count() > 0) {
+            return TeamHelper::getLastVersion($team)->getTreasure();
+        }
+        return $this->getTeamBaseTreasure($team);
+    }
+    public function getTeamBaseTreasure(Team $team):int
+    {
+        $options = $team->getCreationOptions();
+        if(isset($options['max_team_cost'])) {
+            return $options['max_team_cost'];
+        }
+        return $this->ruleHelper->getHelper($team)->getMaxTeamCost();
     }
     public function destructTeamVersion(Team $team):TeamVersion
     {

@@ -1,31 +1,41 @@
 <?php
 
-namespace Obblm\Core\Validator\Constraints;
+namespace Obblm\Core\Validator\Constraints\Team;
 
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
-use Obblm\Core\Helper\PlayerHelper;
+use Obblm\Core\Helper\CoreTranslation;
+use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Helper\TeamHelper;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-class TeamCompositionValidator extends ConstraintValidator
+class GroupOfPositionsValidator extends ConstraintValidator
 {
-    private $teamHelper;
+    private $ruleHelper;
+    private $translator;
 
-    public function __construct(TeamHelper $teamHelper)
+    public function __construct(RuleHelper $ruleHelper, TranslatorInterface $translator)
     {
-        $this->teamHelper = $teamHelper;
+        $this->ruleHelper = $ruleHelper;
+        $this->translator = $translator;
     }
 
     public function validate($value, Constraint $constraint)
     {
-        if (!$constraint instanceof TeamComposition) {
-            throw new UnexpectedTypeException($constraint, TeamComposition::class);
+        if (!$constraint instanceof GroupOfPositions) {
+            throw new UnexpectedTypeException($constraint, GroupOfPositions::class);
         }
-        if (!$value instanceof TeamVersion && !$value instanceof Team) {
-            throw new UnexpectedTypeException($value, Team::class);
+
+        if ($value instanceof TeamVersion)
+        {
+            $value->getNotDeadPlayerVersions();
+        }
+
+        if (!$value instanceof TeamVersion) {
+            throw new UnexpectedTypeException($value, TeamVersion::class);
         }
         if ($value instanceof Team) {
             $value = TeamHelper::getLastVersion($value);
@@ -36,14 +46,16 @@ class TeamCompositionValidator extends ConstraintValidator
 
         $maxPositions = $this->getMaxPlayersByTypes($value->getTeam());
         foreach ($value->getNotDeadPlayerVersions() as $version) {
-            if ($version->getPlayer()->getType()) {
-                $limit = $maxPositions[$version->getPlayer()->getType()];
-                $type = $version->getPlayer()->getType();
+            if ($version->getPlayer()->getPosition()) {
+                $playerType = $version->getPlayer()->getPosition();
+                list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $playerType);
+                $limit = $maxPositions[$type];
                 isset($count[$type]) ? $count[$type]++ : $count[$type] = 1;
                 if ($count[$type] > $limit) {
+                    $translationName = CoreTranslation::getPlayerKeyType($ruleKey, $roster, $type);
                     $this->context->buildViolation($constraint->limitMessage)
                         ->setParameter('{{ limit }}', $limit)
-                        ->setParameter('{{ player_type }}', $type)
+                        ->setParameter('{{ player_type }}', $this->translator->trans($translationName, [], 'lrb6'))
                         ->addViolation();
                 }
             }
@@ -52,13 +64,12 @@ class TeamCompositionValidator extends ConstraintValidator
 
     protected function getMaxPlayersByTypes(Team $team):array
     {
-        $helper = $this->teamHelper->getRuleHelper($team);
+        $helper = $this->ruleHelper->getHelper($team);
         $maxPositions = [];
 
         if ($helper->getAvailablePlayerTypes($team->getRoster())) {
             $types = $helper->getAvailablePlayerTypes($team->getRoster());
             foreach ($types as $key => $type) {
-                $key = PlayerHelper::composePlayerKey($helper->getAttachedRule()->getRuleKey(), $team->getRoster(), $key);
                 $maxPositions[$key] = $type['max'];
             }
         }

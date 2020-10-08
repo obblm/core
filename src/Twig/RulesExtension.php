@@ -4,6 +4,7 @@ namespace Obblm\Core\Twig;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
+use Obblm\Core\Contracts\RosterInterface;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Rule;
@@ -59,34 +60,33 @@ class RulesExtension extends AbstractExtension
 
     public function getAvailableRosters(Rule $rule)
     {
-        return $this->ruleHelper->getHelper($rule)->getAvailableRosters();
+        return $this->ruleHelper->getHelper($rule)->getRosters();
     }
 
-    public function createTeamFor(Rule $rule, $roster)
+    public function createTeamFor(Rule $rule, RosterInterface $roster)
     {
         $helper = $this->ruleHelper->getHelper($rule);
         $team = (new Team())
             ->setRule($rule)
-            ->setName(CoreTranslation::getRosterKey($rule->getRuleKey(), $roster))
-            ->setRoster($roster);
-        $types = $helper->getAvailablePlayerKeyTypes($roster);
-        foreach ($types as $type) {
+            ->setName($roster->getName())
+            ->setRoster($roster->getKey());
+        foreach ($roster->getPositions() as $position) {
             $version = new PlayerVersion();
             $player = (new Player())
-                ->setType(PlayerHelper::composePlayerKey($rule->getRuleKey(), $roster, $type))
-                ->setName(CoreTranslation::getPlayerKeyType($rule->getRuleKey(), $roster, $type))
+                ->setPosition($position->getKey())
+                ->setName($position->getName())
                 ->addVersion($version);
-            $helper->setPlayerDefaultValues(PlayerHelper::getLastVersion($player));
+            $helper->setPlayerDefaultValues(PlayerHelper::getLastVersion($player), $position);
             $team->addPlayer($player);
         }
         return $team;
     }
 
-    public function getMaxPositionType(Rule $rule, Player $player)
+    public function getMaxPositionType(Team $team, Player $player)
     {
-        list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $player->getType());
-        $helper = $this->ruleHelper->getHelper($rule);
-        return $helper->getMaxPlayersByType($roster, $type);
+        $helper = $this->ruleHelper->getHelper($team);
+        $position = $helper->getRoster($team)->getPosition($player->getPosition());
+        return $position->getMax();
     }
 
     public function getAvailableStarPlayers(Team $team)

@@ -9,7 +9,7 @@ use Obblm\Core\Contracts\Rule\RuleBuilderInterface;
 use Obblm\Core\Contracts\Rule\RuleTeamInterface;
 use Obblm\Core\Entity\Rule;
 
-interface RuleHelperInterface extends RuleApplicativeInterface, RuleBuilderInterface, RuleTeamInterface, RulePlayerInterface, RuleInducementInterface
+interface RuleHelperInterface extends RuleApplicativeInterface, RuleBuilderInterface, RuleTeamInterface, RulePlayerInterface, RuleInducementInterface, TeamCreationOptionsInterface
 {
     /****************
      * COMPLIER PASS

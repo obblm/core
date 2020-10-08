@@ -78,7 +78,7 @@ class TranslatorTest extends TestCase
         $this->assertSame($expected, $result);
 
         $dummyPlayer = (new Player())
-            ->setType(join(CoreTranslation::TRANSLATION_GLUE, [self::RULE, self::ROSTER, self::PLAYER_TYPE]))
+            ->setPosition(join(CoreTranslation::TRANSLATION_GLUE, [self::RULE, self::ROSTER, self::PLAYER_TYPE]))
             ->setTeam(
                 (new Team())
                     ->setRule(

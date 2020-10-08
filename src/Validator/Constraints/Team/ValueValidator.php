@@ -1,6 +1,6 @@
 <?php
 
-namespace Obblm\Core\Validator\Constraints;
+namespace Obblm\Core\Validator\Constraints\Team;
 
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
@@ -10,7 +10,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class TeamValueValidator extends ConstraintValidator
+class ValueValidator extends ConstraintValidator
 {
     protected $ruleHelper;
 
@@ -21,8 +21,8 @@ class TeamValueValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        if (!$constraint instanceof TeamValue) {
-            throw new UnexpectedTypeException($constraint, TeamValue::class);
+        if (!$constraint instanceof Value) {
+            throw new UnexpectedTypeException($constraint, Value::class);
         }
         if (!$value instanceof Team && !$value instanceof TeamVersion) {
             throw new UnexpectedTypeException($value, Team::class);

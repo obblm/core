@@ -5,6 +5,7 @@ namespace Obblm\Core\Helper\Rule\Traits;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\CompositeExpression;
+use Obblm\Core\Contracts\PositionInterface;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Exception\InvalidArgumentException;
@@ -34,7 +35,7 @@ trait AbstractPlayerRuleTrait
     {
         /** @var Roster $roster */
         $roster = $this->getRosters()->get($rosterKey);
-        return $roster->getPlayerTypes();
+        return $roster->getPositions();
     }
 
     /**
@@ -48,26 +49,12 @@ trait AbstractPlayerRuleTrait
 
     /**
      * @param PlayerVersion $version
+     * @param PositionInterface $position
      * @return PlayerVersion|null
      */
-    public function setPlayerDefaultValues(PlayerVersion $version): ?PlayerVersion
+    public function setPlayerDefaultValues(PlayerVersion $version, PositionInterface $position): ?PlayerVersion
     {
-        /**
-         * -characteristics: []
-         * -skills: []
-         * -spp_level: null
-         * -value: null
-         */
-        list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $version->getPlayer()->getType());
-        $types = $this->getAvailablePlayerTypes($roster);
-        $base = $types[$type];
-        $characteristics = $base['characteristics'];
-        $version->setCharacteristics([
-            'ma' => $characteristics['ma'],
-            'st' => $characteristics['st'],
-            'ag' => $characteristics['ag'],
-            'av' => $characteristics['av']
-        ])
+        $version->setCharacteristics($position->getCharacteristics())
             ->setActions([
                 'td' => 0,
                 'cas' => 0,
@@ -75,8 +62,8 @@ trait AbstractPlayerRuleTrait
                 'int' => 0,
                 'mvp' => 0,
             ])
-            ->setSkills(($base['skills'] ?? []))
-            ->setValue($base['cost'])
+            ->setSkills($position->getSkills())
+            ->setValue($position->getCost())
             ->setSppLevel($this->getSppLevel($version));
 
         return $version;
@@ -180,7 +167,7 @@ trait AbstractPlayerRuleTrait
 
     private function getAvailableSkillsFor(Player $player):array
     {
-        list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $player->getType());
+        list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $player->getPosition());
         return [
             'single' => $this->rule['rosters'][$roster]['players'][$type]['available_skills'],
             'double' => $this->rule['rosters'][$roster]['players'][$type]['available_skills_on_double']

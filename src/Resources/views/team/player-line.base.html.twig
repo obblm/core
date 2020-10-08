@@ -1,7 +1,7 @@
 <tr>
     {% block number %}<td>{{ player.number }}</td>{% endblock %}
     {% block name %}<td class="left aligned editable">{{ player.name }}</td>{% endblock %}
-    {% block type %}<td class="left aligned editable">{{ player|type|trans({}, rule.ruleKey) }}</td>{% endblock %}
+    {% block position %}<td class="left aligned editable">{{ player|type|trans({}, rule.ruleKey) }}</td>{% endblock %}
     {% block characteristics %}
         <td>{{ player|characteristics('ma') }}</td>
         <td>{{ player|characteristics('st') }}</td>
@@ -9,7 +9,7 @@
         <td>{{ player|characteristics('av') }}</td>
     {% endblock %}
     {% block skills %}<td class="left aligned">
-        {% if player.type %}
+        {% if player.position %}
             {% set skills = get_player_skills(rule, player) %}
             {% for skill in skills %}
                 <span class="skill-tooltip" title="{{ skill.description|trans({}, skill.translationDomain) }}">

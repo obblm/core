@@ -22,7 +22,6 @@ class PlayerTeamCollectionTransformer implements DataTransformerInterface
         // In want to have 16 players in the list, no less, no more
 
         $usedNumbers = [];
-
         foreach ($value->getPlayers() as $player) {
             $usedNumbers[$player->getNumber()] = $player;
         }
@@ -45,7 +44,7 @@ class PlayerTeamCollectionTransformer implements DataTransformerInterface
         }
 
         foreach ($value->getPlayers() as $player) {
-            if (!$player->getName() && !$player->getType()) {
+            if (!$player->getName() && !$player->getPosition()) {
                 $value->removePlayer($player);
             }
         }

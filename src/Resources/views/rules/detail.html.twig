@@ -12,11 +12,11 @@
         <div class="ui four rosters boxes">
             {% for roster in rosters %}
                 <div class="box roster">
-                    <a class="image" href="{{ path('obblm_rules_roster_sheet', {'rule': rule.id, 'roster': roster.key}) }}">
+                    <a class="image" href="{{ path('obblm_rules_roster_sheet', {'rule': rule.id, 'rosterKey': roster.key}) }}">
                         <img src="{{ roster_image(rule, roster.key) }}" alt="{{ roster|trans({}, roster.translationDomain) }}">
                     </a>
                     <div class="content">
-                        <a class="header" href="{{ path('obblm_rules_roster_sheet', {'rule': rule.id, 'roster': roster.key}) }}">{{ roster|trans({}, roster.translationDomain) }}</a>
+                        <a class="header" href="{{ path('obblm_rules_roster_sheet', {'rule': rule.id, 'rosterKey': roster.key}) }}">{{ roster|trans({}, roster.translationDomain) }}</a>
                     </div>
                 </div>
             {% endfor %}
