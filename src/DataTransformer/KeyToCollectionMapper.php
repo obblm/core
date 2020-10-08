@@ -1,6 +1,7 @@
 <?php
 
 namespace Obblm\Core\DataTransformer;
+
 use Obblm\Core\Contracts\PositionInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -23,8 +24,7 @@ class KeyToCollectionMapper implements DataTransformerInterface
             return;
         }
 
-        if(!isset($this->collection[$value]))
-        {
+        if (!isset($this->collection[$value])) {
             return;
         }
 
@@ -40,4 +40,3 @@ class KeyToCollectionMapper implements DataTransformerInterface
         return $viewData->getKey();
     }
 }
-

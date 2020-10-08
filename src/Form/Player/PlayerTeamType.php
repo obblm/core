@@ -52,7 +52,7 @@ class PlayerTeamType extends AbstractType implements DataMapperInterface
         $position = $forms;
 
         $choices = $position->getConfig()->getOption('choices');
-        if($viewData->getPosition()) {
+        if ($viewData->getPosition()) {
             $forms->setData($viewData->getPosition());
         }
     }
@@ -67,7 +67,9 @@ class PlayerTeamType extends AbstractType implements DataMapperInterface
         /** @var PositionInterface $position */
         $position = $forms->getData();
 
-        if($position) $viewData->setPosition($position->getKey());
+        if ($position) {
+            $viewData->setPosition($position->getKey());
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

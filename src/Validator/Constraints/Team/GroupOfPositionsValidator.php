@@ -29,8 +29,7 @@ class GroupOfPositionsValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, GroupOfPositions::class);
         }
 
-        if ($value instanceof TeamVersion)
-        {
+        if ($value instanceof TeamVersion) {
             $value->getNotDeadPlayerVersions();
         }
 

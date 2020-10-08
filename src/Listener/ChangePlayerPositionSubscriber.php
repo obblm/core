@@ -25,18 +25,17 @@ class ChangePlayerPositionSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
         $helper = $form->getConfig()->getOption('helper');
         $player = $form->getData();
-        if(!$player instanceof Player) {
+        if (!$player instanceof Player) {
             return;
         }
-        if(!$helper instanceof RuleHelperInterface) {
+        if (!$helper instanceof RuleHelperInterface) {
             return;
         }
-        if(!$player->getId() || !$data['position']) {
+        if (!$player->getId() || !$data['position']) {
             return;
         }
 
-        if($data['position'] !== $player->getPosition())
-        {
+        if ($data['position'] !== $player->getPosition()) {
             $newPosition = $helper->getRosters()->get($player->getTeam()->getRoster())->getPosition($data['position']);
             $helper->setPlayerDefaultValues(PlayerHelper::getLastVersion($player), $newPosition);
         }
