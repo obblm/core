@@ -63,7 +63,7 @@ class TeamHelper
     }
     public function getNewTeamVersionTreasure(Team $team):int
     {
-        if($team->getVersions()->count() > 0) {
+        if ($team->getVersions()->count() > 0) {
             return TeamHelper::getLastVersion($team)->getTreasure();
         }
         return $this->getTeamBaseTreasure($team);
@@ -71,7 +71,7 @@ class TeamHelper
     public function getTeamBaseTreasure(Team $team):int
     {
         $options = $team->getCreationOptions();
-        if(isset($options['max_team_cost'])) {
+        if (isset($options['max_team_cost'])) {
             return $options['max_team_cost'];
         }
         return $this->ruleHelper->getHelper($team)->getMaxTeamCost();

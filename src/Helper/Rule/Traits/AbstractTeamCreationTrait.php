@@ -11,7 +11,6 @@ trait AbstractTeamCreationTrait
     abstract public function getMaxTeamCost(): int;
     public function getTeamCreationOptions(): array
     {
-
     }
     public function getTeamCreationForm(): string
     {
@@ -19,6 +18,5 @@ trait AbstractTeamCreationTrait
     }
     public function getTeamCreationResolver(): array
     {
-
     }
 }

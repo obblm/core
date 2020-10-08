@@ -29,8 +29,7 @@ class CompositionValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, Composition::class);
         }
 
-        if ($value instanceof TeamVersion)
-        {
+        if ($value instanceof TeamVersion) {
             $value->getNotDeadPlayerVersions();
         }
 

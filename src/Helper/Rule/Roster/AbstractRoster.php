@@ -46,8 +46,7 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
     protected function hydratePositions(array $positions): self
     {
         $positionClassName = $this->getPositionClass();
-        foreach ($positions as $key => $position)
-        {
+        foreach ($positions as $key => $position) {
             $position['key'] = $key;
             $position['name'] = CoreTranslation::getPlayerKeyType(
                 $this->getTranslationDomain(),
