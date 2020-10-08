@@ -34,7 +34,6 @@ class RulesController extends AbstractController
         $this->denyAccessUnlessGranted(Roles::COACH);
 
         $helper = $ruleHelper->getHelper($rule);
-
         return $this->render('@ObblmCore/rules/detail.html.twig', [
             'rule' => $rule,
             'rosters' => $helper->getRosters(),
@@ -42,11 +41,14 @@ class RulesController extends AbstractController
     }
 
     /**
-     * @Route("/{rule}/roster/{roster}", name="_roster_sheet")
+     * @Route("/{rule}/roster/{rosterKey}", name="_roster_sheet")
      */
-    public function rosterSheet(Rule $rule, string $roster):Response
+    public function rosterSheet(Rule $rule, string $rosterKey, RuleHelper $ruleHelper):Response
     {
         $this->denyAccessUnlessGranted(Roles::COACH);
+
+        $helper = $ruleHelper->getHelper($rule);
+        $roster = $helper->getRosters()->get($rosterKey);
 
         return $this->render('@ObblmCore/rules/roster_sheet.html.twig', [
             'rule' => $rule,

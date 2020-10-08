@@ -1,11 +1,11 @@
 <?php
 
-namespace Obblm\Core\Validator\Constraints;
+namespace Obblm\Core\Validator\Constraints\Team;
 
 use Symfony\Component\Validator\Constraint;
 use function get_class;
 
-class TeamValue extends Constraint
+class Value extends Constraint
 {
     const LIMIT = 1000000;
 

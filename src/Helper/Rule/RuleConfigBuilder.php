@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Obblm\Core\Contracts\InducementInterface;
 use Obblm\Core\Contracts\RosterInterface;
 use Obblm\Core\Contracts\Rule\RuleBuilderInterface;
+use Obblm\Core\Entity\Team;
 use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\Rule\Config\ConfigResolver;
 use Obblm\Core\Helper\Rule\Config\RuleConfigResolver;
@@ -92,9 +93,15 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
         return $this;
     }
 
+    /** @return RosterInterface[]|ArrayCollection */
     public function getRosters():ArrayCollection
     {
         return $this->rosters;
+    }
+
+    public function getRoster(Team $team):RosterInterface
+    {
+        return $this->rosters->get($team->getRoster());
     }
 
     public function setRosters(ArrayCollection $rosters):self

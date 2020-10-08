@@ -177,7 +177,7 @@ obblm:
     player:
       fields:
         number: Number
-        type: Player position
+        position: Player position
         name: Player name
 
   emails:

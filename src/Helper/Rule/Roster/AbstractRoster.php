@@ -2,7 +2,10 @@
 
 namespace Obblm\Core\Helper\Rule\Roster;
 
+use Obblm\Core\Contracts\PositionInterface;
 use Obblm\Core\Contracts\RosterInterface;
+use Obblm\Core\Exception\NotFoundKeyException;
+use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\Optionable;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,7 +21,10 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
     protected $key;
     protected $name;
     protected $translationDomain;
-    protected $playerTypes;
+    protected $positions = [];
+    protected $special_rules;
+    protected $additionalValidators;
+    protected $tier;
     protected $rerollCost;
     protected $canHaveApothecary;
     protected $inducementOptions;
@@ -28,10 +34,39 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
         $this->setKey($this->options['key'])
             ->setName($this->options['name'])
             ->setTranslationDomain($this->options['translation_domain'])
-            ->setPlayerTypes($this->options['player_types'])
+            ->setSpecialRules($this->options['special_rules'])
+            ->setTier($this->options['tier'])
+            ->setAdditionalValidators($this->options['additional_validators'])
             ->setInducementTypes($this->options['inducement_options'])
             ->setRerollCost($this->options['reroll_cost'])
             ->setCanHaveApothecary($this->options['can_have_apothecary']);
+        $this->hydratePositions($this->options['player_types']);
+    }
+
+    protected function hydratePositions(array $positions): self
+    {
+        $positionClassName = $this->getPositionClass();
+        foreach ($positions as $key => $position)
+        {
+            $position['key'] = $key;
+            $position['name'] = CoreTranslation::getPlayerKeyType(
+                $this->getTranslationDomain(),
+                $this->getKey(),
+                $key
+            );
+            $position['translation_domain'] = $this->getTranslationDomain();
+            $this->positions[$key] = (new $positionClassName($position))
+                                        ->setRoster($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPositionClass(): string
+    {
+        return Position::class;
     }
 
     /**
@@ -61,9 +96,17 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
     /**
      * @return array
      */
-    public function getPlayerTypes(): ?array
+    public function getPositions(): ?array
     {
-        return $this->playerTypes;
+        return $this->positions;
+    }
+
+    public function getPosition($key): ?PositionInterface
+    {
+        if (!isset($this->positions[$key])) {
+            throw new NotFoundKeyException($key, "positions", self::class);
+        }
+        return $this->positions[$key];
     }
 
     /**
@@ -129,12 +172,12 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
     }
 
     /**
-     * @param array $playerTypes
+     * @param array $positions
      * @return $this
      */
-    public function setPlayerTypes(array $playerTypes): self
+    public function setPositions(array $positions): self
     {
-        $this->playerTypes = $playerTypes;
+        $this->positions = $positions;
         return $this;
     }
 
@@ -168,6 +211,60 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getSpecialRules():array
+    {
+        return $this->special_rules;
+    }
+
+    /**
+     * @param array $special_rules
+     * @return $this
+     */
+    public function setSpecialRules(array $special_rules): self
+    {
+        $this->special_rules = $special_rules;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAdditionalValidators(): ?array
+    {
+        return $this->additionalValidators;
+    }
+
+    /**
+     * @param array $additionalValidators
+     * @return $this
+     */
+    public function setAdditionalValidators(array $additionalValidators): self
+    {
+        $this->additionalValidators = $additionalValidators;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTier():int
+    {
+        return $this->tier;
+    }
+
+    /**
+     * @param int|null $tier
+     * @return $this
+     */
+    public function setTier(?int $tier): self
+    {
+        $this->tier = $tier;
+        return $this;
+    }
+
     public function __toString(): string
     {
         return $this->name;
@@ -176,13 +273,16 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
     public function configureOptions(OptionsResolver $resolver):void
     {
         $resolver->setDefaults([
-            'key'                 => null,
-            'name'                => null,
-            'translation_domain'  => null,
-            'player_types'        => [],
-            'inducement_options'  => [],
-            'reroll_cost'         => 0,
-            'can_have_apothecary' => true,
+            'key'                   => null,
+            'name'                  => null,
+            'translation_domain'    => null,
+            'player_types'          => [],
+            'additional_validators' => [],
+            'special_rules'         => [],
+            'tier'                  => null,
+            'inducement_options'    => self::DEFAULT_INDUCEMENT_OPTIONS,
+            'reroll_cost'           => 0,
+            'can_have_apothecary'   => true,
         ])
             ->setRequired('key')
             ->setRequired('name')
@@ -191,6 +291,9 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
             ->setAllowedTypes('name', ['string'])
             ->setAllowedTypes('translation_domain', ['string'])
             ->setAllowedTypes('player_types', ['array'])
+            ->setAllowedTypes('special_rules', ['array'])
+            ->setAllowedTypes('tier', ['int', 'null'])
+            ->setAllowedTypes('additional_validators', ['array'])
             ->setAllowedTypes('inducement_options', ['array'])
             ->setAllowedTypes('reroll_cost', ['int'])
             ->setAllowedTypes('can_have_apothecary', ['bool'])

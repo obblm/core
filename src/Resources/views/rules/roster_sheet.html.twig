@@ -1,6 +1,6 @@
 {% extends '@ObblmCore/base.html.twig' %}
 {% set team = create_rule_team(rule, roster) %}
-{% set title = team|roster_name|trans({}, rule.ruleKey) %}
+{% set title = roster|trans({}, rule.ruleKey) %}
 
 {% block title 'obblm.rules.title'|trans({}, 'obblm')
 ~ ' > ' ~ rule.name|trans({}, rule.ruleKey)
@@ -25,7 +25,7 @@
         {% block player_head_spp %}{% endblock %}
         {% block player_line %}
             {% embed '@ObblmCore/team/player-line.' ~ rule.template ~ '.html.twig' with { 'player': player } %}
-                {% block number %}<td>0-{{ max_position_type(rule, player) }}</td>{% endblock %}
+                {% block number %}<td>0-{{ max_position_type(team, player) }}</td>{% endblock %}
                 {% block name %}{% endblock %}
                 {% block injuries %}{% endblock %}
                 {% block spp %}{% endblock %}
@@ -43,7 +43,7 @@
             {% embed '@ObblmCore/team/player-line.' ~ rule.template ~ '.html.twig' with { 'player': player } %}
                 {% block number %}{% endblock %}
                 {% block name %}<td class="left aligned editable">{{ player.name }}</td>{% endblock %}
-                {% block type %}{% endblock %}
+                {% block position %}{% endblock %}
                 {% block injuries %}{% endblock %}
                 {% block spp %}{% endblock %}
             {% endembed %}

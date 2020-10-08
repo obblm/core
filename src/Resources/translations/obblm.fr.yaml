@@ -194,7 +194,7 @@ obblm:
     player:
       fields:
         number: Numéro
-        type: Position du joueur
+        position: Position du joueur
         name: Nom du joueur
 
   emails:

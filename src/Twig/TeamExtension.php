@@ -102,7 +102,7 @@ class TeamExtension extends AbstractExtension
 
     public function getCharacteristics(Player $player, $characteristic)
     {
-        if (!$player->getType()) {
+        if (!$player->getPosition()) {
             return '';
         }
         $characteristics = PlayerHelper::getPlayerCharacteristics($player);
@@ -115,7 +115,7 @@ class TeamExtension extends AbstractExtension
 
     public function getSkills(Player $player)
     {
-        if (!$player->getType()) {
+        if (!$player->getPosition()) {
             return null;
         }
         return PlayerHelper::getPlayerSkills($player);
@@ -123,15 +123,17 @@ class TeamExtension extends AbstractExtension
 
     public function getType(Player $player)
     {
-        if (!$player->getType()) {
+        if (!$player->getPosition()) {
             return '';
         }
-        return CoreTranslation::getPlayerTranslationKey($player);
+        $helper = $this->ruleHelper->getHelper($player->getTeam());
+        $position = $helper->getRoster($player->getTeam())->getPosition($player->getPosition());
+        return $position;
     }
 
     public function getSpp(Player $player)
     {
-        if (!$player->getType()) {
+        if (!$player->getPosition()) {
             return '';
         }
         return PlayerHelper::getPlayerSpp($player);
@@ -139,7 +141,7 @@ class TeamExtension extends AbstractExtension
 
     public function getPlayerValue(Player $player)
     {
-        if (!$player->getType()) {
+        if (!$player->getPosition()) {
             return '';
         }
         return PlayerHelper::getPlayerValue($player);

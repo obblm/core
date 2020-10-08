@@ -3,22 +3,23 @@
 namespace Obblm\Core\Helper\Rule\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Obblm\Core\Contracts\PositionInterface;
+use Obblm\Core\Contracts\RosterInterface;
 use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
 use Obblm\Core\Exception\InvalidArgumentException;
-use Obblm\Core\Exception\NotFoundKeyException;
-use Obblm\Core\Exception\NotFoundRuleKeyException;
 use Obblm\Core\Exception\NoVersionException;
 use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\Rule\Roster\Roster;
-use Obblm\Core\Validator\Constraints\TeamValue;
 
 /****************************
  * TEAM INFORMATION METHODS
  ***************************/
 trait AbstractTeamRuleTrait
 {
+    abstract public function getRoster(Team $team):RosterInterface;
+
     /**
      * @return int
      */
@@ -98,16 +99,18 @@ trait AbstractTeamRuleTrait
         }
         $value = 0;
         // Players
+        $roster = $this->getRoster($version->getTeam());
         // TODO: Bug => players are not version's one (because of dead players)
         foreach ($version->getTeam()->getAvailablePlayers() as $player) {
-            if ($player->getType()) {
+            if ($player->getPosition()) {
                 try {
                     $playerVersion = PlayerHelper::getLastVersion($player);
                 } catch (NoVersionException $e) { // It's a new player !
                     $playerVersion = (new PlayerVersion());
                     $player->addVersion($playerVersion);
                     $version->addPlayerVersion($playerVersion);
-                    $this->setPlayerDefaultValues($playerVersion);
+                    $position = $roster->getPosition($player->getPosition());
+                    $this->setPlayerDefaultValues($playerVersion, $position);
                 }
                 if (!$playerVersion->isMissingNextGame() && !($this->playerIsDisposable($playerVersion) && $excludeDisposable)) {
                     $value += $playerVersion->getValue();
@@ -124,8 +127,9 @@ trait AbstractTeamRuleTrait
         return $value;
     }
 
-    abstract public function setPlayerDefaultValues(PlayerVersion $version): ?PlayerVersion;
+    abstract public function setPlayerDefaultValues(PlayerVersion $version, PositionInterface $position): ?PlayerVersion;
     abstract public function playerIsDisposable(PlayerVersion $version):bool;
+    /** @return RosterInterface[]|ArrayCollection */
     abstract public function getRosters():ArrayCollection;
 
     /**
@@ -138,12 +142,8 @@ trait AbstractTeamRuleTrait
 
     public function getMaxPlayersByType($rosterKey, $typeKey): int
     {
-        /** @var Roster $roster */
-        $roster = $this->getRosters()->get($rosterKey);
-        if (!isset($roster->getPlayerTypes()[$typeKey])) {
-            throw new NotFoundKeyException($typeKey, "getRosters()->get('$rosterKey')->getPlayerTypes()", self::class);
-        }
-        $type = $roster->getPlayerTypes()[$typeKey];
-        return (int) $type['max'];
+        /** @var PositionInterface $position */
+        $position = $this->getRosters()->get($rosterKey)->getPosition($typeKey);
+        return (int) $position->getMax();
     }
 }

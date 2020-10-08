@@ -3,11 +3,11 @@
 namespace Obblm\Core\Form\Team;
 
 use Obblm\Core\Entity\TeamVersion;
-use Obblm\Core\Helper\TeamHelper;
+use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Listener\UploaderSubscriber;
 use Obblm\Core\Service\FileTeamUploader;
-use Obblm\Core\Validator\Constraints\TeamComposition;
-use Obblm\Core\Validator\Constraints\TeamValue;
+use Obblm\Core\Validator\Constraints\Team\Composition;
+use Obblm\Core\Validator\Constraints\Team\Value;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,12 +16,12 @@ use Symfony\Component\Validator\Constraints\File;
 
 class EditTeamType extends AbstractType
 {
-    protected $teamHelper;
+    protected $ruleHelper;
     protected $uploader;
 
-    public function __construct(TeamHelper $teamHelper, FileTeamUploader $uploader)
+    public function __construct(RuleHelper $ruleHelper, FileTeamUploader $uploader)
     {
-        $this->teamHelper = $teamHelper;
+        $this->ruleHelper = $ruleHelper;
         $this->uploader = $uploader;
     }
 
@@ -29,10 +29,12 @@ class EditTeamType extends AbstractType
     {
         if ($builder->getData() && $builder->getData() instanceof TeamVersion) {
             $team = $builder->getData()->getTeam();
+            $helper = $this->ruleHelper->getHelper($team);
             if (!$team->isLockedByManagment() && !$team->isReady()) {
                 $builder
                     ->add('team', TeamType::class, [
-                        'data' => $team
+                        'data' => $team,
+                        'helper' => $helper
                     ])
                     ->add('logo', FileType::class, [
                         'label' => 'logo',
@@ -84,7 +86,7 @@ class EditTeamType extends AbstractType
                         'attr' => ['min' => 0, 'max' => 9]
                     ]);
                 $builder->addEventSubscriber(new UploaderSubscriber($this->uploader));
-                if ($this->teamHelper->couldHaveApothecary($team)) {
+                if ($helper->couldHaveApothecary($team)) {
                     $builder->add('apothecary');
                 }
             }
@@ -97,8 +99,8 @@ class EditTeamType extends AbstractType
             'data_class' => TeamVersion::class,
             'translation_domain' => 'obblm',
             'constraints' => [
-                new TeamValue(),
-                new TeamComposition(),
+                new Value(),
+                new Composition(),
             ],
         ));
     }

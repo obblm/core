@@ -156,7 +156,7 @@ class CoreTranslation implements ObblmTranslationInterface
 
     public static function getPlayerTranslationKey(Player $player):string
     {
-        list($ruleKey, $type, $position) = explode(self::TRANSLATION_GLUE, $player->getType());
+        list($ruleKey, $type, $position) = explode(self::TRANSLATION_GLUE, $player->getPosition());
         if ($type == 'star_players') {
             return self::getStarPlayerName($ruleKey, $position);
         }

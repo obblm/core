@@ -3,6 +3,7 @@
 namespace Obblm\Core\Contracts\Rule;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Obblm\Core\Contracts\PositionInterface;
 use Obblm\Core\Entity\PlayerVersion;
 
 /*****************
@@ -10,7 +11,7 @@ use Obblm\Core\Entity\PlayerVersion;
  ****************/
 interface RulePlayerInterface
 {
-    public function setPlayerDefaultValues(PlayerVersion $version):?PlayerVersion;
+    public function setPlayerDefaultValues(PlayerVersion $version, PositionInterface $position):?PlayerVersion;
     public function playerIsDisposable(PlayerVersion $playerVersion):bool;
     public function getInjury(string $key):?object;
     public function getAvailablePlayerKeyTypes(string $roster):array;

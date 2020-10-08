@@ -27,7 +27,7 @@ class PlayerHelper
     }
     public function getBasePlayerVersion(Player $player):array
     {
-        list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $player->getType());
+        list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $player->getPosition());
         $helper = $this->teamHelper->getRuleHelper($player->getTeam());
         $base = $helper->getAttachedRule()->getRule()['rosters'][$roster]['players'][$type];
         $base['injuries'] = [];

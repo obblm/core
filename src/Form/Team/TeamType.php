@@ -3,10 +3,10 @@
 namespace Obblm\Core\Form\Team;
 
 use Doctrine\Common\Collections\Criteria;
+use Obblm\Core\Contracts\RuleHelperInterface;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Form\Player\PlayerTeamType;
-use Obblm\Core\Helper\RuleHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -17,15 +17,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TeamType extends AbstractType implements DataMapperInterface
 {
-    private $ruleHelper;
-
-    public function __construct(RuleHelper $ruleHelper)
-    {
-        $this->ruleHelper = $ruleHelper;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var RuleHelperInterface $helper */
+        $helper = $options['helper'];
         $builder->add('name')
             ->add('anthem')
             ->add('fluff')
@@ -40,8 +35,8 @@ class TeamType extends AbstractType implements DataMapperInterface
                 'prototype' => true,
                 'by_reference' => true,
                 'entry_options' => [
-                    'rule_helper' => $this->ruleHelper->getHelper($team->getRule()),
-                    'roster' => $team->getRoster()
+                    'helper' => $helper,
+                    'roster' => $helper->getRoster($team)
                 ]
             ]);
             $builder->setDataMapper($this);
@@ -94,7 +89,7 @@ class TeamType extends AbstractType implements DataMapperInterface
             ->setFluff($forms['fluff']->getData())
             ->setReady($forms['ready']->getData());
         foreach ($players as $player) {
-            if (!$player->getType()) {
+            if (!$player->getPosition()) {
                 $viewData->removePlayer($player);
             }
             if (!$player->getName()) {
@@ -107,7 +102,10 @@ class TeamType extends AbstractType implements DataMapperInterface
     {
         $resolver->setDefaults(array(
             'translation_domain' => 'obblm',
+            'helper' => null,
             'data_class' => Team::class,
         ));
+
+        $resolver->setAllowedTypes('helper', [RuleHelperInterface::class]);
     }
 }

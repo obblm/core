@@ -52,6 +52,11 @@ class Team implements CanHaveRuleInterface
     private $roster;
 
     /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $creationOptions;
+
+    /**
      * @ORM\OneToMany(targetEntity=Player::class, fetch="EAGER", mappedBy="team", orphanRemoval=true, cascade={"persist", "remove"})
      * @ORM\OrderBy({"number"="ASC"})
      */
@@ -129,6 +134,17 @@ class Team implements CanHaveRuleInterface
     {
         $this->roster = $roster;
 
+        return $this;
+    }
+
+    public function getCreationOptions(): ?array
+    {
+        return $this->creationOptions;
+    }
+
+    public function setCreationOptions(array $creationOptions): self
+    {
+        $this->creationOptions = $creationOptions;
         return $this;
     }
 

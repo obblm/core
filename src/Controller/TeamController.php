@@ -8,10 +8,13 @@ use Obblm\Core\Entity\Rule;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Event\TeamVersionEvent;
 use Obblm\Core\Form\Team\EditTeamType;
+use Obblm\Core\Form\Team\TeamRulesSelectorForm;
+use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Helper\TeamHelper;
 use Obblm\Core\Security\Roles;
 use Obblm\Core\Security\Voter\TeamVoter;
 use Obblm\Core\Service\FileTeamUploader;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +27,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/teams", name="obblm_team")
  */
-class TeamController extends AbstractTeamController
+class TeamController extends AbstractController
 {
     /**
      * @Route("/", name="_mine")
@@ -54,14 +57,32 @@ class TeamController extends AbstractTeamController
     /**
      * @Route("/create/from-rule/{rule}", name="_create_rule")
      */
-    public function createFromRule(Rule $rule, Request $request): Response
+    public function createFromRule(Rule $rule, Request $request, TeamHelper $teamHelper, RuleHelper $ruleHelper): Response
     {
         $this->denyAccessUnlessGranted(Roles::COACH);
 
         $team = (new Team())
             ->setRule($rule)
             ->setCoach($this->getUser());
-        return $this->createAndComputeTeamForm($team, $request);
+
+        $form = $this->createForm(TeamRulesSelectorForm::class, $team, [
+            'helper' => $ruleHelper->getHelper($rule),
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() and $form->isValid()) {
+            $teamHelper->createNewTeamVersion($team);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($team);
+            $em->flush();
+            return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);
+        }
+
+        return $this->render('@ObblmCore/form/team/create.rules-choice.html.twig', [
+            'form' => $form->createView(),
+            'rule' => $team->getRule(),
+        ]);
     }
 
     /**
