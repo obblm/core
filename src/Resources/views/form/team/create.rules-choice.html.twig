@@ -22,33 +22,79 @@
                 {{ form_errors(form.roster) }}
                 {{ form_widget(form.roster, {'attr': {'class': 'ui dropdown'}}) }}
             </div>
+            {% if form.creationOptions %}
+            <h2 class="title">{{ 'obblm.forms.team.create.options'|trans({}, 'obblm') }}</h2>
+            <div class="three boxes">
+                <div class="box field">
+                    {{ form_label(form.creationOptions.max_team_cost, 'obblm.forms.team.fields.max_team_cost'|trans({}, 'obblm')) }}
+                    {{ form_widget(form.creationOptions.max_team_cost) }}
+                    {{ form_errors(form.creationOptions.max_team_cost) }}
+                </div>
+                <div class="box field">
+                    <div class="ui checkbox">
+                        {{ form_widget(form.creationOptions.inducement_allowed) }}
+                        {{ form_label(form.creationOptions.inducement_allowed, 'obblm.forms.team.fields.inducement_allowed'|trans({}, 'obblm')) }}
+                        {{ form_errors(form.creationOptions.inducement_allowed) }}
+                    </div>
+                </div>
+                <div class="box field">
+                    <div class="ui checkbox">
+                        {{ form_widget(form.creationOptions.star_players_allowed) }}
+                        {{ form_label(form.creationOptions.star_players_allowed, 'obblm.forms.team.fields.star_players_allowed'|trans({}, 'obblm')) }}
+                        {{ form_errors(form.creationOptions.star_players_allowed) }}
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <h3 class="title">{{ form_label(form.creationOptions.skills_allowed.choice, 'obblm.forms.team.fields.skills_allowed.title'|trans({}, 'obblm') ) }}</h3>
+                <div class="choice field">
+                    {{ form_widget(form.creationOptions.skills_allowed.choice) }}
+                    {{ form_errors(form.creationOptions.skills_allowed.choice) }}
+                </div>
+                <div class="three boxes">
+                    {% for option in form.creationOptions.skills_allowed %}
+                        {% if not option.rendered %}
+                            {% set label = 'obblm.forms.team.fields.skills_allowed.' ~ option.vars.name %}
+                            <div class="box field">
+                                {{ form_label(option, label|trans({}, 'obblm') ) }}
+                                {{ form_widget(option) }}
+                                {{ form_errors(option) }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {{ form_errors(form.creationOptions.skills_allowed) }}
+            </div>
             <div class="three boxes">
                 {% for option in form.creationOptions %}
-                    {% if option.vars.checked is defined %}
-                    <div class="box field">
-                        <div class="ui checkbox">
-                        {{ form_widget(option) }}
-                        {{ form_label(option) }}
-                        {{ form_errors(option) }}
-                        </div>
-                    </div>
-                    {% elseif option.vars.choices is defined %}
-                    <div class="box selector field">
-                        <div class="ui checkbox">
+                    {% if not option.rendered %}
+                        {% if option.vars.checked is defined %}
+                        <div class="box field">
+                            <div class="ui checkbox">
                             {{ form_widget(option) }}
                             {{ form_label(option) }}
                             {{ form_errors(option) }}
+                            </div>
                         </div>
-                    </div>
-                    {% else %}
-                    <div class="box field">
-                        {{ form_label(option) }}
-                        {{ form_widget(option) }}
-                        {{ form_errors(option) }}
-                    </div>
+                        {% elseif option.vars.choices is defined %}
+                        <div class="box selector field">
+                            <div class="ui checkbox">
+                                {{ form_widget(option) }}
+                                {{ form_label(option) }}
+                                {{ form_errors(option) }}
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="box field">
+                            {{ form_label(option) }}
+                            {{ form_widget(option) }}
+                            {{ form_errors(option) }}
+                        </div>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </div>
+            {% endif %}
         {% endif %}
         <button class="ui button green" type="submit">
             {{ 'obblm.forms.team.create.buttons.submit'|trans({}, 'obblm') }}

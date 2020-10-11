@@ -2,6 +2,7 @@
 
 namespace Obblm\Core\Entity;
 
+use Obblm\Core\Entity\Traits\DeadAndFireTrait;
 use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Repository\PlayerVersionRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,6 +20,8 @@ class PlayerVersion
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    use DeadAndFireTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity=Player::class, inversedBy="versions", cascade={"persist"})
@@ -61,16 +64,6 @@ class PlayerVersion
      * @ORM\Column(type="boolean")
      */
     private $missingNextGame = false;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $dead = false;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $fire = false;
 
     /**
      * @ORM\Column(type="boolean")
@@ -190,31 +183,11 @@ class PlayerVersion
         return $this;
     }
 
-    public function getDead(): ?bool
-    {
-        return $this->dead;
-    }
-
-    public function isDead(): ?bool
-    {
-        return $this->getDead();
-    }
-
     public function setDead(bool $dead): self
     {
         $this->dead = $dead;
         $this->getPlayer()->setDead($this->dead);
         return $this;
-    }
-
-    public function getFire(): ?bool
-    {
-        return $this->fire;
-    }
-
-    public function isFire(): ?bool
-    {
-        return $this->getFire();
     }
 
     public function setFire(bool $fire): self

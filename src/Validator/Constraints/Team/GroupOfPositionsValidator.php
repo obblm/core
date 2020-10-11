@@ -29,50 +29,30 @@ class GroupOfPositionsValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, GroupOfPositions::class);
         }
 
-        if ($value instanceof TeamVersion) {
-            $value->getNotDeadPlayerVersions();
+        if ($value instanceof Team) {
+            $value = TeamHelper::getLastVersion($value);
         }
 
         if (!$value instanceof TeamVersion) {
             throw new UnexpectedTypeException($value, TeamVersion::class);
         }
-        if ($value instanceof Team) {
-            $value = TeamHelper::getLastVersion($value);
-        }
+
         $count = [];
-
         /** @var TeamVersion $value */
-
-        $maxPositions = $this->getMaxPlayersByTypes($value->getTeam());
+        $team  = $value->getTeam();
+        $helper = $this->ruleHelper->getHelper($team);
         foreach ($value->getNotDeadPlayerVersions() as $version) {
             if ($version->getPlayer()->getPosition()) {
-                $playerType = $version->getPlayer()->getPosition();
-                list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $playerType);
-                $limit = $maxPositions[$type];
-                isset($count[$type]) ? $count[$type]++ : $count[$type] = 1;
-                if ($count[$type] > $limit) {
-                    $translationName = CoreTranslation::getPlayerKeyType($ruleKey, $roster, $type);
+                $position = $version->getPlayer()->getPosition();
+                $basePosition = $helper->getRoster($team)->getPosition($position);
+                isset($count[$position]) ? $count[$position]++ : $count[$position] = 1;
+                if ($count[$position] > $basePosition->getMax()) {
                     $this->context->buildViolation($constraint->limitMessage)
-                        ->setParameter('{{ limit }}', $limit)
-                        ->setParameter('{{ player_type }}', $this->translator->trans($translationName, [], 'lrb6'))
+                        ->setParameter('{{ limit }}', $basePosition->getMax())
+                        ->setParameter('{{ player_type }}', $this->translator->trans($basePosition->getName(), [], $basePosition->getTranslationDomain()))
                         ->addViolation();
                 }
             }
         }
-    }
-
-    protected function getMaxPlayersByTypes(Team $team):array
-    {
-        $helper = $this->ruleHelper->getHelper($team);
-        $maxPositions = [];
-
-        if ($helper->getAvailablePlayerTypes($team->getRoster())) {
-            $types = $helper->getAvailablePlayerTypes($team->getRoster());
-            foreach ($types as $key => $type) {
-                $maxPositions[$key] = $type['max'];
-            }
-        }
-
-        return $maxPositions;
     }
 }

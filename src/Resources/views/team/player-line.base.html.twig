@@ -1,7 +1,21 @@
 <tr>
+    {% set position = player|type %}
     {% block number %}<td>{{ player.number }}</td>{% endblock %}
-    {% block name %}<td class="left aligned editable">{{ player.name }}</td>{% endblock %}
-    {% block position %}<td class="left aligned editable">{{ player|type|trans({}, rule.ruleKey) }}</td>{% endblock %}
+    {% block name %}<td class="left aligned editable">
+        {% if player.position == 'star_players' %}
+        {{ position|trans( {}, position.translationDomain ) }}
+        {% else %}
+        {{ player.name }}
+        {% endif %}
+        </td>
+    {% endblock %}
+    {% block position %}<td class="left aligned editable">
+        {% if player.position == 'star_players' %}
+            {{ position.type|trans( {}, position.translationDomain ) }}
+        {% else %}
+            {{ position|trans( {}, rule.ruleKey ) }}
+        {% endif %}</td>
+    {% endblock %}
     {% block characteristics %}
         <td>{{ player|characteristics('ma') }}</td>
         <td>{{ player|characteristics('st') }}</td>
@@ -10,7 +24,7 @@
     {% endblock %}
     {% block skills %}<td class="left aligned">
         {% if player.position %}
-            {% set skills = get_player_skills(rule, player) %}
+            {% set skills = get_player_skills(player) %}
             {% for skill in skills %}
                 <span class="skill-tooltip" title="{{ skill.description|trans({}, skill.translationDomain) }}">
                     {{ skill }}{% if loop.index != loop.last %}, {% endif %}
@@ -18,6 +32,14 @@
             {% else %}
             {{ 'obblm.sheet.table.players.skill_none'|trans({}, 'obblm') }}
             {% endfor %}
+            {% set skills = get_assitional_player_skills(player) %}
+            <span class="extras">
+            {% for skill in skills %}
+                <b class="success color skill-tooltip" title="{{ skill.description|trans({}, skill.translationDomain) }}">
+                    {{ skill }}{% if loop.index != loop.last %}, {% endif %}
+                </b>
+            {% endfor %}
+            </span>
         {% endif %}
     </td>{% endblock %}
     {% block injuries %}<td class="left aligned"></td>{% endblock %}

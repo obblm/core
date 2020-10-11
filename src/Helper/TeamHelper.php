@@ -74,7 +74,7 @@ class TeamHelper
         if (isset($options['max_team_cost'])) {
             return $options['max_team_cost'];
         }
-        return $this->ruleHelper->getHelper($team)->getMaxTeamCost();
+        return $this->ruleHelper->getHelper($team)->getMaxTeamCost($team);
     }
     public function destructTeamVersion(Team $team):TeamVersion
     {

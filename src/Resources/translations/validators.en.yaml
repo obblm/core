@@ -7,15 +7,15 @@ obblm:
         violation: The team can contain max {{ limit }} of {{ player_type }}.
       value:
         violation: The team value must be lower than {{ limit }}. Your team value is at {{ current }}
-      championship:
-        closed:
-          violation: You cannot join to a closed championship.
-        started:
-          violation: The championship is already started and does not allow you to join.
-        teams_limit:
-          violation: The championship has already reached the maximum number of teams ({{ limit }}).
     inducements:
       amount:
         violation: You can't buy all this shits, you can only spend {{ budget }}.
       quantity:
         violation: You can't buy all this shits, you can only have {{ limit }} of {{ type }}.
+    skills:
+      quantity:
+        violation: You can't get all this skills, you can only have {{ limit }} skill(s).
+      quantity_player:
+        violation: You can't get all this skills, you can only have {{ limit }} skill(s) per player.
+      quantity_type:
+        violation: You can't get all this skills, you can only have {{ limit }} of {{ type }} skill(s).

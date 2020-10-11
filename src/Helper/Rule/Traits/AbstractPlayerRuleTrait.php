@@ -6,18 +6,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Obblm\Core\Contracts\PositionInterface;
+use Obblm\Core\Contracts\RosterInterface;
+use Obblm\Core\DataTransformer\StringToSkill;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\PlayerVersion;
+use Obblm\Core\Entity\Team;
 use Obblm\Core\Exception\InvalidArgumentException;
 use Obblm\Core\Exception\NotFoundKeyException;
-use Obblm\Core\Helper\CoreTranslation;
+use Obblm\Core\Helper\Rule\Inducement\StarPlayer;
 use Obblm\Core\Helper\Rule\Roster\Roster;
+use Obblm\Core\Validator\Constraints\Team\AdditionalSkills;
 
 /*****************
  * PLAYER METHODS
  ****************/
 trait AbstractPlayerRuleTrait
 {
+    abstract public function getRoster(Team $team):RosterInterface;
     /**
      * @param PlayerVersion $playerVersion
      * @return bool
@@ -27,15 +32,33 @@ trait AbstractPlayerRuleTrait
         return in_array('disposable', $playerVersion->getSkills());
     }
 
+    public function getPlayerPosition(Player $player):PositionInterface
+    {
+        try {
+            return $this->getRoster($player->getTeam())->getPosition($player->getPosition());
+        } catch (NotFoundKeyException $e) {
+            return $this->getStarPlayer($player->getName());
+        }
+    }
+
     /**
      * @param string $rosterKey
      * @return array
      */
-    public function getAvailablePlayerTypes(string $rosterKey):array
+    public function getAvailablePlayerForTeamCreation(Team $team)
     {
         /** @var Roster $roster */
-        $roster = $this->getRosters()->get($rosterKey);
-        return $roster->getPositions();
+        $positions = $this->getRoster($team)->getPositions();
+        $options = $team->getCreationOptions();
+        if (isset($options['star_players_allowed']) && $options['star_players_allowed']) {
+            $starPlayers = $this->getAvailableStarPlayers($team);
+            foreach ($starPlayers as $starPlayer) {
+                if ($starPlayer instanceof StarPlayer) {
+                    $positions[$starPlayer->getKey()] = $starPlayer;
+                }
+            }
+        }
+        return $positions;
     }
 
     /**
@@ -44,7 +67,7 @@ trait AbstractPlayerRuleTrait
      */
     public function getAvailablePlayerKeyTypes(string $roster):array
     {
-        return array_keys($this->getAvailablePlayerTypes($roster));
+        return array_keys($this->getRosters()->get($roster)->getPositions());
     }
 
     /**
@@ -142,16 +165,16 @@ trait AbstractPlayerRuleTrait
                 $filers[] = Criteria::expr()->in('type', $availableTypes['double']);
             }
             if (in_array('av_up', $context)) {
-                $filers[] = Criteria::expr()->eq('key', 'c.armor_increase');
+                $filers[] = Criteria::expr()->eq('key', 'armor_increase');
             }
             if (in_array('m_up', $context)) {
-                $filers[] = Criteria::expr()->eq('key', 'c.move_increase');
+                $filers[] = Criteria::expr()->eq('key', 'move_increase');
             }
             if (in_array('ag_up', $context)) {
-                $filers[] = Criteria::expr()->eq('key', 'c.agility_increase');
+                $filers[] = Criteria::expr()->eq('key', 'agility_increase');
             }
             if (in_array('st_up', $context)) {
-                $filers[] = Criteria::expr()->eq('key', 'c.strength_increase');
+                $filers[] = Criteria::expr()->eq('key', 'strength_increase');
             }
             if (count($filers) > 0) {
                 $composite = new CompositeExpression(CompositeExpression::TYPE_OR, $filers);
@@ -163,14 +186,66 @@ trait AbstractPlayerRuleTrait
         return $this->getSkills()->matching($criteria);
     }
 
+    public function getPlayerVersionExtraCosts(PlayerVersion $version):int
+    {
+        $extraCost = 0;
+        $team = $version->getPlayer()->getTeam();
+        if (
+            !$team->getCreationOption('skills_allowed') ||
+            $team->getCreationOption('skills_allowed') && $team->getCreationOption('skills_allowed.choice') == AdditionalSkills::NOT_FREE
+        ) {
+            foreach ($version->getAdditionalSkills() as $skill) {
+                $extraCost += $this->getSkillCostForPlayerVersion($version, $skill);
+            }
+        }
+        return $extraCost;
+    }
+
+    private function getSkillCostForPlayerVersion(PlayerVersion $version, $skill):int
+    {
+        if (!$skill) {
+            return 0;
+        }
+
+        $context = $this->getSkillContextForPlayerVersion($version, $skill);
+
+        $rule = $this->getAttachedRule()->getRule();
+
+        if (is_int($rule['experience_value_modifiers'][$context])) {
+            return $rule['experience_value_modifiers'][$context];
+        }
+
+        throw new NotFoundKeyException($context, 'experience_value_modifiers', $this);
+    }
+
+    public function getSkillContextForPlayerVersion(PlayerVersion $version, $skill):string
+    {
+        if (is_string($skill)) {
+            $skill = (new StringToSkill($this))->transform($skill);
+        }
+        $position = $this->getPlayerPosition($version->getPlayer());
+
+        if ($skill->getType() == 'c') {
+            return 'characteristics';
+        }
+        if (in_array($skill->getType(), $position->getOption('available_skills_on_double'))) {
+            return 'double';
+        }
+        if (in_array($skill->getType(), $position->getOption('available_skills'))) {
+            return 'single';
+        }
+
+        throw new NotFoundKeyException($skill->getType(), 'skill_types', $this);
+    }
+
     abstract public function getSkills():ArrayCollection;
 
     private function getAvailableSkillsFor(Player $player):array
     {
-        list($ruleKey, $roster, $type) = explode(CoreTranslation::TRANSLATION_GLUE, $player->getPosition());
+        $position = $this->getRoster($player->getTeam())->getPosition($player->getPosition());
         return [
-            'single' => $this->rule['rosters'][$roster]['players'][$type]['available_skills'],
-            'double' => $this->rule['rosters'][$roster]['players'][$type]['available_skills_on_double']
+            'single' => $position->getOption('available_skills'),
+            'double' => $position->getOption('available_skills_on_double')
         ];
     }
 }

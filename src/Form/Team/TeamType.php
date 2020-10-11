@@ -7,6 +7,7 @@ use Obblm\Core\Contracts\RuleHelperInterface;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Form\Player\PlayerTeamType;
+use Obblm\Core\Listener\ChangePlayerPositionSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -28,6 +29,8 @@ class TeamType extends AbstractType implements DataMapperInterface
 
         if ($builder->getData()) {
             $team = $builder->getData();
+
+            $positions = $helper->getAvailablePlayerForTeamCreation($team);
             $builder->add('players', CollectionType::class, [
                 'entry_type' => PlayerTeamType::class,
                 'allow_add' => true,
@@ -36,9 +39,11 @@ class TeamType extends AbstractType implements DataMapperInterface
                 'by_reference' => true,
                 'entry_options' => [
                     'helper' => $helper,
+                    'positions' => $positions,
                     'roster' => $helper->getRoster($team)
                 ]
             ]);
+            $builder->addEventSubscriber(new ChangePlayerPositionSubscriber());
             $builder->setDataMapper($this);
         }
     }
@@ -92,6 +97,7 @@ class TeamType extends AbstractType implements DataMapperInterface
             if (!$player->getPosition()) {
                 $viewData->removePlayer($player);
             }
+
             if (!$player->getName()) {
                 $player->setName('P ' . $player->getNumber());
             }

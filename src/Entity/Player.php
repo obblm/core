@@ -2,6 +2,7 @@
 
 namespace Obblm\Core\Entity;
 
+use Obblm\Core\Entity\Traits\DeadAndFireTrait;
 use Obblm\Core\Entity\Traits\NameTrait;
 use Obblm\Core\Repository\PlayerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -21,7 +22,7 @@ class Player
      */
     private $id;
 
-    use NameTrait;
+    use NameTrait, DeadAndFireTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="players")
@@ -40,20 +41,15 @@ class Player
     private $position;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $starPlayer = false;
+
+    /**
      * @ORM\OneToMany(targetEntity=PlayerVersion::class, mappedBy="player", orphanRemoval=true, cascade={"remove"})
      * @ORM\OrderBy({"id"="DESC"})
      */
     private $versions;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $dead = false;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $fire = false;
 
     public function __construct()
     {
@@ -101,6 +97,23 @@ class Player
         return $this;
     }
 
+    public function getStarPlayer(): ?bool
+    {
+        return $this->starPlayer;
+    }
+
+    public function isStarPlayer(): ?bool
+    {
+        return $this->starPlayer;
+    }
+
+    public function setStarPlayer(bool $starPlayer): self
+    {
+        $this->starPlayer = $starPlayer;
+
+        return $this;
+    }
+
     /**
      * @return Collection|PlayerVersion[]
      */
@@ -128,30 +141,6 @@ class Player
                 $version->setPlayer(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getDead(): ?bool
-    {
-        return $this->dead;
-    }
-
-    public function setDead(bool $dead): self
-    {
-        $this->dead = $dead;
-
-        return $this;
-    }
-
-    public function getFire(): ?bool
-    {
-        return $this->fire;
-    }
-
-    public function setFire(bool $fire): self
-    {
-        $this->fire = $fire;
 
         return $this;
     }

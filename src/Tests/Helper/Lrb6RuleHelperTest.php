@@ -94,7 +94,7 @@ class Lrb6RuleHelperTest extends TestCase
         $version = TeamHelper::getLastVersion($dwarves);
         // Start Team value must be 0
         $this->assertEquals(0, $this->helper->calculateTeamValue($version));
-        foreach ($this->helper->getAvailablePlayerTypes($dwarves->getRoster()) as $key => $type) {
+        foreach ($this->helper->getRoster($dwarves)->getPositions() as $key => $type) {
             $this->assertContains($key, $types, "Dwarf team has type $key");
             // For team value test
             $dwarves->addPlayer(

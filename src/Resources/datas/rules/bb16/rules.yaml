@@ -53,12 +53,13 @@ rules:
       76: super_star
       176: legend
     experience_value_modifiers:
-      new_skill: 20000
-      new_skill_double: 30000
-      move_bonus: 30000
-      average_bonus: 30000
-      agility_bonus: 40000
-      strength_bonus: 50000
+      single: 20000
+      double: 30000
+      characteristics:
+        move_increase: 30000
+        armor_increase: 30000
+        agility_increase: 40000
+        strength_increase: 50000
     fields:
       default:
         weather:

@@ -4,6 +4,7 @@ namespace Obblm\Core\Helper\Rule\Roster;
 
 use Obblm\Core\Contracts\PositionInterface;
 use Obblm\Core\Contracts\RosterInterface;
+use Obblm\Core\Exception\NotFoundKeyException;
 use Obblm\Core\Helper\Optionable;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -134,6 +135,13 @@ abstract class AbstractPosition extends Optionable implements PositionInterface
         return $this->roster;
     }
 
+    public function getOption(string $key)
+    {
+        if (!isset($this->options[$key])) {
+            throw new NotFoundKeyException($key, 'options', self::class);
+        }
+        return $this->options[$key];
+    }
 
     /**
      * @return string

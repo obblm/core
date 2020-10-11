@@ -1,6 +1,6 @@
 <?php
 
-namespace Obblm\Core\Validator\Constraints;
+namespace Obblm\Core\Validator\Constraints\Team;
 
 use Obblm\Core\Helper\Rule\Inducement\Inducement;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;

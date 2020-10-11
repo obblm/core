@@ -142,6 +142,29 @@ class Team implements CanHaveRuleInterface
         return $this->creationOptions;
     }
 
+    /**
+     * @param string $key
+     * @return mixed|null
+     */
+    public function getCreationOption(string $key)
+    {
+        return $this->getOption($this->creationOptions, $key);
+    }
+    private function getOption($on, $key)
+    {
+        $keys = explode('.', $key, 2);
+        $key = $keys[0];
+        if (isset($on[$key])) {
+            if (!isset($keys[1])) {
+                return $on[$key];
+            }
+            if (isset($keys[1])) {
+                return $this->getOption($on[$key], $keys[1]);
+            }
+        }
+        return null;
+    }
+
     public function setCreationOptions(array $creationOptions): self
     {
         $this->creationOptions = $creationOptions;

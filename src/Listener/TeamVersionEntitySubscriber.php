@@ -4,9 +4,10 @@ namespace Obblm\Core\Listener;
 
 use Obblm\Core\Event\TeamVersionEvent;
 use Obblm\Core\Helper\RuleHelper;
+use Obblm\Core\Validator\Constraints\Team\AdditionalSkills;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class PlayerVersionEntitySubscriber implements EventSubscriberInterface
+class TeamVersionEntitySubscriber implements EventSubscriberInterface
 {
     private $ruleHelper;
 
@@ -27,7 +28,7 @@ class PlayerVersionEntitySubscriber implements EventSubscriberInterface
     {
         $version = $event->getTeamVersion();
         $helper = $this->ruleHelper->getHelper($version->getTeam());
-
+        $helper->applyTeamExtraCosts($version, true);
         $version->setTr($helper->calculateTeamRate($version));
     }
 
@@ -35,8 +36,11 @@ class PlayerVersionEntitySubscriber implements EventSubscriberInterface
     {
         $version = $event->getTeamVersion();
         $helper = $this->ruleHelper->getHelper($version->getTeam()->getRule());
-        $maxTeamCost = $helper->getMaxTeamCost();
-        $treasure = $maxTeamCost - $helper->calculateTeamValue($version);
+        $treasure = $helper->getMaxTeamCost($version->getTeam()) - $helper->calculateTeamValue($version);
+        if ($version->getTeam()->getCreationOption('inducement_allowed') && $version->getTeam()->getCreationOption('inducements')) {
+            $treasure -= $helper->calculateInducementsCost($version->getTeam()->getCreationOption('inducements'));
+        }
+
         $version->setTreasure($treasure);
     }
 }

@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class EditTeamType extends AbstractType
+class TODELETE_EditTeamType extends AbstractType
 {
     protected $ruleHelper;
     protected $uploader;

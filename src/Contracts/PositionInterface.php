@@ -11,6 +11,7 @@ interface PositionInterface extends Translatable
     public function getCost(): int;
     public function getMax(): int;
     public function getMin(): int;
+    public function getOption(string $key);
     public function getCharacteristics(): array;
     public function getSkills(): array;
     public function isJourneyMan(): bool;

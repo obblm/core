@@ -35,16 +35,31 @@
     background: @message-error-bg;
     color: @message-error-color;
     border-color: @message-error-color;
+    &.inverse {
+      background: @message-error-color;
+      color: @message-error-bg;
+      border-color: @message-error-color;
+    }
   }
   &.warning,
   &.info {
     background: @message-info-bg;
     color: @message-info-color;
     border-color: @message-info-color;
+    &.inverse {
+      color: @message-info-bg;
+      background: @message-info-color;
+      border-color: @message-info-color;
+    }
   }
   &.success {
     background: @message-success-bg;
     color: @message-success-color;
     border-color: @message-success-color;
+    &.inverse {
+      background: @message-success-color;
+      color: @message-success-bg;
+      border-color: @message-success-color;
+    }
   }
 }

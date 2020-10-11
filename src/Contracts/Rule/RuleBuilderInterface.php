@@ -25,6 +25,7 @@ interface RuleBuilderInterface
      * @return SkillInterface[]|Collection
      */
     public function getSkills();
+    public function getSkill($key):SkillInterface;
     /**
      * @return RosterInterface[]|Collection
      */
