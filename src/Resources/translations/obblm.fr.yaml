@@ -94,7 +94,7 @@ obblm:
     popularity: Popularité
     apothecary: Apothicaire
     star_players: Star Players
-    inducements: Inducements
+    inducements: Primes de match
     options: Options
 
   dashboard:
@@ -122,6 +122,7 @@ obblm:
   sheet:
     header:
       team_value: Valeur d'équipe
+      inducement_value: Valeur des primes
     table:
       header:
       players:
@@ -158,6 +159,7 @@ obblm:
     team:
       create:
         title: Créer une équipe pour ?
+        options: Options de création
         rule-selector: "Créer une équipe pour : %what%"
         select:
           rules: "Règles disponibles :"
@@ -165,8 +167,15 @@ obblm:
           submit: Créer cette équipe et ajouter des joueurs
       edit:
         title: "Modifier l'équipe : %name%"
+        manage_inducement: "Modifier les primes de match pour : %name%"
+        manage_skills: "Modifier les compétences pour : %name%"
+        options_warning:
+          title: Attention
+          text: Pour des raisons de facilité, si vous validez ce formulaire, ceci videra l'ensemble de votre feuille d'équipe.
         buttons:
           add_player: Ajouter un joueur
+          add_skill: Ajouter une compétence
+          add_inducement: Ajouter une prime de match
           submit: C'est bon, l'équipe est prête !
           save: Sauvegarder et revenir plus tard
           cencel: Annuler
@@ -191,11 +200,27 @@ obblm:
         apothecary: Prendre un apothicaire ?
         popularity: Popularité
         treasury: Trésor restant
+        inducement_help: Vous pouvez dépenser %limit%
+        max_team_cost: Trésorerie initiale
+        additional_inducement: Prime de match
+        inducement_allowed: Primes de match autorisées?
+        star_players_allowed: Star players autorisés?
+        skills_allowed:
+          title: Les joueur peuvent avoir des compétences sup.?
+          choices:
+            0: Non
+            1: Les comp. sont gratuites
+            2: Les comp. sont incluses dans le coût de l'équipe
+          total: Nombre de comp. autorisées
+          double: Nombre de comp. doubles autorisées
+          characteristics: Nombre d'augmentation de carac. autorisées
+          max_skills_per_player: Nombre max. de comp. par joueur
     player:
       fields:
         number: Numéro
         position: Position du joueur
         name: Nom du joueur
+        additional_skill: Compétence sup.
 
   emails:
     coach:

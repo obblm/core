@@ -39,6 +39,8 @@ class MultipleStarPlayer extends StarPlayer implements InducementInterface
         ])
             ->setRequired(['parts'])
             ->setAllowedTypes('parts', ['array'])
+            ->setAllowedTypes('skills', ['null'])
+            ->setAllowedTypes('characteristics', ['null'])
         ;
     }
 }

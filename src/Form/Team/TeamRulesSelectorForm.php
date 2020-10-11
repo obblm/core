@@ -29,10 +29,12 @@ class TeamRulesSelectorForm extends AbstractType
             'required' => true,
             'choice_translation_domain' => $helper->getKey() ?? false
         ]);
-        $builder->add('creationOptions', $helper->getTeamCreationForm(), [
-            'team' => $builder->getData(),
-            'helper' => $helper
-        ]);
+        if ($options['creation_options']) {
+            $builder->add('creationOptions', $helper->getTeamCreationForm(), [
+                'team' => $builder->getData(),
+                'helper' => $helper
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -41,7 +43,9 @@ class TeamRulesSelectorForm extends AbstractType
             'translation_domain' => 'obblm',
             'helper' => null,
             'data_class' => Team::class,
+            'creation_options' => true
         ]);
+        $resolver->setAllowedTypes('creation_options', ['bool']);
         $resolver->setAllowedTypes('helper', [RuleHelperInterface::class]);
     }
 }

@@ -3,7 +3,7 @@
 {% block characteristics %}
     <td>{{ player|characteristics('ma') }}</td>
     <td>{{ player|characteristics('st') }}</td>
-    <td>{{ player|characteristics('pa') }}+</td>
-    <td>{{ player|characteristics('ag') }}+</td>
-    <td>{{ player|characteristics('av') }}+</td>
+    <td>{% if player|characteristics('pa') %}{{ player|characteristics('pa') }}+{% endif %}</td>
+    <td>{% if player|characteristics('ag') %}{{ player|characteristics('ag') }}+{% endif %}</td>
+    <td>{% if player|characteristics('av') %}{{ player|characteristics('av') }}+{% endif %}</td>
 {% endblock %}

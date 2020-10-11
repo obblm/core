@@ -1,0 +1,19 @@
+obblm:
+  constraints:
+    team:
+      composition:
+        violation: L'équipe ne peut avoir que {{ limit }} joueurs du type {{ player_type }}.
+      value:
+        violation: La valeur d'équipe ne peut être supérieure à {{ limit }}. Votre valeur actuelle est de {{ current }}
+    inducements:
+      amount:
+        violation: Vous ne pouvez pas acheter tout ça, vous n'avez que {{ budget }}.
+      quantity:
+        violation: Vous ne pouvez pas prendre tout ça, vous ne pouvez avoir que {{ limit }} primes "{{ type }}".
+    skills:
+      quantity:
+        violation: Vous ne pouvez pas, vous n'avez droit qu'à {{ limit }} compétence(s).
+      quantity_player:
+        violation: Vous ne pouvez pas, vous n'avez droit qu'à {{ limit }} compétence(s) par joueur.
+      quantity_type:
+        violation: Vous ne pouvez pas, vous n'avez droit qu'à {{ limit }} compétence(s) de type {{ type }}.

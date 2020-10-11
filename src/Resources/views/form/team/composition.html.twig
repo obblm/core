@@ -10,13 +10,9 @@
     <h2 class="title">{{ team|roster_name|trans({}, team|rule_key) }}</h2>
     {{ form_errors( form ) }}
     <div class="field">
-        {{ form_label( form.team.name, 'obblm.forms.team.fields.name') }}
-        {{ form_widget( form.team.name ) }}
-        {{ form_errors( form.team.name ) }}
-    </div>
-    <div class="field">
-        <label>{{ 'obblm.forms.team.fields.treasury'|trans({}, 'obblm') }}</label>
-        <span class="like-input">{{ form.vars.value.treasure }}</span>
+        {{ form_label( form.name, 'obblm.forms.team.fields.name') }}
+        {{ form_widget( form.name ) }}
+        {{ form_errors( form.name ) }}
     </div>
     <div class="accordion">
         <h2 class="title">
@@ -38,27 +34,27 @@
             </div>
             <div class="two boxes">
                 <div class="box field">
-                    {{ form_label( form.team.anthem, 'obblm.forms.team.fields.anthem') }}
-                    {{ form_widget( form.team.anthem ) }}
-                    {{ form_errors( form.team.anthem ) }}
+                    {{ form_label( form.anthem, 'obblm.forms.team.fields.anthem') }}
+                    {{ form_widget( form.anthem ) }}
+                    {{ form_errors( form.anthem ) }}
                 </div>
                 <div class="box field">
-                    {{ form_label( form.team.fluff, 'obblm.forms.team.fields.fluff') }}
-                    {{ form_widget( form.team.fluff ) }}
-                    {{ form_errors( form.team.fluff ) }}
+                    {{ form_label( form.fluff, 'obblm.forms.team.fields.fluff') }}
+                    {{ form_widget( form.fluff ) }}
+                    {{ form_errors( form.fluff ) }}
                 </div>
             </div>
         </div>
         <h2 class="title">
             <i class="icon mdi mdi-play"></i>
-            {{ form_label(form.team.players, 'obblm.forms.team.fields.parts.players') }}
+            {{ form_label(form.players, 'obblm.forms.team.fields.parts.players') }}
         </h2>
         <div class="many-collection">
             <div class="sortable clearfix">
-            {% for playerFields in form.team.children.players %}
+            {% for playerFields in form.children.players %}
                 {{ formMacros.printPlayerFieldsRow( playerFields ) }}
             {% else %}
-                {{ form_widget(form.team.players) }}
+                {{ form_widget(form.players) }}
             {% endfor %}
             </div>
         </div>
@@ -69,33 +65,33 @@
         <div class="sidelines container">
             <div class="four boxes fields">
                 <div class="box field">
-                    {{ form_label( form.rerolls, 'obblm.forms.team.fields.rerolls') }}
-                    {{ form_widget( form.rerolls ) }}
-                    {{ form_errors( form.rerolls ) }}
+                    {{ form_label( form.firstVersion.rerolls, 'obblm.forms.team.fields.rerolls') }}
+                    {{ form_widget( form.firstVersion.rerolls ) }}
+                    {{ form_errors( form.firstVersion.rerolls ) }}
                 </div>
                 <div class="box field">
-                    {{ form_label( form.popularity, 'obblm.forms.team.fields.popularity') }}
-                    {{ form_widget( form.popularity ) }}
-                    {{ form_errors( form.popularity ) }}
+                    {{ form_label( form.firstVersion.popularity, 'obblm.forms.team.fields.popularity') }}
+                    {{ form_widget( form.firstVersion.popularity ) }}
+                    {{ form_errors( form.firstVersion.popularity ) }}
                 </div>
                 <div class="box field">
-                    {{ form_label( form.cheerleaders, 'obblm.forms.team.fields.cheerleaders') }}
-                    {{ form_widget( form.cheerleaders ) }}
-                    {{ form_errors( form.cheerleaders ) }}
+                    {{ form_label( form.firstVersion.cheerleaders, 'obblm.forms.team.fields.cheerleaders') }}
+                    {{ form_widget( form.firstVersion.cheerleaders ) }}
+                    {{ form_errors( form.firstVersion.cheerleaders ) }}
                 </div>
                 <div class="box field">
-                    {{ form_label( form.assistants, 'obblm.forms.team.fields.assistants') }}
-                    {{ form_widget( form.assistants ) }}
-                    {{ form_errors( form.assistants ) }}
+                    {{ form_label( form.firstVersion.assistants, 'obblm.forms.team.fields.assistants') }}
+                    {{ form_widget( form.firstVersion.assistants ) }}
+                    {{ form_errors( form.firstVersion.assistants ) }}
                 </div>
             </div>
-            {% if form.apothecary is defined %}
+            {% if form.firstVersion.apothecary is defined %}
                 <div class="field">
                     <div class="ui checkbox">
-                        {{ form_widget( form.apothecary ) }}
-                        {{ form_label( form.apothecary, 'obblm.forms.team.fields.apothecary') }}
+                        {{ form_widget( form.firstVersion.apothecary ) }}
+                        {{ form_label( form.firstVersion.apothecary, 'obblm.forms.team.fields.apothecary') }}
                     </div>
-                    {{ form_errors( form.apothecary ) }}
+                    {{ form_errors( form.firstVersion.apothecary ) }}
                 </div>
             {% endif %}
         </div>
@@ -104,10 +100,9 @@
         <a class="ui button red" href="{{ path('obblm_team_detail', {'team': team.id}) }}">
             {{ 'obblm.forms.team.edit.buttons.cencel'|trans({}, 'obblm') }}
         </a>
-        <button class="ui button orange" type="submit">
+        <button class="ui button green" type="submit">
             {{ 'obblm.forms.team.edit.buttons.save'|trans({}, 'obblm') }}
         </button>
-        {{ form_widget( form.team.ready ) }}
     </div>
     {{ form_rest( form ) }}
     {{ form_end( form ) }}
@@ -126,8 +121,8 @@
                     {{ form_widget( playerFields.name ) }}
                 </div>
                 <div class="box position field inline selector">
-                    {{ form_label( playerFields.position, 'obblm.forms.player.fields.position', {'translation_domain': 'obblm'} ) }}
-                    {{ form_widget( playerFields.position, {'attr': {'class': 'ui dropdown'}} ) }}
+                    {{ form_label( playerFields.newPosition, 'obblm.forms.player.fields.position', {'translation_domain': 'obblm'} ) }}
+                    {{ form_widget( playerFields.newPosition, {'attr': {'class': 'ui dropdown'}} ) }}
                 </div>
                 <div class="box button move" type="button">
                     <i class="icon mdi mdi-cursor-move"></i>

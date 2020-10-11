@@ -7,7 +7,10 @@ use Knp\Snappy\Pdf;
 use Obblm\Core\Entity\Rule;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Event\TeamVersionEvent;
-use Obblm\Core\Form\Team\EditTeamType;
+use Obblm\Core\Form\Team\CompositionInducementsForm;
+use Obblm\Core\Form\Team\CompositionForm;
+use Obblm\Core\Form\Team\CompositionOptionsForm;
+use Obblm\Core\Form\Team\CompositionSkillsForm;
 use Obblm\Core\Form\Team\TeamRulesSelectorForm;
 use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Helper\TeamHelper;
@@ -61,12 +64,14 @@ class TeamController extends AbstractController
     {
         $this->denyAccessUnlessGranted(Roles::COACH);
 
+        $helper = $ruleHelper->getHelper($rule);
         $team = (new Team())
             ->setRule($rule)
-            ->setCoach($this->getUser());
+            ->setCoach($this->getUser())
+            ->setCreationOptions(['max_team_cost' => $helper->getMaxTeamCost()]);
 
         $form = $this->createForm(TeamRulesSelectorForm::class, $team, [
-            'helper' => $ruleHelper->getHelper($rule),
+            'helper' => $helper
         ]);
 
         $form->handleRequest($request);
@@ -118,16 +123,84 @@ class TeamController extends AbstractController
     /**
      * @Route("/{team}/edit", name="_edit")
      */
-    public function edit(Team $team, Request $request, EventDispatcherInterface $dispatcher): Response
+    public function edit(Team $team, Request $request, RuleHelper $ruleHelper, EventDispatcherInterface $dispatcher): Response
     {
         $this->denyAccessUnlessGranted(TeamVoter::EDIT, $team);
 
-        $form = $this->createForm(EditTeamType::class, TeamHelper::getLastVersion($team));
+        $form = $this->createForm(CompositionForm::class, $team, [
+            'helper' => $ruleHelper->getHelper($team)
+        ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $version = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $version = TeamHelper::getLastVersion($team);
+            $dispatcher->dispatch(new TeamVersionEvent($version), TeamVersionEvent::PRE_SAVE);
+            $dispatcher->dispatch(new TeamVersionEvent($version), TeamVersionEvent::TREASURE_BASE);
+            $em->persist($team);
+            $em->flush();
+            $this->addFlash(
+                'success',
+                'obblm.flash.team.saved'
+            );
+            return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);
+        }
+
+        return $this->render('@ObblmCore/form/team/composition.html.twig', [
+            'form' => $form->createView(),
+            'team' => $team
+        ]);
+    }
+
+    /**
+     * @Route("/{team}/edit-inducements", name="_edit_inducements")
+     */
+    public function inducementOptions(Team $team, Request $request, RuleHelper $ruleHelper, EventDispatcherInterface $dispatcher): Response
+    {
+        $this->denyAccessUnlessGranted(TeamVoter::EDIT, $team);
+
+        $form = $this->createForm(CompositionInducementsForm::class, $team, [
+            'helper' => $ruleHelper->getHelper($team)
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $version = TeamHelper::getLastVersion($team);
+            $dispatcher->dispatch(new TeamVersionEvent($version), TeamVersionEvent::PRE_SAVE);
+            $dispatcher->dispatch(new TeamVersionEvent($version), TeamVersionEvent::TREASURE_BASE);
+            $em->persist($team);
+            $em->flush();
+            $this->addFlash(
+                'success',
+                'obblm.flash.team.saved'
+            );
+            return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);
+        }
+
+        return $this->render('@ObblmCore/form/team/composition-inducements.html.twig', [
+            'form' => $form->createView(),
+            'team' => $team
+        ]);
+    }
+
+    /**
+     * @Route("/{team}/edit-skills", name="_edit_skills")
+     */
+    public function skillsOptions(Team $team, Request $request, RuleHelper $ruleHelper, EventDispatcherInterface $dispatcher): Response
+    {
+        $this->denyAccessUnlessGranted(TeamVoter::EDIT, $team);
+        $version = TeamHelper::getLastVersion($team);
+
+        $form = $this->createForm(CompositionSkillsForm::class, $version, [
+            'helper' => $ruleHelper->getHelper($team),
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $dispatcher->dispatch(new TeamVersionEvent($version), TeamVersionEvent::PRE_SAVE);
             $dispatcher->dispatch(new TeamVersionEvent($version), TeamVersionEvent::TREASURE_BASE);
@@ -140,9 +213,42 @@ class TeamController extends AbstractController
             return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);
         }
 
-        return $this->render('@ObblmCore/form/team/edit.html.twig', [
+        return $this->render('@ObblmCore/form/team/composition-skills.html.twig', [
             'form' => $form->createView(),
             'team' => $team
+        ]);
+    }
+
+    /**
+     * @Route("/{team}/edit-options", name="_edit_options")
+     */
+    public function compositionOptions(Team $team, Request $request, TeamHelper $teamHelper, RuleHelper $ruleHelper): Response
+    {
+        $this->denyAccessUnlessGranted(Roles::COACH);
+
+        $form = $this->createForm(CompositionOptionsForm::class, $team, [
+            'helper' => $ruleHelper->getHelper($team),
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() and $form->isValid()) {
+            $version = TeamHelper::getLastVersion($team);
+            $team->removeVersion($version);
+            $em = $this->getDoctrine()->getManager();
+            foreach ($team->getAvailablePlayers() as $player) {
+                $team->removePlayer($player);
+            }
+            $em->persist($team);
+            $teamHelper->createNewTeamVersion($team);
+            $em->persist($team);
+            $em->flush();
+            return $this->redirectToRoute('obblm_team_detail', ['team' => $team->getId()]);
+        }
+
+        return $this->render('@ObblmCore/form/team/composition.options.html.twig', [
+            'form' => $form->createView(),
+            'rule' => $team->getRule(),
         ]);
     }
 

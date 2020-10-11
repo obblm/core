@@ -5,6 +5,7 @@ namespace Obblm\Core\Twig;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Obblm\Core\Contracts\RosterInterface;
+use Obblm\Core\Contracts\RuleHelperInterface;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Rule;
@@ -49,6 +50,7 @@ class RulesExtension extends AbstractExtension
             new TwigFunction('get_all_star_players', [$this, 'getAllStarPlayers']),
             new TwigFunction('get_all_skills', [$this, 'getAllSkills']),
             new TwigFunction('get_player_skills', [$this, 'getPlayerSkills']),
+            new TwigFunction('get_assitional_player_skills', [$this, 'getAdditionalPlayerSkills']),
             new TwigFunction('get_skills_for_sheet', [$this, 'getSkillsForSheet']),
         ];
     }
@@ -137,13 +139,19 @@ class RulesExtension extends AbstractExtension
     {
         $helper = $this->ruleHelper->getHelper($rule);
         /* Aplha ordering */
-        return $this->translateAndOrderSkills($rule);
+        return $this->translateAndOrderSkills($helper);
     }
 
-    public function getPlayerSkills(Rule $rule, Player $player)
+    public function getPlayerSkills(Player $player)
     {
         $version = PlayerHelper::getLastVersion($player);
-        return $this->translateAndOrderSkills($rule, $version->getSkills());
+        return $this->translateAndOrderSkills($this->ruleHelper->getHelper($player->getTeam()), $version->getSkills());
+    }
+
+    public function getAdditionalPlayerSkills(Player $player)
+    {
+        $version = PlayerHelper::getLastVersion($player);
+        return $this->translateAndOrderSkills($this->ruleHelper->getHelper($player->getTeam()), $version->getAdditionalSkills());
     }
 
     /**
@@ -151,20 +159,18 @@ class RulesExtension extends AbstractExtension
      * @param ArrayCollection|Player[] $players
      * @return ArrayCollection
      */
-    public function getSkillsForSheet(Rule $rule, TeamVersion $team)
+    public function getSkillsForSheet(TeamVersion $version)
     {
         $skills = [];
-        foreach ($team->getAvailablePlayerVersions() as $player) {
+        foreach ($version->getAvailablePlayerVersions() as $player) {
             $skills = array_merge($skills, $player->getSkills());
             $skills = array_merge($skills, $player->getAdditionalSkills());
         }
-        return $this->translateAndOrderSkills($rule, $skills);
+        return $this->translateAndOrderSkills($this->ruleHelper->getHelper($version->getTeam()), $skills);
     }
 
-    private function translateAndOrderSkills(Rule $rule, array $skills = null)
+    private function translateAndOrderSkills(RuleHelperInterface $helper, array $skills = null)
     {
-        $helper = $this->ruleHelper->getHelper($rule);
-
         $returnSkills = $helper->getSkills();
 
         if ($skills !== null) {
@@ -174,8 +180,8 @@ class RulesExtension extends AbstractExtension
         $order = Criteria::create()->orderBy(['name' => 'ASC']);
 
         $translator = $this->translator;
-        $closure = function (Skill $skill) use ($translator, $rule) {
-            $skill->setName($translator->trans($skill->getName(), [], $rule->getRuleKey()));
+        $closure = function (Skill $skill) use ($translator) {
+            $skill->setName($translator->trans($skill->getName(), [], $skill->getTranslationDomain()));
             return $skill;
         };
 

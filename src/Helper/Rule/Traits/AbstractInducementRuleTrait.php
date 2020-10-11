@@ -12,8 +12,10 @@ use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Exception\InvalidArgumentException;
 use Obblm\Core\Exception\NotFoundKeyException;
+use Obblm\Core\Exception\UnexpectedTypeException;
 use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\Rule\Inducement\Inducement;
+use Obblm\Core\Helper\Rule\Inducement\MultipleStarPlayer;
 use Obblm\Core\Helper\Rule\Inducement\StarPlayer;
 
 /*********************
@@ -98,24 +100,24 @@ trait AbstractInducementRuleTrait
         return $this->getInducementTable()->matching($criteria);
     }
 
-    public function getInducementsFor(Team $team, ?int $budget = null):ArrayCollection
+    public function getInducementsFor(Team $team, ?int $budget = null, ?array $types = null):ArrayCollection
     {
         $criteria = Criteria::create();
-        $expr = [
-            'type' => [
+        if (!$types) {
+            $types = [
                 'inducements',
                 'star_players'
-            ],
-            'roster' => $team->getRoster()
-        ];
+            ];
+        }
+        $expr['type'] = $types;
+        $expr['roster'] = $team->getRoster();
         if ($budget !== null) {
             $expr['cost_limit'] = $budget;
         }
         $criteria->where(Criteria::expr()->andX(
             $this->getInducementExpression($expr)
         ));
-        $availableInducements = $this->getInducementTable()->matching($criteria);
-        return $availableInducements->toArray();
+        return $this->getInducementTable()->matching($criteria);
     }
 
     public function getInducementsByTeamOptions(array $options):array
@@ -147,14 +149,28 @@ trait AbstractInducementRuleTrait
         return $this->rule['inducements']['star_players']['max'];
     }
 
-    public function getStarPlayer(string $key):InducementInterface
+    public function getStarPlayer(string $key):StarPlayer
     {
-        if (!$this->getStarPlayers()->containsKey($key)) {
-            throw new NotFoundKeyException($key, 'starPlayers', self::class);
+        $starPlayer = $this->getInducement($key);
+        if (!$starPlayer instanceof StarPlayer) {
+            throw new UnexpectedTypeException($starPlayer, StarPlayer::class);
         }
-        return $this->getStarPlayers()->get($key);
+        return $starPlayer;
     }
 
+    public function getInducement(string $key):InducementInterface
+    {
+        if (!$this->getInducementTable()->containsKey($key)) {
+            throw new NotFoundKeyException($key, 'inducements', self::class);
+        }
+        return $this->getInducementTable()->get($key);
+    }
+
+
+    /**
+     * @param Team $team
+     * @return array|InducementInterface[]
+     */
     public function getAvailableStarPlayers(Team $team):array
     {
         $criteria = Criteria::create();
@@ -186,26 +202,29 @@ trait AbstractInducementRuleTrait
         return $player;
     }
 
-    public function createStarPlayerAsPlayer(string $key, int $number):Player
+    public function createStarPlayerAsPlayer(string $key, int $number, bool $hire = false):Player
     {
         $ruleKey = $this->getAttachedRule()->getRuleKey();
 
         $starPlayer = $this->getStarPlayer($key);
-        if (isset($starPlayer['multi_parts']) && $starPlayer['multi_parts']) {
-            throw new \Exception('You cannot create a player with a multiple parts InducementInterface');
+        if ($starPlayer instanceof StarPlayer) {
+            if ($starPlayer instanceof MultipleStarPlayer) {
+                throw new \Exception('You cannot create a player with a multiple parts InducementInterface');
+            }
+            $version = (new PlayerVersion())
+                ->setCharacteristics($starPlayer->getCharacteristics())
+                ->setValue($starPlayer->getValue())
+                ->setHiredStarPlayer($hire);
+            if ($starPlayer->getSkills()) {
+                $version->setSkills($starPlayer->getSkills());
+            }
+            $player = (new Player())
+                ->setNumber($number)
+                ->setPosition($starPlayer->getKey())
+                ->setName($starPlayer->getName())
+                ->addVersion($version);
+            return $player;
         }
-        $version = (new PlayerVersion())
-            ->setCharacteristics($starPlayer['characteristics'])
-            ->setValue($starPlayer['cost']);
-        if ($starPlayer['skills']) {
-            $version->setSkills($starPlayer['skills']);
-        }
-        $player = (new Player())
-            ->setNumber($number)
-            ->setPosition(CoreTranslation::getStarPlayerTitle($ruleKey))
-            ->setName(CoreTranslation::getStarPlayerName($ruleKey, $key))
-            ->addVersion($version);
-        return $player;
     }
 
     public function getTransformedInducementsFor(string $roster)

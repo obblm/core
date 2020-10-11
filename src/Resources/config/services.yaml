@@ -6,7 +6,7 @@ services:
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
     resource: '../../*'
     public: false
-    exclude: '../../{DependencyInjection,Entity,Migrations,Ressources,Tests,ObblmCoreBundle.php}'
+    exclude: '../../{DataTransformer,DependencyInjection,Entity,Migrations,Ressources,Tests,ObblmCoreBundle.php}'
 
   # controllers are imported separately to make sure services can be injected
   # as action arguments even if you don't extend any base controller class

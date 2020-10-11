@@ -2,6 +2,7 @@
 
 namespace Obblm\Core\Twig;
 
+use Obblm\Core\Contracts\PositionInterface;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Helper\CoreTranslation;
@@ -34,6 +35,7 @@ class TeamExtension extends AbstractExtension
             new TwigFilter('roster_description', [$this, 'getRosterDescription']),
             new TwigFilter('tr', [$this, 'getTeamRate']),
             new TwigFilter('calculate_value', [$this, 'getTeamValue']),
+            new TwigFilter('calculate_inducement', [$this, 'getTeamInducements']),
             new TwigFilter('reroll_cost', [$this, 'getRerollCost']),
             new TwigFilter('injury_effects', [$this, 'getInjuryEffects']),
             // Players filters
@@ -100,6 +102,14 @@ class TeamExtension extends AbstractExtension
         return $this->ruleHelper->getHelper($team)->calculateTeamValue(TeamHelper::getLastVersion($team), true);
     }
 
+    public function getTeamInducements(Team $team)
+    {
+        if ($team->getCreationOption('inducements')) {
+            return $this->ruleHelper->getHelper($team)->calculateInducementsCost($team->getCreationOption('inducements'));
+        }
+        return 0;
+    }
+
     public function getCharacteristics(Player $player, $characteristic)
     {
         if (!$player->getPosition()) {
@@ -127,8 +137,10 @@ class TeamExtension extends AbstractExtension
             return '';
         }
         $helper = $this->ruleHelper->getHelper($player->getTeam());
-        $position = $helper->getRoster($player->getTeam())->getPosition($player->getPosition());
-        return $position;
+        if ($player->getPosition() == 'star_players') {
+            return $helper->getStarPlayer($player->getName());
+        }
+        return $helper->getRoster($player->getTeam())->getPosition($player->getPosition());
     }
 
     public function getSpp(Player $player)

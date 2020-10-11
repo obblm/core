@@ -2,6 +2,7 @@
 
 namespace Obblm\Core\Form\Player;
 
+use Obblm\Core\DataTransformer\StringToSkill;
 use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Contracts\RuleHelperInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -15,8 +16,9 @@ class AddSkillType extends ChoiceType
         /** @var RuleHelperInterface $helper */
         $helper = $options['helper'];
         $version = $options['version'];
+        $options['choice_value'] = 'key';
         $options['choices'] = $helper->getAvailableSkills($version, $options['context']);
-
+        $builder->addViewTransformer(new StringToSkill($helper));
         parent::buildForm($builder, $options);
     }
 

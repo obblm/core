@@ -9,9 +9,10 @@ use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
 use Obblm\Core\Exception\InvalidArgumentException;
-use Obblm\Core\Exception\NoVersionException;
 use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\Rule\Roster\Roster;
+use Obblm\Core\Validator\Constraints\Team\AdditionalSkills;
+use Obblm\Core\Validator\Constraints\Team\Value;
 
 /****************************
  * TEAM INFORMATION METHODS
@@ -23,9 +24,13 @@ trait AbstractTeamRuleTrait
     /**
      * @return int
      */
-    public function getMaxTeamCost():int
+    public function getMaxTeamCost(Team $team = null):int
     {
-        return ($this->rule['max_team_cost']) ? $this->rule['max_team_cost'] : TeamValue::LIMIT;
+        if ($team && $team->getCreationOption('max_team_cost')) {
+            return $team->getCreationOption('max_team_cost');
+        }
+
+        return ($this->rule['max_team_cost']) ? $this->rule['max_team_cost'] : Value::LIMIT;
     }
 
     /**
@@ -92,6 +97,26 @@ trait AbstractTeamRuleTrait
         return $this->calculateTeamValue($version) / 10000;
     }
 
+    public function calculateInducementsCost(array $inducements):int
+    {
+        $cost = 0;
+        foreach ($inducements as $key) {
+            $cost += $this->getInducement($key)->getValue();
+        }
+        return $cost;
+    }
+
+    public function updatePlayerVersionCost(PlayerVersion $playerVersion)
+    {
+        $position = $this->getPlayerPosition($playerVersion->getPlayer());
+        if ($playerVersion->getPlayer()->getTeam()->getCreationOption('skills_allowed') && $playerVersion->getPlayer()->getTeam()->getCreationOption('skills_allowed.choice') == AdditionalSkills::NOT_FREE) {
+            if (!$playerVersion->isHiredStarPlayer() && !$playerVersion->getPlayer()->isStarPlayer()) {
+                $extra = $this->getPlayerVersionExtraCosts($playerVersion);
+                $playerVersion->setValue($position->getCost() + $extra);
+            }
+        }
+    }
+
     public function calculateTeamValue(TeamVersion $version, bool $excludeDisposable = false):int
     {
         if (!$version->getTeam()) {
@@ -100,18 +125,11 @@ trait AbstractTeamRuleTrait
         $value = 0;
         // Players
         $roster = $this->getRoster($version->getTeam());
-        // TODO: Bug => players are not version's one (because of dead players)
-        foreach ($version->getTeam()->getAvailablePlayers() as $player) {
+        foreach ($version->getNotDeadPlayerVersions() as $playerVersion) {
+            $player = $playerVersion->getPlayer();
             if ($player->getPosition()) {
-                try {
-                    $playerVersion = PlayerHelper::getLastVersion($player);
-                } catch (NoVersionException $e) { // It's a new player !
-                    $playerVersion = (new PlayerVersion());
-                    $player->addVersion($playerVersion);
-                    $version->addPlayerVersion($playerVersion);
-                    $position = $roster->getPosition($player->getPosition());
-                    $this->setPlayerDefaultValues($playerVersion, $position);
-                }
+                $playerVersion = PlayerHelper::getLastVersion($player);
+                //$this->updatePlayerVersionCost($playerVersion);
                 if (!$playerVersion->isMissingNextGame() && !($this->playerIsDisposable($playerVersion) && $excludeDisposable)) {
                     $value += $playerVersion->getValue();
                 }
@@ -145,5 +163,20 @@ trait AbstractTeamRuleTrait
         /** @var PositionInterface $position */
         $position = $this->getRosters()->get($rosterKey)->getPosition($typeKey);
         return (int) $position->getMax();
+    }
+
+    public function applyTeamExtraCosts(TeamVersion $version, $creationPhase = false)
+    {
+        if ($creationPhase &&
+            $version->getTeam()->getCreationOption('skills_allowed') &&
+            $version->getTeam()->getCreationOption('skills_allowed.choice') == AdditionalSkills::NOT_FREE) {
+            foreach ($version->getNotDeadPlayerVersions() as $playerVersion) {
+                if (!$playerVersion->isHiredStarPlayer() && !$playerVersion->getPlayer()->isStarPlayer()) {
+                    $extra = $this->getPlayerVersionExtraCosts($playerVersion);
+                    $position = $this->getPlayerPosition($playerVersion->getPlayer());
+                    $playerVersion->setValue($position->getCost() + $extra);
+                }
+            }
+        }
     }
 }

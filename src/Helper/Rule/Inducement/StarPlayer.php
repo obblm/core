@@ -3,9 +3,11 @@
 namespace Obblm\Core\Helper\Rule\Inducement;
 
 use Obblm\Core\Contracts\InducementInterface;
+use Obblm\Core\Contracts\PositionInterface;
+use Obblm\Core\Exception\NotFoundKeyException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class StarPlayer extends AbstractInducement implements InducementInterface
+class StarPlayer extends AbstractInducement implements PositionInterface
 {
     /** @var array $characteristics */
     protected $characteristics;
@@ -22,7 +24,7 @@ class StarPlayer extends AbstractInducement implements InducementInterface
     /**
      * @return array
      */
-    public function getCharacteristics(): ?array
+    public function getCharacteristics(): array
     {
         return $this->characteristics;
     }
@@ -40,7 +42,7 @@ class StarPlayer extends AbstractInducement implements InducementInterface
     /**
      * @return array
      */
-    public function getSkills(): ?array
+    public function getSkills(): array
     {
         return $this->skills;
     }
@@ -55,16 +57,39 @@ class StarPlayer extends AbstractInducement implements InducementInterface
         return $this;
     }
 
+    public function getCost(): int
+    {
+        return $this->getValue();
+    }
+
+    public function getMin(): int
+    {
+        return 0;
+    }
+
+    public function getOption(string $key)
+    {
+        if (!isset($this->options[$key])) {
+            throw new NotFoundKeyException($key, 'options', self::class);
+        }
+        return $this->options[$key];
+    }
+
+    public function isJourneyMan(): bool
+    {
+        return false;
+    }
+
     public function configureOptions(OptionsResolver $resolver):void
     {
         parent::configureOptions($resolver);
         $resolver->setDefaults([
-            'characteristics' => null,
-            'skills'          => null,
+            'characteristics' => [],
+            'skills'          => [],
         ])
             ->setRequired(['characteristics'])
-            ->setAllowedTypes('characteristics', ['array', 'null'])
-            ->setAllowedTypes('skills', ['array', 'null'])
+            ->setAllowedTypes('characteristics', ['array'])
+            ->setAllowedTypes('skills', ['array'])
         ;
     }
 }

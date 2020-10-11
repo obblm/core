@@ -10,6 +10,7 @@ interface InducementInterface extends Translatable
     public function getKey(): string;
     public function getName(): string;
     public function getType(): ?InducementType;
+    public function getTypeKey(): ?string;
     public function getTypeName(): string;
     public function getValue(): int;
     public function getDiscountValue(): int;

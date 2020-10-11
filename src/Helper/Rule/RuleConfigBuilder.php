@@ -3,10 +3,13 @@
 namespace Obblm\Core\Helper\Rule;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Obblm\Core\Contracts\InducementInterface;
 use Obblm\Core\Contracts\RosterInterface;
 use Obblm\Core\Contracts\Rule\RuleBuilderInterface;
+use Obblm\Core\Contracts\SkillInterface;
 use Obblm\Core\Entity\Team;
+use Obblm\Core\Exception\NotFoundKeyException;
 use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\Rule\Config\ConfigResolver;
 use Obblm\Core\Helper\Rule\Config\RuleConfigResolver;
@@ -115,6 +118,22 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
         return $this->skills;
     }
 
+    public function getSkill($key):SkillInterface
+    {
+        $criteria = (Criteria::create())
+            ->where(
+                Criteria::expr()
+                ->eq('key', $key)
+            );
+        $criteria->setMaxResults(1);
+        $result = $this->getSkills()->matching($criteria);
+        if (!$result->first()) {
+            throw new NotFoundKeyException($key, 'skills', self::class);
+        }
+
+        return $result->first();
+    }
+
     public function setSkills(ArrayCollection $skills):self
     {
         $this->skills = $skills;
@@ -219,14 +238,14 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
                     'discount_value' => $value['discount_cost'] ?? null,
                 ]);
                 if (!$this->inducements->contains($inducement)) {
-                    $this->inducements->add($inducement);
+                    $this->inducements->set($inducement->getKey(), $inducement);
                 }
             }
         }
         foreach ($rule['star_players'] as $key => $starPlayer) {
             $inducement = $this->createStarPlayerInducement($ruleKey, $key, $starPlayer);
             if (!$this->inducements->contains($inducement)) {
-                $this->inducements->add($inducement);
+                $this->inducements->set($inducement->getKey(), $inducement);
             }
         }
     }

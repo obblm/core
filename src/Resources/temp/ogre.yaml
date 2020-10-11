@@ -1,0 +1,47 @@
+rules:
+  bb2020:
+    rosters:
+      ogre: # Spike#8
+        players:
+          gnoblar:
+            min: 0
+            max: 16
+            characteristics:
+              ma: 5
+              st: 1
+              ag: 3
+              av: 5
+            skills: [ dodge, right_stuff, side_step, stunty, titchy ]
+            cost: 20000
+            available_skills: [ a ]
+            available_skills_on_double: [ g, s, p ]
+            is_journeyman: true
+          ogre:
+            min: 0
+            max: 5
+            characteristics:
+              ma: 5
+              st: 5
+              ag: 2
+              av: 9
+            skills: [ bone_head, mighty_blow, thick_skull, throw_team_mate ]
+            cost: 140000
+            available_skills: [ s ]
+            available_skills_on_double: [ g, a, p ]
+          ogre_kicker:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 5
+              st: 5
+              ag: 2
+              av: 9
+            skills: [ bone_head, mighty_blow, thick_skull, kick_team_mate ]
+            cost: 150000
+            available_skills: [ s, p ]
+            available_skills_on_double: [ g, a ]
+        reroll_cost: 60000
+        options:
+
+          can_have_apothecary: true
+

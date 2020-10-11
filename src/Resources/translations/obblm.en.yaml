@@ -103,6 +103,7 @@ obblm:
   sheet:
     header:
       team_value: Team value
+      inducement_value: Inducement value
     table:
       header:
       players:
@@ -141,6 +142,7 @@ obblm:
     team:
       create:
         title: Create a team for ?
+        options: Creation options
         rule-selector: "Create a team for : %what%"
         select:
           rules: "Available rules :"
@@ -148,8 +150,12 @@ obblm:
           submit: Create this team and add players & sidelines
       edit:
         title: "Edit the team : %name%"
+        manage_inducement: "Edit inducements for : %name%"
+        manage_skills: "Edit skills for : %name%"
         buttons:
           add_player: Add another player
+          add_skill: Add a skill
+          add_inducement: Add an inducement
           submit: Save and ready to go
           save: Save and come back later
           cencel: Cancel
@@ -174,11 +180,27 @@ obblm:
         apothecary: Get an apothecary ?
         popularity: Popularity
         treasury: Available treasury
+        inducement_help: You can spent %limit%
+        max_team_cost: Maximum team cost
+        additional_inducement: Inducement
+        inducement_allowed: Inducement allowed in creation?
+        star_players_allowed: Star players allowed in creation?
+        skills_allowed:
+          title: Are players can have extra skills ?
+          choices:
+            0: No
+            1: Skills are free
+            2: Skills are included in team cost
+          total: Allowed extra skills
+          double: Allowed double skills
+          characteristics: Allowed characteristic increasments
+          max_skills_per_player: Maximum skills per player
     player:
       fields:
         number: Number
         position: Player position
         name: Player name
+        additional_skill: Additional skill
 
   emails:
     coach:

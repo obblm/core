@@ -1,6 +1,6 @@
 <?php
 
-namespace Obblm\Core\Validator\Constraints;
+namespace Obblm\Core\Validator\Constraints\Team;
 
 use Obblm\Core\Contracts\RuleHelperInterface;
 use Symfony\Component\Validator\Constraint;

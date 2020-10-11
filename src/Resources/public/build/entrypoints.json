@@ -8,7 +8,7 @@
       ],
       "css": [
         "/bundles/obblmcore/build/0.7d214775.css",
-        "/bundles/obblmcore/build/obblm-core.4e644527.css"
+        "/bundles/obblmcore/build/obblm-core.ec6efa6c.css"
       ]
     },
     "obblm-core-light": {
@@ -16,7 +16,7 @@
         "/bundles/obblmcore/build/runtime.fefdd81b.js"
       ],
       "css": [
-        "/bundles/obblmcore/build/obblm-core-light.2bf29416.css"
+        "/bundles/obblmcore/build/obblm-core-light.4eae0c36.css"
       ]
     },
     "obblm-core-dark": {
@@ -24,7 +24,7 @@
         "/bundles/obblmcore/build/runtime.fefdd81b.js"
       ],
       "css": [
-        "/bundles/obblmcore/build/obblm-core-dark.cbeca932.css"
+        "/bundles/obblmcore/build/obblm-core-dark.30415451.css"
       ]
     },
     "reset": {
@@ -40,7 +40,7 @@
         "/bundles/obblmcore/build/runtime.fefdd81b.js"
       ],
       "css": [
-        "/bundles/obblmcore/build/email.3f4fd8b7.css"
+        "/bundles/obblmcore/build/email.bcc7a445.css"
       ]
     },
     "print": {
@@ -48,7 +48,7 @@
         "/bundles/obblmcore/build/runtime.fefdd81b.js"
       ],
       "css": [
-        "/bundles/obblmcore/build/print.8ae4c468.css"
+        "/bundles/obblmcore/build/print.0683cf37.css"
       ]
     }
   }

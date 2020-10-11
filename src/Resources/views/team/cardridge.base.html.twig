@@ -1,0 +1,99 @@
+<ul class="four boxes">
+{% block informations %}
+    <li class="box vertical aligned">
+        <ul>
+            {% block base_informations %}
+            <li class="box information">
+                <span class="label">
+                    <i class="icon mdi mdi-label"></i>
+                    {{ 'obblm.trait.roster'|trans({}, 'obblm') }} :
+                </span>
+                {{ version.team|roster_name|trans({}, version.team.rule.ruleKey) }}
+            </li>
+            <li class="box information">
+                <span class="label">
+                    <i class="icon mdi mdi-account"></i>
+                    {{ 'obblm.trait.coach'|trans({}, 'obblm') }} :
+                </span>
+                {{ version.team.coach.username }}
+            </li>
+            <li class="box information">
+                <span class="label">
+                    <i class="icon mdi mdi-account"></i>
+                    {{ 'obblm.trait.rule'|trans({}, 'obblm') }} :
+                </span>
+                {{ version.team.rule|rule_name|trans({}, version.team.rule.ruleKey) }}
+            </li>
+            {% endblock %}
+        </ul>
+    </li>
+    <li class="box vertical aligned">
+        <ul>
+            <li class="box information">
+                <span class="label">
+                    <i class="icon mdi mdi-view-dashboard"></i>
+                    {{ 'obblm.trait.tr.abbr'|trans({}, 'obblm') }} :
+                </span>
+                {{ version.tr }}
+            </li>
+            <li class="box information">
+                <span class="label">{{ 'obblm.sheet.header.team_value'|trans({}, 'obblm') }} :</span>
+                {{ version.team|calculate_value|price }}
+            </li>
+            {% if version.team.creationOption('inducement_allowed') %}
+                <li class="box information">
+                    <span class="label">{{ 'obblm.sheet.header.inducement_value'|trans({}, 'obblm') }} :</span>
+                    {{ version.team|calculate_inducement|price }}
+                </li>
+            {% endif %}
+            <li class="box information">
+                <span class="label">{{ 'obblm.forms.team.fields.treasury'|trans({}, 'obblm') }} :</span>
+                {{ version.treasure|price }}
+            </li>
+        </ul>
+    </li>
+    <li class="box vertical aligned">
+        <ul>
+            <li class="box information">
+                <span class="label">
+                    <i class="icon mdi mdi-dice-4"></i>
+                    {{ 'obblm.trait.rerolls'|trans({}, 'obblm') }} :
+                </span>
+                {{ version.rerolls }} (x{{ version.team|reroll_cost|price }})
+            </li>
+            <li class="box information">
+                <span class="label">{{ 'obblm.trait.apothecary'|trans({}, 'obblm') }} :</span>
+                {{ version.apothecary|yesno }}
+            </li>
+            <li class="box information">
+                <span class="label">{{ 'obblm.trait.assistants'|trans({}, 'obblm') }} :</span>
+                {{ version.assistants }}
+            </li>
+            <li class="box information">
+                <span class="label">{{ 'obblm.trait.cheerleaders'|trans({}, 'obblm') }} :</span>
+                {{ version.cheerleaders }}
+            </li>
+        </ul>
+    </li>
+    <li class="box vertical aligned">
+        <ul>
+            <li class="box information">
+                <span class="label">{{ 'obblm.trait.popularity'|trans({}, 'obblm') }} :</span>
+                {{ version.popularity }}
+            </li>
+            <!-- <li class="box information">
+                    <span class="label">{{ 'Stadium'|trans({}, 'obblm') }} :</span>
+                    toto
+                </li> -->
+            <!-- <li class="box information">
+                    <span class="label">{{ 'League'|trans({}, 'obblm') }} :</span>
+                    Toto
+                </li> -->
+            <!-- <li class="box information">
+                    <span class="label">{{ 'Sponsor'|trans({}, 'obblm') }} :</span>
+                    toto
+                </li> -->
+        </ul>
+    </li>
+{% endblock %}
+</ul>

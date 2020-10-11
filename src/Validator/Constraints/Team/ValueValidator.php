@@ -32,8 +32,10 @@ class ValueValidator extends ConstraintValidator
         }
 
         $helper = $this->ruleHelper->getHelper($value->getTeam());
+        $limit = $helper->getMaxTeamCost($value->getTeam());
+
+        $helper->applyTeamExtraCosts($value, true);
         $teamCost = $helper->calculateTeamValue($value);
-        $limit = $helper->getMaxTeamCost();
 
         if ($teamCost > $limit) {
             $this->context->buildViolation($constraint->limitMessage)
