@@ -1,0 +1,51 @@
+rules:
+  bb2020:
+    rosters:
+      black_orc: # RuleBook
+        players:
+          goblin:
+            min: 0
+            max: 12
+            characteristics:
+              ma: 6
+              st: 2
+              ag: 3
+              pa: 4
+              av: 8
+            skills: [ dodge, right_stuff, stunty, thick_skull ]
+            cost: 45000
+            available_skills: [ a ]
+            available_skills_on_double: [ g, s, p ]
+            is_journeyman: true
+          black_ork:
+            min: 0
+            max: 6
+            characteristics:
+              ma: 4
+              st: 4
+              ag: 4
+              pa: 5
+              av: 10
+            skills: [ brawler, grab ]
+            cost: 90000
+            available_skills: [ g, s ]
+            available_skills_on_double: [ a, p ]
+          troll:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 4
+              st: 5
+              ag: 5
+              pa: 5
+              av: 10
+            skills: [ loner: 3, always_hungry, mighty_blow: 1, projectile_vomit, really_stupid, regeneration, throw_team_mate ]
+            cost: 115000
+            available_skills: [ s ]
+            available_skills_on_double: [ g, a, p ]
+        reroll_cost: 60000
+        options:
+          special_rules: badlands_brawl, bribery, corruption
+          tier: 2
+          can_have_apothecary: true
+

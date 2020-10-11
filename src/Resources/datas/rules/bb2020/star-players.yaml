@@ -1,0 +1,736 @@
+rules:
+  bb2020:
+    star_players:
+      anqi_panqi:
+        cost: 210000
+        rosters: [ lizardmen ]
+        characteristics:
+          ma: 7
+          st: 4
+          ag: 1
+          av: 9
+        skills: [ loner, block, grab, stand_firm ]
+      asperon_thorn:
+        cost: 160000
+        rosters: [ dark_elf, elf_union, high_elf]
+        characteristics:
+          ma: 6
+          st: 3
+          ag: 4
+          av: 8
+        skills: [ loner, hail_mary_pass, kick_off_return, pass, safe_throw, sure_hands ]
+      barik_farblast:
+        cost: 60000
+        rosters: [ dwarf, old_world_alliance ]
+        characteristics:
+          ma: 6
+          st: 3
+          ag: 3
+          av: 8
+        skills: [ loner, hail_mary_pass, pass, secret_weapon, strong_arm, sure_hands, thick_skull ]
+      big_jojo_hairyfoot:
+        cost: 120000
+        rosters: [ halfling, ogre ]
+        characteristics:
+          ma: 4
+          st: 3
+          ag: 2
+          av: 8
+        skills: [ loner, dirty_player, stand_firm, stunty, tackle, wrestle ]
+      bilrot_vomitflesh:
+        cost: 180000
+        rosters: [ chaos, nurgle ]
+        characteristics:
+          ma: 4
+          st: 5
+          ag: 2
+          av: 9
+        skills: [ loner, dirty_player, disturbing_presence, foul_appearance ]
+      bo_gallante:
+        cost: 160000
+        rosters: [ high_elf ]
+        characteristics:
+          ma: 8
+          st: 3
+          ag: 4
+          av: 7
+        skills: [ loner, dodge, side_step, sprint, sure_feet ]
+      boomer_dribblesnot:
+        cost: 60000
+        rosters: [ chaos_pact, goblin, ogre, orc, underworld, snotling ]
+        characteristics:
+          ma: 6
+          st: 2
+          ag: 3
+          av: 7
+        skills: [ loner, accurate, bombardier, dodge, right_stuff, secret_weapon, stunty ]
+      boomer_eziasson:
+        cost: 60000
+        rosters: [ dwarf, norse ]
+        characteristics:
+          ma: 4
+          st: 3
+          ag: 2
+          av: 9
+        skills: [ loner, accurate, block, bombardier, secret_weapon, thick_skull ]
+      bryce_cambuel:
+        cost: 130000
+        rosters: [ khemri, undead ]
+        characteristics:
+          ma: 5
+          st: 3
+          ag: 2
+          av: 8
+        skills: [ loner, chainsaw, regeneration, secret_weapon, stand_firm ]
+      bulla_shardhorn:
+        cost: 230000
+        rosters: [ nurgle ]
+        characteristics:
+          ma: 6
+          st: 3
+          ag: 3
+          av: 8
+        skills: [ loner, block, extra_arms, foul_appearance, horns, nurgle_rot, two_heads, regeneration, stab ]
+      cindy_piewhistle:
+        cost: 50000
+        rosters: [ halfling ]
+        characteristics:
+          ma: 5
+          st: 2
+          ag: 3
+          av: 6
+        skills: [ loner, accurate, bombardier, dodge, secret_weapon, stunty ]
+      count_luthor_von_drakenborg:
+        cost: 390000
+        rosters: [ necromantic, undead, vampire ]
+        characteristics:
+          ma: 6
+          st: 5
+          ag: 4
+          av: 9
+        skills: [ loner, block, hypnotic_gaze, regeneration, side_step ]
+      curnoth_darkwald:
+        cost: 240000
+        rosters: [ wood_elf ]
+        characteristics:
+          ma: 7
+          st: 3
+          ag: 4
+          av: 7
+        skills: [ loner, dodge, frenzy, jump_up, leap, wrestle ]
+      deeproot_strongbranch:
+        cost: 300000
+        rosters: [ halfling ]
+        characteristics:
+          ma: 2
+          st: 7
+          ag: 1
+          av: 10
+        skills: [ loner, block, mighty_blow, stand_firm, strong_arm, thick_skull, throw_team_mate, timber ]
+      drull_dribl:
+        cost: 190000
+        rosters: [ lizardmen ]
+        multi_parts:
+          drull:
+            characteristics:
+              ma: 8
+              st: 2
+              ag: 3
+              av: 7
+            skills: [ loner, dodge, side_step, stab, stunty ]
+          dribl:
+            characteristics:
+              ma: 8
+              st: 2
+              ag: 3
+              av: 7
+            skills: [ loner, dirty_player, dodge, side_step, sneaky_git, stunty ]
+      eldril_sidewinder:
+        cost: 200000
+        rosters: [ dark_elf, elf_union, high_elf, wood_elf ]
+        characteristics:
+          ma: 8
+          st: 3
+          ag: 4
+          av: 7
+        skills: [ loner, catch, dodge, hypnotic_gaze, nerves_of_steel, pass_block ]
+      elijah_doom:
+        cost: 190000
+        rosters: [ dark_elf, elf_union]
+        characteristics:
+          ma: 6
+          st: 3
+          ag: 4
+          av: 9
+        skills: [ loner, fend, guard, stand_firm, wrestle ]
+      flint_churnblade:
+        cost: 130000
+        rosters: [ dwarf ]
+        characteristics:
+          ma: 5
+          st: 3
+          ag: 2
+          av: 8
+        skills: [ loner, block, chainsaw, secret_weapon, thick_skull ]
+      frank_n_stein:
+        cost: 270000
+        rosters: [ human, necromantic, undead ]
+        characteristics:
+          ma: 4
+          st: 5
+          ag: 1
+          av: 9
+        skills: [ loner, break_tackle, mighty_blow, regeneration, stand_firm, thick_skull ]
+      fungus_the_loon:
+        cost: 80000
+        rosters: [ goblin, snotling ]
+        characteristics:
+          ma: 4
+          st: 7
+          ag: 3
+          av: 7
+        skills: [ loner, ball_chain, mighty_blow, no_hands, secret_weapon, stunty ]
+      glart_smashrip:
+        cost: 190000
+        rosters: [ skaven, underworld ]
+        characteristics:
+          ma: 5
+          st: 4
+          ag: 2
+          av: 8
+        skills: [ loner, block, claw_claws, juggernaut, grab, stand_firm ]
+      gloriel_summerbloom:
+        cost: 160000
+        rosters: [ wood_elf ]
+        characteristics:
+          ma: 7
+          st: 2
+          ag: 4
+          av: 7
+        skills: [ loner, accurate, dodge, pass, side_step, sure_hands ]
+      glotl_stop:
+        cost: 360000
+        rosters: [ amazon, lizardmen ]
+        characteristics:
+          ma: 6
+          st: 6
+          ag: 1
+          av: 9
+        skills: [ loner, frenzy, mighty_blow, piling_on, prehensile_tail, thick_skull, wild_animal ]
+      gobbler_grimlich:
+        cost: 230000
+        rosters: [ chaos, chaos_pact, underworld ]
+        characteristics:
+          ma: 5
+          st: 4
+          ag: 2
+          av: 9
+        skills: [ loner, big_hand, leap, disturbing_presence, monstrous_mouth, tentacles, regeneration, very_long_legs ]
+#      grak_and_crumbleberry:
+#        cost: 300000
+#        rosters: [  ]
+#        multi_parts:
+#          grak:
+#            characteristics:
+#              ma: 5
+#              st: 5
+#              ag: 2
+#              av: 9
+#            skills: [ loner, mighty_blow, thick_skull, kick_team_mate ]
+#          crumbleberry:
+#            characteristics:
+#              ma: 5
+#              st: 2
+#              ag: 3
+#              av: 6
+#            skills: [ loner, dodge, stunty, right_stuff, sure_hands ]
+      gral_blodschuker:
+        cost: 160000
+        rosters: [ necromantic, undead, vampire ]
+        characteristics:
+          ma: 7
+          st: 3
+          ag: 3
+          av: 7
+        skills: [ loner, catch, dodge, sure_feet, wrestle ]
+      grashnak_blackhoof:
+        cost: 310000
+        rosters: [ chaos, chaos_dwarf, nurgle ]
+        characteristics:
+          ma: 6
+          st: 6
+          ag: 2
+          av: 8
+        skills: [ loner, frenzy, horns, mighty_blow, thick_skull ]
+      gretche_wachter:
+        cost: 280000
+        rosters: [ necromantic, undead, vampire ]
+        characteristics:
+          ma: 7
+          st: 3
+          ag: 4
+          av: 8
+        skills: [ loner, disturbing_presence, dodge, foul_appearance, jump_up, no_hands, regeneration, shadowing, side_step ]
+      griff_oberwald:
+        cost: 320000
+        rosters: [ human ]
+        characteristics:
+          ma: 7
+          st: 4
+          ag: 4
+          av: 8
+        skills: [ loner, block, dodge, fend, sprint, sure_feet ]
+      grim_ironjaw:
+        cost: 220000
+        rosters: [ dwarf ]
+        characteristics:
+          ma: 5
+          st: 4
+          ag: 3
+          av: 8
+        skills: [ loner, block, dauntless, frenzy, multiple_block, thick_skull ]
+      guffle_pusmaw:
+        cost: 210000
+        rosters: [ chaos, chaos_pact, nurgle ]
+        characteristics:
+          ma: 5
+          st: 3
+          ag: 4
+          av: 9
+        skills: [ loner, monstrous_mouth, nurgle_rot, foul_appearance ]
+      hakflem_skuttlespike:
+        cost: 200000
+        rosters: [ skaven, underworld ]
+        characteristics:
+          ma: 9
+          st: 3
+          ag: 4
+          av: 7
+        skills: [ loner, dodge, extra_arms, prehensile_tail, two_heads ]
+      headsplitter:
+        cost: 340000
+        rosters: [ skaven ]
+        characteristics:
+          ma: 6
+          st: 6
+          ag: 3
+          av: 8
+        skills: [ loner, frenzy, mighty_blow, prehensile_tail ]
+      helmut_wulf:
+        cost: 110000
+        rosters: [ amazon, human, chaos_pact, lizardmen, norse, old_world_alliance, snotling, vampire ]
+        characteristics:
+          ma: 6
+          st: 3
+          ag: 3
+          av: 8
+        skills: [ loner, chainsaw, secret_weapon, stand_firm ]
+      horkon_heartripper:
+        cost: 210000
+        rosters: [ dark_elf ]
+        characteristics:
+          ma: 7
+          st: 3
+          ag: 4
+          av: 7
+        skills: [ loner, dodge, leap, multiple_block, shadowing, stab ]
+      hthark_the_unstoppable:
+        cost: 330000
+        rosters: [ chaos_dwarf ]
+        characteristics:
+          ma: 6
+          st: 5
+          ag: 2
+          av: 9
+        skills: [ loner, block, break_tackle, juggernaut, sprint, sure_feet, thick_skull ]
+      hubris_rakarth:
+        cost: 260000
+        rosters: [ dark_elf, elf_union ]
+        characteristics:
+          ma: 7
+          st: 4
+          ag: 4
+          av: 8
+        skills: [ loner, block, dirty_player, jump_up, mighty_blow, strip_ball ]
+      ivan_deathshroud:
+        cost: 230000
+        rosters: [ khemri, necromantic, undead]
+        characteristics:
+          ma: 6
+          st: 4
+          ag: 2
+          av: 8
+        skills: [ loner, block, foul_appearance, juggernaut, regeneration, strip_ball, tackle ]
+      jordell_freshbreeze:
+        cost: 260000
+        rosters: [ elf_union, wood_elf ]
+        characteristics:
+          ma: 8
+          st: 3
+          ag: 5
+          av: 7
+        skills: [ loner, block, diving_catch, dodge, leap, side_step ]
+      karla_von_kill:
+        cost: 220000
+        rosters: [ amazon, halfling, human, old_world_alliance, norse ]
+        characteristics:
+          ma: 6
+          st: 4
+          ag: 3
+          av: 8
+        skills: [ loner, block, dauntless, dodge, jump_up ]
+      kiroth_krakenye:
+        cost: 170000
+        rosters: [ dark_elf, elf_union]
+        characteristics:
+          ma: 7
+          st: 3
+          ag: 4
+          av: 8
+        skills: [ loner, disturbing_presence, foul_appearance, pass_block, tackle, tentacles ]
+      kreek_rustgouger:
+        cost: 130000
+        rosters: [ skaven, underworld ]
+        characteristics:
+          ma: 5
+          st: 7
+          ag: 2
+          av: 9
+        skills: [ loner, ball_chain, mighty_blow, no_hands, prehensile_tail, secret_weapon ]
+      lewdgrip_whiparm:
+        cost: 160000
+        rosters: [ chaos, chaos_pact, nurgle ]
+        characteristics:
+          ma: 6
+          st: 3
+          ag: 3
+          av: 9
+        skills: [ loner, dodge, pass, strong_arm, sure_hands, tentacles ]
+      lord_borak:
+        cost: 300000
+        rosters: [ chaos, nurgle ]
+        characteristics:
+          ma: 5
+          st: 5
+          ag: 3
+          av: 9
+        skills: [ loner, block, dirty_player, mighty_blow ]
+      max_spleenripper:
+        cost: 130000
+        rosters: [ chaos, nurgle ]
+        characteristics:
+          ma: 5
+          st: 4
+          ag: 3
+          av: 8
+        skills: [ loner,chainsaw, secret_weapon ]
+      madcap_miggz:
+        cost: 170000
+        rosters: [ goblin, snotling, underworld ]
+        characteristics:
+          ma: 6
+          st: 4
+          ag: 3
+          av: 8
+        skills: [ loner, break_tackle, claw_claws, leap, no_hands, very_long_legs, wild_animal ]
+      maple_highgrove:
+        cost: 300000
+        rosters: [ wood_elf ]
+        characteristics:
+          ma: 3
+          st: 5
+          ag: 1
+          av: 10
+        skills: [ loner, grab, mighty_blow, stand_firm, tentacles, thick_skull ]
+      mighty_zug:
+        cost: 260000
+        rosters: [ human, old_world_alliance ]
+        characteristics:
+          ma: 4
+          st: 5
+          ag: 2
+          av: 9
+        skills: [ loner, block, mighty_blow ]
+      mordrix_hex:
+        cost: 230000
+        rosters: [ dark_elf ]
+        characteristics:
+          ma: 7
+          st: 3
+          ag: 4
+          av: 7
+        skills: [ loner, block, dauntless, dodge, frenzy, mighty_blow ]
+      morg_n_thorg:
+        cost: 430000
+        rosters:
+          - amazon
+          - chaos
+          - chaos_dwarf
+          - chaos_pact
+          - dark_elf
+          - dwarf
+          - elf_union
+          - goblin
+          - halfling
+          - high_elf
+          - human
+          - lizardmen
+          - norse
+          - nurgle
+          - old_world_alliance
+          - ogre
+          - orc
+          - skaven
+          - snotling
+          - underworld
+          - vampire
+          - wood_elf
+        characteristics:
+          ma: 6
+          st: 6
+          ag: 3
+          av: 10
+        skills: [ loner, block, mighty_blow, thick_skull, throw_team_mate ]
+      neddley_verruca:
+        cost: 70000
+        rosters: [ halfling ]
+        characteristics:
+          ma: 5
+          st: 2
+          ag: 3
+          av: 6
+        skills: [ loner, dodge, leap, secret_weapon, stab, stunty, very_long_legs ]
+      nobbla_blackwart:
+        cost: 130000
+        rosters: [ chaos_dwarf, goblin, ogre, underworld, snotling ]
+        characteristics:
+          ma: 6
+          st: 2
+          ag: 3
+          av: 7
+        skills: [ loner, block, dodge, chainsaw, secret_weapon, stunty ]
+      prince_moranion:
+        cost: 230000
+        rosters: [ elf_union, high_elf ]
+        characteristics:
+          ma: 7
+          st: 4
+          ag: 4
+          av: 8
+        skills: [ loner, block, dauntless, tackle, wrestle ]
+      puggy_baconbreath:
+        cost: 140000
+        rosters: [ human, halfling ]
+        characteristics:
+          ma: 5
+          st: 3
+          ag: 3
+          av: 6
+        skills: [ loner, block, dodge, nerves_of_steel, right_stuff, stunty ]
+      ramtut_iii:
+        cost: 360000
+        rosters: [ khemri, necromantic, undead ]
+        characteristics:
+          ma: 5
+          st: 6
+          ag: 1
+          av: 9
+        skills: [ loner, break_tackle, mighty_blow, regeneration, wrestle ]
+      rashnak_rackstabber:
+        cost: 200000
+        rosters: [ chaos_dwarf ]
+        characteristics:
+          ma: 7
+          st: 3
+          ag: 3
+          av: 7
+        skills: [ loner, dodge, side_step, sneaky_git, stab ]
+      rasta_tailspike:
+        cost: 120000
+        rosters: [ skaven ]
+        characteristics:
+          ma: 8
+          st: 3
+          ag: 3
+          av: 7
+        skills: [ loner, catch, extra_arms ]
+      rick_bupkeis:
+        cost: 110000
+        rosters: [ necromantic, undead ]
+        characteristics:
+          ma: 4
+          st: 3
+          ag: 2
+          av: 8
+        skills: [ loner, dirty_player, regeneration, sneaky_git ]
+      ripper:
+        cost: 270000
+        rosters: [ goblin, orc, snotling ]
+        characteristics:
+          ma: 4
+          st: 6
+          ag: 1
+          av: 9
+        skills: [ loner, grab, mighty_blow, regeneration, throw_team_mate ]
+      roxanna_darknail:
+        cost: 250000
+        rosters: [ amazon, dark_elf ]
+        characteristics:
+          ma: 8
+          st: 3
+          ag: 5
+          av: 7
+        skills: [ loner, dodge, jump_up, frenzy, juggernaut, leap ]
+      rumblelow_sheepskin:
+        cost: 170000
+        rosters: [ halfling ]
+        characteristics:
+          ma: 6
+          st: 3
+          ag: 3
+          av: 7
+        skills: [ loner, block, horns, juggernaut, no_hands, tackle, thick_skull ]
+      scrappa_sorehead:
+        cost: 150000
+        rosters: [ goblin, ogre, orc, snotling ]
+        characteristics:
+          ma: 7
+          st: 2
+          ag: 3
+          av: 7
+        skills: [ loner, dirty_player, dodge, leap, right_stuff, sprint, stunty, sure_feet, very_long_legs ]
+      scyla_anfingrimm:
+        cost: 250000
+        rosters: [ chaos, norse ]
+        characteristics:
+          ma: 5
+          st: 5
+          ag: 1
+          av: 9
+        skills: [ loner, claw_claws, frenzy, prehensile_tail, thick_skull, wild_animal ]
+      skitter_stab_stab:
+        cost: 160000
+        rosters: [ skaven, underworld ]
+        characteristics:
+          ma: 9
+          st: 2
+          ag: 4
+          av: 7
+        skills: [ loner, dodge, prehensile_tail, shadowing, stab ]
+      skrull_halfeight:
+        cost: 190000
+        rosters: [ khemri, undead ]
+        characteristics:
+          ma: 6
+          st: 3
+          ag: 3
+          av: 8
+        skills: [ loner, accurate, nerves_of_steel, pass, regeneration, sure_hands, thick_skull ]
+      swiftvine_glimmershard:
+        cost: 130000
+        rosters: [ wood_elf ]
+        characteristics:
+          ma: 7
+          st: 2
+          ag: 3
+          av: 6
+        skills: [ loner, disturbing_presence, fend, side_step, stab, stunty ]
+      swift_twins:
+        cost: 390000
+        rosters: [ elf_union, high_elf, wood_elf ]
+        multi_parts:
+          swift_lucien:
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 4
+              av: 8
+            skills: [ loner, block, mighty_blow, tackle ]
+          swift_valen:
+            characteristics:
+              ma: 7
+              st: 3
+              ag: 5
+              av: 7
+            skills: [ loner, accurate, nerves_of_steel, pass, safe_throw, sure_hands ]
+      tolly_glockinger:
+        cost: 110000
+        rosters: [ nurgle ]
+        characteristics:
+          ma: 3
+          st: 7
+          ag: 2
+          av: 9
+        skills: [ loner, ball_chain, disturbing_presence, foul_appearance, no_hands, nurgle_rot, secret_weapon, stand_firm ]
+      throttlesnot:
+        cost: 100000
+        rosters: [ necromantic, undead]
+        characteristics:
+          ma: 6
+          st: 2
+          ag: 3
+          av: 7
+        skills: [ loner, dirty_player, dodge, leap, regeneration, secret_weapon, stab, stunty ]
+      ugroth_bolgrot:
+        cost: 100000
+        rosters: [ chaos_pact, orc, snotling ]
+        characteristics:
+          ma: 5
+          st: 3
+          ag: 3
+          av: 9
+        skills: [ loner, chainsaw, secret_weapon ]
+      varag_ghoul_chewer:
+        cost: 290000
+        rosters: [ orc ]
+        characteristics:
+          ma: 6
+          st: 4
+          ag: 3
+          av: 9
+        skills: [ loner, block, jump_up, mighty_blow, thick_skull ]
+      withergrasp_doubledrool:
+        cost: 170000
+        rosters: [ chaos, chaos_pact, nurgle ]
+        characteristics:
+          ma: 6
+          st: 3
+          ag: 3
+          av: 8
+        skills: [ loner, prehensile_tail, tackle, tentacles, two_heads ]
+      wilhelm_chaney:
+        cost: 240000
+        rosters: [ necromantic, norse, vampire ]
+        characteristics:
+          ma: 8
+          st: 4
+          ag: 3
+          av: 8
+        skills: [ loner, catch, claw_claws, frenzy, regeneration, wrestle ]
+      willow_rosebark:
+        cost: 150000
+        rosters: [ amazon, halfling, wood_elf ]
+        characteristics:
+          ma: 5
+          st: 4
+          ag: 3
+          av: 8
+        skills: [ loner, dauntless, side_step, thick_skull ]
+      zolcath_the_zoat:
+        cost: 280000
+        rosters: [ amazon, lizardmen, wood_elf ]
+        characteristics:
+          ma: 5
+          st: 5
+          ag: 2
+          av: 9
+        skills: [ loner, disturbing_presence, juggernaut, mighty_blow, prehensile_tail, regeneration, sure_feet ]
+      zzharg_madeye:
+        cost: 90000
+        rosters: [ chaos_dwarf, chaos_pact ]
+        characteristics:
+          ma: 4
+          st: 4
+          ag: 3
+          av: 9
+        skills: [ loner, hail_mary_pass, pass, secret_weapon, strong_arm, sure_hands, tackle, thick_skull ]
