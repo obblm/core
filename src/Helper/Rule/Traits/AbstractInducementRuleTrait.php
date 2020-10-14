@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Doctrine\Common\Collections\Expr\Expression;
 use Obblm\Core\Contracts\InducementInterface;
+use Obblm\Core\Contracts\PositionInterface;
 use Obblm\Core\Entity\Player;
 use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Team;
@@ -14,7 +15,6 @@ use Obblm\Core\Exception\InvalidArgumentException;
 use Obblm\Core\Exception\NotFoundKeyException;
 use Obblm\Core\Exception\UnexpectedTypeException;
 use Obblm\Core\Helper\CoreTranslation;
-use Obblm\Core\Helper\Rule\Inducement\Inducement;
 use Obblm\Core\Helper\Rule\Inducement\MultipleStarPlayer;
 use Obblm\Core\Helper\Rule\Inducement\StarPlayer;
 
@@ -126,6 +126,8 @@ trait AbstractInducementRuleTrait
         $ruleKey = $this->getAttachedRule()->getRuleKey();
         $availableInducements = $this->rule['inducements'];
 
+        $inducementClass = self::INDUCEMENT_CLASS;
+
         foreach ($availableInducements as $key => $value) {
             if ($key !== 'star_players') {
                 if ($options[$key]) {
@@ -137,7 +139,7 @@ trait AbstractInducementRuleTrait
                         'max' => $value['max'] ?? 0,
                         'value' => ($options[$key] === 'discount') ? $value['discounted_cost'] : $value['cost'],
                     ];
-                    $inducements[] = new Inducement($inducement);
+                    $inducements[] = new $inducementClass($inducement);
                 }
             }
         }
@@ -183,9 +185,9 @@ trait AbstractInducementRuleTrait
         return $this->getInducementTable()->matching($criteria)->toArray();
     }
 
-    public function createInducementAsPlayer(InducementInterface $inducement, $number = 0):?Player
+    public function createInducementAsPlayer(InducementInterface $inducement, int $number = 0):?Player
     {
-        if (!$inducement instanceof StarPlayer) {
+        if (!$inducement instanceof PositionInterface) {
             return null;
         }
         $version = (new PlayerVersion())
@@ -196,8 +198,9 @@ trait AbstractInducementRuleTrait
         }
         $player = (new Player())
             ->setNumber($number)
-            ->setPosition($inducement->getType()->getName())
-            ->setName($inducement->getName())
+            ->setPosition($inducement->getType()->getKey())
+            ->setName($inducement->getKey())
+            ->setStarPlayer(true)
             ->addVersion($version);
         return $player;
     }

@@ -1,5 +1,6 @@
 {% extends '@ObblmCore/base.html.twig' %}
-{% set team = create_rule_team(rule, roster) %}
+{% set version = create_rule_team(rule, roster) %}
+{% set team = version.team %}
 {% set title = roster|trans({}, rule.ruleKey) %}
 
 {% block title 'obblm.rules.title'|trans({}, 'obblm')
@@ -18,13 +19,14 @@
             <p>{{ team|roster_description|trans({}, rule.ruleKey) }}</p>
         </div>
     </div>
-    {% embed '@ObblmCore/team/table.' ~ rule.template ~ '.html.twig' with { 'team': team,  'players': team.availablePlayers } %}
-        {% block player_head_number %}<th>Max</th>{% endblock %}
+    {% embed '@ObblmCore/team/table.' ~ rule.template ~ '.html.twig' with { 'translation_domain': rule.ruleKey, 'playerVersions': version.notDeadPlayerVersions } %}
+        {% block player_head_number %}<th class="carac">Max</th>{% endblock %}
         {% block player_head_name %}{% endblock %}
         {% block player_head_injuries %}{% endblock %}
         {% block player_head_spp %}{% endblock %}
         {% block player_line %}
-            {% embed '@ObblmCore/team/player-line.' ~ rule.template ~ '.html.twig' with { 'player': player } %}
+            {% set position = roster.position(playerVersion.player.position) %}
+            {% embed '@ObblmCore/team/player-line.' ~ rule.template ~ '.html.twig' with { 'playerVersion': playerVersion } %}
                 {% block number %}<td>0-{{ max_position_type(team, player) }}</td>{% endblock %}
                 {% block name %}{% endblock %}
                 {% block injuries %}{% endblock %}
@@ -34,19 +36,40 @@
     {% endembed %}
     <h2 class="title">{{ 'obblm.rules.available_star_players'|trans({}, 'obblm') }}</h2>
     {% set star_players = get_star_players(team) %}
-    {% embed '@ObblmCore/team/table.' ~ rule.template ~ '.html.twig' with { 'team': team,  'players': star_players } %}
+    {% embed '@ObblmCore/team/table.' ~ rule.template ~ '.html.twig' with { 'translation_domain': rule.ruleKey,  'playerVersions': star_players } %}
         {% block player_head_number %}{% endblock %}
         {% block player_head_type %}{% endblock %}
         {% block player_head_injuries %}{% endblock %}
         {% block player_head_spp %}{% endblock %}
         {% block player_line %}
-            {% embed '@ObblmCore/team/player-line.' ~ rule.template ~ '.html.twig' with { 'player': player } %}
+            {% set position = get_star_player(playerVersion, rule) %}
+            {% if position|is_multiple_star_player %}
+            <tr class="multiplayer">
+                <th class="left aligned editable">{{ position.name|trans({}, position.translationDomain) }}</th>
+                <th colspan="5"></th>
+                <th class="right aligned">{{ position.value|price }}</th>
+            </tr>
+            {% for part in position.parts %}
+                {% set player = get_star_player_part(rule, part) %}
+                {% embed '@ObblmCore/team/player-line.' ~ rule.template ~ '.html.twig' with { 'playerVersion': player } %}
+                    {% block number %}{% endblock %}
+                    {% block name %}
+                        <td class="left aligned editable">{{ part.name|trans({}, part.translationDomain) }}</td>
+                    {% endblock %}
+                    {% block position %}{% endblock %}
+                    {% block injuries %}{% endblock %}
+                    {% block spp %}{% endblock %}
+                    {% block value %}<td class="right aligned">-</td>{% endblock %}
+                {% endembed %}
+            {% endfor %}
+            {% else %}
+            {% embed '@ObblmCore/team/player-line.' ~ rule.template ~ '.html.twig' with { 'playerVersion': playerVersion } %}
                 {% block number %}{% endblock %}
-                {% block name %}<td class="left aligned editable">{{ player.name }}</td>{% endblock %}
                 {% block position %}{% endblock %}
                 {% block injuries %}{% endblock %}
                 {% block spp %}{% endblock %}
             {% endembed %}
+            {% endif %}
         {% endblock %}
     {% endembed %}
 {% endblock %}

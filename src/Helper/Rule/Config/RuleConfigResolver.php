@@ -20,6 +20,7 @@ class RuleConfigResolver extends AbstractTreeResolver implements ConfigInterface
         $resolver->setDefaults([
             'default_team_inducements' => null,
             'sidelines_cost'           => null,
+            'roster_special_rules'     => null,
             'template'                 => "base",
         ])
             ->setRequired('post_bb_2020')
@@ -36,6 +37,7 @@ class RuleConfigResolver extends AbstractTreeResolver implements ConfigInterface
             ->setAllowedTypes('max_team_cost', ['int'])
             ->setAllowedTypes('rosters', ['array'])
             ->setAllowedTypes('inducements', ['array'])
+            ->setAllowedTypes('roster_special_rules', ['array', 'null'])
             ->setAllowedTypes('star_players', ['array'])
             ->setAllowedTypes('spp_levels', ['array'])
             ->setAllowedTypes('injuries', ['array'])

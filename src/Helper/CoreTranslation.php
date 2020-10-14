@@ -55,6 +55,16 @@ class CoreTranslation implements ObblmTranslationInterface
      * @param $roster
      * @return string
      */
+    public static function getSkillNameWithVarsKey($ruleKey, $skill):string
+    {
+        return join(self::TRANSLATION_GLUE, [$ruleKey, 'skills', $skill, 'title_with_vars']);
+    }
+
+    /**
+     * @param $ruleKey
+     * @param $roster
+     * @return string
+     */
     public static function getSkillType($ruleKey, $type):string
     {
         return join(self::TRANSLATION_GLUE, [$ruleKey, 'skill_types', $type]);

@@ -3,17 +3,16 @@
 namespace Obblm\Core\Helper\Rule\Inducement;
 
 use Obblm\Core\Helper\Optionable;
+use Obblm\Core\Helper\Rule\Traits\TranslatableTrait;
 use Obblm\Core\Helper\Rule\Translatable;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class InducementType extends Optionable implements Translatable
 {
+    use TranslatableTrait;
+
     /** @var string */
     public $key;
-    /** @var string */
-    private $name;
-    /** @var string */
-    private $translationDomain;
 
     protected function hydrateWithOptions()
     {
@@ -28,27 +27,6 @@ class InducementType extends Optionable implements Translatable
     public function getKey(): string
     {
         return $this->key;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTranslationDomain(): string
-    {
-        return $this->translationDomain;
-    }
-
-    public function __toString(): string
-    {
-        return $this->name;
     }
 
     public function configureOptions(OptionsResolver $resolver):void

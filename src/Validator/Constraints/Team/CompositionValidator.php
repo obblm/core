@@ -52,7 +52,7 @@ class CompositionValidator extends ConstraintValidator
         $this->validatePlayers($value, $constraint);
     }
 
-    private function validatePlayers($value, Composition $constraint)
+    private function validatePlayers(TeamVersion $value, Composition $constraint)
     {
         foreach ($value->getNotDeadPlayerVersions() as $version) {
             if ($version->getPlayer()->getPosition()) {

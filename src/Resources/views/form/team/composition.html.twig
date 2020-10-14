@@ -85,13 +85,13 @@
                     {{ form_errors( form.firstVersion.assistants ) }}
                 </div>
             </div>
-            {% if form.firstVersion.apothecary is defined %}
+            {% if form.apothecary is defined %}
                 <div class="field">
                     <div class="ui checkbox">
-                        {{ form_widget( form.firstVersion.apothecary ) }}
-                        {{ form_label( form.firstVersion.apothecary, 'obblm.forms.team.fields.apothecary') }}
+                        {{ form_widget( form.apothecary ) }}
+                        {{ form_label( form.apothecary, 'obblm.forms.team.fields.apothecary') }}
                     </div>
-                    {{ form_errors( form.firstVersion.apothecary ) }}
+                    {{ form_errors( form.apothecary ) }}
                 </div>
             {% endif %}
         </div>

@@ -4,20 +4,19 @@ namespace Obblm\Core\Helper\Rule\Inducement;
 
 use Obblm\Core\Contracts\InducementInterface;
 use Obblm\Core\Helper\Optionable;
+use Obblm\Core\Helper\Rule\Traits\TranslatableTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractInducement extends Optionable implements InducementInterface
 {
+    use TranslatableTrait;
+
     /** @var string */
     protected $key;
     /** @var int */
     protected $value;
     /** @var int */
     protected $discountValue;
-    /** @var string */
-    protected $name;
-    /** @var string */
-    protected $translationDomain;
     /** @var string */
     protected $typeName;
     /** @var InducementType */
@@ -94,22 +93,6 @@ abstract class AbstractInducement extends Optionable implements InducementInterf
     }
 
     /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTranslationDomain(): string
-    {
-        return $this->translationDomain;
-    }
-
-    /**
      * @return int
      */
     public function getMax(): int
@@ -142,22 +125,6 @@ abstract class AbstractInducement extends Optionable implements InducementInterf
     }
 
     /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @param string $translationDomain
-     */
-    public function setTranslationDomain(string $translationDomain): void
-    {
-        $this->translationDomain = $translationDomain;
-    }
-
-    /**
      * @param InducementType|array $type
      */
     public function setType($type): void
@@ -179,11 +146,6 @@ abstract class AbstractInducement extends Optionable implements InducementInterf
     public function setRosters(array $rosters): void
     {
         $this->rosters = $rosters;
-    }
-
-    public function __toString(): string
-    {
-        return $this->name;
     }
 
     public function configureOptions(OptionsResolver $resolver):void

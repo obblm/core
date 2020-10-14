@@ -9,4 +9,5 @@ interface OptionableInterface
     public function __construct(array $options);
     public function resolveOptions(array $options):void;
     public function configureOptions(OptionsResolver $resolver):void;
+    public function getOption(string $key);
 }

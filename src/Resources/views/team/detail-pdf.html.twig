@@ -12,100 +12,12 @@
             <div class="content">
                 <h1 class="title">{{ version.team.name }}</h1>
                 <div class="informations">
-                    <ul class="four boxes">
-                        <li class="box vertical aligned">
-                            <ul>
-                                <li class="box information">
-                                    <span class="label">
-                                        <i class="icon mdi mdi-label"></i>
-                                        {{ 'obblm.trait.roster'|trans({}, 'obblm') }} :
-                                    </span>
-                                    {{ version.team|roster_name|trans({}, version.team.rule.ruleKey) }}
-                                </li>
-                                <li class="box information">
-                                    <span class="label">
-                                        <i class="icon mdi mdi-account"></i>
-                                        {{ 'obblm.trait.coach'|trans({}, 'obblm') }} :
-                                    </span>
-                                    {{ version.team.coach.username }}
-                                </li>
-                                <li class="box information">
-                                    <span class="label">
-                                        <i class="icon mdi mdi-account"></i>
-                                        {{ 'obblm.trait.rule'|trans({}, 'obblm') }} :
-                                    </span>
-                                    {{ version.team.rule|rule_name|trans({}, version.team.rule.ruleKey) }}
-                                </li>
-                                <!-- <li class="box information">
-                                    <span class="label">{{ 'League'|trans({}, 'obblm') }} :</span>
-                                    Toto
-                                </li> -->
-                            </ul>
-                        </li>
-                        <li class="box vertical aligned">
-                            <ul>
-                                <li class="box information">
-                                    <span class="label">
-                                        <i class="icon mdi mdi-view-dashboard"></i>
-                                        {{ 'obblm.trait.tr.abbr'|trans({}, 'obblm') }} :
-                                    </span>
-                                    {{ version.tr }}
-                                </li>
-                                <li class="box information">
-                                    <span class="label">{{ 'obblm.sheet.header.team_value'|trans({}, 'obblm') }} :</span>
-                                    {{ version.team|calculate_value|price }}
-                                </li>
-                                <li class="box information">
-                                    <span class="label">{{ 'obblm.forms.team.fields.treasury'|trans({}, 'obblm') }} :</span>
-                                    {{ version.treasure|price }}
-                                </li>
-                                <!-- <li class="box information">
-                                    <span class="label">{{ 'Stadium'|trans({}, 'obblm') }} :</span>
-                                    toto
-                                </li> -->
-                            </ul>
-                        </li>
-                        <li class="box vertical aligned">
-                            <ul>
-                                <li class="box information">
-                                    <span class="label">
-                                        <i class="icon mdi mdi-dice-4"></i>
-                                        {{ 'obblm.trait.rerolls'|trans({}, 'obblm') }} :
-                                    </span>
-                                    {{ version.rerolls }} (x{{ version.team|reroll_cost|price }})
-                                </li>
-                                <li class="box information">
-                                    <span class="label">{{ 'obblm.trait.apothecary'|trans({}, 'obblm') }} :</span>
-                                    {{ version.apothecary|yesno }}
-                                </li>
-                                <!-- <li class="box information">
-                                    <span class="label">{{ 'Sponsor'|trans({}, 'obblm') }} :</span>
-                                    toto
-                                </li> -->
-                            </ul>
-                        </li>
-                        <li class="box vertical aligned">
-                            <ul>
-                                <li class="box information">
-                                    <span class="label">{{ 'obblm.trait.popularity'|trans({}, 'obblm') }} :</span>
-                                    {{ version.popularity }}
-                                </li>
-                                <li class="box information">
-                                    <span class="label">{{ 'obblm.trait.assistants'|trans({}, 'obblm') }} :</span>
-                                    {{ version.assistants }}
-                                </li>
-                                <li class="box information">
-                                    <span class="label">{{ 'obblm.trait.cheerleaders'|trans({}, 'obblm') }} :</span>
-                                    {{ version.cheerleaders }}
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    {% include '@ObblmCore/team/cardridge.' ~ version.team.rule.template ~ '.html.twig' with { 'version': version } only %}
                 </div>
             </div>
         </header>
         <section class="row">
-            {% include '@ObblmCore/team/sheet.html.twig' with { 'team': version.team } %}
+            {% include '@ObblmCore/team/sheet.html.twig' with { 'version': version } %}
         </section>
     </section>
     <aside class="container">

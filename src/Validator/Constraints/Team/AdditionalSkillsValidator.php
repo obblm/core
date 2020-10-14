@@ -2,6 +2,7 @@
 
 namespace Obblm\Core\Validator\Constraints\Team;
 
+use Obblm\Core\Contracts\RuleHelperInterface;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Entity\TeamVersion;
 use Obblm\Core\Helper\RuleHelper;
@@ -13,6 +14,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 class AdditionalSkillsValidator extends ConstraintValidator
 {
     protected $ruleHelper;
+    /** @var RuleHelperInterface */
+    protected $helper;
 
     public function __construct(RuleHelper $ruleHelper)
     {
@@ -31,16 +34,30 @@ class AdditionalSkillsValidator extends ConstraintValidator
             $value = TeamHelper::getLastVersion($value);
         }
 
-        $helper = $this->ruleHelper->getHelper($value->getTeam());
+        $this->helper = $this->ruleHelper->getHelper($value->getTeam());
 
         // Skills cost included in team value
-        if ($value->getTeam()->getCreationOption('skills_allowed') &&
-            $value->getTeam()->getCreationOption('skills_allowed.choice') == AdditionalSkills::NOT_FREE) {
-            $helper->applyTeamExtraCosts($value, true);
-            $this->addOtherValidator(new ValueValidator($this->ruleHelper), new Value(), $value);
-        }
+        $this->addValueValidator($value);
 
         // Skills quantity
+        $this->addOtherValidator(
+            new SkillsQuantityValidator($this->ruleHelper),
+            new SkillsQuantity($this->generateSkillContexts($value)),
+            $value
+        );
+    }
+
+    private function addValueValidator($value)
+    {
+        if ($value->getTeam()->getCreationOption('skills_allowed') &&
+            $value->getTeam()->getCreationOption('skills_allowed.choice') == AdditionalSkills::NOT_FREE) {
+            $this->helper->applyTeamExtraCosts($value, true);
+            $this->addOtherValidator(new ValueValidator($this->ruleHelper), new Value(), $value);
+        }
+    }
+
+    private function generateSkillContexts($value):array
+    {
         $skillContext = [];
         if ($value->getTeam()->getCreationOption('skills_allowed.single') !== null) {
             $skillContext[] = 'single';
@@ -48,7 +65,7 @@ class AdditionalSkillsValidator extends ConstraintValidator
         if ($value->getTeam()->getCreationOption('skills_allowed.double') !== null) {
             $skillContext[] = 'double';
         }
-        $this->addOtherValidator(new SkillsQuantityValidator($this->ruleHelper), new SkillsQuantity($skillContext), $value);
+        return $skillContext;
     }
 
     private function addOtherValidator(ConstraintValidator $validator, Constraint $constraint, $value)

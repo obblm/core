@@ -1,23 +1,23 @@
-{% set domain = team ? team.rule.ruleKey : rule.ruleKey %}
-<table id="player-sheet" class="table aligned center lined">
+<table class="table aligned center lined player-sheet">
     <thead>
         <tr>
-            {% block player_head_number %}<th>{{ 'obblm.trait.number.abbr'|trans({}, 'obblm') }}</th>{% endblock %}
-            {% block player_head_name %}<th class="left aligned">{{ 'obblm.trait.name.title'|trans({}, 'obblm') }}</th>{% endblock %}
-            {% block player_head_type %}<th class="left aligned">{{ 'obblm.trait.type.title'|trans({}, 'obblm') }}</th>{% endblock %}
-            {% block player_head_characteristics %}<th>{{ (domain ~ '.trait.ma.abbr')|trans({}, domain) }}</th>
-            <th>{{ (domain ~ '.trait.st.abbr')|trans({}, domain) }}</th>
-            <th>{{ (domain ~ '.trait.ag.abbr')|trans({}, domain) }}</th>
-            <th>{{ (domain ~ '.trait.av.abbr')|trans({}, domain) }}</th>{% endblock %}
-            {% block player_head_skills %}<th class="left aligned">{{ 'obblm.trait.skill.title'|trans({}, 'obblm') }}</th>{% endblock %}
-            {% block player_head_injuries %}<th class="left aligned">{{ 'obblm.trait.injury.title'|trans({}, 'obblm') }}</th>{% endblock %}
-            {% block player_head_spp %}<th>{{ (domain ~ '.trait.spp.abbr')|trans({}, domain) }}</th>{% endblock %}
-            {% block player_head_value %}<th class="right aligned">{{ 'obblm.trait.value.title'|trans({}, 'obblm') }}</th>{% endblock %}
+            {% block player_head_number %}<th class="number">{{ 'obblm.trait.number.abbr'|trans({}, 'obblm') }}</th>{% endblock %}
+            {% block player_head_name %}<th class="left aligned name">{{ 'obblm.trait.name.title'|trans({}, 'obblm') }}</th>{% endblock %}
+            {% block player_head_type %}<th class="left aligned position">{{ 'obblm.trait.type.title'|trans({}, 'obblm') }}</th>{% endblock %}
+            {% block player_head_characteristics %}<th class="carac">{{ (translation_domain ~ '.trait.ma.abbr')|trans({}, translation_domain) }}</th>
+            <th class="carac">{{ (translation_domain ~ '.trait.st.abbr')|trans({}, translation_domain) }}</th>
+            <th class="carac">{{ (translation_domain ~ '.trait.ag.abbr')|trans({}, translation_domain) }}</th>
+            <th class="carac">{{ (translation_domain ~ '.trait.av.abbr')|trans({}, translation_domain) }}</th>{% endblock %}
+            {% block player_head_skills %}<th class="left aligned skills">{{ 'obblm.trait.skill.title'|trans({}, 'obblm') }}</th>{% endblock %}
+            {% block player_head_injuries %}<th class="left aligned injuries">{{ 'obblm.trait.injury.title'|trans({}, 'obblm') }}</th>{% endblock %}
+            {% block player_head_spp %}<th class="spp">{{ (translation_domain ~ '.trait.spp.abbr')|trans({}, translation_domain) }}</th>{% endblock %}
+            {% block player_head_value %}<th class="right aligned value">{{ 'obblm.trait.value.title'|trans({}, 'obblm') }}</th>{% endblock %}
         </tr>
     </thead>
-    {% for player in players %}
+    {% for playerVersion in playerVersions %}
         {% block player_line %}
-            {% embed '@ObblmCore/team/player-line.base.html.twig' with { 'player': player, 'rule': rule } %}{% endembed %}
+            {% set position = playerVersion.player|position %}
+            {% embed '@ObblmCore/team/player-line.base.html.twig' with { 'playerVersion': playerVersion, 'position': position } %}{% endembed %}
         {% endblock %}
     {% else %}
         <tr colspan="5">{{ 'No players'|trans({}, 'obblm') }}</tr>

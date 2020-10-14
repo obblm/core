@@ -5,6 +5,7 @@ namespace Obblm\Core\Helper\Rule;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Obblm\Core\Contracts\InducementInterface;
+use Obblm\Core\Contracts\PositionInterface;
 use Obblm\Core\Contracts\RosterInterface;
 use Obblm\Core\Contracts\Rule\RuleBuilderInterface;
 use Obblm\Core\Contracts\SkillInterface;
@@ -34,6 +35,11 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
     private $inducements;
     /** @var ArrayCollection|RosterInterface[] */
     private $rosters;
+
+    const ROSTER_CLASS = Roster::class;
+    const STAR_PLAYER_CLASS = StarPlayer::class;
+    const MULTI_STAR_PLAYER_CLASS = MultipleStarPlayer::class;
+    const INDUCEMENT_CLASS = Inducement::class;
 
     protected function build(string $ruleKey, array $rule)
     {
@@ -209,12 +215,13 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
                 $this->skills->set(
                     $key,
                     new Skill([
-                        'key'         => $skill,
-                        'type'        => $type,
-                        'name'        => CoreTranslation::getSkillNameKey($ruleKey, $skill),
-                        'description' => CoreTranslation::getSkillDescription($ruleKey, $skill),
-                        'type_name'   => CoreTranslation::getSkillType($ruleKey, $type),
-                        'translation_domain'      => $ruleKey,
+                        'key'            => $skill,
+                        'type'           => $type,
+                        'name'           => CoreTranslation::getSkillNameKey($ruleKey, $skill),
+                        'name_with_vars' => CoreTranslation::getSkillNameWithVarsKey($ruleKey, $skill),
+                        'description'    => CoreTranslation::getSkillDescription($ruleKey, $skill),
+                        'type_name'      => CoreTranslation::getSkillType($ruleKey, $type),
+                        'translation_domain' => $ruleKey,
                     ])
                 );
             }
@@ -224,10 +231,10 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
     private function prepareInducementTable(string $ruleKey, array $rule)
     {
         $this->inducements = new ArrayCollection();
-
+        $inducementClass = self::INDUCEMENT_CLASS;
         foreach ($rule['inducements'] as $key => $value) {
             if ($key !== 'star_players') {
-                $inducement = new Inducement([
+                $inducement = new $inducementClass([
                     'type' => $this->inducementTypes['inducements'],
                     'key' => join(CoreTranslation::TRANSLATION_GLUE, [$ruleKey, 'inducements', $key]),
                     'translation_domain' => $ruleKey,
@@ -253,10 +260,11 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
     private function prepareRosterTable(string $ruleKey, array $rule)
     {
         $this->rosters = new ArrayCollection();
+        $rosterClass = self::ROSTER_CLASS;
         foreach ($rule['rosters'] as $key => $roster) {
             $this->rosters->set(
                 $key,
-                new Roster([
+                new $rosterClass([
                     'key' => $key,
                     'name' => CoreTranslation::getRosterKey($ruleKey, $key),
                     'translation_domain' => $ruleKey,
@@ -279,8 +287,8 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
             'translation_domain' => $ruleKey,
             'name' => CoreTranslation::getStarPlayerName($ruleKey, $key),
             'max' => $starPlayer['max'] ?? 1,
-            'characteristics' => $starPlayer['characteristics'] ?? null,
-            'skills' => $starPlayer['skills'] ?? null,
+            'characteristics' => $starPlayer['characteristics'] ?? [],
+            'skills' => $starPlayer['skills'] ?? [],
             'rosters' => $starPlayer['rosters'] ?? null,
         ];
         if (isset($starPlayer['multi_parts']) && $starPlayer['multi_parts']) {
@@ -291,10 +299,10 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
                 $options['parts'][] = $this->createStarPlayerInducement($ruleKey, $key, $part);
                 $first = false;
             }
-            $inducement = new MultipleStarPlayer($options);
+            $class = self::MULTI_STAR_PLAYER_CLASS;
         } else {
-            $inducement = new StarPlayer($options);
+            $class = self::STAR_PLAYER_CLASS;
         }
-        return $inducement;
+        return new $class($options);
     }
 }

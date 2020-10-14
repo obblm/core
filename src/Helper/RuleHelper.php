@@ -141,7 +141,7 @@ class RuleHelper
         $rule = ($item instanceof CanHaveRuleInterface) ? $item->getRule() : $item;
 
         if (!($rule instanceof Rule)) {
-            throw new UnexpectedTypeException(get_class($rule), Rule::class);
+            throw new UnexpectedTypeException($rule, Rule::class);
         }
 
         $key = $this->getCacheKey($rule);

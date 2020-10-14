@@ -4,6 +4,7 @@ namespace Obblm\Core\Controller;
 
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Knp\Snappy\Pdf;
+use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Rule;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Event\TeamVersionEvent;
@@ -96,8 +97,10 @@ class TeamController extends AbstractController
     public function detail(Team $team): Response
     {
         $this->denyAccessUnlessGranted(TeamVoter::VIEW, $team);
+        $version = TeamHelper::getLastVersion($team);
         return $this->render('@ObblmCore/team/detail.html.twig', [
-            'version' => TeamHelper::getLastVersion($team),
+            'version' => $version,
+            'playerVersions' => $this->getDoctrine()->getRepository(PlayerVersion::class)->findNotDeadPlayerVersionsByTeamVersion($version)
         ]);
     }
 

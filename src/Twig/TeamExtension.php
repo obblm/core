@@ -2,15 +2,14 @@
 
 namespace Obblm\Core\Twig;
 
-use Obblm\Core\Contracts\PositionInterface;
 use Obblm\Core\Entity\Player;
+use Obblm\Core\Entity\PlayerVersion;
 use Obblm\Core\Entity\Team;
 use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\PlayerHelper;
 use Obblm\Core\Helper\RuleHelper;
 use Obblm\Core\Helper\TeamHelper;
 use Obblm\Core\Service\ObblmPackage;
-use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -39,7 +38,7 @@ class TeamExtension extends AbstractExtension
             new TwigFilter('reroll_cost', [$this, 'getRerollCost']),
             new TwigFilter('injury_effects', [$this, 'getInjuryEffects']),
             // Players filters
-            new TwigFilter('type', [$this, 'getType']),
+            new TwigFilter('position', [$this, 'getPlayerPosition']),
             new TwigFilter('characteristics', [$this, 'getCharacteristics']),
             new TwigFilter('skills', [$this, 'getSkills']),
             new TwigFilter('spp', [$this, 'getSpp']),
@@ -110,14 +109,11 @@ class TeamExtension extends AbstractExtension
         return 0;
     }
 
-    public function getCharacteristics(Player $player, $characteristic)
+    public function getCharacteristics(PlayerVersion $playerVersion, $characteristic)
     {
-        if (!$player->getPosition()) {
-            return '';
-        }
-        $characteristics = PlayerHelper::getPlayerCharacteristics($player);
+        $characteristics = $playerVersion->getCharacteristics();
         if (!isset($characteristics[$characteristic])) {
-            throw new InvalidParameterException("The characteristic " . $characteristic . " does not exists");
+            return '-';
         }
 
         return $characteristics[$characteristic];
@@ -131,16 +127,10 @@ class TeamExtension extends AbstractExtension
         return PlayerHelper::getPlayerSkills($player);
     }
 
-    public function getType(Player $player)
+    public function getPlayerPosition(Player $player)
     {
-        if (!$player->getPosition()) {
-            return '';
-        }
         $helper = $this->ruleHelper->getHelper($player->getTeam());
-        if ($player->getPosition() == 'star_players') {
-            return $helper->getStarPlayer($player->getName());
-        }
-        return $helper->getRoster($player->getTeam())->getPosition($player->getPosition());
+        return $helper->getPlayerPosition($player);
     }
 
     public function getSpp(Player $player)

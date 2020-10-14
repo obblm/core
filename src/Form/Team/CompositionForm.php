@@ -10,6 +10,7 @@ use Obblm\Core\Entity\Team;
 use Obblm\Core\Exception\NoVersionException;
 use Obblm\Core\Form\Player\PlayerTeamType;
 use Obblm\Core\Helper\PlayerHelper;
+use Obblm\Core\Helper\Rule\Inducement\MultipleStarPlayer;
 use Obblm\Core\Helper\TeamHelper;
 use Obblm\Core\Listener\UploaderSubscriber;
 use Obblm\Core\Service\FileTeamUploader;
@@ -18,6 +19,7 @@ use Obblm\Core\Validator\Constraints\Team\Value;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,7 +46,6 @@ class CompositionForm extends AbstractType implements DataMapperInterface
         if ($builder->getData()) {
             /** @var Team $team */
             $team = $builder->getData();
-            $roster = $helper->getRoster($team);
 
             $builder->add('players', CollectionType::class, [
                 'entry_type' => PlayerTeamType::class,
@@ -98,6 +99,11 @@ class CompositionForm extends AbstractType implements DataMapperInterface
                 ])
                 ->add('firstVersion', TeamVersionType::class);
 
+            if ($team && $helper->getRoster($team)->canHaveApothecary()) {
+                $builder->add('apothecary', CheckboxType::class, [
+                    'required' => false,
+                ]);
+            }
             $builder->setDataMapper($this);
             $builder->addEventSubscriber(new UploaderSubscriber($this->uploader));
         }
@@ -112,8 +118,8 @@ class CompositionForm extends AbstractType implements DataMapperInterface
             throw new UnexpectedTypeException($viewData, Team::class);
         }
 
-        /** @var FormInterface[] $forms */
-        $forms = iterator_to_array($forms);
+        /** @var FormInterface[] $children */
+        $children = iterator_to_array($forms);
 
         // In want to have 16 players in the list, no less, no more
         $usedNumbers = [];
@@ -128,14 +134,14 @@ class CompositionForm extends AbstractType implements DataMapperInterface
         }
         $criteria = Criteria::create();
         $criteria->orderBy(['number' => 'ASC']);
-        $forms['name']->setData($viewData->getName());
-        $forms['fluff']->setData($viewData->getFluff());
-        $forms['anthem']->setData($viewData->getAnthem());
-        $forms['players']->setData($newPlayerList->matching($criteria));
+        $children['name']->setData($viewData->getName());
+        $children['fluff']->setData($viewData->getFluff());
+        $children['anthem']->setData($viewData->getAnthem());
+        $children['players']->setData($newPlayerList->matching($criteria));
         $version = TeamHelper::getLastVersion($viewData);
-        $forms['firstVersion']->setData($version);
-        if (isset($forms['apothecary'])) {
-            $forms['apothecary']->setData($version->getApothecary());
+        $children['firstVersion']->setData($version);
+        if (isset($children['apothecary'])) {
+            $children['apothecary']->setData($version->getApothecary());
         }
     }
 
@@ -148,18 +154,21 @@ class CompositionForm extends AbstractType implements DataMapperInterface
             throw new UnexpectedTypeException($viewData, Team::class);
         }
 
-        /** @var FormInterface[] $formChilds */
-        $formChilds = iterator_to_array($forms);
+        /** @var FormInterface[] $children */
+        $children = iterator_to_array($forms);
 
         /** @var RuleHelperInterface $helper */
-        $helper = $formChilds['name']->getParent()->getConfig()->getOption('helper');
+        $helper = $children['name']->getParent()->getConfig()->getOption('helper');
 
-        $viewData->setName($formChilds['name']->getData());
-        $viewData->setAnthem($formChilds['anthem']->getData());
-        $viewData->setFluff($formChilds['fluff']->getData());
+        $viewData->setName($children['name']->getData());
+        $viewData->setAnthem($children['anthem']->getData());
+        $viewData->setFluff($children['fluff']->getData());
         $version = TeamHelper::getLastVersion($viewData);
         /** @var FormInterface[] $formVersion */
-        $formVersion = $formChilds['firstVersion'];
+        $formVersion = $children['firstVersion'];
+        if (isset($children['apothecary'])) {
+            $version->setApothecary($children['apothecary']->getData());
+        }
         $version->setRerolls($formVersion['rerolls']->getData());
         $version->setAssistants($formVersion['assistants']->getData());
         $version->setCheerleaders($formVersion['cheerleaders']->getData());
@@ -178,6 +187,9 @@ class CompositionForm extends AbstractType implements DataMapperInterface
         }
         $player->setTeam($viewData);
         $position = $helper->getPlayerPosition($player);
+        if ($position instanceof MultipleStarPlayer) {
+            throw new \Exception('MultipleStarPlayer spotted');
+        }
         try {
             $helper->setPlayerDefaultValues(PlayerHelper::getLastVersion($player), $position);
         } catch (NoVersionException $e) { // It's a new player !

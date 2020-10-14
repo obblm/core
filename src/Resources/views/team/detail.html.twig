@@ -42,12 +42,12 @@
             <div class="content">
                 <h1 class="title">{{ version.team.name }}</h1>
                 <div class="informations">
-                    {% include '@ObblmCore/team/cardridge.' ~ version.team.rule.template ~ '.html.twig' with { 'team': version.team } %}
+                    {% include '@ObblmCore/team/cardridge.' ~ version.team.rule.template ~ '.html.twig' with { 'version': version } only %}
                 </div>
             </div>
         </header>
         <section class="row">
-            {% include '@ObblmCore/team/sheet.html.twig' with { 'team': version.team } %}
+            {% include '@ObblmCore/team/sheet.html.twig' with { 'version': version, 'playerVersions': playerVersions } %}
         </section>
         <aside class="fluff two boxes">
             {% if version.team.fluff %}

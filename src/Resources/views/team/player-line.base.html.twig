@@ -1,5 +1,5 @@
 <tr>
-    {% set position = player|type %}
+    {% set player = playerVersion.player %}
     {% block number %}<td>{{ player.number }}</td>{% endblock %}
     {% block name %}<td class="left aligned editable">
         {% if player.position == 'star_players' %}
@@ -13,18 +13,18 @@
         {% if player.position == 'star_players' %}
             {{ position.type|trans( {}, position.translationDomain ) }}
         {% else %}
-            {{ position|trans( {}, rule.ruleKey ) }}
+            {{ position|trans( {}, position.translationDomain ) }}
         {% endif %}</td>
     {% endblock %}
     {% block characteristics %}
-        <td>{{ player|characteristics('ma') }}</td>
-        <td>{{ player|characteristics('st') }}</td>
-        <td>{{ player|characteristics('ag') }}</td>
-        <td>{{ player|characteristics('av') }}</td>
+        <td>{{ playerVersion|characteristics('ma') }}</td>
+        <td>{{ playerVersion|characteristics('st') }}</td>
+        <td>{{ playerVersion|characteristics('ag') }}</td>
+        <td>{{ playerVersion|characteristics('av') }}</td>
     {% endblock %}
     {% block skills %}<td class="left aligned">
         {% if player.position %}
-            {% set skills = get_player_skills(player) %}
+            {% set skills = get_player_skills(playerVersion) %}
             {% for skill in skills %}
                 <span class="skill-tooltip" title="{{ skill.description|trans({}, skill.translationDomain) }}">
                     {{ skill }}{% if loop.index != loop.last %}, {% endif %}
@@ -32,7 +32,7 @@
             {% else %}
             {{ 'obblm.sheet.table.players.skill_none'|trans({}, 'obblm') }}
             {% endfor %}
-            {% set skills = get_assitional_player_skills(player) %}
+            {% set skills = get_additional_player_skills(playerVersion) %}
             <span class="extras">
             {% for skill in skills %}
                 <b class="success color skill-tooltip" title="{{ skill.description|trans({}, skill.translationDomain) }}">
@@ -46,3 +46,4 @@
     {% block spp %}<td>{{ player|spp }}</td>{% endblock %}
     {% block value %}<td class="right aligned">{{ player|value|price }}</td>{% endblock %}
 </tr>
+{% block after %}{% endblock %}

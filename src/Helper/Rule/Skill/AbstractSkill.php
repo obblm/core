@@ -4,16 +4,15 @@ namespace Obblm\Core\Helper\Rule\Skill;
 
 use Obblm\Core\Contracts\SkillInterface;
 use Obblm\Core\Helper\Optionable;
+use Obblm\Core\Helper\Rule\Traits\TranslatableTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractSkill extends Optionable implements SkillInterface
 {
+    use TranslatableTrait;
+
     /** @var string */
     private $key;
-    /** @var string */
-    private $name;
-    /** @var string */
-    private $translationDomain;
     /** @var string */
     private $type;
     /** @var string */
@@ -23,27 +22,20 @@ abstract class AbstractSkill extends Optionable implements SkillInterface
 
     protected function hydrateWithOptions()
     {
-        $this->key = $this->options['key'];
-        $this->name = $this->options['name'];
-        $this->translationDomain = $this->options['translation_domain'];
-        $this->type = $this->options['type'];
-        $this->typeName = $this->options['type_name'];
-        $this->description = $this->options['description'] ?? "";
+        $this
+            ->setKey($this->options['key'])
+            ->setName($this->options['name'])
+            ->setNameWithVars($this->options['name_with_vars'])
+            ->setTranslationDomain($this->options['translation_domain'])
+            ->setTranslationVars($this->options['translation_vars'])
+            ->setType($this->options['type'])
+            ->setTypeName($this->options['type_name'])
+            ->setDescription($this->options['description'] ?? "");
     }
 
     public function getKey(): string
     {
         return $this->key;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getTranslationDomain(): string
-    {
-        return $this->translationDomain;
     }
 
     public function getType(): string
@@ -67,15 +59,9 @@ abstract class AbstractSkill extends Optionable implements SkillInterface
         return $this;
     }
 
-    public function setName(string $name): self
+    public function setDescription(string $description): self
     {
-        $this->name = $name;
-        return $this;
-    }
-
-    public function setTranslationDomain(string $translationDomain): self
-    {
-        $this->translationDomain = $translationDomain;
+        $this->description = $description;
         return $this;
     }
 
@@ -91,7 +77,7 @@ abstract class AbstractSkill extends Optionable implements SkillInterface
         return $this;
     }
 
-    public function __toString(): string
+    public function __toString():string
     {
         return $this->name;
     }
@@ -102,14 +88,18 @@ abstract class AbstractSkill extends Optionable implements SkillInterface
             'key'                => null,
             'type'               => null,
             'name'               => null,
+            'name_with_vars'     => null,
             'translation_domain' => null,
+            'translation_vars'   => [],
             'type_name'          => null,
             'description'        => null,
         ])
             ->setRequired(['key', 'type', 'name', 'translation_domain', 'type_name'])
             ->setAllowedTypes('key', ['string'])
             ->setAllowedTypes('name', ['string'])
+            ->setAllowedTypes('name_with_vars', ['string', 'null'])
             ->setAllowedTypes('translation_domain', ['string'])
+            ->setAllowedTypes('translation_vars', ['array'])
             ->setAllowedTypes('type', ['string'])
             ->setAllowedTypes('type_name', ['string'])
             ->setAllowedTypes('description', ['string', 'null'])

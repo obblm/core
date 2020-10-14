@@ -21,6 +21,7 @@ interface RuleInducementInterface
     public function getInducement(string $key):InducementInterface;
     public function getStarPlayer(string $key):StarPlayer;
     public function getAvailableStarPlayers(Team $team):array;
+    public function createInducementAsPlayer(InducementInterface $inducement, int $number = 0):?Player;
     public function createStarPlayerAsPlayer(string $key, int $number, bool $hire = false):Player;
     public function getMaxStarPlayers():int;
 }

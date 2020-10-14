@@ -68,6 +68,7 @@ obblm:
     roster: Roster
     team_ready: Team is ready
     coach: Coach
+    tiers: Tiers
     rule: Rule
     rerolls: Rerolls
     assistants: Assistants

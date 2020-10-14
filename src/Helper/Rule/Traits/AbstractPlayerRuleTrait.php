@@ -85,7 +85,7 @@ trait AbstractPlayerRuleTrait
                 'int' => 0,
                 'mvp' => 0,
             ])
-            ->setSkills($position->getSkills())
+            ->setSkills($position->getOption('skills'))
             ->setValue($position->getCost())
             ->setSppLevel($this->getSppLevel($version));
 

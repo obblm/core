@@ -36,11 +36,12 @@ class MultipleStarPlayer extends StarPlayer implements InducementInterface
         parent::configureOptions($resolver);
         $resolver->setDefaults([
             'parts' => null,
+            'skills' => [],
+            'characteristics' => []
         ])
             ->setRequired(['parts'])
             ->setAllowedTypes('parts', ['array'])
-            ->setAllowedTypes('skills', ['null'])
-            ->setAllowedTypes('characteristics', ['null'])
+            ->setAllowedTypes('skills', ['array', 'null'])
         ;
     }
 }

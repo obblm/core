@@ -31,7 +31,7 @@ interface RuleBuilderInterface
      */
     public function getRosters();
     /**
-     * @return RosterInterface[]|Collection
+     * @return RosterInterface
      */
     public function getRoster(Team $team):RosterInterface;
     /**

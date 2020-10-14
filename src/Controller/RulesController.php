@@ -34,6 +34,7 @@ class RulesController extends AbstractController
         $this->denyAccessUnlessGranted(Roles::COACH);
 
         $helper = $ruleHelper->getHelper($rule);
+
         return $this->render('@ObblmCore/rules/detail.html.twig', [
             'rule' => $rule,
             'rosters' => $helper->getRosters(),

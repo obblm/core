@@ -113,6 +113,6 @@ class CoreExtension extends AbstractExtension
 
     public function formatBooleanToString(bool $var):string
     {
-        return ($var) ? 'yes' : 'no';
+        return ($var) ? 'obblm.layout.tools.yes' : 'obblm.layout.tools.no';
     }
 }

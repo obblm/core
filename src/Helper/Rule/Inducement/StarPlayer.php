@@ -4,6 +4,7 @@ namespace Obblm\Core\Helper\Rule\Inducement;
 
 use Obblm\Core\Contracts\InducementInterface;
 use Obblm\Core\Contracts\PositionInterface;
+use Obblm\Core\Contracts\SkillInterface;
 use Obblm\Core\Exception\NotFoundKeyException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,13 +13,13 @@ class StarPlayer extends AbstractInducement implements PositionInterface
     /** @var array $characteristics */
     protected $characteristics;
     /** @var array $skills */
-    protected $skills;
+    protected $skills = [];
 
     protected function hydrateWithOptions()
     {
         parent::hydrateWithOptions();
-        $this->characteristics = $this->options['characteristics'];
-        $this->skills = $this->options['skills'];
+        $this->setSkills($this->options['skills']);
+        $this->setCharacteristics($this->options['characteristics']);
     }
 
     /**
@@ -70,7 +71,7 @@ class StarPlayer extends AbstractInducement implements PositionInterface
     public function getOption(string $key)
     {
         if (!isset($this->options[$key])) {
-            throw new NotFoundKeyException($key, 'options', self::class);
+            return null;
         }
         return $this->options[$key];
     }

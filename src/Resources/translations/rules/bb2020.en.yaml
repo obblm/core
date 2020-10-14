@@ -1,4 +1,5 @@
 bb2020:
+  title: Rule Book 2020
   trait:
     ma:
       abbr: M
@@ -41,6 +42,12 @@ bb2020:
       title: Injuries
 
   rosters:
+    black_orc:
+      title: Black Orc
+      positions:
+        goblin: Goblin Bruiser Lineman
+        black_orc: Black Orc
+        troll: Trained Troll
     human:
       title: Human
       positions:
@@ -50,3 +57,290 @@ bb2020:
         blitzer: Blitzer
         halfling: Halfling Hopeful
         ogre: Ogre
+
+  skill_types:
+    a: Agility skill
+    g: General skill
+    m: Mutation skill
+    p: Passing skill
+    s: Strength skill
+
+  skills:
+    # Agility
+    catch:
+      title: Catch
+      description: This player may re-roll a fail. Agility test when attempting to catch the ball.
+    diving_catch:
+      title: Diving Catch
+      description: This player may attempt to catch the hat, if a pass, throw-in or kick-off causes it to land in a square within their Tackle Zone after scattering of deviating. This Skill does not allow this player to attempt to catch the ball if it bounces into a square within their Tackle Zone.
+        Additionally, this player may apply a +1 modifier to any attempt to catch an accurate pass if they occupy the target square.
+    diving_tackle:
+      title: Diving Tackle
+      description: Should an active opposition player that is attempting to Dodge, Jump or Leap in order to vacate a square in which they are being   by this player pass their Agility test, you may declare that this player will use this Skill. Your opponent must immediately subtract 2 from the result of the Agility test. This player is then Placed Prone in the square vacated by the opposition player.
+        If the opposition player was being Marked by more than one player with this Skill, only one player may use it.
+    dodge:
+      title: Dodge
+      description: Once per team turn, during their activation, this player may re-roll a failed Agility test when attempting to Dodge.
+        Additionally, this player may choose to use this Skill when they are the target of a Block action and a Stumble result is applied against them, as described in rule book.
+    defensive:
+      title: Defensive
+      description: During your opponent, team turn (but not during your own team turn) any opposition players being Marked by this player cannot use the Guard skill.
+    jump_up:
+      title: Jump Up
+      description: If this player is Prone they may stand up for free (i.e., standing up does not cost this player three (3) squares of their Movement Allowance, as it normally would).
+        Additionally, if this player is Prone when activated, they may attempt to Jump Up and perform a Block action. This player makes an Agility test, applying a +1 modifier. If this test is passed, they stand up and may perform a Block action. If the test is fail, they remain Prone and their activation ends.
+    leap:
+      title: Leap
+      description: During their movement, instead of jumping over a single square that is occupied by a Prone or Stunned player, as described in Rulebook, a player with this Skill may choose to Leap over any single adjacent square, including unoccupied squares and squares occupied by Standing players.
+        Additionally, this player may reduce any negative modifier applied to the Agility test when they attempt to Jump over a Prone or Stunned player, or to Leap over an empty square or a square occupied by a Standing player by 1, to a minimum of • 1.
+        A player with this Skill cannot also have the Pogo Stick trait.
+    safe_pair_of_hands:
+      title: Safe pair of hands
+      description: If this player Is Knocked Down or placed Prone (but not it they Fall Over) whilst in possession of the ball, the ball does not bounce. Instead you may place the ball in an unoccupied square adjacent to the one this player occupies when they become Prone.
+    side_step:
+      title: Side Step
+      description: If this player is Pushed back for any reason, they are not moved into a square chosen by the opposing coach. Instead you may Choose any unoccupied square adjacent to this player. This player is pushed back into that square instead. If there are no unoccupied squares adjacent to this player, this Skill cannot be used.
+    sneaky_git:
+      title: Skeaky Git
+      description: When this player performs a Foul action, they are not Sent-off for committing a Foul should they roll a natural double on the Armour roll.
+        Additionally, the activation of this player does not have to end once the Foul has been committed. If you wish and if this player has not used their full Movement Allowance, they may continue to move alter committing the Foul.
+    sprint:
+      title: Sprint
+      description: When this player performs any action that includes movement, they may attempt to Rush three times, rather than the usual two.
+    sure_feet:
+      title: Sure Feet
+      description: Once per team tum. during their activation, this player may re-roll the D6 when attempting to Rush.
+    # General
+    block:
+      title: Block
+      description: When a Both Down result is applied during a Block action, this player may choose to ignore it and not be Knocked Down, as described in the Rule book.
+    dauntless:
+      title: Dauntless
+      description: When this player performs a Block action fon its own or as part of a Blitz action), if the nominated target has a higher Strength characteristic than this player before counting offensive or defensive assists but after applying any other modifiers, roll a D6 and add this player's Strength characteristic to the result. If the total is higher than the target's Strength characteristic, this player increases their Strength characteristic to be equal to that of the target of the Block action, before counting offensive or defensive assists, for the duration of this Block action.
+        If this player has another Skill that allows them to perform more than Block action, such as Frenzy, they must make a Dauntless roll before each separate Block action is performed.
+    dirty_player:
+      title: Dirty Player (+1)
+      description: When this player commits a Foul action, either the Armour roll or Injury roll made against the victim may be modified by the amount shown in brackets. This modifier may be applied after the roll has been made.
+    fend:
+      title: Fend
+      description: If the player is pushed back as the result of any block dice result being applied against them, they may choose to prevent the player that pushed them back from following-up. However, the player that pushed them back may continue to move as part of a Blitz action if they have Movement Allowance remaining or by Rushing.
+        This Skill cannot be used when this player is chain-pushed, against a player with the Ball & Chain trait or against a player with the Juggernaut skill that performed the Block action as part of a Blitz.
+    frenzy:
+      title: Frenzy
+      description: ~
+    kick:
+      title: Kick
+      description: ~
+    pro:
+      title: Pro
+      description: ~
+    shadowing:
+      title: Shadowing
+      description: ~
+    strip_ball:
+      title: Strip Ball
+      description: ~
+    sure_hands:
+      title: Sure Hands
+      description: ~
+    tackle:
+      title: Tackle
+      description: ~
+    wrestle:
+      title: Wrestle
+      description: ~
+    # Mutation
+    big_hand:
+      title: Big Hand
+      description: ~
+    claws:
+      title: Claws
+      description: ~
+    disturbing_presence:
+      title: Disturbing Presence
+      description: ~
+    extra_arms:
+      title: Extra Arms
+      description: ~
+    foul_appearance:
+      title: Foul appearance
+      description: ~
+    horns:
+      title: Horns
+      description: ~
+    iron_hard_skin:
+      title: Iron Hard Skin
+      description: ~
+    monstrous_mouth:
+      title: Monstrous Mouth
+      description: ~
+    prehensile_tail:
+      title: Prehensile Tail
+      description: ~
+    tentacles:
+      title: Tentacles
+      description: ~
+    two_heads:
+      title: Two Heads
+      description: ~
+    very_long_legs:
+      title: Very Long Legs
+      description: ~
+    # Passing
+    accurate:
+      title: Accurate
+      description: ~
+    cannoneer:
+      title: Cannoneer
+      description: ~
+    cloud_burster:
+      title: Cloud Burster
+      description: ~
+    dump_off:
+      title: Dump off
+      description: ~
+    fumblerooskie:
+      title: Fumblerooskie
+      description: ~
+    hail_mary_pass:
+      title: Hail Mary Pass
+      description: ~
+    leader:
+      title: Leader
+      description: ~
+    nerves_of_steel:
+      title: Nerves of Steel
+      description: ~
+    on_the_ball:
+      title: On the Ball
+      description: ~
+    pass:
+      title: Pass
+      description: ~
+    running_pass:
+      title: Running Pass
+      description: ~
+    safe_pass:
+      title: Safe Pass
+      description: ~
+    # Strength
+    arm_bar:
+      title: Arm Bar
+      description: ~
+    brawler:
+      title: Brawler
+      description: ~
+    break_tackle:
+      title: Break Tackle
+      description: ~
+    grab:
+      title: Grab
+      description: ~
+    guard:
+      title: Guard
+      description: ~
+    juggernaut:
+      title: Juggernaut
+      description: ~
+    mighty_blow:
+      title: Mighty Blow (+1)
+      description: ~
+    multiple_block:
+      title: Multiple Block
+      description: ~
+    pile_diver:
+      title: Pile Diver
+      description: ~
+    stand_firm:
+      title: Stand Firm
+      description: ~
+    strong_arm:
+      title: Strong Arm
+      description: ~
+    thick_skull:
+      title: Thick Skull
+      description: ~
+    #Traits
+    animal_savagery:
+      title: Animal Savagery
+      description: ~
+    animosity:
+      title: Animosity (X)
+      title_with_vars: Animosity ({%limit%})
+      description: ~
+    always_hungry:
+      title: Always Hungry
+      description: ~
+    ball_chain:
+      title: Ball & Chain
+      description: ~
+    bombardier:
+      title: Bombardier
+      description: ~
+    bone_head:
+      title: Bone-head
+      description: ~
+    chainsaw:
+      title: Chainsaw
+      description: ~
+    hypnotic_gaze:
+      title: Hypnotic Gaze
+      description: ~
+    kick_team_mate:
+      title: Kick Team-Mate
+      description: ~
+    loner:
+      title: Loner (X+)
+      title_with_vars: Loner (limit+)
+      description: ~
+    no_hands:
+      title: No Hands
+      description: ~
+    plague_ridden:
+      title: Plague Ridden
+      description: ~
+    pogo_stick:
+      title: Pogo Stick
+      description: ~
+    projectile_vomit:
+      title: Projectile Vomit
+      description: ~
+    really_stupid:
+      title: Really Stupid
+      description: ~
+    regeneration:
+      title: Regeneration
+      description: ~
+    right_stuff:
+      title: Right Stuff
+      description: ~
+    secret_weapon:
+      title: Secret Weapon
+      description: ~
+    stab:
+      title: Stab
+      description: ~
+    stunty:
+      title: Stunty
+      description: ~
+    swarming:
+      title: Swarming
+      description: ~
+    swoop:
+      title: Swoop
+      description: ~
+    take_root:
+      title: Take Root
+      description: ~
+    titchy:
+      title: Titchy
+      description: ~
+    throw_team_mate:
+      title: Throw Team-Mate
+      description: ~
+    timber:
+      title: Timmm-Ber!
+      description: ~
+    unchannelled_fury:
+      title: Unchannelled Fury
+      description: ~

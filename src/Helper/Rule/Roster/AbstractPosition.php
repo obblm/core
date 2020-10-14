@@ -4,18 +4,17 @@ namespace Obblm\Core\Helper\Rule\Roster;
 
 use Obblm\Core\Contracts\PositionInterface;
 use Obblm\Core\Contracts\RosterInterface;
-use Obblm\Core\Exception\NotFoundKeyException;
+use Obblm\Core\Contracts\SkillInterface;
 use Obblm\Core\Helper\Optionable;
+use Obblm\Core\Helper\Rule\Skill\Skill;
+use Obblm\Core\Helper\Rule\Traits\TranslatableTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractPosition extends Optionable implements PositionInterface
 {
+    use TranslatableTrait;
     /** @var string */
     private $key;
-    /** @var string */
-    private $name;
-    /** @var string */
-    private $translationDomain;
     /** @var int */
     private $cost;
     /** @var int */
@@ -26,8 +25,8 @@ abstract class AbstractPosition extends Optionable implements PositionInterface
     private $isJourneyman;
     /** @var array */
     private $characteristics;
-    /** @var array */
-    private $skills;
+    /** @var Skill[] */
+    private $skills = [];
     /** @var array */
     private $availableSkills;
     /** @var array */
@@ -57,14 +56,6 @@ abstract class AbstractPosition extends Optionable implements PositionInterface
     public function getKey(): string
     {
         return $this->key;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 
     public function getMax(): int
@@ -135,22 +126,6 @@ abstract class AbstractPosition extends Optionable implements PositionInterface
         return $this->roster;
     }
 
-    public function getOption(string $key)
-    {
-        if (!isset($this->options[$key])) {
-            throw new NotFoundKeyException($key, 'options', self::class);
-        }
-        return $this->options[$key];
-    }
-
-    /**
-     * @return string
-     */
-    public function getTranslationDomain(): string
-    {
-        return $this->translationDomain;
-    }
-
     public function setKey(string $key): self
     {
         $this->key = $key;
@@ -160,18 +135,6 @@ abstract class AbstractPosition extends Optionable implements PositionInterface
     public function setRoster(RosterInterface $roster): self
     {
         $this->roster = $roster;
-        return $this;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    public function setTranslationDomain(string $translationDomain): self
-    {
-        $this->translationDomain = $translationDomain;
         return $this;
     }
 
@@ -245,11 +208,6 @@ abstract class AbstractPosition extends Optionable implements PositionInterface
     {
         $this->availableSkillsOnDouble = $availableSkillsOnDouble;
         return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->name;
     }
 
     public function configureOptions(OptionsResolver $resolver):void

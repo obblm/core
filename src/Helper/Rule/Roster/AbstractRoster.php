@@ -7,6 +7,7 @@ use Obblm\Core\Contracts\RosterInterface;
 use Obblm\Core\Exception\NotFoundKeyException;
 use Obblm\Core\Helper\CoreTranslation;
 use Obblm\Core\Helper\Optionable;
+use Obblm\Core\Helper\Rule\Traits\TranslatableTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractRoster extends Optionable implements RosterInterface
@@ -18,9 +19,9 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
         'igor' => false
     ];
 
+    use TranslatableTrait;
+
     protected $key;
-    protected $name;
-    protected $translationDomain;
     protected $positions = [];
     protected $special_rules;
     protected $additionalValidators;
@@ -74,22 +75,6 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
     public function getKey(): string
     {
         return $this->key;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTranslationDomain(): string
-    {
-        return $this->translationDomain;
     }
 
     /**
@@ -147,26 +132,6 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
     public function setKey(string $key): self
     {
         $this->key = $key;
-        return $this;
-    }
-
-    /**
-     * @param string $name
-     * @return $this
-     */
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @param string $translationDomain
-     * @return $this
-     */
-    public function setTranslationDomain(string $translationDomain): self
-    {
-        $this->translationDomain = $translationDomain;
         return $this;
     }
 
@@ -262,11 +227,6 @@ abstract class AbstractRoster extends Optionable implements RosterInterface
     {
         $this->tier = $tier;
         return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->name;
     }
 
     public function configureOptions(OptionsResolver $resolver):void

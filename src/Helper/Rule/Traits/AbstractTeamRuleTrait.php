@@ -170,12 +170,17 @@ trait AbstractTeamRuleTrait
         if ($creationPhase &&
             $version->getTeam()->getCreationOption('skills_allowed') &&
             $version->getTeam()->getCreationOption('skills_allowed.choice') == AdditionalSkills::NOT_FREE) {
-            foreach ($version->getNotDeadPlayerVersions() as $playerVersion) {
-                if (!$playerVersion->isHiredStarPlayer() && !$playerVersion->getPlayer()->isStarPlayer()) {
-                    $extra = $this->getPlayerVersionExtraCosts($playerVersion);
-                    $position = $this->getPlayerPosition($playerVersion->getPlayer());
-                    $playerVersion->setValue($position->getCost() + $extra);
-                }
+            $this->applyPlayersExtraCosts($version);
+        }
+    }
+
+    private function applyPlayersExtraCosts(TeamVersion $version)
+    {
+        foreach ($version->getNotDeadPlayerVersions() as $playerVersion) {
+            if (!$playerVersion->isHiredStarPlayer() && !$playerVersion->getPlayer()->isStarPlayer()) {
+                $extra = $this->getPlayerVersionExtraCosts($playerVersion);
+                $position = $this->getPlayerPosition($playerVersion->getPlayer());
+                $playerVersion->setValue($position->getCost() + $extra);
             }
         }
     }
