@@ -1,0 +1,75 @@
+{% extends '@ObblmCoreApplication/base.html.twig' %}
+{% set version = create_rule_team(rule, roster) %}
+{% set team = version.team %}
+{% set title = roster|trans({}, rule.ruleKey) %}
+
+{% block title 'obblm.rules.title'|trans({}, 'obblm')
+~ ' > ' ~ rule.name|trans({}, rule.ruleKey)
+    ~ ' > ' ~ title %}
+{% block body %}
+    <h1 class="title">{{ title }}</h1>
+    <div class="didyouknow">
+        {% if roster_image(rule, team.roster) %}
+        <div class="image">
+            <img src="{{ roster_image(rule, team.roster) }}">
+        </div>
+        {% endif %}
+        <div class="text container">
+            <h3>{{ 'obblm.layout.tools.didyouknow'|trans({}, 'obblm') }}</h3>
+            <p>{{ team|roster_description|trans({}, rule.ruleKey) }}</p>
+        </div>
+    </div>
+    {% embed '@ObblmCoreApplication/team/table.' ~ rule.template ~ '.html.twig' with { 'translation_domain': rule.ruleKey, 'playerVersions': version.notDeadPlayerVersions } %}
+        {% block player_head_number %}<th class="carac">Max</th>{% endblock %}
+        {% block player_head_name %}{% endblock %}
+        {% block player_head_injuries %}{% endblock %}
+        {% block player_head_spp %}{% endblock %}
+        {% block player_line %}
+            {% set position = roster.position(playerVersion.player.position) %}
+            {% embed '@ObblmCoreApplication/team/player-line.' ~ rule.template ~ '.html.twig' with { 'playerVersion': playerVersion } %}
+                {% block number %}<td>0-{{ max_position_type(team, player) }}</td>{% endblock %}
+                {% block name %}{% endblock %}
+                {% block injuries %}{% endblock %}
+                {% block spp %}{% endblock %}
+            {% endembed %}
+        {% endblock %}
+    {% endembed %}
+    <h2 class="title">{{ 'obblm.rules.available_star_players'|trans({}, 'obblm') }}</h2>
+    {% set star_players = get_star_players(team) %}
+    {% embed '@ObblmCoreApplication/team/table.' ~ rule.template ~ '.html.twig' with { 'translation_domain': rule.ruleKey,  'playerVersions': star_players } %}
+        {% block player_head_number %}{% endblock %}
+        {% block player_head_type %}{% endblock %}
+        {% block player_head_injuries %}{% endblock %}
+        {% block player_head_spp %}{% endblock %}
+        {% block player_line %}
+            {% set position = get_star_player(playerVersion, rule) %}
+            {% if position|is_multiple_star_player %}
+            <tr class="multiplayer">
+                <th class="left aligned editable">{{ position.name|trans({}, position.translationDomain) }}</th>
+                <th colspan="5"></th>
+                <th class="right aligned">{{ position.value|price }}</th>
+            </tr>
+            {% for part in position.parts %}
+                {% set player = get_star_player_part(rule, part) %}
+                {% embed '@ObblmCoreApplication/team/player-line.' ~ rule.template ~ '.html.twig' with { 'playerVersion': player } %}
+                    {% block number %}{% endblock %}
+                    {% block name %}
+                        <td class="left aligned editable">{{ part.name|trans({}, part.translationDomain) }}</td>
+                    {% endblock %}
+                    {% block position %}{% endblock %}
+                    {% block injuries %}{% endblock %}
+                    {% block spp %}{% endblock %}
+                    {% block value %}<td class="right aligned">-</td>{% endblock %}
+                {% endembed %}
+            {% endfor %}
+            {% else %}
+            {% embed '@ObblmCoreApplication/team/player-line.' ~ rule.template ~ '.html.twig' with { 'playerVersion': playerVersion } %}
+                {% block number %}{% endblock %}
+                {% block position %}{% endblock %}
+                {% block injuries %}{% endblock %}
+                {% block spp %}{% endblock %}
+            {% endembed %}
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

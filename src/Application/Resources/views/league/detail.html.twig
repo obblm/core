@@ -1,0 +1,16 @@
+{% extends '@ObblmCoreApplication/base.html.twig' %}
+
+{% block title 'obblm.dashboard.title'|trans({}, 'obblm') %}
+
+{% block body %}
+    {% include '@ObblmCoreApplication/partials/flash.html.twig' %}
+    <h1 class="title">{{ league.name }}</h1>
+    <div class="one boxes">
+        <div class="box main">
+            <ul>
+                <li><strong>Admin :</strong> {{ league.admin }}</li>
+                <li><a href="{{ path('obblm.league.edit', {'league': league.id}) }}">Edit</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

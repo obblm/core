@@ -1,0 +1,13 @@
+{% extends '@ObblmCoreApplication/base.html.twig' %}
+
+{% block title 'obblm.dashboard.title'|trans({}, 'obblm') %}
+
+{% block body %}
+    {% include '@ObblmCoreApplication/partials/flash.html.twig' %}
+    <h1 class="title">{{ 'obblm.league.create.title'|trans({}, 'obblm') }}</h1>
+    <div class="one boxes">
+        <div class="box main">
+             {{ form(form) }}
+        </div>
+    </div>
+{% endblock %}

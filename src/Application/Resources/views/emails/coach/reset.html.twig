@@ -1,0 +1,15 @@
+{% extends '@ObblmCoreApplication/emails/email-template.html.twig'%}
+{% block header_title 'obblm.emails.coach.reset_password.title'|trans({'%receiver%': coach.username}, 'obblm', coach.locale) %}
+{% block content %}
+    {% do email.setSubject( 'obblm.emails.coach.reset_password.title'|trans({'%receiver%': coach.username}, 'obblm', coach.locale) ) %}
+    <div class="container">
+        <div class="text">
+            <p>{{ 'obblm.emails.coach.reset_password.text.hello'|trans({'%receiver%': coach.username}, 'obblm', coach.locale) }}</p>
+            <p>{{ 'obblm.emails.coach.reset_password.text.reset'|trans({}, 'obblm', coach.locale) }}</p>
+            <p class="message warning">{{ 'obblm.emails.coach.reset_password.text.warning'|trans({}, 'obblm', coach.locale) }}</p>
+        </div>
+        <div class="center aligned">
+            <a class="button" href="{{ absolute_url(path('obblm_reset_password', {'hash': coach.resetPasswordHash})) }}">{{ 'obblm.emails.coach.reset_password.link_to_reset'|trans({}, 'obblm', coach.locale) }}</a>
+        </div>
+    </div>
+{% endblock%}

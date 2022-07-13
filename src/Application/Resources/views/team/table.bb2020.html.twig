@@ -1,0 +1,12 @@
+{% extends '@ObblmCoreApplication/team/table.base.html.twig' %}
+
+{% block player_head_characteristics %}
+    <th>{{ (translation_domain ~ '.trait.ma.abbr')|trans({}, translation_domain) }}</th>
+    <th>{{ (translation_domain ~ '.trait.st.abbr')|trans({}, translation_domain) }}</th>
+    <th>{{ (translation_domain ~ '.trait.ag.abbr')|trans({}, translation_domain) }}</th>
+    <th>{{ (translation_domain ~ '.trait.pa.abbr')|trans({}, translation_domain) }}</th>
+    <th>{{ (translation_domain ~ '.trait.av.abbr')|trans({}, translation_domain) }}</th>{% endblock %}
+{% block player_line %}
+    {% set position = playerVersion.player|position %}
+    {% include '@ObblmCoreApplication/team/player-line.bb2020.html.twig' with { 'playerVersion': playerVersion, 'position': position } %}
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends '@ObblmCoreApplication/base.html.twig' %}
+{% set title = 'obblm.forms.team.edit.title'|trans({'%name%': team.name}, 'obblm') %}
+{% block title 'obblm.team.title'|trans({}, 'obblm')
+~ ' > ' ~ title %}
+{% import _self as formMacros %}
+{% block body %}
+    {% form_theme form '@ObblmCoreApplication/form/ui-form.html.twig'%}
+    {{ form_start( form, {'attr': {'class': 'form container fixed-actions', 'id': 'editTeamForm'}} ) }}
+    <h1 class="title">{{ title }}</h1>
+    <h2 class="title">{{ team|roster_name|trans({}, team|rule_key) }}</h2>
+    {{ form_errors( form ) }}
+    <div class="field">
+        {{ form_label( form.name, 'obblm.forms.team.fields.name') }}
+        {{ form_widget( form.name ) }}
+        {{ form_errors( form.name ) }}
+    </div>
+    <div class="accordion">
+        <h2 class="title">
+            <i class="icon mdi mdi-play"></i>
+            {{ 'obblm.forms.team.fields.parts.story'|trans({}, 'obblm') }}
+        </h2>
+        <div class="story container">
+            <div class="two boxes">
+                <div class="box field">
+                    {{ form_label( form.logo, 'obblm.forms.team.fields.logo') }}
+                    {{ form_widget( form.logo ) }}
+                    {{ form_errors( form.logo ) }}
+                </div>
+                <div class="box field">
+                    {{ form_label( form.cover, 'obblm.forms.team.fields.cover') }}
+                    {{ form_widget( form.cover ) }}
+                    {{ form_errors( form.cover ) }}
+                </div>
+            </div>
+            <div class="two boxes">
+                <div class="box field">
+                    {{ form_label( form.anthem, 'obblm.forms.team.fields.anthem') }}
+                    {{ form_widget( form.anthem ) }}
+                    {{ form_errors( form.anthem ) }}
+                </div>
+                <div class="box field">
+                    {{ form_label( form.fluff, 'obblm.forms.team.fields.fluff') }}
+                    {{ form_widget( form.fluff ) }}
+                    {{ form_errors( form.fluff ) }}
+                </div>
+            </div>
+        </div>
+        <h2 class="title">
+            <i class="icon mdi mdi-play"></i>
+            {{ form_label(form.players, 'obblm.forms.team.fields.parts.players') }}
+        </h2>
+        <div class="many-collection">
+            <div class="sortable clearfix">
+            {% for playerFields in form.children.players %}
+                {{ formMacros.printPlayerFieldsRow( playerFields ) }}
+            {% else %}
+                {{ form_widget(form.players) }}
+            {% endfor %}
+            </div>
+        </div>
+        <h2 class="title">
+            <i class="icon mdi mdi-play"></i>
+            {{ 'obblm.forms.team.fields.parts.sidelines'|trans({}, 'obblm') }}
+        </h2>
+        <div class="sidelines container">
+            <div class="four boxes fields">
+                <div class="box field">
+                    {{ form_label( form.firstVersion.rerolls, 'obblm.forms.team.fields.rerolls') }}
+                    {{ form_widget( form.firstVersion.rerolls ) }}
+                    {{ form_errors( form.firstVersion.rerolls ) }}
+                </div>
+                <div class="box field">
+                    {{ form_label( form.firstVersion.popularity, 'obblm.forms.team.fields.popularity') }}
+                    {{ form_widget( form.firstVersion.popularity ) }}
+                    {{ form_errors( form.firstVersion.popularity ) }}
+                </div>
+                <div class="box field">
+                    {{ form_label( form.firstVersion.cheerleaders, 'obblm.forms.team.fields.cheerleaders') }}
+                    {{ form_widget( form.firstVersion.cheerleaders ) }}
+                    {{ form_errors( form.firstVersion.cheerleaders ) }}
+                </div>
+                <div class="box field">
+                    {{ form_label( form.firstVersion.assistants, 'obblm.forms.team.fields.assistants') }}
+                    {{ form_widget( form.firstVersion.assistants ) }}
+                    {{ form_errors( form.firstVersion.assistants ) }}
+                </div>
+            </div>
+            {% if form.apothecary is defined %}
+                <div class="field">
+                    <div class="ui checkbox">
+                        {{ form_widget( form.apothecary ) }}
+                        {{ form_label( form.apothecary, 'obblm.forms.team.fields.apothecary') }}
+                    </div>
+                    {{ form_errors( form.apothecary ) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="actions aligned center">
+        <a class="ui button red" href="{{ path('obblm_team_detail', {'team': team.id}) }}">
+            {{ 'obblm.forms.team.edit.buttons.cencel'|trans({}, 'obblm') }}
+        </a>
+        <button class="ui button green" type="submit">
+            {{ 'obblm.forms.team.edit.buttons.save'|trans({}, 'obblm') }}
+        </button>
+    </div>
+    {{ form_rest( form ) }}
+    {{ form_end( form ) }}
+{% endblock %}
+{% macro printPlayerFieldsRow( playerFields ) %}
+    <div class="item">
+        {{ form_errors( playerFields ) }}
+        <div class="player">
+            <div class="four boxes fields">
+                <div class="box inline number">
+                    <span>{{ playerFields.vars.value.number }}</span>
+                    {{ form_widget( playerFields.number ) }}
+                </div>
+                <div class="box name field inline">
+                    {{ form_label( playerFields.name, 'obblm.forms.player.fields.name', {'translation_domain': 'obblm'} ) }}
+                    {{ form_widget( playerFields.name ) }}
+                </div>
+                <div class="box position field inline selector">
+                    {{ form_label( playerFields.newPosition, 'obblm.forms.player.fields.position', {'translation_domain': 'obblm'} ) }}
+                    {{ form_widget( playerFields.newPosition, {'attr': {'class': 'ui dropdown'}} ) }}
+                </div>
+                <div class="box button move" type="button">
+                    <i class="icon mdi mdi-cursor-move"></i>
+                </div>
+            </div>
+        </div>
+        {{ form_rest( playerFields ) }}
+    </div>
+{% endmacro %}

@@ -1,0 +1,38 @@
+<div class="box team"{#% if(team.coverFilename) %} style="background-image: url({{ team_cover(team, 500) }});"{% endif %#}>
+    <div class="logo">
+        <a href="#">
+            {# <img alt="{{ team.name }}" class="image" src="{{ team_logo(team) }}"> #}
+        </a>
+    </div>
+    <div class="content">
+        <a class="header" href="{{ path('obblm.team.view', {'team': team.id}) }}">
+            {{ team.name }}
+        </a>
+        <div class="meta">
+            {{ team|roster_name|trans({}, team.rule.ruleKey) }} | {{ 'obblm.trait.tr.abbr'|trans({}, 'obblm') }} : {{ team|tr }}
+        </div>
+        <div class="description">
+            {% if team.ready == false %}
+                <p>{{ 'obblm.team.not_finished'|trans({}, 'obblm') }}</p>
+            {% endif %}
+        </div>
+            <div class="links">
+                {% if(is_granted('team.edit', team)) %}
+                <div class="two boxes buttons center aligned">
+                    <a class="box button" href="#">
+                        {{ 'obblm.layout.tools.actions.edit'|trans({}, 'obblm') }}
+                    </a>
+                    <a class="box button" href="#">
+                        {{ 'obblm.layout.tools.actions.delete'|trans({}, 'obblm') }}
+                    </a>
+                </div>
+                {% else %}
+                <div class="buttons center aligned">
+                    <a class="button" target="_blank" href="#">
+                        {{ 'obblm.layout.tools.actions.pdf'|trans({}, 'obblm') }}
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+{% extends '@ObblmCoreApplication/base.html.twig' %}
+
+{% block title 'obblm.team.title'|trans({}, 'obblm')
+~ ' > ' ~ version.team.name %}
+{% block body %}
+    <section id="team-sheet" class="container">
+        <nav class="action">
+            <a class="button" target="_blank" href="{{ path('obblm_team_pdf', {'team': version.team.id}) }}">
+                {{ 'obblm.layout.tools.actions.pdf'|trans({}, 'obblm') }}
+            </a>
+        {% if(is_granted('team.edit', version.team)) %}
+            <a class="button orange" href="{{ path('obblm_team_edit', {'team': version.team.id}) }}">
+                {{ 'obblm.layout.tools.actions.edit'|trans({}, 'obblm') }}
+            </a>
+        {% endif %}
+        {% if(is_granted('team.edit', version.team)) and version.team.creationOption('inducement_allowed') %}
+            <a class="button orange" href="{{ path('obblm_team_edit_inducements', {'team': version.team.id}) }}">
+                {{ 'obblm.trait.inducements'|trans({}, 'obblm') }}
+            </a>
+        {% endif %}
+        {% if(is_granted('team.edit', version.team)) and version.team.creationOption('skills_allowed') %}
+            <a class="button orange" href="{{ path('obblm_team_edit_skills', {'team': version.team.id}) }}">
+                {{ 'obblm.trait.skill.title'|trans({}, 'obblm') }}
+            </a>
+        {% endif %}
+        {% if(is_granted('team.delete', version.team)) %}
+            <a class="button red" href="{{ path('obblm_team_delete', {'team': version.team.id}) }}">
+                {{ 'obblm.layout.tools.actions.delete'|trans({}, 'obblm') }}
+            </a>
+        {% endif %}
+        {% if(is_granted('team.edit', version.team)) and version.team.creationOptions is not empty %}
+            <a class="button red" href="{{ path('obblm_team_edit_options', {'team': version.team.id}) }}">
+                {{ 'obblm.trait.options'|trans({}, 'obblm') }}
+            </a>
+        {% endif %}
+        </nav>
+        {% include '@ObblmCoreApplication/partials/flash.html.twig' %}
+        <header class="header"{% if(version.team.coverFilename) %} style="background-image: url({{ team_cover(version.team) }});"{% endif %}>
+            <div class="logo">
+                <img alt="{{ version.team.name }}" class="image" src="{{ team_logo(version.team) }}">
+            </div>
+            <div class="content">
+                <h1 class="title">{{ version.team.name }}</h1>
+                <div class="informations">
+                    {% include '@ObblmCoreApplication/team/cardridge.' ~ version.team.rule.template ~ '.html.twig' with { 'version': version } only %}
+                </div>
+            </div>
+        </header>
+        <section class="row">
+            {% include '@ObblmCoreApplication/team/sheet.html.twig' with { 'version': version, 'playerVersions': playerVersions } %}
+        </section>
+        <aside class="fluff two boxes">
+            {% if version.team.fluff %}
+            <div class="box text fluff container">
+                <h3>{{ 'obblm.layout.tools.didyouknow'|trans({}, 'obblm') }}</h3>
+                <div>{{ version.team.fluff }}</div>
+            </div>
+            {% endif %}
+            {% if version.team.anthem %}
+            <div class="anthem box container">
+                <div>{{ version.team.anthem|nl2br }}</div>
+            </div>
+            {% endif %}
+        </aside>
+    </section>
+{% endblock %}

@@ -1,0 +1,78 @@
+rules:
+  bb2020:
+    rosters:
+      chaos: # Spike #1
+        players:
+          beastman:
+            min: 0
+            max: 16
+            characteristics:
+              ma: 6
+              st: 3
+              ag: 3
+              pa: 4
+              av: 9
+            cost: 60000
+            skills: [ horns ]
+            available_skills: [ g, s, m ]
+            available_skills_on_double: [ a, p ]
+            is_journeyman: true
+          warrior:
+            min: 0
+            max: 4
+            characteristics:
+              ma: 5
+              st: 4
+              ag: 3
+              pa: 5
+              av: 10
+            cost: 100000
+            available_skills: [ g, s, m ]
+            available_skills_on_double: [ p, a ]
+          minotaur:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 5
+              st: 5
+              ag: 4
+              av: 9
+            cost: 150000
+            skills: [ loner: {limit: 4}, frenzy, horns, mighty_blow, thick_skull, unchannelled_fury ]
+            available_skills: [ s, m ]
+            available_skills_on_double: [ g, a, p ]
+          ogre:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 5
+              st: 5
+              ag: 5
+              pa: 5
+              av: 10
+            cost: 140000
+            skills: [bone_head, loner: {limit: 4}, mighty_blow, thick_skull, throw_team_mate ]
+            available_skills: [ s, m ]
+            available_skills_on_double: [ g, a, p ]
+          troll:
+            min: 0
+            max: 1
+            characteristics:
+              ma: 5
+              st: 5
+              ag: 5
+              pa: 5
+              av: 10
+            cost: 115000
+            skills: [ always_hungry, loner: {limit: 4}, mighty_blow, projectile_vomit, really_stupid, regeneration, throw_team_mate ]
+            available_skills: [ s, m ]
+            available_skills_on_double: [ g, a, p ]
+        reroll_cost: 60000
+        options:
+          special_rules: favoured_of
+          constraints:
+            x_of:
+              limit: 1
+              positions: [ogre, minotaur, troll]
+          tier: 2
+          can_have_apothecary: true

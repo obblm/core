@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Obblm\Core\Domain\Model\Team" table="obblm_team">
+        <id name="id" type="uuid" column="id">
+            <generator strategy="CUSTOM"/>
+            <custom-id-generator class="Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator"/>
+        </id>
+        <field name="anthem" type="text" column="anthem" precision="0" scale="0" nullable="true"/>
+        <field name="fluff" type="text" column="fluff" precision="0" scale="0" nullable="true"/>
+        <field name="roster" type="string" column="roster" length="50" precision="0" scale="0" nullable="false"/>
+        <field name="creationOptions" type="array" column="creation_options" precision="0" scale="0" nullable="true"/>
+        <field name="ready" type="boolean" column="ready" precision="0" scale="0" nullable="false"/>
+        <field name="lockedByManagment" type="boolean" column="locked_by_managment" precision="0" scale="0" nullable="false"/>
+        <field name="name" type="string" column="name" length="255" precision="0" scale="0" nullable="false"/>
+        <field name="logoFilename" type="string" column="logo_filename" precision="0" scale="0" nullable="true"/>
+        <field name="logoMimeType" type="string" column="logo_mime_type" precision="0" scale="0" nullable="true"/>
+        <field name="coverFilename" type="string" column="cover_filename" precision="0" scale="0" nullable="true"/>
+        <field name="coverMimeType" type="string" column="cover_mime_type" precision="0" scale="0" nullable="true"/>
+        <field name="createdAt" type="datetime_immutable" column="created_at" precision="0" scale="0" nullable="true"/>
+        <field name="updatedAt" type="datetime_immutable" column="updated_at" precision="0" scale="0" nullable="true"/>
+        <one-to-many field="versions" target-entity="Obblm\Core\Domain\Model\TeamVersion" mapped-by="team" orphan-removal="true" fetch="EAGER">
+            <cascade>
+                <cascade-remove/>
+                <cascade-persist/>
+            </cascade>
+            <order-by>
+                <order-by-field name="id" direction="DESC"/>
+            </order-by>
+        </one-to-many>
+        <!-- <one-to-many field="players" target-entity="Obblm\Core\Entity\Player" mapped-by="team" orphan-removal="true" fetch="EAGER">
+            <cascade>
+                <cascade-remove/>
+                <cascade-persist/>
+            </cascade>
+            <order-by>
+                <order-by-field name="number" direction="ASC"/>
+            </order-by>
+        </one-to-many>-->
+        <many-to-one field="rule" target-entity="Obblm\Core\Domain\Model\Rule" inversed-by="teams" fetch="LAZY">
+            <join-columns>
+                <join-column name="rule_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <many-to-one field="coach" target-entity="Obblm\Core\Domain\Model\Coach" inversed-by="teams" fetch="LAZY">
+            <join-columns>
+                <join-column name="coach_id" referenced-column-name="id" nullable=""/>
+            </join-columns>
+        </many-to-one>
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="setCreatedAtValue"/>
+            <lifecycle-callback type="preUpdate" method="setUpdatedAtValue"/>
+        </lifecycle-callbacks>
+    </entity>
+</doctrine-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Obblm\Core\Domain\Model\League" table="obblm_league">
+        <id name="id" type="uuid" column="id">
+            <generator strategy="CUSTOM"/>
+            <custom-id-generator class="Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator"/>
+        </id>
+        <field name="name" type="string" column="name" length="255" precision="0" scale="0" nullable="false"/>
+        <field name="logoFilename" type="string" column="logo_filename" precision="0" scale="0" nullable="true"/>
+        <field name="logoMimeType" type="string" column="logo_mime_type" precision="0" scale="0" nullable="true"/>
+        <field name="createdAt" type="datetime_immutable" column="created_at" precision="0" scale="0" nullable="true"/>
+        <field name="updatedAt" type="datetime_immutable" column="updated_at" precision="0" scale="0" nullable="true"/>
+        <many-to-one field="admin" target-entity="Obblm\Core\Domain\Model\Coach" inversed-by="leagues" fetch="LAZY">
+            <join-columns>
+                <join-column name="admin_id" referenced-column-name="id" nullable=""/>
+            </join-columns>
+        </many-to-one>
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="setCreatedAtValue"/>
+            <lifecycle-callback type="preUpdate" method="setUpdatedAtValue"/>
+        </lifecycle-callbacks>
+    </entity>
+</doctrine-mapping>

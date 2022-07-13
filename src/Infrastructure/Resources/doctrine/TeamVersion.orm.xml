@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Obblm\Core\Domain\Model\TeamVersion" table="obblm_team_version">
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <field name="apothecary" type="boolean" column="apothecary" precision="0" scale="0" nullable="false" />
+        <field name="rerolls" type="integer" length="2" column="rerolls" precision="0" scale="0" nullable="false" />
+        <field name="cheerleaders" type="integer" length="11" column="cheerleaders" precision="0" scale="0" nullable="false" />
+        <field name="assistants" type="integer" length="11" column="assistants" precision="0" scale="0" nullable="false" />
+        <field name="popularity" type="integer" length="11" column="popularity" precision="0" scale="0" nullable="false" />
+        <field name="createdAt" type="datetime_immutable" column="created_at" precision="0" scale="0" nullable="true"/>
+        <field name="updatedAt" type="datetime_immutable" column="updated_at" precision="0" scale="0" nullable="true"/>
+        <field name="treasure" type="integer" length="11" column="treasure" precision="0" scale="0" nullable="false"  />
+        <field name="tr" type="integer" length="11" column="tr" precision="0" scale="0" nullable="false"  />
+
+        <field name="points" type="integer" length="11" column="points" precision="0" scale="0" nullable="false"  />
+        <field name="tdGive" type="integer" length="11" column="td_give" precision="0" scale="0" nullable="false"  />
+        <field name="tdTake" type="integer" length="11" column="td_take" precision="0" scale="0" nullable="false"  />
+        <field name="injuryGive" type="integer" length="11" column="injury_give" precision="0" scale="0" nullable="false"  />
+        <field name="injuryTake" type="integer" length="11" column="injury_take" precision="0" scale="0" nullable="false"  />
+        <field name="gameWin" type="integer" length="11" column="game_win" precision="0" scale="0" nullable="false"  />
+        <field name="gameDraw" type="integer" length="11" column="game_draw" precision="0" scale="0" nullable="false"  />
+        <field name="gameLoss" type="integer" length="11" column="game_loss" precision="0" scale="0" nullable="false"  />
+
+        <many-to-one field="team" target-entity="Obblm\Core\Domain\Model\Team" inversed-by="versions" fetch="LAZY">
+            <join-columns>
+                <join-column name="team_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="setCreatedAtValue"/>
+            <lifecycle-callback type="preUpdate" method="setUpdatedAtValue"/>
+        </lifecycle-callbacks>
+    </entity>
+</doctrine-mapping>

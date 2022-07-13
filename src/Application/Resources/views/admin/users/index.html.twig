@@ -1,0 +1,25 @@
+{% extends '@ObblmCoreApplication/base.html.twig'%}
+
+{% block body %}
+    {% include '@ObblmCoreApplication/partials/flash.html.twig' %}
+    <h1 class="title">{{ 'obblm.users.title'|trans({}, 'obblm') }}</h1>
+    <ul class="five boxes">
+        {% for item in users %}
+        <li class="box container">
+            <h2 class="title header">
+                {{ item.username }}
+            </h2>
+            <div class="email">
+                <a href="mailto:{{ item.email }}">
+                    <i class="icon mdi mdi-email"></i>
+                    {{ item.email }}
+                </a>
+            </div>
+            <div class="actions center aligned">
+                <a class="button" href="{{ path('admin_users_edit', {user: item.id}) }}">{{ 'obblm.layout.tools.actions.edit'|trans({}, 'obblm') }}</a>
+                <a class="button" href="#delete-{{ item.id }}">{{ 'obblm.layout.tools.actions.delete'|trans({}, 'obblm') }}</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,10 @@
+<div class="container">
+    <h2 class="title">{{ 'obblm.dashboard.last_teams'|trans({'%count%': teams.count}, 'obblm') }}</h2>
+    <div class="teams container">
+    {% for team in teams %}
+        {% include '@ObblmCoreApplication/team/team-list-item.html.twig' with { 'team': team } %}
+    {% else %}
+        {{ 'obblm.team.none'|trans({}, 'obblm') }}
+    {% endfor %}
+    </div>
+</div>

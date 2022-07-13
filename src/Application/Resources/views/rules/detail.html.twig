@@ -1,0 +1,25 @@
+{% extends '@ObblmCoreApplication/base.html.twig' %}
+
+{% block title 'obblm.rules.title'|trans({}, 'obblm')
+~ ' > ' ~ rule.name|trans({}, rule.ruleKey) %}
+{% block body %}
+    <div class="container" id="rule">
+        <h1 class="title">{{ rule.name|trans({}, rule.ruleKey) }}</h1>
+        <h2 class="title">{{ 'obblm.trait.options'|trans({}, 'obblm') }}</h2>
+        <a class="ui button primary" href="{{ path('obblm_rules_star_players', {'rule': rule.id}) }}">{{ (rule.ruleKey ~ '.star_players.title')|trans({}, rule.ruleKey) }}</a>
+        <a class="ui button primary" href="{{ path('obblm_rules_skills', {'rule': rule.id}) }}">{{ (rule.ruleKey ~ '.trait.skill.title')|trans({}, rule.ruleKey) }}</a>
+        <h2 class="title">{{ 'obblm.trait.roster'|trans({'count': rosters.count}, 'obblm') }} ({{ rosters.count }})</h2>
+        <div class="ui four rosters boxes">
+            {% for roster in rosters %}
+                <div class="box roster">
+                    <a class="image" href="{{ path('obblm_rules_roster_sheet', {'rule': rule.id, 'rosterKey': roster.key}) }}">
+                        <img src="{{ roster_image(rule, roster.key) }}" alt="{{ roster|trans({}, roster.translationDomain) }}">
+                    </a>
+                    <div class="content">
+                        <a class="header" href="{{ path('obblm_rules_roster_sheet', {'rule': rule.id, 'rosterKey': roster.key}) }}">{{ roster|trans({}, roster.translationDomain) }}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

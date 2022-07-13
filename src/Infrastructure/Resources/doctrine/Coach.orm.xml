@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Obblm\Core\Domain\Model\Coach" table="obblm_coach">
+    <id name="id" type="uuid" column="id">
+      <generator strategy="CUSTOM"/>
+      <custom-id-generator class="Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator"/>
+    </id>
+    <field name="email" type="string" column="email" length="180" precision="0" scale="0" unique="true" nullable="false"/>
+    <field name="username" type="string" column="username" length="255" precision="0" scale="0" unique="true" nullable="false"/>
+    <field name="roles" type="json" column="roles" precision="0" scale="0" nullable="false"/>
+    <field name="password" type="string" column="password" precision="0" scale="0" nullable="false"/>
+    <field name="firstName" type="string" column="first_name" length="255" precision="0" scale="0" nullable="true"/>
+    <field name="lastName" type="string" column="last_name" length="255" precision="0" scale="0" nullable="true"/>
+    <field name="locale" type="string" column="locale" length="4" precision="0" scale="0" nullable="true"/>
+    <field name="active" type="boolean" column="active" precision="0" scale="0" nullable="false"/>
+    <field name="hash" type="string" column="hash" length="255" precision="0" scale="0" nullable="true"/>
+    <field name="createdAt" type="datetime_immutable" column="created_at" precision="0" scale="0" nullable="false"/>
+    <field name="resetPasswordAt" type="datetime_immutable" column="reset_password_at" precision="0" scale="0" nullable="true"/>
+    <field name="resetPasswordHash" type="string" column="reset_password_hash" length="255" precision="0" scale="0" nullable="true"/>
+    <one-to-many field="teams" target-entity="Obblm\Core\Domain\Model\Team" mapped-by="coach" orphan-removal="true" fetch="LAZY">
+      <cascade>
+        <cascade-remove/>
+      </cascade>
+    </one-to-many>
+    <lifecycle-callbacks>
+      <lifecycle-callback type="prePersist" method="setCreatedAtValue"/>
+    </lifecycle-callbacks>
+  </entity>
+</doctrine-mapping>

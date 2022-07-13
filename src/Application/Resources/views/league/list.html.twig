@@ -1,0 +1,26 @@
+{% extends '@ObblmCoreApplication/base.html.twig' %}
+
+{% block title 'obblm.dashboard.title'|trans({}, 'obblm') %}
+
+{% block body %}
+    {% include '@ObblmCoreApplication/partials/flash.html.twig' %}
+    <h1 class="title">{{ 'obblm.league.list.title'|trans({}, 'obblm') }}</h1>
+    <div id="dashboard" class="two boxes">
+        <div class="box main">
+            <ul class="leagues">
+            {% for league in leagues %}
+                <li>
+                    <a href="{{ path('obblm.league.detail', {'league': league.id}) }}">{{ league.name }}</a>
+                </li>
+            {% else %}
+                <li>
+                    {{ 'obblm.league.list.empty'|trans({}, 'obblm') }}
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="box right">
+
+        </div>
+    </div>
+{% endblock %}

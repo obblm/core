@@ -1,0 +1,21 @@
+{% extends '@ObblmCoreApplication/base.html.twig' %}
+
+{% block title 'obblm.dashboard.title'|trans({}, 'obblm') %}
+
+{% block body %}
+    {% include '@ObblmCoreApplication/partials/flash.html.twig' %}
+    <h1 class="title">{{ 'obblm.dashboard.title'|trans({}, 'obblm') }}</h1>
+    <div id="dashboard" class="two boxes">
+        <div class="box main">
+            {% block main_dashboard %}
+            {% endblock %}
+        </div>
+        <div class="box right">
+            {% block right_dashboard %}
+                {{ render(controller(
+                    'Obblm\\Core\\Application\\Controller\\Dashboard\\LastTeamsController', {max: 3}
+                )) }}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

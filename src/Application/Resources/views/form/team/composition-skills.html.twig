@@ -1,0 +1,71 @@
+{% extends '@ObblmCoreApplication/base.html.twig' %}
+{% set title = 'obblm.forms.team.edit.manage_skills'|trans({'%name%': team.name}, 'obblm') %}
+{% block title 'obblm.team.title'|trans({}, 'obblm')
+~ ' > ' ~ title %}
+{% import _self as formMacros %}
+{% block body %}
+    {% form_theme form '@ObblmCoreApplication/form/ui-form.html.twig'%}
+    {{ form_start( form, {'attr': {'class': 'form container fixed-actions', 'id': 'editTeamForm'}} ) }}
+    <h1 class="title">{{ title }}</h1>
+    <h2 class="title">{{ team|roster_name|trans({}, team|rule_key) }}</h2>
+    {{ form_errors( form ) }}
+    {% if form.playerVersions is defined %}
+    {% for playerForm in form.playerVersions %}
+        <div class="field attach-collection-actions">
+            {% if playerForm.additionalSkills is defined %}
+            <div class="header">
+                {% set position = playerForm.vars.data.player|type %}
+                {% set label = playerForm.vars.data.player.name ~ ' (' ~ position|trans({}, position.translationDomain) ~ ')' %}
+                {{ form_label(playerForm, label) }}
+                <div class="buttons aligned right">
+                    <button type="button"
+                            class="add-another-collection-widget ui button primary"
+                            data-list-selector="#{{ playerForm.additionalSkills.vars.id }}">
+                        {{ 'obblm.forms.team.edit.buttons.add_skill'|trans({}, 'obblm') }}
+                    </button>
+                </div>
+            </div>
+            <div id="{{ playerForm.additionalSkills.vars.id }}"
+                 class="many-collection"
+                 data-prototype="{{ formMacros.multipleItems(playerForm.additionalSkills.vars.prototype)|e('html_attr') }}"
+                 data-widget-counter="{{ playerForm.additionalSkills.children|length+1 }}">
+                {% for item in playerForm.additionalSkills.children %}
+                    {{ formMacros.multipleItems( item ) }}
+                {% else %}
+                    {{ form_widget(playerForm.additionalSkills) }}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {{ form_errors( playerForm ) }}
+        {{ form_rest( playerForm ) }}
+    {% endfor %}
+    {% endif %}
+    <div class="actions aligned center">
+        <a class="ui button red" href="{{ path('obblm_team_detail', {'team': team.id}) }}">
+            {{ 'obblm.forms.team.edit.buttons.cencel'|trans({}, 'obblm') }}
+        </a>
+        <button class="ui button green" type="submit">
+            {{ 'obblm.forms.team.edit.buttons.save'|trans({}, 'obblm') }}
+        </button>
+    </div>
+    {{ form_rest( form ) }}
+    {{ form_end( form ) }}
+{% endblock %}
+{% macro multipleItems( fields ) %}
+    <div class="item">
+        <div class="inline fields">
+            <div class="delete">
+                <a href="#" data-item-selector=".item" class="remove-collection-widget pull-right">
+                    <i class="icon mdi mdi-close color error"></i>
+                </a>
+            </div>
+            <div class="field selector">
+                {{ form_label( fields, 'obblm.forms.player.fields.additional_skill'|trans({}, 'obblm') ) }}
+                {{ form_widget( fields, {'attr': {'class': 'ui dropdown'}} ) }}
+                {{ form_errors( fields ) }}
+            </div>
+        </div>
+        {{ form_rest( fields ) }}
+    </div>
+{% endmacro %}

@@ -1,0 +1,32 @@
+<header id="header">
+    <nav class="container">
+        <a class="launch item">
+            <i class="icon mdi mdi-menu"></i>
+        </a>
+        <div class="item center">
+            <h1 class="title">{{ 'obblm.full_title'|trans({}, 'obblm') }}</h1>
+        </div>
+        {% if(is_granted('ROLE_OBBLM_COACH')) %}
+            <div class="right item menu">
+                <div>
+                    <span aria-hidden="true" class="icon notranslate mdi mdi-account"></span>
+                    <span class="label">{{ app.user.username }}</span>
+                </div>
+                <ul>
+                    <li>
+                        <a class="link" href="{{ path('obblm.account')}}" title="{{ 'obblm.layout.header.my_account'|trans({}, 'obblm') }}">
+                            <i aria-hidden="true" class="icon notranslate mdi mdi-account"></i>
+                            {{ 'obblm.layout.header.my_account'|trans({}, 'obblm') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="link" href="{{ path('obblm.logout')}}" title="{{ 'obblm.layout.header.logout'|trans({}, 'obblm') }}">
+                            <i aria-hidden="true" class="icon notranslate mdi mdi-logout"></i>
+                            {{ 'obblm.layout.header.logout'|trans({}, 'obblm') }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+    </nav>
+</header>

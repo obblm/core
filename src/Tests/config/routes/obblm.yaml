@@ -1,3 +1,0 @@
-obblm:
-  resource: '@ObblmCoreBundle/Resources/config/routing.yaml'
-  prefix: /

@@ -1,0 +1,45 @@
+services:
+  Obblm\Core\Infrastructure\:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    resource: '../../*'
+    public: false
+    exclude: '../../{DependencyInjection,Model,Resources}'
+
+  Obblm\Core\Domain\Repository\CoachRepositoryInterface:
+    alias: Obblm\Core\Infrastructure\Repository\Doctrine\CoachRepository
+    public: true
+
+  Obblm\Core\Domain\Repository\LeagueRepositoryInterface:
+    alias: Obblm\Core\Infrastructure\Repository\Doctrine\LeagueRepository
+    public: true
+
+  Obblm\Core\Domain\Repository\RuleRepositoryInterface:
+    alias: Obblm\Core\Infrastructure\Repository\Doctrine\RuleRepository
+    public: true
+
+  Obblm\Core\Domain\Repository\TeamRepositoryInterface:
+    alias: Obblm\Core\Infrastructure\Repository\Doctrine\TeamRepository
+    public: true
+
+  Obblm\Core\Domain\Repository\TeamVersionRepositoryInterface:
+    alias: Obblm\Core\Infrastructure\Repository\Doctrine\TeamVersionRepository
+    public: true
+
+  Obblm\Core\Infrastructure\Handler\Doctrine\Coach\:
+    resource: '../../Handler/Doctrine/Coach'
+    public: true
+    autowire: true
+    tags: [ messenger.message_handler ]
+
+  Obblm\Core\Infrastructure\Handler\Doctrine\League\:
+    resource: '../../Handler/Doctrine/League'
+    public: true
+    autowire: true
+    tags: [ messenger.message_handler ]
+
+  Obblm\Core\Infrastructure\Handler\Doctrine\Rule\:
+    resource: '../../Handler/Doctrine/Rule'
+    public: true
+    autowire: true
+    tags: [ messenger.message_handler ]
