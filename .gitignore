@@ -1,7 +1,7 @@
 /.idea/
 /bin/
 /build/
-
+composer.lock
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
