@@ -20,6 +20,7 @@ class ViewController extends AbstractController
     {
         $this->denyAccessUnlessGranted(TeamVoter::VIEW, $team);
         $version = $team->getVersions()->last();
+
         return $this->render('@ObblmCoreApplication/team/detail.html.twig', ['team' => $team, 'version' => $version]);
     }
 }

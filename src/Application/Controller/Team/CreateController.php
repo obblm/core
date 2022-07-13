@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Application\Controller\Team;
 
-use Obblm\Core\Application\Form\Team\BaseTeamForm;
 use Obblm\Core\Application\Form\Team\RuledTeamForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

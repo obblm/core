@@ -18,11 +18,11 @@ class BaseLeagueForm extends AbstractType
         $builder
             ->add('name', null, [
                 'constraints' => [
-                    new NotNull()
-                ]
+                    new NotNull(),
+                ],
             ])
             ->add('admin', EntityType::class, [
-                'class' => Coach::class
+                'class' => Coach::class,
             ]);
     }
 }

@@ -43,9 +43,11 @@ class CreateAdminCommand extends AbstractAdminCommand
             }
             $this->saveCoach($coach);
             $this->io->success("The coach $username has been created !");
+
             return 1;
         }
         $this->io->text('Aborted.');
+
         return 0;
     }
 }

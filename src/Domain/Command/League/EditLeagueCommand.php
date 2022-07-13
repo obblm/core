@@ -7,7 +7,6 @@ namespace Obblm\Core\Domain\Command\League;
 use Obblm\Core\Domain\Command\CommandInterface;
 use Obblm\Core\Domain\Model\Coach;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class EditLeagueCommand implements CommandInterface

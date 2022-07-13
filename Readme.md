@@ -16,9 +16,9 @@ As a Composer dependency, you can install it on any [Symfony project][3]. Once y
 
 🧰 Extensions
 ----------------------------------
-The **obblm/championship** extension provides a full league and chmapionship management, and with **pre-configured core rules** you will be able to launch you league very fast.
+The **obblm/championship** extension provides a full league and championship management, and with **pre-configured core rules** you will be able to launch you league very fast.
 
-_To come : a **obblm/skeleton** how will provide full project stand-alone version._
+_To come : a **obblm/skeleton** how will provide full project standalone version._
 
 
 💾 Requirements

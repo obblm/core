@@ -10,18 +10,20 @@ class ConfigResolver
     private $resolver;
     /** @var ConfigResolver[] */
     private $children = [];
+
     public function __construct(ConfigInterface $configuration)
     {
         $this->resolver = new OptionsResolver();
         $this->configure($configuration);
     }
+
     private function configure($configuration)
     {
         $configuration->configureOptions($this->resolver);
         foreach ($configuration::getChildren() as $key => $childrenClass) {
             $children = new $childrenClass();
             if (!$children instanceof ConfigInterface) {
-                $message = sprintf("The children must implements interface %s", ConfigInterface::class);
+                $message = sprintf('The children must implements interface %s', ConfigInterface::class);
                 throw new \Exception($message);
             }
             if ($children instanceof ConfigTreeInterface) {
@@ -31,6 +33,7 @@ class ConfigResolver
             }
         }
     }
+
     public function resolve($data)
     {
         $resolved = $this->resolver->resolve($data);
@@ -43,6 +46,7 @@ class ConfigResolver
                 $resolved[$key] = $children->resolve($resolved[$key]);
             }
         }
+
         return $resolved;
     }
 }

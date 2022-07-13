@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Obblm\Core\Application\Controller\League;
 
 use Obblm\Core\Application\Form\League\BaseLeagueForm;
-use Obblm\Core\Application\Form\Security\RegistrationForm;
 use Obblm\Core\Domain\Command\League\CreateLeagueCommand;
 use Obblm\Core\Domain\Security\Roles;
 use Obblm\Core\Domain\Service\League\LeagueService;
@@ -33,6 +32,7 @@ class LeagueCreateController extends AbstractController
             $data = $form->getData();
             $command = CreateLeagueCommand::fromArray($data);
             $leagueService->create($command);
+
             return $this->redirectToRoute('obblm.league.list');
         }
 

@@ -24,7 +24,6 @@ class KernelTest extends TestCase
         $this->assertInstanceOf(ObblmCoreBundle::class, $this->bundle);
     }
 
-
     protected function tearDown(): void
     {
         parent::tearDown();

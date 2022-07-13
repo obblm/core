@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Application\Controller\League;
 
-use Obblm\Core\Domain\Repository\LeagueRepositoryInterface;
 use Obblm\Core\Domain\Security\Roles;
 use Obblm\Core\Domain\Service\League\LeagueService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Obblm\Core\Infrastructure\Shared\Persistence\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ObjectRepository;
 
 abstract class DoctrineRepository

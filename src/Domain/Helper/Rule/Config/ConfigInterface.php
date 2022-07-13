@@ -6,6 +6,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 interface ConfigInterface
 {
-    public static function getChildren():array;
+    public static function getChildren(): array;
+
     public function configureOptions(OptionsResolver $resolver);
 }

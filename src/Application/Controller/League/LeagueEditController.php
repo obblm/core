@@ -27,7 +27,7 @@ class LeagueEditController extends AbstractController
 
         $form = $this->createForm(BaseLeagueForm::class, [
             'name' => $league->getName(),
-            'admin' => $league->getAdmin()
+            'admin' => $league->getAdmin(),
         ]);
 
         $form->handleRequest($request);
@@ -36,6 +36,7 @@ class LeagueEditController extends AbstractController
             $data = $form->getData();
             $command = EditLeagueCommand::fromArray($data, (string) $league->getId());
             $leagueService->create($command);
+
             return $this->redirectToRoute('obblm.league.list');
         }
 

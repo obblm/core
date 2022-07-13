@@ -29,10 +29,12 @@ class RevokeCoachCommand extends AbstractAdminCommand
                     $this->saveCoach($coach);
                 }
                 $this->io->success("The coach {$coach->getUsername()} has been revoked !");
+
                 return 1;
             }
         }
         $this->io->text('Aborted.');
+
         return 0;
     }
 }

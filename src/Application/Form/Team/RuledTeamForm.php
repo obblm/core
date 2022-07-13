@@ -15,7 +15,7 @@ class RuledTeamForm extends BaseTeamForm
         parent::buildForm($builder, $options);
         $builder
             ->add('rule', EntityType::class, [
-                'class' => Rule::class
+                'class' => Rule::class,
             ]);
     }
 }

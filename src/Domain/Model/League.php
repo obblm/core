@@ -19,7 +19,6 @@ class League
     private Coach $admin;
     private bool $canPlayersCreateTeams = false;
 
-
     public function getId(): ?Uuid
     {
         return $this->id;
@@ -33,6 +32,7 @@ class League
     public function setAdmin(Coach $coach): League
     {
         $this->admin = $coach;
+
         return $this;
     }
 
@@ -44,8 +44,7 @@ class League
     public function setCanPlayersCreateTeams(bool $canPlayersCreateTeams): League
     {
         $this->canPlayersCreateTeams = $canPlayersCreateTeams;
+
         return $this;
     }
-
-
 }

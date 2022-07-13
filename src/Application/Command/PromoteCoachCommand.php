@@ -26,10 +26,12 @@ class PromoteCoachCommand extends AbstractAdminCommand
                     ->setRoles([Roles::ADMIN]);
                 $this->saveCoach($coach);
                 $this->io->success("The coach {$coach->getUsername()} has been promoted !");
+
                 return 1;
             }
         }
         $this->io->text('Aborted.');
+
         return 0;
     }
 }

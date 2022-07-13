@@ -1,42 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.5/phpunit.xsd"
-         backupGlobals="false"
-         colors="true"
-         bootstrap="vendor/autoload.php"
->
-    <php>
-        <ini name="error_reporting" value="-1" />
-        <server name="APP_ENV" value="test" force="true" />
-        <server name="KERNEL_CLASS" value="Obblm\Core\Tests\Kernel" />
-        <server name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/var/test.db" force="true" />
-
-        <server name="SHELL_VERBOSITY" value="-1" />
-        <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
-        <server name="SYMFONY_PHPUNIT_VERSION" value="7.5" />
-    </php>
-
-    <testsuites>
-        <testsuite name="Obblm Core Tests">
-            <directory>src/Tests</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory>src/</directory>
-            <exclude>
-                <directory>src/.idea</directory>
-                <directory>src/node_modules</directory>
-                <directory>src/DataFixtures</directory>
-                <directory>src/Resources</directory>
-                <directory>src/Tests</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-    <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
-    </listeners>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" backupGlobals="false" colors="true" bootstrap="tests/bootstrap.php">
+  <coverage processUncoveredFiles="true">
+    <include>
+      <directory>src/</directory>
+    </include>
+    <exclude>
+      <directory>src/.idea</directory>
+      <directory>src/node_modules</directory>
+      <directory>src/DataFixtures</directory>
+      <directory>src/Resources</directory>
+      <directory>src/Tests</directory>
+      <directory>src/Infrastructure/Model</directory>
+      <directory>src/Domain/Model</directory>
+    </exclude>
+  </coverage>
+  <php>
+    <ini name="error_reporting" value="-1"/>
+    <server name="APP_ENV" value="test" force="true"/>
+    <server name="KERNEL_CLASS" value="Obblm\Core\Tests\Kernel"/>
+    <server name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/var/test.db" force="true"/>
+    <server name="SHELL_VERBOSITY" value="-1"/>
+    <server name="SYMFONY_PHPUNIT_REMOVE" value=""/>
+    <server name="SYMFONY_PHPUNIT_VERSION" value="8.5"/>
+  </php>
+  <testsuites>
+    <testsuite name="main">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>

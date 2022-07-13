@@ -6,7 +6,6 @@ namespace Obblm\Core\Infrastructure\Repository\File;
 
 use Obblm\Core\Domain\Model\Rule;
 use Obblm\Core\Domain\Repository\RuleRepositoryInterface;
-use Obblm\Core\Infrastructure\Shared\Persistence\Doctrine\DoctrineRepository;
 
 class RuleRepository implements RuleRepositoryInterface
 {

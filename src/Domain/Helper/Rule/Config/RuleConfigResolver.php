@@ -6,7 +6,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RuleConfigResolver extends AbstractTreeResolver implements ConfigInterface
 {
-    public static function getChildren():array
+    public static function getChildren(): array
     {
         return [
             'rosters' => RosterResolver::class,
@@ -19,9 +19,9 @@ class RuleConfigResolver extends AbstractTreeResolver implements ConfigInterface
     {
         $resolver->setDefaults([
             'default_team_inducements' => null,
-            'sidelines_cost'           => null,
-            'roster_special_rules'     => null,
-            'template'                 => "base",
+            'sidelines_cost' => null,
+            'roster_special_rules' => null,
+            'template' => 'base',
         ])
             ->setRequired('post_bb_2020')
             ->setRequired('max_team_cost')

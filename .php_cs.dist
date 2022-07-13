@@ -1,13 +1,13 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-    ->exclude('node_modules')
-    ->exclude('var')
     ->in(__DIR__)
+    ->exclude('var')
 ;
 
 return PhpCsFixer\Config::create()
     ->setRules([
+        '@Symfony' => true,
         '@PSR2' => true,
     ])
     ->setFinder($finder)

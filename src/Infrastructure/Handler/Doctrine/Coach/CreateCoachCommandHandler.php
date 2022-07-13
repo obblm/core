@@ -10,7 +10,6 @@ use Obblm\Core\Domain\Model\Coach;
 use Obblm\Core\Domain\Service\Hash;
 use Obblm\Core\Infrastructure\Repository\Doctrine\CoachRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CreateCoachCommandHandler implements CreateCoachCommandHandlerInterface
 {

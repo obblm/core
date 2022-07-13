@@ -30,11 +30,11 @@ class RulesLoaderCommand extends Command
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
-        $this->rulesDirectory = dirname(__DIR__) . '/../Domain/Resources/datas/rules';
+        $this->rulesDirectory = dirname(__DIR__).'/../Domain/Resources/datas/rules';
         parent::__construct();
     }
 
-    protected function configure():void
+    protected function configure(): void
     {
         $this->setDescription('Loads Blood Bowl core rules.')
             ->setHelp('This command will add core Blood Bowl rules to the database.');
@@ -44,7 +44,7 @@ class RulesLoaderCommand extends Command
     {
         $this->io = new SymfonyStyle($input, $output);
         $finder = new Finder();
-        $this->io->title("Importing pre fetched rules from " . $this->rulesDirectory);
+        $this->io->title('Importing pre fetched rules from '.$this->rulesDirectory);
         $finder->directories()->ignoreDotFiles(true)->depth(0)->in($this->rulesDirectory);
         if ($finder->hasResults()) {
             foreach ($finder as $ruleDirectory) {
@@ -52,13 +52,14 @@ class RulesLoaderCommand extends Command
             }
             $this->em->flush();
             $this->io->success('All rules have been created or updated.');
+
             return 0;
         }
 
         return 1;
     }
 
-    protected function parseRule(SplFileInfo $ruleDirectory):void
+    protected function parseRule(SplFileInfo $ruleDirectory): void
     {
         $rules = [];
         $key = $ruleDirectory->getFilename();
@@ -103,9 +104,11 @@ class RulesLoaderCommand extends Command
                 $this->io->progressFinish();
                 $this->io->error("The rule.{$key} is not valid, resolver said :\n{$e->getMessage()}");
             }
+
             return;
         }
         $this->io->warning("There is no rule files in {$ruleDirectory->getPathname()} directory.");
+
         return;
     }
 }

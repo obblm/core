@@ -21,15 +21,18 @@ class TeamRepository extends DoctrineRepository implements TeamRepositoryInterfa
         return $this->repository(Team::class)->findBy(['coach' => $coach]);
     }
 
-    public function findOneBy(array $criteria, array $orderBy = null) {
+    public function findOneBy(array $criteria, array $orderBy = null)
+    {
         return $this->repository(Team::class)->findOneBy($criteria, $orderBy);
     }
 
-    public function findAll() {
+    public function findAll()
+    {
         return $this->repository(Team::class)->findAll();
     }
 
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) {
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    {
         return $this->repository(Team::class)->findBy($criteria, $orderBy, $limit, $offset);
     }
 
