@@ -24,7 +24,9 @@ class CreateController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid())
         {
-            $command = CreateTeamCommand::fromArray($form->getData());
+            $data = $form->getData();
+            $data['coach'] = $this->getUser();
+            $command = CreateTeamCommand::fromArray($data);
             $teamService->create($command);
         }
 

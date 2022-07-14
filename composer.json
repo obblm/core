@@ -29,6 +29,7 @@
         "symfony/password-hasher": "^5.4",
         "symfony/proxy-manager-bridge": "^5.2",
         "symfony/security-bundle": "^5.2",
+        "symfony/serializer": "^5.4",
         "symfony/translation": "^5.2",
         "symfony/twig-bundle": "^5.2",
         "symfony/uid": "^5.4",

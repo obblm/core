@@ -22,6 +22,7 @@ class CreateTeamCommandHandler implements CreateTeamCommandHandlerInterface
     {
         $team = (new Team())
             ->setName($command->getName())
+            ->setCoach($command->getCoach())
             ->setRule($command->getRule())
         ;
 
