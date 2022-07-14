@@ -7,7 +7,7 @@
         </id>
         <field name="anthem" type="text" column="anthem" precision="0" scale="0" nullable="true"/>
         <field name="fluff" type="text" column="fluff" precision="0" scale="0" nullable="true"/>
-        <field name="roster" type="string" column="roster" length="50" precision="0" scale="0" nullable="false"/>
+        <field name="roster" type="string" column="roster" length="50" precision="0" scale="0" nullable="true"/>
         <field name="creationOptions" type="array" column="creation_options" precision="0" scale="0" nullable="true"/>
         <field name="ready" type="boolean" column="ready" precision="0" scale="0" nullable="false"/>
         <field name="lockedByManagment" type="boolean" column="locked_by_managment" precision="0" scale="0" nullable="false"/>

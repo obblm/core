@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Obblm\Core\Application\Controller\Team;
 
 use Obblm\Core\Application\Form\Team\RuledTeamForm;
+use Obblm\Core\Domain\Command\Team\CreateTeamCommand;
+use Obblm\Core\Domain\Service\Team\TeamService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,11 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CreateController extends AbstractController
 {
-    public function __invoke(Request $request)
+    public function __invoke(TeamService $teamService, Request $request)
     {
         $form = $this->createForm(RuledTeamForm::class);
 
         $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $command = CreateTeamCommand::fromArray($form->getData());
+            $teamService->create($command);
+        }
 
         return $this->render('@ObblmCoreApplication/team/create.html.twig', ['form' => $form->createView()]);
     }

@@ -14,6 +14,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ObblmCoreBundle extends Bundle
 {
+    protected $path = __DIR__ . DIRECTORY_SEPARATOR . 'Application';
+
     public function getContainerExtension()
     {
         return new ObblmCoreDomainExtension();
@@ -21,7 +23,6 @@ class ObblmCoreBundle extends Bundle
 
     public function build(ContainerBuilder $container): void
     {
-        $this->path = dirname(__DIR__ ) . DIRECTORY_SEPARATOR . 'src/Application';
         $container->registerExtension(new ObblmCoreInfrastructureExtension());
         $container->registerExtension(new ObblmCoreApplicationExtension());
 
