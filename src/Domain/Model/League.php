@@ -15,11 +15,11 @@ class League
     use LogoTrait;
     use TimeStampableTrait;
 
-    private Uuid $id;
+    private $id;
     private Coach $admin;
     private bool $canPlayersCreateTeams = false;
 
-    public function getId(): ?Uuid
+    public function getId(): ?string
     {
         return $this->id;
     }

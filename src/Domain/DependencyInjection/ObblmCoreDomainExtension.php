@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Domain\DependencyInjection;
 
+use Obblm\Core\Domain\Helper\FileTeamUploader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\VarDumper\VarDumper;
 
 class ObblmCoreDomainExtension extends Extension
 {
@@ -30,11 +33,18 @@ class ObblmCoreDomainExtension extends Extension
         $container->setParameter('obblm.email_sender.email', $config['email_sender']['email']);
         $container->setParameter('obblm.email_sender.name', $config['email_sender']['name']);
 
-        //$this->createAssetsDirectoriesConfiguration($container, $config);
-
         $locator = new FileLocator(dirname(__DIR__).'/Resources/config');
         $loader = new YamlFileLoader($container, $locator);
         $loader->load('services.yaml');
+
+        //$this->createRulesPoolCacheDefinition($container, $config);
+        //$this->pullUploaders($container, $config);
+    }
+
+    private function pullUploaders(ContainerBuilder $container, array $config)
+    {
+        $teamUploaderDefinition = $container->getDefinition(FileTeamUploader::class);
+        $teamUploaderDefinition->addMethodCall('setUploader', [new Reference('obblm.team.uploader')]);
     }
 
     private function createRulesPoolCacheDefinition(ContainerBuilder $container, array $config): string

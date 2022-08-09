@@ -13,7 +13,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('obblm');
         $rootNode = $treeBuilder->getRootNode();
@@ -24,10 +24,6 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('email')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('name')->isRequired()->cannotBeEmpty()->end()
-                    ->scalarNode('upload_directory')
-                    ->end()
-                    ->scalarNode('public_cache_directory')
-                    ->end()
                 ->end()
             ->end()
         ;
@@ -36,7 +32,7 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function getCacheTree(ArrayNodeDefinition $rootNode)
+    private function getCacheTree(ArrayNodeDefinition $rootNode): ArrayNodeDefinition
     {
         return $rootNode
             ->fixXmlConfig('cache')

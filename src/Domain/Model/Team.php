@@ -12,6 +12,7 @@ use Obblm\Core\Domain\Model\Traits\LogoTrait;
 use Obblm\Core\Domain\Model\Traits\NameTrait;
 use Obblm\Core\Domain\Model\Traits\RuleTrait;
 use Obblm\Core\Domain\Model\Traits\TimeStampableTrait;
+use Symfony\Component\Uid\Uuid;
 
 class Team
 {
@@ -37,9 +38,15 @@ class Team
         $this->versions = new ArrayCollection();
     }
 
-    public function getId(): ?Uuid
+    public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function setId(Uuid $id): self
+    {
+        $this->id = $id;
+        return $this;
     }
 
     public function getCoach(): Coach

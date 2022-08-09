@@ -1,22 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Obblm\Core\Domain\Helper;
 
-use Obblm\Core\Application\Service\FileUploader\AbstractFileUploader;
-use Obblm\Core\Application\Service\FileUploader\FileUploaderInterface;
+use Obblm\Core\Domain\Contracts\ObblmFileUploaderInterface;
 use Obblm\Core\Domain\Model\Team;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class FileTeamUploader extends AbstractFileUploader implements FileUploaderInterface
+class FileTeamUploader
 {
+    private ?ObblmFileUploaderInterface $uploader = null;
+
+    public function setUploader(ObblmFileUploaderInterface $uploader)
+    {
+        $this->uploader = $uploader;
+    }
+
     /**
-     * @param $object
-     * @param $field
-     * @param $file
+     * @param Team $object
+     * @param string $field
+     * @param UploadedFile $file
      *
      * @return File|null
      */
-    public function uploadIfExists($object, $file, $field)
+    public function uploadIfExists(Team $object, UploadedFile $file, string $field)
     {
         if (!$object instanceof Team || !$file) {
             return null;
@@ -31,13 +40,13 @@ class FileTeamUploader extends AbstractFileUploader implements FileUploaderInter
         return null;
     }
 
-    public function uploadLogoIfExists(Team $object, $logoFile): ?File
+    public function uploadLogoIfExists(Team $object, UploadedFile $logoFile): ?File
     {
         if ($logoFile) {
-            $this->setObjectSubDirectory($object->getId());
-            if ($logo = $this->upload($logoFile)) {
+            $this->uploader->setObjectSubDirectory((string) $object->getId());
+            if ($logo = $this->uploader->upload($logoFile)) {
                 if ($object->getLogoFilename()) {
-                    $this->removeOldFile($object->getLogoFilename());
+                    $this->uploader->remove($object->getLogoFilename());
                 }
                 $object->setLogoFilename($logo->getFilename());
                 $object->setLogoMimeType($logo->getMimeType());
@@ -49,13 +58,13 @@ class FileTeamUploader extends AbstractFileUploader implements FileUploaderInter
         return null;
     }
 
-    public function uploadCoverIfExists(Team $object, $coverFile): ?File
+    public function uploadCoverIfExists(Team $object, UploadedFile $coverFile): ?File
     {
         if ($coverFile) {
-            $this->setObjectSubDirectory($object->getId());
-            if ($cover = $this->upload($coverFile)) {
+            $this->uploader->setObjectSubDirectory((string) $object->getId());
+            if ($cover = $this->uploader->upload($coverFile)) {
                 if ($object->getCoverFilename()) {
-                    $this->removeOldFile($object->getCoverFilename());
+                    $this->uploader->remove($object->getCoverFilename());
                 }
                 $object->setCoverFilename($cover->getFilename());
                 $object->setCoverMimeType($cover->getMimeType());

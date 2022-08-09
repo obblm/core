@@ -14,6 +14,7 @@ use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\Component\VarDumper\VarDumper;
 use Twig\Extra\TwigExtraBundle\TwigExtraBundle;
 
 class Kernel extends BaseKernel
@@ -25,7 +26,7 @@ class Kernel extends BaseKernel
         $container->import('config/{packages}/*.yaml');
         $container->import('config/{packages}/'.$this->environment.'/*.yaml');
 
-        if (is_file(\dirname(__DIR__).'/config/services.yaml')) {
+        if (is_file(\dirname(__FILE__).'/config/services.yaml')) {
             $container->import('config/services.yaml');
             $container->import('config/{services}_'.$this->environment.'.yaml');
         } elseif (is_file($path = \dirname(__FILE__).'/config/services.php')) {
@@ -45,7 +46,7 @@ class Kernel extends BaseKernel
         }
     }
 
-    public function registerBundles()
+    public function registerBundles(): array
     {
         return [
             new FrameworkBundle(),

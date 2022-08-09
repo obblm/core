@@ -24,7 +24,7 @@ class ImageHelper
     private $filesystem;
     private $fileTeamUploader;
 
-    public function __construct(FileTeamUploader $fileTeamUploader, string $kernetProjectDir, string $cacheDirectory)
+    public function __construct(FileTeamUploader $fileTeamUploader, string $kernetProjectDir = '', string $cacheDirectory = '')
     {
         $this->imageManager = new ImageManager(['driver' => 'gd']);
         $this->publicDirectory = $kernetProjectDir;

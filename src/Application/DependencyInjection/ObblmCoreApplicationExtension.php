@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class ObblmCoreApplicationExtension extends Extension implements PrependExtensionInterface
 {
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'obblm_application';
     }

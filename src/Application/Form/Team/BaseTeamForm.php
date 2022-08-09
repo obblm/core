@@ -13,6 +13,7 @@ class BaseTeamForm extends AbstractType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('name');
+            ->add('name')
+            ->add('roster');
     }
 }

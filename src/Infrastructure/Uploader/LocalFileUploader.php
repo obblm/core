@@ -1,7 +1,10 @@
 <?php
 
-namespace Obblm\Core\Domain\Helper\FileUploader;
+declare(strict_types=1);
 
+namespace Obblm\Core\Infrastructure\Uploader;
+
+use Obblm\Core\Domain\Contracts\ObblmFileUploaderInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -9,13 +12,14 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class AbstractFileUploader
+class LocalFileUploader extends AbstractUploader implements ObblmFileUploaderInterface
 {
-    private $targetDirectory;
-    private $uploadDirectory;
-    private $slugger;
+    private string $targetDirectory = '';
+    private string $uploadDirectory = '';
 
-    public function __construct($targetDirectory, SluggerInterface $slugger)
+    private SluggerInterface $slugger;
+
+    public function __construct(string $targetDirectory, SluggerInterface $slugger)
     {
         $this->targetDirectory = $targetDirectory;
         $this->uploadDirectory = $targetDirectory;
@@ -24,30 +28,17 @@ class AbstractFileUploader
 
     public function removeOldFile(string $filename = '')
     {
-        $filesystem = new Filesystem();
+        $this->remove($filename);
+    }
 
+    public function remove(string $filename)
+    {
+        $filesystem = new Filesystem();
         try {
             $filesystem->remove($this->getObjectDirectory().'/'.$filename);
         } catch (IOExceptionInterface $exception) {
             echo 'An error occurred while creating your directory at '.$exception->getPath();
         }
-    }
-
-    public function getTargetDirectory(): string
-    {
-        return $this->targetDirectory;
-    }
-
-    public function getObjectDirectory(): string
-    {
-        return $this->uploadDirectory;
-    }
-
-    public function setObjectSubDirectory(string $uploadDirectory): self
-    {
-        $this->uploadDirectory = $this->targetDirectory.'/'.$uploadDirectory;
-
-        return $this;
     }
 
     public function upload(UploadedFile $file): ?File

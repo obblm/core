@@ -7,7 +7,6 @@ namespace Obblm\Core\Domain\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Obblm\Core\Domain\Model\Traits\NameTrait;
-use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Uid\Uuid;
 
 class Rule
@@ -31,7 +30,7 @@ class Rule
         $this->teams = new ArrayCollection();
     }
 
-    public function getId(): ?Uuid
+    public function getId(): ?string
     {
         return $this->id;
     }

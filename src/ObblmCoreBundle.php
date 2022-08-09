@@ -7,16 +7,16 @@ namespace Obblm\Core;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Obblm\Core\Application\DependencyInjection\CompilerPass\BuildAssetsPass;
 use Obblm\Core\Application\DependencyInjection\ObblmCoreApplicationExtension;
+use Obblm\Core\Domain\DependencyInjection\CompilerPass\UploaderPass;
 use Obblm\Core\Domain\DependencyInjection\ObblmCoreDomainExtension;
 use Obblm\Core\Infrastructure\DependencyInjection\ObblmCoreInfrastructureExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ObblmCoreBundle extends Bundle
 {
-    protected $path = __DIR__ . DIRECTORY_SEPARATOR . 'Application';
-
-    public function getContainerExtension()
+    public function getContainerExtension(): ?ExtensionInterface
     {
         return new ObblmCoreDomainExtension();
     }
@@ -29,6 +29,7 @@ class ObblmCoreBundle extends Bundle
         parent::build($container);
         //$container->addCompilerPass(new RulesPass());
         //$container->addCompilerPass(new RoutesPass());
+        $container->addCompilerPass(new UploaderPass());
         $container->addCompilerPass(new BuildAssetsPass());
 
         $this->buildMappingCompilerPass($container);

@@ -4,9 +4,9 @@ namespace Obblm\Core\Application\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Obblm\Core\Application\Service\CoreTranslation;
-use Obblm\Core\Domain\Helper\Rule\Config\ConfigResolver;
-use Obblm\Core\Domain\Helper\Rule\Config\RuleConfigResolver;
 use Obblm\Core\Domain\Model\Rule;
+use Obblm\Core\Resources\Rule\Config\ConfigResolver;
+use Obblm\Core\Resources\Rule\Config\RuleConfigResolver;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

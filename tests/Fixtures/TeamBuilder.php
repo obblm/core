@@ -2,11 +2,13 @@
 
 namespace Obblm\Core\Tests\Fixtures;
 
-use Obblm\Core\Entity\Team;
+use Obblm\Core\Domain\Model\Team;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Uid\Uuid;
 
 class TeamBuilder implements BuilderInterface
 {
-    public static function for(): TeamBuilder
+    public static function for(?ContainerInterface $container = null): TeamBuilder
     {
         return new TeamBuilder();
     }
@@ -16,6 +18,7 @@ class TeamBuilder implements BuilderInterface
         $rule = RuleBuilder::for()->build();
 
         return (new Team())
+            ->setId(Uuid::v4())
             ->setName('Test Team')
             ->setRule($rule);
     }

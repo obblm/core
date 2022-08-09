@@ -7,16 +7,14 @@ namespace Obblm\Core\Domain\Command\Team;
 use Obblm\Core\Domain\Command\CommandInterface;
 use Obblm\Core\Domain\Model\Coach;
 use Obblm\Core\Domain\Model\Rule;
-use Obblm\Core\Domain\Model\Team;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Uid\Uuid;
-use Symfony\Component\Validator\Constraints as Assert;
 
 final class CreateTeamCommand implements CommandInterface
 {
-    protected $name;
-    protected $coach;
-    protected $rule;
+    private $name;
+    private $coach;
+    private $rule;
 
     public function __construct($name, $coach, $rule)
     {

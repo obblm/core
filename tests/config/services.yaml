@@ -14,5 +14,9 @@ services:
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Obblm\Core\Application\Controller\:
-        resource: '../../Controller/'
+        resource: '../../src/Application/Controller/'
         tags: ['controller.service_arguments']
+
+    Obblm\Core\Domain\Helper\:
+        resource: '../../src/Domain/Helper/'
+        public: true

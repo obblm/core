@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Domain\Service\Team;
 
-use Obblm\Core\Domain\Model\Coach;
-use Obblm\Core\Domain\Model\League;
 use Obblm\Core\Domain\Repository\TeamRepositoryInterface;
 use Obblm\Core\Domain\Service\MessageBusService;
 use Symfony\Component\Messenger\MessageBusInterface;

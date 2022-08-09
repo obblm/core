@@ -1,6 +1,6 @@
 <?php
 
-namespace Obblm\Core\Domain\Helper\Rule\Config;
+namespace Obblm\Core\Resources\Rule\Config;
 
 interface ConfigTreeInterface extends ConfigInterface
 {

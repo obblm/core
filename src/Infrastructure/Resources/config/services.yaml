@@ -32,20 +32,14 @@ services:
     autowire: true
     tags: [ messenger.message_handler ]
 
-  Obblm\Core\Infrastructure\Handler\Doctrine\Team\:
-    resource: '../../Handler/Doctrine/Team'
-    public: true
-    autowire: true
-    tags: [ messenger.message_handler ]
-
   Obblm\Core\Infrastructure\Handler\Doctrine\League\:
     resource: '../../Handler/Doctrine/League'
     public: true
     autowire: true
     tags: [ messenger.message_handler ]
 
-  #Obblm\Core\Infrastructure\Handler\Doctrine\Rule\:
-  #  resource: '../../Handler/Doctrine/Rule'
-  #  public: true
-  #  autowire: true
-  #  tags: [ messenger.message_handler ]
+  Obblm\Core\Infrastructure\Handler\Doctrine\Rule\:
+    resource: '../../Handler/Doctrine/Rule'
+    public: true
+    autowire: true
+    tags: [ messenger.message_handler ]

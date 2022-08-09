@@ -13,7 +13,7 @@ use Symfony\Component\Uid\Uuid;
 
 class Coach implements UserInterface, EmailObjectInterface, PasswordAuthenticatedUserInterface
 {
-    private Uuid $id;
+    private $id;
     private string $email;
     private string $username;
     private array $roles = [Roles::COACH];
@@ -35,7 +35,7 @@ class Coach implements UserInterface, EmailObjectInterface, PasswordAuthenticate
         $this->createdAt = new \DateTimeImmutable();
     }
 
-    public function getId(): ?Uuid
+    public function getId(): ?string
     {
         return $this->id;
     }

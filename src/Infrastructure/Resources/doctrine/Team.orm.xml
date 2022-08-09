@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="Obblm\Core\Domain\Model\Team" table="obblm_team">
-        <id name="id" type="uuid" column="id">
+        <id name="id" type="guid" column="id">
             <generator strategy="CUSTOM"/>
             <custom-id-generator class="Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator"/>
         </id>
         <field name="anthem" type="text" column="anthem" precision="0" scale="0" nullable="true"/>
         <field name="fluff" type="text" column="fluff" precision="0" scale="0" nullable="true"/>
-        <field name="roster" type="string" column="roster" length="50" precision="0" scale="0" nullable="true"/>
+        <field name="roster" type="string" column="roster" length="50" precision="0" scale="0" nullable="false"/>
         <field name="creationOptions" type="array" column="creation_options" precision="0" scale="0" nullable="true"/>
         <field name="ready" type="boolean" column="ready" precision="0" scale="0" nullable="false"/>
         <field name="lockedByManagment" type="boolean" column="locked_by_managment" precision="0" scale="0" nullable="false"/>

@@ -32,4 +32,9 @@ class LeagueService extends MessageBusService
     {
         return $this->repository->findAll();
     }
+
+    public function supportsClass(string $class): bool
+    {
+        return Coach::class === $class;
+    }
 }

@@ -1,3 +1,7 @@
+parameters:
+  obblm.config.directory.public.cache: '%kernel.project_dir%/var/tmp'
+  obblm.config.directory.upload: '%kernel.project_dir%/var/uploads'
+
 services:
   Obblm\Core\Domain\:
     autowire: true      # Automatically injects dependencies in your services.
@@ -5,3 +9,7 @@ services:
     resource: '../../*'
     public: false
     exclude: '../../{DependencyInjection,Model,Migrations,Resources}'
+
+  Obblm\Core\Domain\Helper\FileTeamUploader:
+    arguments:
+      - '@obblm.team.uploader'
