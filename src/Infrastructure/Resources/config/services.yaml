@@ -6,6 +6,12 @@ services:
     public: false
     exclude: '../../{DependencyInjection,Model,Resources}'
 
+  Obblm\Core\Domain\Contracts\ObblmBusInterface:
+    alias: Obblm\Core\Infrastructure\Handler\SymfonyMessageBus
+
+  Obblm\Core\Domain\Contracts\CacheStorageInterface:
+    alias: Obblm\Core\Infrastructure\Shared\Cache\CacheStorage
+
   Obblm\Core\Domain\Repository\CoachRepositoryInterface:
     alias: Obblm\Core\Infrastructure\Repository\Doctrine\CoachRepository
     public: true
@@ -38,8 +44,14 @@ services:
     autowire: true
     tags: [ messenger.message_handler ]
 
-  Obblm\Core\Infrastructure\Handler\Doctrine\Rule\:
-    resource: '../../Handler/Doctrine/Rule'
+  Obblm\Core\Infrastructure\Handler\Doctrine\Team\:
+    resource: '../../Handler/Doctrine/Team'
     public: true
     autowire: true
     tags: [ messenger.message_handler ]
+
+#  Obblm\Core\Infrastructure\Handler\Doctrine\Rule\:
+#    resource: '../../Handler/Doctrine/Rule'
+#    public: true
+#    autowire: true
+#    tags: [ messenger.message_handler ]

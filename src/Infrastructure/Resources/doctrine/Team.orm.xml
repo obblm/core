@@ -27,7 +27,7 @@
                 <order-by-field name="id" direction="DESC"/>
             </order-by>
         </one-to-many>
-        <!-- <one-to-many field="players" target-entity="Obblm\Core\Entity\Player" mapped-by="team" orphan-removal="true" fetch="EAGER">
+        <one-to-many field="players" target-entity="Obblm\Core\Domain\Model\Player" mapped-by="team" orphan-removal="true" fetch="EAGER">
             <cascade>
                 <cascade-remove/>
                 <cascade-persist/>
@@ -35,7 +35,7 @@
             <order-by>
                 <order-by-field name="number" direction="ASC"/>
             </order-by>
-        </one-to-many>-->
+        </one-to-many>
         <many-to-one field="rule" target-entity="Obblm\Core\Domain\Model\Rule" inversed-by="teams" fetch="LAZY">
             <join-columns>
                 <join-column name="rule_id" referenced-column-name="id"/>

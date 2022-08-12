@@ -9,8 +9,6 @@
         <field name="cheerleaders" type="integer" length="11" column="cheerleaders" precision="0" scale="0" nullable="false" />
         <field name="assistants" type="integer" length="11" column="assistants" precision="0" scale="0" nullable="false" />
         <field name="popularity" type="integer" length="11" column="popularity" precision="0" scale="0" nullable="false" />
-        <field name="createdAt" type="datetime_immutable" column="created_at" precision="0" scale="0" nullable="true"/>
-        <field name="updatedAt" type="datetime_immutable" column="updated_at" precision="0" scale="0" nullable="true"/>
         <field name="treasure" type="integer" length="11" column="treasure" precision="0" scale="0" nullable="false"  />
         <field name="tr" type="integer" length="11" column="tr" precision="0" scale="0" nullable="false"  />
 
@@ -28,6 +26,19 @@
                 <join-column name="team_id" referenced-column-name="id"/>
             </join-columns>
         </many-to-one>
+
+        <one-to-many field="playerVersions" target-entity="Obblm\Core\Domain\Model\PlayerVersion" mapped-by="teamVersion" orphan-removal="true" fetch="EAGER">
+            <cascade>
+                <cascade-remove/>
+                <cascade-persist/>
+            </cascade>
+            <order-by>
+                <order-by-field name="id" direction="DESC"/>
+            </order-by>
+        </one-to-many>
+
+        <field name="createdAt" type="datetime_immutable" column="created_at" precision="0" scale="0" nullable="true"/>
+        <field name="updatedAt" type="datetime_immutable" column="updated_at" precision="0" scale="0" nullable="true"/>
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="setCreatedAtValue"/>
             <lifecycle-callback type="preUpdate" method="setUpdatedAtValue"/>

@@ -2,8 +2,9 @@
 
 namespace Obblm\Core\Domain\Model\Proxy\Roster;
 
-use Obblm\Core\Domain\Contracts\PositionInterface;
-use Obblm\Core\Domain\Contracts\RosterInterface;
+use Obblm\Core\Application\Service\CoreTranslation;
+use Obblm\Core\Domain\Contracts\Rule\PositionInterface;
+use Obblm\Core\Domain\Contracts\Rule\RosterInterface;
 use Obblm\Core\Domain\Model\Proxy\Traits\OptionableTrait;
 use Obblm\Core\Domain\Model\Proxy\Traits\TranslatableTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;

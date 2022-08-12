@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Obblm\Core\Domain\Model\PlayerVersion" table="obblm_player_version">
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <many-to-one field="player" target-entity="Obblm\Core\Domain\Model\Player" inversed-by="versions" fetch="LAZY">
+            <join-columns>
+                <join-column name="player_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <many-to-one field="teamVersion" target-entity="Obblm\Core\Domain\Model\TeamVersion" inversed-by="playerVersions" fetch="LAZY">
+            <join-columns>
+                <join-column name="team_version_id" referenced-column-name="id"/>
+            </join-columns>
+        </many-to-one>
+        <field name="characteristics" type="array" column="characteristics" />
+        <field name="skills" type="array" column="skills" />
+        <field name="additionalSkills" type="array" column="additional_skills" />
+        <field name="injuries" type="array" column="injuries" />
+        <field name="actions" type="array" column="actions" />
+        <field name="missingNextGame" type="boolean" column="missing_next_game" precision="0" scale="0" nullable="false"/>
+        <field name="hiredStarPlayer" type="boolean" column="hired_star_player" precision="0" scale="0" nullable="false"/>
+        <field name="mercenary" type="boolean" column="mercenary" precision="0" scale="0" nullable="false"/>
+        <field name="spp" type="integer" length="3" column="spp" precision="0" scale="0" nullable="false"  />
+        <field name="sppLevel" type="integer" length="3" column="spp_level" precision="0" scale="0" nullable="false"  />
+        <field name="value" type="integer" length="11" column="value" precision="0" scale="0" nullable="false"  />
+    </entity>
+</doctrine-mapping>

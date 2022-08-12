@@ -15,10 +15,10 @@ class AssetsExtension extends AbstractExtension
     protected AssetPackager $packager;
     protected ImageHelper $imageHelper;
 
-    public function __construct(AssetPackager $packager/*, ImageHelper $imageHelper*/)
+    public function __construct(AssetPackager $packager, ImageHelper $imageHelper)
     {
         $this->packager = $packager;
-        //$this->imageHelper = $imageHelper;
+        $this->imageHelper = $imageHelper;
     }
 
     public function getFunctions()

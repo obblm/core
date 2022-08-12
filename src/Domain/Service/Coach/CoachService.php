@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Domain\Service\Coach;
 
+use Obblm\Core\Domain\Contracts\ObblmBusInterface;
 use Obblm\Core\Domain\Model\Coach;
 use Obblm\Core\Domain\Repository\CoachRepositoryInterface;
 use Obblm\Core\Domain\Service\MessageBusService;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -15,7 +15,7 @@ class CoachService extends MessageBusService implements UserProviderInterface
 {
     protected CoachRepositoryInterface $repository;
 
-    public function __construct(MessageBusInterface $messageBus, CoachRepositoryInterface $repository)
+    public function __construct(ObblmBusInterface $messageBus, CoachRepositoryInterface $repository)
     {
         parent::__construct($messageBus);
         $this->repository = $repository;

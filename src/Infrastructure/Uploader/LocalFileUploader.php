@@ -14,9 +14,6 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class LocalFileUploader extends AbstractUploader implements ObblmFileUploaderInterface
 {
-    private string $targetDirectory = '';
-    private string $uploadDirectory = '';
-
     private SluggerInterface $slugger;
 
     public function __construct(string $targetDirectory, SluggerInterface $slugger)
@@ -41,7 +38,10 @@ class LocalFileUploader extends AbstractUploader implements ObblmFileUploaderInt
         }
     }
 
-    public function upload(UploadedFile $file): ?File
+    /**
+     * @param UploadedFile $file
+     */
+    public function upload($file): ?File
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);

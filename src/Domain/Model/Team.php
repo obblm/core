@@ -7,6 +7,7 @@ namespace Obblm\Core\Domain\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
+use Obblm\Core\Domain\Contracts\HasRuleInterface;
 use Obblm\Core\Domain\Model\Traits\CoverTrait;
 use Obblm\Core\Domain\Model\Traits\LogoTrait;
 use Obblm\Core\Domain\Model\Traits\NameTrait;
@@ -14,7 +15,7 @@ use Obblm\Core\Domain\Model\Traits\RuleTrait;
 use Obblm\Core\Domain\Model\Traits\TimeStampableTrait;
 use Symfony\Component\Uid\Uuid;
 
-class Team
+class Team implements HasRuleInterface
 {
     use NameTrait;
     use RuleTrait;
@@ -46,6 +47,7 @@ class Team
     public function setId(Uuid $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -237,6 +239,11 @@ class Team
     public function getVersions(): Collection
     {
         return $this->versions;
+    }
+
+    public function getLastVersion(): ?TeamVersion
+    {
+        return $this->versions->last();
     }
 
     public function addVersion(TeamVersion $version): self

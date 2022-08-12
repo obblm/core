@@ -11,7 +11,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class UploaderPass implements CompilerPassInterface
 {
-
     public function process(ContainerBuilder $container)
     {
         $teamUploaderDefinition = $container->getDefinition(FileTeamUploader::class);

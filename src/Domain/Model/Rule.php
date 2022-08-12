@@ -7,20 +7,19 @@ namespace Obblm\Core\Domain\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Obblm\Core\Domain\Model\Traits\NameTrait;
-use Symfony\Component\Uid\Uuid;
 
 class Rule
 {
     use NameTrait;
     private $id;
     private string $ruleKey;
-    private ?string $ruleDirectory;
+    private ?string $ruleDirectory = '';
     private string $template;
-    private ?string $description;
+    private ?string $description = '';
     private array $rule = [];
     private bool $postBb2020;
     private bool $readOnly;
-    private Collection $teams;
+    private ?Collection $teams = null;
     protected array $injuryTable = [];
 
     public function __construct()
@@ -132,7 +131,6 @@ class Rule
 
     /**
      * @return Collection|Team[]
-     * @Ignore()
      */
     public function getTeams(): Collection
     {

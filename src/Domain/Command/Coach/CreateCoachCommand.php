@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Domain\Command\Coach;
 
+use Obblm\Core\Domain\Command\AbstractCommand;
 use Obblm\Core\Domain\Command\CommandInterface;
 use Obblm\Core\Domain\Validator\Constraints as ObblmAssert;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class CreateCoachCommand implements CommandInterface
+final class CreateCoachCommand extends AbstractCommand implements CommandInterface
 {
+    public const CONSTRUCTOR_ARGUMENTS = ['email', 'username', 'plainPassword'];
+
     /**
      * @Assert\NotBlank()
      * @ObblmAssert\Coach\UniqueEmail()
@@ -52,23 +54,5 @@ final class CreateCoachCommand implements CommandInterface
     public function getPlainPassword(): string
     {
         return $this->plainPassword;
-    }
-
-    public static function fromArray($data): CreateCoachCommand
-    {
-        return new CreateCoachCommand(
-            $data['email'],
-            $data['username'],
-            $data['plainPassword']
-        );
-    }
-
-    public static function fromRequest(Request $request): CreateCoachCommand
-    {
-        return new CreateCoachCommand(
-            $request->get('email'),
-            $request->get('username'),
-            $request->get('plainPassword')
-        );
     }
 }

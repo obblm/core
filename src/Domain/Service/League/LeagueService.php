@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Domain\Service\League;
 
+use Obblm\Core\Domain\Contracts\ObblmBusInterface;
 use Obblm\Core\Domain\Model\Coach;
 use Obblm\Core\Domain\Model\League;
 use Obblm\Core\Domain\Repository\LeagueRepositoryInterface;
 use Obblm\Core\Domain\Service\MessageBusService;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 class LeagueService extends MessageBusService
 {
     protected LeagueRepositoryInterface $repository;
 
-    public function __construct(MessageBusInterface $messageBus, LeagueRepositoryInterface $repository)
+    public function __construct(ObblmBusInterface $messageBus, LeagueRepositoryInterface $repository)
     {
         parent::__construct($messageBus);
         $this->repository = $repository;

@@ -18,7 +18,15 @@ class TeamRepository extends DoctrineRepository implements TeamRepositoryInterfa
 
     public function findByCoach(Coach $coach): array
     {
-        return $this->repository(Team::class)->findBy(['coach' => $coach]);
+        $qb = $this->em->createQueryBuilder()
+            ->select('t')
+            ->from(Team::class, 't')
+            ->where('t.coach=:coach')
+            ->setParameter(':coach', $coach)
+            ->orderBy('t.updatedAt', 'DESC')
+            ->orderBy('t.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
     }
 
     public function findOneBy(array $criteria, array $orderBy = null)

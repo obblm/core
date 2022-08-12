@@ -6,6 +6,7 @@ namespace Obblm\Core\Application\Controller\Team;
 
 use Obblm\Core\Domain\Model\Team;
 use Obblm\Core\Domain\Security\Voter\TeamVoter;
+use Obblm\Core\Domain\Service\Rule\RuleService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ViewController extends AbstractController
 {
-    public function __invoke(Team $team)
+    public function __invoke(Team $team, RuleService $service)
     {
         $this->denyAccessUnlessGranted(TeamVoter::VIEW, $team);
         $version = $team->getVersions()->last();

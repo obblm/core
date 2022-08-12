@@ -1,13 +1,39 @@
 {% extends '@ObblmCoreApplication/base.html.twig' %}
 
-{% block title 'obblm.dashboard.title'|trans({}, 'obblm') %}
-
+{% set title = 'obblm.forms.team.create.rule-selector'|trans({}, 'obblm') %}
+{% block title 'obblm.team.title'|trans({}, 'obblm')
+    ~ ' > ' ~ title %}
 {% block body %}
-    {% include '@ObblmCoreApplication/partials/flash.html.twig' %}
-    <h1 class="title">{{ 'obblm.team.create.title'|trans({}, 'obblm') }}</h1>
-    <div class="one boxes">
-        <div class="box main">
-            {{ form(form) }}
+    {% form_theme form '@ObblmCoreApplication/form/ui-form.html.twig' %}
+    {% if form.vars.errors is not empty %}
+        {{ form_errors(form) }}
+    {% endif %}
+    {{ form_start( form, {'attr': {'class': 'container form', 'id': 'team-rule-choice'}} ) }}
+    <h1 class="title">{{ title }}</h1>
+    {% if form.children.rule is defined %}
+        <div class="field selector">
+            {{ form_label(form.rule, 'obblm.forms.team.create.select.rules') }}
+            {{ form_errors(form.rule) }}
+            {{ form_widget(form.rule, {'attr': {'class': 'ui dropdown'}}) }}
         </div>
-    </div>
+    {% endif %}
+    {% if form.children.name is defined %}
+        <div class="field">
+            {{ form_label(form.name, 'obblm.forms.team.fields.name') }}
+            {% if not form.name.vars.valid %}
+                {{ form_errors(form.name) }}
+            {% endif %}
+            {{ form_widget(form.name) }}
+        </div>
+        <div class="field selector">
+            {{ form_label(form.roster, 'obblm.forms.team.fields.roster') }}
+            {{ form_errors(form.roster) }}
+            {{ form_widget(form.roster, {'attr': {'class': 'ui dropdown'}}) }}
+        </div>
+    {% endif %}
+    {{ form_rest( form ) }}
+    <button class="ui button green" type="submit">
+        {{ 'obblm.forms.team.create.buttons.submit'|trans({}, 'obblm') }}
+    </button>
+    {{ form_end( form ) }}
 {% endblock %}

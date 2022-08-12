@@ -7,6 +7,7 @@ namespace Obblm\Core;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Obblm\Core\Application\DependencyInjection\CompilerPass\BuildAssetsPass;
 use Obblm\Core\Application\DependencyInjection\ObblmCoreApplicationExtension;
+use Obblm\Core\Domain\DependencyInjection\CompilerPass\RulesPass;
 use Obblm\Core\Domain\DependencyInjection\CompilerPass\UploaderPass;
 use Obblm\Core\Domain\DependencyInjection\ObblmCoreDomainExtension;
 use Obblm\Core\Infrastructure\DependencyInjection\ObblmCoreInfrastructureExtension;
@@ -27,7 +28,7 @@ class ObblmCoreBundle extends Bundle
         $container->registerExtension(new ObblmCoreApplicationExtension());
 
         parent::build($container);
-        //$container->addCompilerPass(new RulesPass());
+        $container->addCompilerPass(new RulesPass());
         //$container->addCompilerPass(new RoutesPass());
         $container->addCompilerPass(new UploaderPass());
         $container->addCompilerPass(new BuildAssetsPass());

@@ -9,7 +9,6 @@ use Doctrine\Common\Collections\Collection;
 use Obblm\Core\Domain\Security\Roles;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Uid\Uuid;
 
 class Coach implements UserInterface, EmailObjectInterface, PasswordAuthenticatedUserInterface
 {

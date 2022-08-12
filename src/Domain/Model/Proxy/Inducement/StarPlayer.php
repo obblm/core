@@ -2,7 +2,7 @@
 
 namespace Obblm\Core\Domain\Model\Proxy\Inducement;
 
-use Obblm\Core\Domain\Contracts\PositionInterface;
+use Obblm\Core\Domain\Contracts\Rule\PositionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StarPlayer extends AbstractInducement implements PositionInterface

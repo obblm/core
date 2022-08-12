@@ -6,8 +6,6 @@ namespace Obblm\Core\Domain\Helper;
 
 use Obblm\Core\Domain\Contracts\ObblmFileUploaderInterface;
 use Obblm\Core\Domain\Model\Team;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileTeamUploader
 {
@@ -19,13 +17,9 @@ class FileTeamUploader
     }
 
     /**
-     * @param Team $object
-     * @param string $field
-     * @param UploadedFile $file
-     *
-     * @return File|null
+     * @return \SplFileInfo|null
      */
-    public function uploadIfExists(Team $object, UploadedFile $file, string $field)
+    public function uploadIfExists(Team $object, \SplFileInfo $file, string $field)
     {
         if (!$object instanceof Team || !$file) {
             return null;
@@ -40,7 +34,7 @@ class FileTeamUploader
         return null;
     }
 
-    public function uploadLogoIfExists(Team $object, UploadedFile $logoFile): ?File
+    public function uploadLogoIfExists(Team $object, \SplFileInfo $logoFile): ?\SplFileInfo
     {
         if ($logoFile) {
             $this->uploader->setObjectSubDirectory((string) $object->getId());
@@ -58,7 +52,7 @@ class FileTeamUploader
         return null;
     }
 
-    public function uploadCoverIfExists(Team $object, UploadedFile $coverFile): ?File
+    public function uploadCoverIfExists(Team $object, \SplFileInfo $coverFile): ?\SplFileInfo
     {
         if ($coverFile) {
             $this->uploader->setObjectSubDirectory((string) $object->getId());

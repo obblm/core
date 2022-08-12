@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Application\Controller\Security;
 
+use Obblm\Core\Application\Controller\ObblmAbstractController;
 use Obblm\Core\Application\Form\Security\RegistrationForm;
 use Obblm\Core\Domain\Command\Coach\CreateCoachCommand;
 use Obblm\Core\Domain\Service\Coach\CoachService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/register", name="obblm.register")
  */
-class RegisterController extends AbstractController
+class RegisterController extends ObblmAbstractController
 {
     public function __invoke(CoachService $coachService, Request $request): Response
     {
@@ -31,7 +31,7 @@ class RegisterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $command = CreateCoachCommand::fromArray($data);
+            $command = $this->commandFromArray(CreateCoachCommand::class, $data);
             $coachService->create($command);
             $this->redirectToRoute('obblm.login');
         }

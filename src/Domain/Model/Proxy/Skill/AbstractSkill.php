@@ -2,7 +2,7 @@
 
 namespace Obblm\Core\Domain\Model\Proxy\Skill;
 
-use Obblm\Core\Domain\Contracts\SkillInterface;
+use Obblm\Core\Domain\Contracts\Rule\SkillInterface;
 use Obblm\Core\Domain\Model\Proxy\Traits\OptionableTrait;
 use Obblm\Core\Domain\Model\Proxy\Traits\TranslatableTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;

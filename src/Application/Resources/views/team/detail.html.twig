@@ -5,11 +5,11 @@
 {% block body %}
     <section id="team-sheet" class="container">
         <nav class="action">
-            <a class="button" target="_blank" href="{{ path('obblm_team_pdf', {'team': version.team.id}) }}">
+            <a class="button" target="_blank" href="{{ path('obblm.dashboard', {'team': version.team.id}) }}">
                 {{ 'obblm.layout.tools.actions.pdf'|trans({}, 'obblm') }}
             </a>
         {% if(is_granted('team.edit', version.team)) %}
-            <a class="button orange" href="{{ path('obblm_team_edit', {'team': version.team.id}) }}">
+            <a class="button orange" href="{{ path('obblm.dashboard', {'team': version.team.id}) }}">
                 {{ 'obblm.layout.tools.actions.edit'|trans({}, 'obblm') }}
             </a>
         {% endif %}
@@ -47,7 +47,7 @@
             </div>
         </header>
         <section class="row">
-            {% include '@ObblmCoreApplication/team/sheet.html.twig' with { 'version': version, 'playerVersions': playerVersions } %}
+            {% include '@ObblmCoreApplication/team/sheet.html.twig' with { 'version': version, 'playerVersions': version.playerVersions } %}
         </section>
         <aside class="fluff two boxes">
             {% if version.team.fluff %}

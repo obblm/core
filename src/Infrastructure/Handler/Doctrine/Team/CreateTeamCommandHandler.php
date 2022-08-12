@@ -7,6 +7,7 @@ namespace Obblm\Core\Infrastructure\Handler\Doctrine\Team;
 use Obblm\Core\Domain\Command\Team\CreateTeamCommand;
 use Obblm\Core\Domain\Handler\Team\CreateTeamCommandHandlerInterface;
 use Obblm\Core\Domain\Model\Team;
+use Obblm\Core\Domain\Model\TeamVersion;
 use Obblm\Core\Domain\Repository\TeamRepositoryInterface;
 
 class CreateTeamCommandHandler implements CreateTeamCommandHandlerInterface
@@ -22,9 +23,12 @@ class CreateTeamCommandHandler implements CreateTeamCommandHandlerInterface
     {
         $team = (new Team())
             ->setName($command->getName())
+            ->setRoster($command->getRoster())
             ->setCoach($command->getCoach())
             ->setRule($command->getRule())
         ;
+
+        $team->addVersion(new TeamVersion());
 
         $this->repository->save($team);
 

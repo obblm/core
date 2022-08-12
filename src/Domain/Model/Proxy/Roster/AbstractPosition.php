@@ -3,8 +3,8 @@
 namespace Obblm\Core\Domain\Model\Proxy\Roster;
 
 use Obblm\Core\Domain\Contracts\OptionableInterface;
-use Obblm\Core\Domain\Contracts\PositionInterface;
-use Obblm\Core\Domain\Contracts\RosterInterface;
+use Obblm\Core\Domain\Contracts\Rule\PositionInterface;
+use Obblm\Core\Domain\Contracts\Rule\RosterInterface;
 use Obblm\Core\Domain\Model\Proxy\Skill\Skill;
 use Obblm\Core\Domain\Model\Proxy\Traits\OptionableTrait;
 use Obblm\Core\Domain\Model\Proxy\Traits\TranslatableTrait;

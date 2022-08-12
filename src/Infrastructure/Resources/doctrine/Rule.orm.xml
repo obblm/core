@@ -13,5 +13,10 @@
         <field name="template" type="string" column="template" length="255" precision="0" scale="0" nullable="false"/>
         <field name="rule" type="array" column="rule" nullable="true"/>
 
+        <one-to-many field="teams" target-entity="Obblm\Core\Domain\Model\Team" mapped-by="rule" orphan-removal="true" fetch="EAGER">
+            <order-by>
+                <order-by-field name="id" direction="DESC"/>
+            </order-by>
+        </one-to-many>
     </entity>
 </doctrine-mapping>

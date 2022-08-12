@@ -4,49 +4,47 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Domain\Command\Team;
 
+use Obblm\Core\Domain\Command\AbstractCommand;
 use Obblm\Core\Domain\Command\CommandInterface;
 use Obblm\Core\Domain\Model\Coach;
 use Obblm\Core\Domain\Model\Rule;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Uid\Uuid;
 
-final class CreateTeamCommand implements CommandInterface
+final class CreateTeamCommand extends AbstractCommand implements CommandInterface
 {
-    private $name;
+    private string $name;
+    private string $roster;
     private $coach;
     private $rule;
 
-    public function __construct($name, $coach, $rule)
+    const CONSTRUCTOR_ARGUMENTS = ['name', 'roster', 'coach', 'rule'];
+
+    public function __construct($name, $roster, $coach, $rule)
     {
         $this->name = $name;
+        $this->roster = $roster;
         $this->coach = $coach;
         $this->rule = $rule;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /** @return string|Uuid|Coach */
+    public function getRoster(): string
+    {
+        return $this->roster;
+    }
+
+    /** @return string|Coach */
     public function getCoach()
     {
         return $this->coach;
     }
 
-    /** @return string|Uuid|Rule */
+    /** @return string|Rule */
     public function getRule()
     {
         return $this->rule;
-    }
-
-    public static function fromArray(array $data): CreateTeamCommand
-    {
-        return new CreateTeamCommand($data['name'], $data['coach'], $data['rule']);
-    }
-
-    public static function fromRequest(Request $request): CreateTeamCommand
-    {
-        return new CreateTeamCommand($request->get('name'), $request->get('coach'), $request->get('rule'));
     }
 }

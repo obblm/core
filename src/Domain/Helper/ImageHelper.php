@@ -4,6 +4,7 @@ namespace Obblm\Core\Domain\Helper;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Intervention\Image\ImageManager;
+use Obblm\Core\Domain\Model\Rule;
 use Obblm\Core\Domain\Model\Team;
 use SplFileInfo;
 use Symfony\Component\Filesystem\Filesystem;
@@ -73,7 +74,7 @@ class ImageHelper
 
     public function getRosterImage(Rule $rule, string $roster, int $width = null, int $height = null): ?string
     {
-        $helper = $this->ruleHelper->getHelper($rule);
+        /*$helper = $this->ruleHelper->getHelper($rule);
         if ($helper->getRosters()->get($roster) && $rule->getRuleDirectory()) {
             $finder = new Finder();
             $directory = dirname(__DIR__).$rule->getRuleDirectory().'/assets/';
@@ -81,7 +82,6 @@ class ImageHelper
                 ->name($roster.'.*')
                 ->in($directory);
             if ($finder->hasResults()) {
-                /** @var SplFileInfo[]|ArrayCollection $results */
                 $results = new ArrayCollection();
                 foreach ($finder as $file) {
                     $results->add($file);
@@ -92,7 +92,7 @@ class ImageHelper
 
                 return $this->returnCachedAsset($file, $newFilePath, $width, $height);
             }
-        }
+        }*/
 
         return null;
     }

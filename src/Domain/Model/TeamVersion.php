@@ -17,13 +17,13 @@ class TeamVersion
     use SidelinesTrait;
     use TeamEvolutionTrait;
 
-    private $id;
+    private string $id;
 
-    private $team;
+    private Team $team;
 
-    private $playerVersions;
+    private Collection $playerVersions;
 
-    private $treasure = 0;
+    private int $treasure = 0;
 
     public function __construct()
     {
@@ -63,7 +63,7 @@ class TeamVersion
     /**
      * @return Collection|PlayerVersion[]
      */
-    public function getNotDeadPlayerVersions(): Collection
+    public function getNotDeadPlayerVersions()
     {
         $criteria = Criteria::create()
             ->andWhere(Criteria::expr()->eq('dead', false))
@@ -75,7 +75,7 @@ class TeamVersion
     /**
      * @return Collection|PlayerVersion[]
      */
-    public function getAvailablePlayerVersions(): Collection
+    public function getAvailablePlayerVersions()
     {
         $criteria = Criteria::create()
             ->andWhere(Criteria::expr()->eq('dead', false))

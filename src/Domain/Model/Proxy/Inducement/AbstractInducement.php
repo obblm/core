@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Domain\Model\Proxy\Inducement;
 
-use Obblm\Core\Domain\Contracts\InducementInterface;
 use Obblm\Core\Domain\Contracts\OptionableInterface;
+use Obblm\Core\Domain\Contracts\Rule\InducementInterface;
 use Obblm\Core\Domain\Model\Proxy\Traits\OptionableTrait;
 use Obblm\Core\Domain\Model\Proxy\Traits\TranslatableTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;

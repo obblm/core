@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Application\Controller\League;
 
+use Obblm\Core\Application\Controller\ObblmAbstractController;
 use Obblm\Core\Application\Form\League\BaseLeagueForm;
 use Obblm\Core\Domain\Command\League\CreateLeagueCommand;
 use Obblm\Core\Domain\Security\Roles;
 use Obblm\Core\Domain\Service\League\LeagueService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/leagues/create", name="obblm.league.create")
  */
-class LeagueCreateController extends AbstractController
+class LeagueCreateController extends ObblmAbstractController
 {
     public function __invoke(LeagueService $leagueService, Request $request): Response
     {
@@ -30,7 +30,7 @@ class LeagueCreateController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $command = CreateLeagueCommand::fromArray($data);
+            $command = $this->commandFromArray(CreateLeagueCommand::class, $data);
             $leagueService->create($command);
 
             return $this->redirectToRoute('obblm.league.list');

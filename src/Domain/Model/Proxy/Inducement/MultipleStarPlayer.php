@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Domain\Model\Proxy\Inducement;
 
-use Obblm\Core\Domain\Contracts\InducementInterface;
+use Obblm\Core\Domain\Contracts\Rule\InducementInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MultipleStarPlayer extends StarPlayer implements InducementInterface
@@ -43,9 +43,10 @@ class MultipleStarPlayer extends StarPlayer implements InducementInterface
         $resolver->setDefaults([
             'parts' => null,
             'skills' => [],
-            'characteristics' => [],
+            'characteristics' => null,
         ])
             ->setRequired(['parts'])
+            ->setAllowedTypes('characteristics', ['null'])
             ->setAllowedTypes('parts', ['array'])
             ->setAllowedTypes('skills', ['array', 'null'])
         ;

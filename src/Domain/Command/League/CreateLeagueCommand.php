@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Domain\Command\League;
 
+use Obblm\Core\Domain\Command\AbstractCommand;
 use Obblm\Core\Domain\Command\CommandInterface;
 use Obblm\Core\Domain\Model\Coach;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class CreateLeagueCommand implements CommandInterface
+final class CreateLeagueCommand extends AbstractCommand implements CommandInterface
 {
+    public const CONSTRUCTOR_ARGUMENTS = ['name', 'admin'];
+
     /**
      * @Assert\NotBlank()
      */
@@ -40,21 +42,5 @@ final class CreateLeagueCommand implements CommandInterface
     public function getAdmin(): Coach
     {
         return $this->admin;
-    }
-
-    public static function fromArray($data): CreateLeagueCommand
-    {
-        return new CreateLeagueCommand(
-            $data['name'],
-            $data['admin']
-        );
-    }
-
-    public static function fromRequest(Request $request): CreateLeagueCommand
-    {
-        return new CreateLeagueCommand(
-            $request->get('name'),
-            $request->get('admin')
-        );
     }
 }

@@ -39,7 +39,7 @@ class ObblmCoreInfrastructureExtension extends Extension
 
     private function bindUploaders(ContainerBuilder $container, array $config)
     {
-        if(isset($config['uploads']['team'])) {
+        if (isset($config['uploads']['team'])) {
             $this->bindTeamUploader($container, $config['uploads']['team']);
         }
     }
@@ -55,9 +55,10 @@ class ObblmCoreInfrastructureExtension extends Extension
         switch ($config['class']) {
             default:
                 $slugger = new Reference('Symfony\\Component\\String\\Slugger\\SluggerInterface');
+
                 return (new Definition($config['class'], [
                         '$targetDirectory' => $config['path'],
-                        '$slugger' => $slugger
+                        '$slugger' => $slugger,
                     ]))->setPublic(true);
         }
     }

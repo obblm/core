@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Obblm\Core\Domain\Model\Proxy\Inducement;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Obblm\Core\Domain\Contracts\RosterInterface;
+use Obblm\Core\Domain\Contracts\Rule\RosterInterface;
 
 class InducementCollection extends ArrayCollection
 {

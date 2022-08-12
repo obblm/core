@@ -9,12 +9,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 trait OptionableTrait
 {
-    protected array$options;
+    protected array $options;
 
-    public function setOptions(array $options = []): void
+    public function setOptions(array $options = []): self
     {
         $this->resolveOptions($options);
         $this->hydrateWithOptions();
+
+        return $this;
     }
 
     abstract protected function configureOptions(OptionsResolver $resolver);

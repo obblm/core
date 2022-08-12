@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Domain\DependencyInjection;
 
+use Obblm\Core\Domain\Contracts\RuleHelperInterface;
+use Obblm\Core\Domain\DependencyInjection\CompilerPass\RulesPass;
 use Obblm\Core\Domain\Helper\FileTeamUploader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\VarDumper\VarDumper;
 
 class ObblmCoreDomainExtension extends Extension
 {
@@ -39,6 +40,10 @@ class ObblmCoreDomainExtension extends Extension
 
         //$this->createRulesPoolCacheDefinition($container, $config);
         //$this->pullUploaders($container, $config);
+
+        $container->registerForAutoconfiguration(RuleHelperInterface::class)
+            ->addTag(RulesPass::SERVICE_TAG)
+        ;
     }
 
     private function pullUploaders(ContainerBuilder $container, array $config)

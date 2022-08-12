@@ -7,7 +7,6 @@ namespace Obblm\Core\Domain\Model;
 use Obblm\Core\Domain\Model\Traits\LogoTrait;
 use Obblm\Core\Domain\Model\Traits\NameTrait;
 use Obblm\Core\Domain\Model\Traits\TimeStampableTrait;
-use Symfony\Component\Uid\Uuid;
 
 class League
 {

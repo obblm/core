@@ -32,3 +32,6 @@ services:
     Obblm\Core\Application\Controller\:
         resource: '../../Controller/'
         tags: ['controller.service_arguments']
+
+    Obblm\Core\Application\EventSubscriber\LocaleSubscriber:
+        arguments: ['%kernel.default_locale%']
