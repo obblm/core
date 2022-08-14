@@ -1,9 +1,0 @@
-{% extends '@ObblmCoreApplication/team/player-line.base.html.twig' %}
-
-{% block characteristics %}
-    <td>{{ playerVersion|characteristics('ma') }}</td>
-    <td>{{ playerVersion|characteristics('st') }}</td>
-    <td>{% if playerVersion|characteristics('ag') %}{{ playerVersion|characteristics('ag') }}{% if playerVersion|characteristics('ag') != '-' %}+{% endif %}{% endif %}</td>
-    <td>{% if playerVersion|characteristics('pa') %}{{ playerVersion|characteristics('pa') }}{% if playerVersion|characteristics('pa') != '-' %}+{% endif %}{% endif %}</td>
-    <td>{% if playerVersion|characteristics('av') %}{{ playerVersion|characteristics('av') }}{% if playerVersion|characteristics('av') != '-' %}+{% endif %}{% endif %}</td>
-{% endblock %}

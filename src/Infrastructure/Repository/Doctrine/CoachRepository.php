@@ -42,7 +42,7 @@ class CoachRepository extends DoctrineRepository implements CoachRepositoryInter
         return $this->repository(Coach::class)->find($id);
     }
 
-    public function loadUserByUsernameOrEmail($usernameOrEmail): ?Coach
+    public function loadUserByUsernameOrEmail(string $usernameOrEmail): ?Coach
     {
         return $this->repository(Coach::class)->createQueryBuilder('c')
             ->where('c.username = :username_or_email')
@@ -52,7 +52,7 @@ class CoachRepository extends DoctrineRepository implements CoachRepositoryInter
             ->getOneOrNullResult();
     }
 
-    public function loadUserByUsername($username): ?Coach
+    public function loadUserByUsername(string $username): ?Coach
     {
         return $this->repository(Coach::class)->createQueryBuilder('c')
             ->where('c.username = :username')
@@ -61,7 +61,7 @@ class CoachRepository extends DoctrineRepository implements CoachRepositoryInter
             ->getOneOrNullResult();
     }
 
-    public function loadUserByEmail($email): ?Coach
+    public function loadUserByEmail(string $email): ?Coach
     {
         return $this->repository(Coach::class)->createQueryBuilder('c')
             ->where('c.email = :email')
@@ -70,7 +70,18 @@ class CoachRepository extends DoctrineRepository implements CoachRepositoryInter
             ->getOneOrNullResult();
     }
 
-    public function findOneForPasswordReset($hash): ?Coach
+    public function findOneByHash(string $hash): ?Coach
+    {
+        $limitDateTime = (new \DateTime('- 1 day'))->format('Y-m-d H:m:i');
+
+        return $this->repository(Coach::class)->createQueryBuilder('c')
+            ->where('c.hash = :hash')
+            ->setParameter(':hash', $hash)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findOneForPasswordReset(string $hash): ?Coach
     {
         $limitDateTime = (new \DateTime('- 1 day'))->format('Y-m-d H:m:i');
 

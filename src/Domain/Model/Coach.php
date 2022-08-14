@@ -36,7 +36,7 @@ class Coach implements UserInterface, EmailObjectInterface, PasswordAuthenticate
 
     public function getId(): ?string
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     public function getEmail(): ?string

@@ -1,7 +1,7 @@
-{% set reset = obblm_css('reset', 'core')|map(css => source("@public_assets" ~ css))|join %}
-{% set email = obblm_css('email', 'core')|map(css => source("@public_assets" ~ css))|join %}
+{% set reset = obblm_css('reset', 'core')|join %}
+{% set email_css = obblm_css('email', 'core')|join %}
 
-{% apply inline_css(reset, email) %}
+{% apply inline_css(reset, email_css) %}
 <html>
     <body>
 <div class="main container">

@@ -5,10 +5,10 @@ namespace Obblm\Core\Domain\Service\Rule\Traits;
 use Doctrine\Common\Collections\ArrayCollection;
 use Obblm\Core\Domain\Contracts\Rule\PositionInterface;
 use Obblm\Core\Domain\Contracts\Rule\RosterInterface;
+use Obblm\Core\Domain\Model\PlayerVersion;
 use Obblm\Core\Domain\Model\Proxy\Roster\Roster;
 use Obblm\Core\Domain\Model\Team;
 use Obblm\Core\Domain\Model\TeamVersion;
-use Obblm\Core\Domain\Model\PlayerVersion;
 
 /****************************
  * TEAM INFORMATION METHODS

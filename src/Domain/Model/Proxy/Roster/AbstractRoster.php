@@ -2,11 +2,11 @@
 
 namespace Obblm\Core\Domain\Model\Proxy\Roster;
 
-use Obblm\Core\Application\Service\CoreTranslation;
 use Obblm\Core\Domain\Contracts\Rule\PositionInterface;
 use Obblm\Core\Domain\Contracts\Rule\RosterInterface;
 use Obblm\Core\Domain\Model\Proxy\Traits\OptionableTrait;
 use Obblm\Core\Domain\Model\Proxy\Traits\TranslatableTrait;
+use Obblm\Core\Domain\Service\CoreTranslation;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractRoster implements RosterInterface

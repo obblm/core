@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Obblm\Core\Application\Twig;
 
 use Obblm\Core\Application\Service\AssetPackager;
-use Obblm\Core\Application\Service\CoreTranslation;
 use Obblm\Core\Domain\Model\Team;
+use Obblm\Core\Domain\Service\CoreTranslation;
 use Obblm\Core\Domain\Service\Rule\RuleService;
 use Obblm\Core\Infrastructure\Model\Doctrine\Player;
 use Symfony\Component\Routing\Exception\InvalidParameterException;

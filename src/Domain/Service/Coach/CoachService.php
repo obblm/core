@@ -41,6 +41,11 @@ class CoachService extends MessageBusService implements UserProviderInterface
         return $this->repository->loadUserByEmail($username) ? true : false;
     }
 
+    public function findOneByHash(string $hash): ?Coach
+    {
+        return $this->repository->findOneByHash($hash);
+    }
+
     /**
      * UserProviderInterface methods.
      */

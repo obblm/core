@@ -9,7 +9,7 @@
             <p class="message warning">{{ 'obblm.emails.coach.reset_password.text.warning'|trans({}, 'obblm', coach.locale) }}</p>
         </div>
         <div class="center aligned">
-            <a class="button" href="{{ absolute_url(path('obblm_reset_password', {'hash': coach.resetPasswordHash})) }}">{{ 'obblm.emails.coach.reset_password.link_to_reset'|trans({}, 'obblm', coach.locale) }}</a>
+            <a class="button" href="{{ absolute_url(path('obblm.reset.password', {'hash': coach.resetPasswordHash})) }}">{{ 'obblm.emails.coach.reset_password.link_to_reset'|trans({}, 'obblm', coach.locale) }}</a>
         </div>
     </div>
 {% endblock%}

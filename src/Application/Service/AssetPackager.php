@@ -11,8 +11,7 @@ use Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy;
 
 class AssetPackager
 {
-    /** @var Package */
-    private $package;
+    private Package $package;
     private $entrypoints = [];
 
     public function addBuildAsset(BuildAssetsInterface $buildAssets)
@@ -40,6 +39,8 @@ class AssetPackager
         $loadedEntrypoints = json_decode($json, true);
 
         $this->entrypoints = array_merge_recursive($this->entrypoints, $loadedEntrypoints['entrypoints']);
+
+        return $this->package;
     }
 
     public function getCssEntry(string $entrypoint)

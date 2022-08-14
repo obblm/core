@@ -3,8 +3,8 @@
 namespace Obblm\Core\Application\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Obblm\Core\Application\Service\CoreTranslation;
 use Obblm\Core\Domain\Model\Rule;
+use Obblm\Core\Domain\Service\CoreTranslation;
 use Obblm\Core\Domain\Service\Rule\Config\ConfigResolver;
 use Obblm\Core\Domain\Service\Rule\Config\RuleConfigResolver;
 use Symfony\Component\Console\Command\Command;

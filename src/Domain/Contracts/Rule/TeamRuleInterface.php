@@ -2,9 +2,9 @@
 
 namespace Obblm\Core\Domain\Contracts\Rule;
 
+use Obblm\Core\Domain\Model\PlayerVersion;
 use Obblm\Core\Domain\Model\Team;
 use Obblm\Core\Domain\Model\TeamVersion;
-use Obblm\Core\Domain\Model\PlayerVersion;
 
 interface TeamRuleInterface
 {

@@ -49,7 +49,6 @@ class CoachServiceTest extends MessageTestCase
     public function testGetService()
     {
         $coach = $this->service->get($this->expectedCoach->getId());
-
         self::assertSame($this->expectedCoach, $coach);
     }
 

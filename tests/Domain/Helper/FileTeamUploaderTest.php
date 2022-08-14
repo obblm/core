@@ -22,10 +22,7 @@ class FileTeamUploaderTest extends KernelTestCase
     {
         self::assertInstanceOf(FileTeamUploader::class, $this->uploader);
 
-        var_dump($this->uploader);
-
         $team = TeamBuilder::for()->build();
-        var_dump($team);
-        $this->uploader->uploadIfExists($team, 'logo');
+        //$this->uploader->uploadIfExists($team, 'logo');
     }
 }

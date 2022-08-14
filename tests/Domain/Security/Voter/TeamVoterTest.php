@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Obblm\Core\Tests\Domain\Security\Voter;
 
 use Obblm\Core\Domain\Model\Coach;
+use Obblm\Core\Domain\Model\Player;
 use Obblm\Core\Domain\Model\Team;
 use Obblm\Core\Domain\Security\Voter\TeamVoter;
-use Obblm\Core\Infrastructure\Model\Doctrine\Player;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManager;

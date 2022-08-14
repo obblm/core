@@ -1,4 +1,4 @@
-{% extends '@ObblmCore/emails/email-template.html.twig'%}
+{% extends '@ObblmCoreApplication/emails/email-template.html.twig'%}
 {% block header_title 'obblm.emails.coach.activation.welldone'|trans({'%login%': coach.username}, 'obblm', coach.locale) %}
 {% block content %}
     {% do email.setSubject( 'obblm.emails.coach.activation.title'|trans({'%login%': coach.username }, 'obblm', coach.locale) ) %}
@@ -14,7 +14,7 @@
             <p>{{ 'obblm.emails.coach.activation.text'|trans({}, 'obblm', coach.locale) }}</p>
         </div>
         <div class="aligned center">
-            <a class="button" href="{{ absolute_url(path('obblm_login')) }}">{{ 'obblm.emails.coach.activation.link_to_login'|trans({}, 'obblm', coach.locale) }}</a>
+            <a class="button" href="{{ absolute_url(path('obblm.login')) }}">{{ 'obblm.emails.coach.activation.link_to_login'|trans({}, 'obblm', coach.locale) }}</a>
         </div>
     </div>
 {% endblock%}

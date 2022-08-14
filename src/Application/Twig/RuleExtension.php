@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Application\Twig;
 
-use Obblm\Core\Application\Service\CoreTranslation;
 use Obblm\Core\Domain\Model\Rule;
+use Obblm\Core\Domain\Service\CoreTranslation;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 

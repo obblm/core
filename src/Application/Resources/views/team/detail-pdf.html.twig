@@ -12,12 +12,12 @@
             <div class="content">
                 <h1 class="title">{{ version.team.name }}</h1>
                 <div class="informations">
-                    {% include '@ObblmCoreApplication/team/cardridge.' ~ version.team.rule.template ~ '.html.twig' with { 'version': version } only %}
+                    {% include '@ObblmCoreApplication/team/partials/cardridge.' ~ version.team.rule.template ~ '.html.twig' with { 'version': version } only %}
                 </div>
             </div>
         </header>
         <section class="row">
-            {% include '@ObblmCoreApplication/team/sheet.html.twig' with { 'version': version } %}
+            {% include '@ObblmCoreApplication/team/partials/sheet.html.twig' with { 'version': version } %}
         </section>
     </section>
     <aside class="container">

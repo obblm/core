@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class CreateCoachCommand extends AbstractCommand implements CommandInterface
 {
-    public const CONSTRUCTOR_ARGUMENTS = ['email', 'username', 'plainPassword'];
+    public const CONSTRUCTOR_ARGUMENTS = ['email', 'username', 'plainPassword', 'locale'];
 
     /**
      * @Assert\NotBlank()
@@ -28,17 +28,21 @@ final class CreateCoachCommand extends AbstractCommand implements CommandInterfa
      */
     private string $plainPassword;
 
+    private string $locale = 'en';
+
     /**
      * CreateCoachCommand constructor.
      */
     public function __construct(
         string $email,
         string $username,
-        string $plainPassword
+        string $plainPassword,
+        string $locale = 'en'
     ) {
         $this->email = $email;
         $this->username = $username;
         $this->plainPassword = $plainPassword;
+        $this->locale = $locale;
     }
 
     public function getEmail(): string
@@ -54,5 +58,10 @@ final class CreateCoachCommand extends AbstractCommand implements CommandInterfa
     public function getPlainPassword(): string
     {
         return $this->plainPassword;
+    }
+
+    public function getLocale(): string
+    {
+        return $this->locale;
     }
 }

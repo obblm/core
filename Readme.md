@@ -2,7 +2,6 @@
 
 [![Scrutinizer](https://scrutinizer-ci.com/g/obblm/core/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/obblm/core/?branch=master)
 [![Scrutinizer](https://scrutinizer-ci.com/g/obblm/core/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/obblm/core/?branch=master)
-[![SymfonyInsight](https://insight.symfony.com/projects/5235fc05-8604-4bc8-9a78-f93f13b7f2fa/mini.svg)](https://insight.symfony.com/projects/5235fc05-8604-4bc8-9a78-f93f13b7f2fa)
 
 **OBBLM** is a highly extensible open-source PHP Blood Bowl team management system based on the [Symfony framework][1]. 
 OBBLM is designed to deliver multi-rules and multi-league portal while providing an intuitive and extensible administration interface to manage the full league and championship lifecycle.
@@ -33,9 +32,9 @@ Have a look at the require section in the [composer.json](composer.json) of the 
 Ressources
 ----------------------------------
 
-- [Documentation](./src/Resources/doc/Readme.md)
+- [Documentation](doc/Readme.md)
 
 [1]: https://symfony.com/
 [2]: https://github.com/obblm/core
 [3]: https://symfony.com/doc/current/setup.html
-[4]: ./src/Resources/doc/1.Installation.md
+[4]: doc/1.Installation.md

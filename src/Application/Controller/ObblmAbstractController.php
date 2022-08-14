@@ -6,7 +6,6 @@ namespace Obblm\Core\Application\Controller;
 
 use Obblm\Core\Domain\Command\AbstractCommand;
 use Obblm\Core\Domain\Command\CommandInterface;
-use Obblm\Core\Domain\Command\Team\CreateTeamCommand;
 use Obblm\Core\Domain\Exception\Command\MissingCommandKeyException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,11 +22,11 @@ abstract class ObblmAbstractController extends AbstractController
             $data[$key] = $request->get($key);
         }
 
-        return AbstractCommand::fromArray(CreateTeamCommand::class, $data);
+        return AbstractCommand::fromArray($class, $data);
     }
 
     public function commandFromArray(string $class, array $data): ?CommandInterface
     {
-        return AbstractCommand::fromArray(CreateTeamCommand::class, $data);
+        return AbstractCommand::fromArray($class, $data);
     }
 }

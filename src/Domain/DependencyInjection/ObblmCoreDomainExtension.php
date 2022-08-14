@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Domain\DependencyInjection;
 
+use Obblm\Core\Domain\Contracts\DefaultSenderInterface;
 use Obblm\Core\Domain\Contracts\RuleHelperInterface;
+use Obblm\Core\Domain\DependencyInjection\CompilerPass\DefaultMailSenderPass;
 use Obblm\Core\Domain\DependencyInjection\CompilerPass\RulesPass;
-use Obblm\Core\Domain\Helper\FileTeamUploader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 
 class ObblmCoreDomainExtension extends Extension
 {
@@ -31,40 +31,19 @@ class ObblmCoreDomainExtension extends Extension
             }
         }
 
-        $container->setParameter('obblm.email_sender.email', $config['email_sender']['email']);
-        $container->setParameter('obblm.email_sender.name', $config['email_sender']['name']);
+        $container->setParameter(DefaultMailSenderPass::SENDER_ADDRESS, $config['email_sender']['email']);
+        $container->setParameter(DefaultMailSenderPass::SENDER_NAME, $config['email_sender']['name']);
 
         $locator = new FileLocator(dirname(__DIR__).'/Resources/config');
         $loader = new YamlFileLoader($container, $locator);
         $loader->load('services.yaml');
 
-        //$this->createRulesPoolCacheDefinition($container, $config);
-        //$this->pullUploaders($container, $config);
-
         $container->registerForAutoconfiguration(RuleHelperInterface::class)
             ->addTag(RulesPass::SERVICE_TAG)
         ;
-    }
 
-    private function pullUploaders(ContainerBuilder $container, array $config)
-    {
-        $teamUploaderDefinition = $container->getDefinition(FileTeamUploader::class);
-        $teamUploaderDefinition->addMethodCall('setUploader', [new Reference('obblm.team.uploader')]);
-    }
-
-    private function createRulesPoolCacheDefinition(ContainerBuilder $container, array $config): string
-    {
-        $serviceId = 'obblm.cache.rules';
-        $default = $container->getDefinition('obblm.cache');
-        $default->addTag('cache.pool');
-        $container->setDefinition('obblm.cache', $default);
-        if ($config['caches']) {
-            foreach ($config['caches'] as $part => $options) {
-                if (isset($options['adapter'])) {
-                }
-            }
-        }
-
-        return $serviceId;
+        $container->registerForAutoconfiguration(DefaultSenderInterface::class)
+            ->addTag(DefaultMailSenderPass::SERVICE_TAG)
+        ;
     }
 }

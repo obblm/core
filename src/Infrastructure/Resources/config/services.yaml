@@ -38,6 +38,14 @@ services:
     autowire: true
     tags: [ messenger.message_handler ]
 
+  Obblm\Core\Infrastructure\Handler\Email\Coach\:
+    resource: '../../Handler/Email/Coach'
+    public: true
+    autowire: true
+    tags:
+      - messenger.message_handler
+      - !php/const Obblm\Core\Domain\DependencyInjection\CompilerPass\DefaultMailSenderPass::SERVICE_TAG
+
   Obblm\Core\Infrastructure\Handler\Doctrine\League\:
     resource: '../../Handler/Doctrine/League'
     public: true

@@ -48,6 +48,13 @@ bb2020:
         goblin: Goblin Bruiser Lineman
         black_orc: Black Orc
         troll: Trained Troll
+    chaos:
+      title: Chaos Chosen
+      description: ~
+      positions:
+        beastman: Beastman
+        warrior: Blocker
+        minotaur: Minotaur
     human:
       title: Human
       positions:

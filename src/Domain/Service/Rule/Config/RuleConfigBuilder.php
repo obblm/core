@@ -4,7 +4,6 @@ namespace Obblm\Core\Domain\Service\Rule\Config;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
-use Obblm\Core\Application\Service\CoreTranslation;
 use Obblm\Core\Domain\Contracts\Rule\InducementInterface;
 use Obblm\Core\Domain\Contracts\Rule\RosterInterface;
 use Obblm\Core\Domain\Contracts\Rule\RuleBuilderInterface;
@@ -17,7 +16,7 @@ use Obblm\Core\Domain\Model\Proxy\Inducement\StarPlayer;
 use Obblm\Core\Domain\Model\Proxy\Roster\Roster;
 use Obblm\Core\Domain\Model\Proxy\Skill\Skill;
 use Obblm\Core\Domain\Model\Team;
-use phpDocumentor\Reflection\Types\Self_;
+use Obblm\Core\Domain\Service\CoreTranslation;
 
 class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterface
 {
@@ -108,10 +107,10 @@ class RuleConfigBuilder extends RuleConfigResolver implements RuleBuilderInterfa
     public function getRoster(Team $team): RosterInterface
     {
         $roster = $this->rosters->get($team->getRoster());
-        if (!$roster)
-        {
+        if (!$roster) {
             throw new NotFoundKeyException($team->getRoster(), 'rosters', self::class);
         }
+
         return $roster;
     }
 

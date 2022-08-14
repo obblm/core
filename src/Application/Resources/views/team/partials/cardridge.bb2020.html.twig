@@ -1,0 +1,12 @@
+{% extends '@ObblmCoreApplication/team/partials/cardridge.base.html.twig' %}
+
+{% block base_informations %}
+    {{ parent() }}
+    <li class="box information">
+        <span class="label">
+            <i class="icon mdi mdi-label"></i>
+            {{ 'obblm.trait.tiers'|trans({}, 'obblm') }} :
+        </span>
+        {{ 2 }}
+    </li>
+{% endblock %}

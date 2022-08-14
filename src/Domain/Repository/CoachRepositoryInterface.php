@@ -16,11 +16,13 @@ interface CoachRepositoryInterface extends UserLoaderInterface, PasswordUpgrader
 
     public function delete(Coach $coach): void;
 
-    public function loadUserByUsernameOrEmail($usernameOrEmail): ?Coach;
+    public function loadUserByUsernameOrEmail(string $usernameOrEmail): ?Coach;
 
-    public function loadUserByUsername($username): ?Coach;
+    public function loadUserByUsername(string $username): ?Coach;
 
-    public function loadUserByEmail($email): ?Coach;
+    public function loadUserByEmail(string $email): ?Coach;
 
-    public function findOneForPasswordReset($hash): ?Coach;
+    public function findOneForPasswordReset(string $hash): ?Coach;
+
+    public function findOneByHash(string $hash): ?Coach;
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Obblm\Core\Application\Form\Team;
 
+use Obblm\Core\Domain\Contracts\RuleHelperInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,22 +17,28 @@ class BaseTeamForm extends AbstractType
         $builder
             ->add('name')
             ->add('roster', ChoiceType::class, [
-                'choices' => $options['rosters'],
+                'choices' => $options['rule']->getRosters()->toArray(),
                 'choice_value' => 'key',
                 'choice_label' => 'name',
-                'choice_translation_domain' => $options['choice_translation_domain']
+                'choice_translation_domain' => $options['choice_translation_domain'],
             ]);
+        if ($options['creation_options']) {
+            $builder->add('creationOptions', CreationOptionsType::class, ['rule' => $options['rule']]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired(['rosters'])
+            ->setRequired(['rule'])
             ->setDefaults([
                 'translation_domain' => 'obblm',
                 'choice_translation_domain' => 'obblm',
+                'creation_options' => true,
+                'rule' => null,
             ])
-            ->addAllowedTypes('rosters', ['array'])
+            ->addAllowedTypes('rule', [RuleHelperInterface::class])
+            ->addAllowedTypes('creation_options', ['bool'])
             ->addAllowedTypes('choice_translation_domain', ['string']);
     }
 }

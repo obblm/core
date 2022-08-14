@@ -11,7 +11,7 @@
     <h1 class="title">{{ 'obblm.team.mine.title'|trans({}, 'obblm') }}</h1>
     <div class="boxes three teams">
     {% for team in teams %}
-        {% include '@ObblmCoreApplication/team/team-list-item.html.twig' with { 'team': team } %}
+        {% include '@ObblmCoreApplication/team/partials/team-list-item.html.twig' with { 'team': team } %}
     {% else %}
         <div>
             {{ 'obblm.team.none'|trans({}, 'obblm') }}

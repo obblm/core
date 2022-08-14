@@ -9,10 +9,10 @@ use Obblm\Core\Domain\Contracts\Rule\PositionInterface;
 use Obblm\Core\Domain\Contracts\Rule\RosterInterface;
 use Obblm\Core\Domain\Exception\NotFoundKeyException;
 use Obblm\Core\Domain\Model\Player;
+use Obblm\Core\Domain\Model\PlayerVersion;
 use Obblm\Core\Domain\Model\Proxy\Inducement\StarPlayer;
 use Obblm\Core\Domain\Model\Proxy\Roster\Roster;
 use Obblm\Core\Domain\Model\Team;
-use Obblm\Core\Domain\Model\PlayerVersion;
 
 /*****************
  * PLAYER METHODS

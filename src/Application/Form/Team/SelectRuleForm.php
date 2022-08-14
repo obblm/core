@@ -13,6 +13,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class SelectRuleForm extends AbstractType
 {
     private $translator;
+
     public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
@@ -22,14 +23,14 @@ class SelectRuleForm extends AbstractType
     {
         $rules = [];
         foreach ($options['rules'] as $rule) {
-            /** @var Rule $rule */
+            /* @var Rule $rule */
             $rules[$this->translator->trans($rule->getName(), [], $rule->getRuleKey())] = $rule;
         }
         $builder
             ->add('rule', ChoiceType::class, [
                 'data_class' => RuleHelperInterface::class,
                 'choices' => $rules,
-                'choice_value' => 'id'
+                'choice_value' => 'id',
             ]);
     }
 

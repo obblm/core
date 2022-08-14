@@ -1,0 +1,2 @@
+{% set sheet = '@ObblmCoreApplication/team/partials/table.' ~ version.team.rule.template ~ '.html.twig' %}
+{{ include(sheet, { 'translation_domain': version.team.rule.ruleKey, 'playerVersions': playerVersions }, ignore_missing = true) }}
